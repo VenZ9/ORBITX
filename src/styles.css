@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-bg: #0b0e18;
+  --color-surface: #141218;
+  --color-surface-2: #1c181f;
+  --color-fg: #f4edea;
+  --color-muted: #c2b0ab;
+  --color-subtle: #8a7874;
+  --color-accent: #c0392b;
+  --color-accent-dark: #8e1e1e;
+  --color-accent-soft: #e07a6e;
+  --color-border: #3a2c2c;
+  --color-ok: #7d9b6a;
+  --color-skin: #d8c4b0;
+  --color-hair: #2a1c1c;
+  --color-pants: #3a3538;
+  --color-pants-2: #2e2a2c;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotateX(68deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(68deg) rotateZ(360deg);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes log-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring,
+  .player-bob {
+    animation: none !important;
+  }
+}
+
+.orbit-ring {
+  animation: orbit-spin 14s linear infinite;
+}
+
+.player-bob {
+  animation: bob 3.6s ease-in-out infinite;
+}
+
+.log-line {
+  animation: log-in 150ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}

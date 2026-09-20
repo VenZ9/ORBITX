@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "OrbitX Launcher",
+      "hasCanvas": false,
+      "bodyTextLen": 566,
+      "bodyTextHash": "38b25414089fa5c3219a76fd8873f0bc535630cf2e750915042da2b582f38f15",
+      "bodyTextPrefix": "Home Manage Download Controller Multiplayer Settings Back OrbitX",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "OrbitX Launcher",
+      "hasCanvas": false,
+      "bodyTextLen": 560,
+      "bodyTextHash": "526e95a793b1a5d49130e1a28ba084db4ee846b2ee45ad485975f79aa3a0695a",
+      "bodyTextPrefix": "Home Manage Download Controller Multiplayer Settings Back OrbitX",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
