@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.OrbitX" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#FF07080C</item>
+        <item name="android:navigationBarColor">#FF07080C</item>
+        <item name="android:windowBackground">#FF07080C</item>
+    </style>
+</resources>
