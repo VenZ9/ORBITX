@@ -106,3 +106,56 @@ the corresponding source.
 
 The web application that lives elsewhere in this repository is a separate work and
 is not covered by this file.
+
+## OrbitX UI modifications (2026-09-20)
+
+This is a UI-only round: no runtime, launch, JRE, native-bridge, GL-translation or
+control-overlay behaviour was changed. Upstream's copyright notices and the GPL-3.0
+text remain intact and unmodified.
+
+**1. Upstream remote-notice popup removed.**
+`net/kdt/pojavlaunch/LauncherActivity` called
+`com.movtery.zalithlauncher.feature.notice.CheckNewNotice`, which fetched
+`launcher_notice.json` from the `ZalithLauncher/Zalith-Info` GitHub repository and
+rendered it in the `notice_layout` view. Its current content is a notice about the
+Zalith Launcher Discord server being discontinued, and it is configured to show on
+first launch. Removed: the `checkNotice()` and `setNotice()` methods, the
+`checkNotice`/`noticeAnimPlayer` fields, the `notice_layout` subtree and its
+`DraggableViewWrapper` drag binding, the `notice_got_button` click handler, and the
+`noticeCheck` / `noticeNumbering` / `noticeDefault` preference keys in
+`AllSettings`. The launcher now opens directly on the home screen. The upstream
+automatic update check was also unsubscribed from the launch path for the same
+reason (a stale downloaded package is still reported from Settings).
+
+**2. Launcher shell and home screen reorganised.**
+`res/layout/activity_launcher.xml`: the header was restructured from a bare title
+plus two loose icons into a brand block (mark + wordmark + product line) and a
+translucent action pill holding the download and settings buttons.
+`res/layout/fragment_launcher.xml`: upstream's composition (one full-height
+vertical action list on the left, account/version/Play rail on the right) was
+replaced with a different hierarchy - a titled "Quick actions" card containing a 2x2
+tile grid with share-logs spanning beneath it, and an "Instance" block ordering
+instance selector, profile gear, account and the primary Play action. All view ids
+referenced by `MainMenuFragment` are preserved.
+
+**3. Secondary screens reorganised.**
+Settings and Downloads: the category tab rail moved from the left edge to the right
+edge (indicators and shadow flipped to match). About: the info pager and the
+operate/action panel swapped sides and the split guideline moved from 0.69 to 0.31.
+Version manager: the section headers moved from a centered title to a left-aligned
+overline style, and the shortcuts-vs-management column widths were rebalanced
+(0.85 / 1.15). Download/settings rails and the about panel now sit on a rounded
+surface instead of a flat overlay colour.
+
+**4. OrbitX visual identity.**
+New `res/values/orbitx_ui.xml` (spacing scale, corner radii, brand strings),
+`res/drawable/background_header_pill.xml` and
+`res/drawable/background_rail.xml`. New `background_header_pill` colour in
+`values/colors.xml` and `values-night/colors_night.xml`. Card/row radii raised to
+`orbitx_radius_card`. The base theme now sets `colorPrimary` / `colorPrimaryDark` /
+`colorAccent` so dialogs, buttons and system chrome inherit the red palette rather
+than the framework default accent.
+
+The files above are the complete set of this round's changes; nothing outside
+`android/ZalithLauncher/src/main/res/`, `AllSettings.kt` and `LauncherActivity.java`
+was touched.

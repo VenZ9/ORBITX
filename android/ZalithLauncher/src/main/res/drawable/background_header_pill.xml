@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- OrbitX: translucent pill that groups the header action icons. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="@dimen/orbitx_radius_pill" />
+    <solid android:color="@color/background_header_pill" />
+</shape>

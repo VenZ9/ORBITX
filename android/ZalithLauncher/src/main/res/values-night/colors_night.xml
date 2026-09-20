@@ -18,6 +18,9 @@
     <color name="background_menu_element">#D32F2F</color>
     <color name="background_ripple_effect">#DCDCDC</color>
 
+    <!-- OrbitX: translucent pill behind the header action icons -->
+    <color name="background_header_pill">#33FFFFFF</color>
+
     <color name="button_background">#3A1414</color>
     <color name="button_background_selected">#5B1F1F</color>
     <color name="dialog_background">#2A1010</color>

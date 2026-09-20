@@ -96,34 +96,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_8sdp"
-                    android:text="Github"
+                    android:text="GitHub"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/license_button"
                     app:layout_constraintTop_toBottomOf="@id/dec3"
                     tools:ignore="HardcodedText" />
 
-                <com.movtery.zalithlauncher.ui.view.AnimButton
-                    android:id="@+id/qq_group_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_8sdp"
-                    android:text="QQ"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/github_button"
-                    app:layout_constraintTop_toBottomOf="@id/dec3"
-                    tools:ignore="HardcodedText" />
-
-                <com.movtery.zalithlauncher.ui.view.AnimButton
-                    android:id="@+id/discord_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_8sdp"
-                    android:text="Discord"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/qq_group_button"
-                    app:layout_constraintTop_toBottomOf="@id/dec3"
-                    tools:ignore="HardcodedText" />
+                <!--
+                  The upstream build also had QQ-group and Discord buttons here, wired to
+                  the upstream project's community.  Both are removed: they are not
+                  OrbitX channels and pointed users at another launcher's community.
+                -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -163,17 +146,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/about_title" />
 
-                <com.movtery.zalithlauncher.ui.view.AnimButton
-                    android:id="@+id/sponsor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_4sdp"
-                    android:layout_marginBottom="@dimen/_4sdp"
-                    android:text="@string/about_sponsors_list"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/about_recycler"/>
+                <!--
+                  The upstream \"View Sponsors List\" button used to sit here and paged to a
+                  sponsor screen loaded from the upstream project's info repository.  Both
+                  the button and that page are gone; the third-party attribution it partly
+                  served now lives in the repository's LICENSE-THIRD-PARTY.md.
+                -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

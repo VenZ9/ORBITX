@@ -220,15 +220,6 @@ class AllSettings {
         val ignoreUpdate = StringSettingUnit("ignoreUpdate", "")
 
         @JvmStatic
-        val noticeCheck = LongSettingUnit("noticeCheck", 0L)
-
-        @JvmStatic
-        val noticeNumbering = IntSettingUnit("noticeNumbering", 0)
-
-        @JvmStatic
-        val noticeDefault = BooleanSettingUnit("noticeDefault", false)
-
-        @JvmStatic
         val buttonSnapping = BooleanSettingUnit("buttonSnapping", true)
 
         @JvmStatic

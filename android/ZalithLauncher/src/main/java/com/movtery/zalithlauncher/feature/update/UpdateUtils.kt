@@ -163,8 +163,12 @@ class UpdateUtils {
         @JvmStatic
         fun getDownloadUrl(launcherVersion: LauncherVersion): String {
             val archModel = getArchModel()
-            return "https://github.com/ZalithLauncher/ZalithLauncher/releases/download/" +
-                    "${launcherVersion.versionCode}/ZalithLauncher-${launcherVersion.versionName}" +
+            // OrbitX release artefacts are named after the launcher_name build property,
+            // which is "OrbitXLauncher".  No OrbitX releases exist yet, so the version feed
+            // above resolves to nothing and this is never reached - but it must not point
+            // at the upstream releases, or an update prompt would install another launcher.
+            return "https://github.com/VenZ9/ORBITX/releases/download/" +
+                    "${launcherVersion.versionCode}/OrbitXLauncher-${launcherVersion.versionName}" +
                     "${(if (archModel != null) String.format("-%s", archModel) else "")}.apk"
         }
 

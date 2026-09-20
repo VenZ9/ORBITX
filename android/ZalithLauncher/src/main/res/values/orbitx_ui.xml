@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  OrbitX Launcher - UI tokens and strings that give the launcher its own identity.
+
+  Kept in one file so the OrbitX-specific additions are reviewable at a glance and
+  never get tangled with the large upstream values files. Colours themselves live in
+  colors.xml / colors_night.xml; this file holds the OrbitX spacing scale, corner
+  radii and the brand strings.
+-->
+<resources>
+
+    <!-- Brand -->
+    <string name="orbitx_brand_name" translatable="false">OrbitX Launcher</string>
+    <string name="orbitx_brand_tagline" translatable="false">Minecraft Java Edition</string>
+    <string name="orbitx_home_shortcuts" translatable="false">Quick actions</string>
+    <string name="orbitx_home_profile" translatable="false">Instance</string>
+    <string name="orbitx_desc_download" translatable="false">Downloads</string>
+    <string name="orbitx_desc_settings" translatable="false">Settings</string>
+
+    <!-- Spacing scale used by the OrbitX-reworked screens -->
+    <dimen name="orbitx_space_xs">@dimen/_4sdp</dimen>
+    <dimen name="orbitx_space_sm">@dimen/_8sdp</dimen>
+    <dimen name="orbitx_space_md">@dimen/_12sdp</dimen>
+    <dimen name="orbitx_space_lg">@dimen/_16sdp</dimen>
+    <dimen name="orbitx_space_xl">@dimen/_24sdp</dimen>
+
+    <!-- Corner radii: cards are noticeably rounder than upstream's flat 8dp -->
+    <dimen name="orbitx_radius_card">@dimen/_14sdp</dimen>
+    <dimen name="orbitx_radius_pill">@dimen/_20sdp</dimen>
+
+    <!-- Shell header -->
+    <dimen name="orbitx_header_height">@dimen/_52sdp</dimen>
+    <dimen name="orbitx_header_action">@dimen/_34sdp</dimen>
+    <dimen name="orbitx_brand_mark">@dimen/_30sdp</dimen>
+
+</resources>

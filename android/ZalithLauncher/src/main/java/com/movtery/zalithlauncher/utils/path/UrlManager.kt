@@ -16,12 +16,20 @@ class UrlManager {
         private const val URL_USER_AGENT: String = "${InfoDistributor.LAUNCHER_NAME}/${BuildConfig.VERSION_NAME}"
         @JvmField
         val TIME_OUT = Pair(8000, TimeUnit.MILLISECONDS)
-        const val URL_GITHUB_HOME: String = "https://api.github.com/repos/ZalithLauncher/Zalith-Info/contents/"
+        /**
+         * Base for the optional update / notice feeds.  OrbitX has no separate info
+         * repository, so this points at OrbitX's own repository; those requests simply
+         * 404 until such feeds are published, and the callers already treat a failure as
+         * "nothing new".  Redirecting it away from the upstream info repository is what
+         * guarantees the launcher can never offer to download the upstream app.
+         */
+        const val URL_GITHUB_HOME: String = "https://api.github.com/repos/VenZ9/ORBITX/contents/"
         const val URL_MCMOD: String = "https://www.mcmod.cn/"
         const val URL_MINECRAFT: String = "https://www.minecraft.net/"
         const val URL_MINECRAFT_VERSION_REPOS: String = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
-        const val URL_SUPPORT: String = "https://afdian.com/a/MovTery"
-        const val URL_HOME: String = "https://github.com/ZalithLauncher/ZalithLauncher"
+        const val URL_SUPPORT: String = "https://github.com/VenZ9/ORBITX"
+        const val URL_HOME: String = "https://github.com/VenZ9/ORBITX"
+        const val URL_LICENSE: String = "https://www.gnu.org/licenses/gpl-3.0.html"
         const val URL_FCL_RENDERER_PLUGIN: String = "https://github.com/ShirosakiMio/FCLRendererPlugin/releases/tag/Renderer"
         const val URL_FCL_DRIVER_PLUGIN: String = "https://github.com/FCL-Team/FCLDriverPlugin/releases/tag/Turnip"
 

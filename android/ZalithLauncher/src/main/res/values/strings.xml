@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- OrbitX Launcher (built on Zalith Launcher; see LICENSE-THIRD-PARTY.md) -->
+    <!-- OrbitX Launcher. Upstream attribution and licence texts: see LICENSE-THIRD-PARTY.md -->
     <string name="generic_open">Open</string>
     <string name="generic_close">Close</string>
     <string name="generic_return">Return</string>
@@ -651,7 +651,7 @@
     <string name="splash_screen_apply">Agree and Install</string>
     <!-- About -->
     <string name="about_tab">About %s</string>
-    <string name="about_dec1">%s is a Minecraft launcher based on PojavLauncher that allows Minecraft: Java Edition to run on Android devices.</string>
+    <string name="about_dec1">%s is a Minecraft: Java Edition launcher for Android devices, built on the PojavLauncher runtime.</string>
     <string name="about_dec2">%s focuses on optimizing user experience, redesigning the application interface, and adding more practical features, aiming to lower the barriers to play and let more people enjoy the fun of Minecraft easily.</string>
     <string name="about_dec3">%s uses the GPL 3.0 open-source license, which is "viral." Any code that uses, modifies, or derives from GPL libraries or software must also adopt the GPL license for open sourcing. If you intend to distribute this software, please comply with the relevant provisions of the GPL 3.0 open-source license.</string>
     <string name="about_contributors">Contributors and Acknowledgements:</string>
@@ -660,13 +660,7 @@
     <string name="about_sponsors_desc">The following are all the sponsors who support the development, thank you very much!</string>
     <string name="about_sponsors_amount">Time and Total Amount</string>
     <string name="about_button_support_development">Sponsor Development</string>
-    <string name="about_MovTery_desc">Main author of the launcher</string>
     <string name="about_PojavLauncher_desc">The development team of PojavLauncher, who developed and open-sourced PojavLauncher</string>
-    <string name="about_mcmod_desc">The launcher uses Mod and modpack Chinese translations from MC Wiki</string>
-    <string name="about_VeraFirefly_desc">Provided technical support for rendering in the launcher</string>
-    <string name="about_LingMuQiuZhu_desc">Provided technical support for the launcher</string>
-    <string name="about_ShirosakiMio_desc">Provided technical support for the launcher and fixed some bugs</string>
-    <string name="about_bangbang93_desc">The launcher uses the BMCLAPI mirror source created by them</string>
     <string name="about_access_space">Access Space</string>
     <string name="about_access_link">Access Link</string>
     <string name="about_version_name">Software Version Name:</string>

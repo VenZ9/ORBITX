@@ -5,6 +5,10 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <!-- OrbitX: give the app a red title strip instead of the inherited blue accent. -->
+        <item name="colorPrimary">@color/background_menu_top</item>
+        <item name="colorPrimaryDark">@color/background_status_bar</item>
+        <item name="colorAccent">@color/background_menu_element</item>
         <item name="android:statusBarColor">@color/background_status_bar</item>
         <item name="android:navigationBarColor">@color/background_app</item>
         <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>

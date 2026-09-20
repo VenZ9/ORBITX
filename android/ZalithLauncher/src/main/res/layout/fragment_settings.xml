@@ -10,10 +10,10 @@
         android:id="@+id/settings_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_minus4sdp"
+        android:layout_marginEnd="@dimen/_minus4sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/settings_layout"
+        app:layout_constraintEnd_toStartOf="@+id/settings_layout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,25 +21,25 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:id="@+id/shadowView"
             android:layout_width="@dimen/_4sdp"
             android:layout_height="0dp"
-            android:background="@drawable/shadow_gradient_left"
+            android:background="@drawable/shadow_gradient_right"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.angcyo.tablayout.DslTabLayout
             android:id="@+id/settings_tab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/menu_overlay"
-            app:layout_constraintEnd_toStartOf="@+id/shadowView"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/background_rail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shadowView"
             app:tab_draw_indicator="true"
             app:tab_indicator_enable_flow="true"
             app:tab_indicator_drawable="@drawable/selector_bar_vertical"

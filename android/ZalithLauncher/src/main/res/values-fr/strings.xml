@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Zalith Launcher -->
+    <!-- OrbitX Launcher -->
     <string name="generic_open">Ouvrir</string>
     <string name="generic_close">Fermer</string>
     <string name="generic_return">Retour</string>
@@ -654,13 +654,7 @@
     <string name="about_sponsors_desc">Voici tous les sponsors qui soutiennent le développement, un grand merci !</string>
     <string name="about_sponsors_amount">Temps et Montant Total</string>
     <string name="about_button_support_development">Soutenir le développement</string>
-    <string name="about_MovTery_desc">Auteur principal du lanceur</string>
     <string name="about_PojavLauncher_desc">Équipe de développement de PojavLauncher, qui a développé et open-sourcé PojavLauncher</string>
-    <string name="about_mcmod_desc">Le lanceur utilise des Mods de MC 百科 ainsi que des traductions en chinois pour les packs d\'intégration</string>
-    <string name="about_VeraFirefly_desc">Support technique pour le lanceur en matière de rendu</string>
-    <string name="about_LingMuQiuZhu_desc">Support technique pour le lanceur</string>
-    <string name="about_ShirosakiMio_desc">Support technique pour le lanceur, a corrigé certains bugs</string>
-    <string name="about_bangbang93_desc">Le lanceur utilise la source miroir BMCLAPI créée par eux</string>
     <string name="about_access_space">Accès à l\'espace</string>
     <string name="about_access_link">Lien d\'accès</string>
     <string name="about_version_name">Nom de la version du logiciel :</string>
