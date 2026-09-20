@@ -1,31 +1,18 @@
-# Gradle
-.gradle/
-build/
-!gradle/wrapper/gradle-wrapper.jar
-
-# Kotlin
-.kotlin/
-
-# Android build output
-app/build/
-*.apk
-*.aab
-*.ap_
-*.dex
-output-metadata.json
-
-# Native build
-.cxx/
-obj/
-app/.cxx/
-
-# IDE
-*.iml
-.idea/
+/.gradle
+/build
+/*/build
 local.properties
-captures/
+.idea/
+.vscode/
+/curseforge_key.txt
+/ZalithLauncher/.cxx/
+# NOTE: OrbitX ships components/lwjgl3/lwjgl-glfw-classes.jar. Upstream generates it
+# from the :jre_lwjgl3glfw module, but on a plain `assembleDebug` Gradle does not
+# regenerate it, so it is committed here and must NOT be ignored.
+/ZalithLauncher/release/
 
-# Logs / OS noise
-*.log
-.DS_Store
-Thumbs.db
+# Upstream's RELEASE signing keystore.  It is deliberately not carried into OrbitX:
+# a release private key does not belong in a public repository, it is not needed to
+# build (the release build type also needs MOVTERY_KEYSTORE_PASSWORD, which is
+# upstream's own and which we do not have), and the debug build uses debug.keystore.
+/movtery-key.jks

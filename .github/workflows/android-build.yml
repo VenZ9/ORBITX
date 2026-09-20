@@ -26,10 +26,14 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
+      # The launcher compiles a native bridge (src/main/jni, ndkBuild) and links a
+      # prefab dependency, so the NDK is required - the build fails at
+      # externalNativeBuild without it.  The version is pinned to match the one the
+      # project declares in ZalithLauncher/build.gradle.kts.
+      - name: Set up Android SDK and NDK
         uses: android-actions/setup-android@v3
         with:
-          packages: 'platforms;android-34 build-tools;34.0.0 platform-tools'
+          packages: 'platforms;android-34 build-tools;34.0.0 platform-tools ndk;25.2.9519653 cmake;3.22.1'
 
       - name: Cache Gradle
         uses: actions/cache@v4
@@ -37,28 +41,36 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('android/**/*.gradle') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('android/**/*.gradle', 'android/**/*.gradle.kts', 'android/**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Grant execute permission for gradlew
-        run: chmod +x android/gradlew || true
+        run: chmod +x android/gradlew
 
       - name: Build debug APK
         working-directory: android
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+        # arm64 only: one ABI keeps the APK (and the build) far smaller.  On a normal
+        # CI runner raise the memory settings in gradle.properties to speed this up.
+        run: ./gradlew assembleDebug --no-daemon -Darch=arm64 --stacktrace
 
       - name: Verify APK
         working-directory: android
         run: |
-          APK=$(find . -name 'app-debug.apk' -print -quit)
+          APK=$(find . -name '*.apk' -path '*/outputs/apk/debug/*' -print -quit)
           echo "APK: $APK"
           ls -la "$APK"
           unzip -t "$APK" > /dev/null && echo "unzip -t: OK"
+          echo "--- native libraries ---"
+          unzip -l "$APK" | grep -c '\.so$' | sed 's/^/so files: /'
+          unzip -l "$APK" | grep -q 'libpojavexec.so' && echo "libpojavexec.so: present"
+          echo "--- manifest ---"
+          "$ANDROID_HOME"/build-tools/34.0.0/aapt dump badging "$APK" | grep -E '^package|^application-label:'
+          echo "sha256:"; sha256sum "$APK"
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: orbitx-launcher-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/ZalithLauncher/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 30

@@ -1,86 +1,98 @@
 # OrbitX Launcher (Android)
 
-A Minecraft: Java Edition launcher for Android, written in Kotlin with Jetpack Compose.
+A Minecraft: Java Edition launcher for Android, rebranded and recoloured as
+**OrbitX**. This directory is a modified redistribution of **Zalith Launcher
+1.4.1.4** (GPL-3.0), which itself carries the **PojavLauncher** runtime
+(LGPL-3.0). See [`LICENSE-THIRD-PARTY.md`](LICENSE-THIRD-PARTY.md) for full
+attribution and the exact list of changes.
 
-This is the native Android application in the repository. The TanStack/React web app in
-the repository root is a separate, unrelated project and is untouched by this module.
+<p align="center">
+  <img src="ZalithLauncher/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="140" alt="OrbitX Launcher icon"/>
+</p>
 
-## Requirements
+## What OrbitX is
 
-- JDK 17
-- Android SDK: platform 34, build-tools 34.0.0
-- Gradle 8.x (or use the wrapper from a machine that has one)
-- Optional: an NDK, for the native EGL bridge
-
-## Build
-
-```bash
-cd android
-ANDROID_HOME=/path/to/sdk gradle assembleDebug
-```
-
-The APK lands at `app/build/outputs/apk/debug/app-debug.apk`.
-
-The native EGL bridge in `app/cpp/` is only compiled when an NDK is present and the
-build is asked for it:
-
-```bash
-gradle assembleDebug -Porbitx.native=true
-```
-
-Without it the launcher still builds and runs; the session screen reports that the GL
-surface is unavailable, and provisioning/launch progress is still shown. A playable
-session needs three things this repository does not ship prebuilt (all are fetched or
-supplied at runtime):
-
-1. an Android-patched OpenJDK runtime — downloaded automatically on first launch from
-   `AngelAuraMC/angelauramc-openjdk-build`;
-2. an Android build of LWJGL/GLFW — see `LICENSE-THIRD-PARTY.md`;
-3. a GL translation layer (`libgl4es_114.so` / `libOSMesa.so` / `libltw.so`).
+| | |
+|---|---|
+| App name | **OrbitX Launcher** |
+| Application ID | `com.orbitx.launcher` (debug: `com.orbitx.launcher.debug`) |
+| minSdk / targetSdk | 26 / 34 |
+| Runtime | Java Edition via a bundled Android JRE (8 / 17 / 21 / 25) |
+| Renderers | GL4ES, VirGL, Zink (OSMesa), ANGLE — selectable per instance |
+| Mod loaders | Fabric, Forge, NeoForge, Quilt, OptiFine |
+| Controls | PojavLauncher's control system, recoloured red, incl. custom-key buttons |
+| Auth | Offline accounts supported; no account needed to launch |
 
 ## Layout
 
 ```
-app/src/main/java/com/orbitx/launcher/
-  OrbitXApp.kt              Application: storage + logging + state init
-  MainActivity.kt           Compose host
-  GameActivity.kt           Session host (SurfaceView + EGL bridge + JVM process)
-  core/
-    OrbitPaths.kt           Canonical storage layout
-    OrbitLog.kt             File-backed launcher log
-    Downloader.kt           Hash-verified parallel downloads
-    MojangApi.kt            Version manifest / json / libraries / assets / natives
-    McVersion.kt            Version-JSON model, rule evaluation, arg entries
-    LoaderApi.kt            Fabric (meta profiles) and Forge (installer jar)
-    ArgumentBuilder.kt      Placeholder substitution, jvm+game argv
-    Renderer.kt             GL4ES / VirGL / Zink / ANGLE + runtime catalog/extractor
-    GameLauncher.kt         Assembles and spawns the session
-    Installer.kt            Install orchestration used by the UI
-  data/
-    Models.kt               Profile / Control / Layout / Settings
-    Store.kt                Single-JSON local storage, exposed as StateFlow
-  ui/
-    Theme.kt, Common.kt, RootScaffold.kt
-    HomeScreen.kt, ProfilesScreen.kt, VersionsScreen.kt
-    ControlsScreen.kt, SettingsScreen.kt
+android/
+├── ZalithLauncher/          the app module (Kotlin + Java + XML/Compose UI)
+│   ├── src/main/java/       app sources (namespaces retained upstream, see below)
+│   ├── src/main/jni/        native bridge, built with the NDK
+│   ├── src/main/jniLibs/    prebuilt GL translation layers (.so)
+│   ├── src/main/assets/     bundled JREs (8/17/21/25), LWJGL, caciocavallo
+│   └── src/main/res/        icons, layouts, strings, colours
+├── jre_lwjgl3glfw/          LWJGL/GLFW shim compiled into the APK assets
+├── build.gradle.kts         root build
+├── gradle.properties        memory-fitted Gradle settings
+└── gradlew                  Gradle wrapper (pinned)
 ```
 
-## Storage
+## Building
 
-Everything is local; there are no cloud services and no account calls.
+Requirements: **JDK 17**, Android SDK with **platform 34**, **build-tools
+34.0.0**, and **NDK 25.2.9519653** — the native bridge is compiled with the NDK,
+so the build fails at `externalNativeBuild` without it.
 
-- Launcher state: `files/orbitx-state.json`
-- Game root: `files/orbitx/` — `versions/`, `libraries/`, `assets/`, `runtimes/`,
-  `natives/`, `instances/<version>/`
-- Logs: `files/orbitx/logs/orbitx.log` and `game-<version>.log`
+```bash
+export ANDROID_HOME=/opt/android-sdk          # or your SDK location
+export JAVA_HOME=/path/to/jdk-17
 
-## Offline profiles
+cd android
+./gradlew assembleDebug -Darch=arm64          # or -Darch=all, -Darch=arm, ...
+```
 
-Profiles are created locally. The UUID is the standard offline identifier — MD5 of
-`OfflinePlayer:<name>` with the version/variant bits forced — which is the same value
-the game derives for an unauthenticated player, so world data stays consistent with a
-desktop client. No Microsoft authentication is needed for offline play.
+The APK lands in `ZalithLauncher/build/outputs/apk/debug/`.
+
+`-Darch=<abi>` selects the ABI (`all`, `arm`, `arm64`, `x86`, `x86_64`). For a
+device-only build `arm64` keeps the APK far smaller.
+
+### Memory
+
+`gradle.properties` is deliberately tuned for a **2048 MB container with no
+swap** — upstream ships `-Xmx4096M`, which gets the daemon OOM-killed
+immediately. These settings bound the *total* JVM footprint (heap 768 MB,
+metaspace 320 MB, explicit `CompressedClassSpaceSize`) because the Gradle
+daemon grows to ~1.4 GB RSS while compiling this project, and Jetifier is off
+since every dependency is already AndroidX. On a normal 8 GB+ machine you can
+raise `org.gradle.jvmargs` back toward `-Xmx4096M` for a faster build.
+
+### Java package namespace
+
+The shipped **application ID is `com.orbitx.launcher`**, but the internal Java
+packages deliberately remain `com.movtery.zalithlauncher` and
+`net.kdt.pojavlaunch`. 549 sources reference those namespaces and the native
+code resolves classes by hardcoded path strings, so renaming them would break
+the JNI bindings and game launching. All user-visible branding — app name,
+icon, colours, application ID — is OrbitX. This is explained in full in
+[`LICENSE-THIRD-PARTY.md`](LICENSE-THIRD-PARTY.md).
+
+## Controls
+
+The control overlay is PojavLauncher's: movement D-pad, jump/sneak/sprint,
+attack/use, inventory, drop, chat, pause and the hotbar row — recoloured to the
+OrbitX red palette. Custom-key buttons are supported: in the controls editor
+you can add a control and bind it to any keyboard key or mouse action.
+Layouts are stored normalised `0..1`, with Default / PvP / Custom presets and
+separate portrait and landscape arrangements.
 
 ## Licence
 
-GPL-3.0. See `LICENSE` and `LICENSE-THIRD-PARTY.md`.
+**GNU GPL-3.0** — see [`LICENSE`](LICENSE), with third-party attribution in
+[`LICENSE-THIRD-PARTY.md`](LICENSE-THIRD-PARTY.md). Because this is a
+derivative of GPL-3.0 Zalith Launcher, any redistributed build must keep these
+notices and publish its source.
+
+Not affiliated with, endorsed by, or associated with Mojang Studios or
+Microsoft. Minecraft is a trademark of Mojang Studios.

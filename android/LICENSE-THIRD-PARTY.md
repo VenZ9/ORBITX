@@ -1,76 +1,108 @@
-# Third-party components and attribution
+# Third-party attribution — OrbitX Launcher
 
-OrbitX Launcher is a Minecraft: Java Edition launcher for Android. It is built on the
-work of several open-source projects, and this file records what came from where and
-under which licence.
+OrbitX Launcher is a **modified redistribution of Zalith Launcher 1.4.1.4**, which in
+turn is a derivative of PojavLauncher. This file records the upstream projects, their
+licences, and exactly what was changed here. It is required by the GNU GPL and it is
+deliberately explicit: nothing upstream has been stripped or hidden.
 
-## Reference implementations
+## Upstream projects
 
-No source file was copied verbatim from these projects. Their architecture was studied
-and the necessary contracts re-implemented:
+### Zalith Launcher — the direct base
+- Source: https://github.com/ZalithLauncher/ZalithLauncher
+- Version imported: **1.4.1.4** (`launcher_version_code=141400`)
+- Licence: **GNU GPL-3.0** — full text retained in [`LICENSE`](LICENSE)
+- Copyright: the Zalith Launcher contributors (principally MovTery and contributors).
 
-### PojavLauncher — https://github.com/PojavLauncherTeam/PojavLauncher
-- **Licence:** GNU LGPL-3.0 (project); its constituent parts are licensed as listed below.
-- **What OrbitX adopts:**
-  - The renderer contract. `POJAV_RENDERER`, `LIBGL_ES`, `POJAVEXEC_EGL`,
-    `MESA_LOADER_DRIVER_OVERRIDE`, `POJAV_NATIVEDIR`, `AWTSTUB_WIDTH/HEIGHT` and the
-    `-Dorg.lwjgl.opengl.libname` JVM property, together with the renderer names
-    `opengles2`, `opengles2_5`, `opengles3`, `opengles3_ltw`, `vulkan_zink`.
-    These are interface names taken from the LWJGL-on-Android ABI; reusing them is what
-    lets OrbitX load the same translation libraries.
-  - The launch model: a per-version JSON, a maven-style library tree, a
-    content-addressed asset store, `inheritsFrom` profile merging, and launching the
-    JVM out-of-process with the official argument vector.
-  - The EGL-context handoff design (see `app/cpp/orbitx_egl_bridge.c`).
-- **Status:** PojavLauncher was archived in September 2025; its Android line continues
-  as Amethyst-Android (AngelAuraMC).
+### PojavLauncher — the runtime engine beneath Zalith
+- Source: https://github.com/PojavLauncherTeam/PojavLauncher
+- Licence: **GNU LGPL-3.0**
+- Copyright: PojavLauncherTeam and contributors.
 
-### Zalith Launcher / Zalith Launcher 2 — https://github.com/ZalithLauncher/ZalithLauncher2
-- **Licence:** GPL-3.0.
-- **What OrbitX adopts:** the UI/UX shape only — a Compose launcher with Home,
-  Profiles, Versions and Settings, a profile-per-install model, and a renderer picker.
-  No Zalith code or resource is included.
+Zalith Launcher carries the whole PojavLauncher Java-side runtime and its control
+system forward; OrbitX therefore contains LGPL-3.0-derived code by inheritance. The
+`net.kdt.pojavlaunch` namespaces and the `pojavexec` native module originate there.
 
-### Fold Craft Launcher — https://github.com/FCL-Team/FoldCraftLauncher
-- **Licence:** GPL-3.0.
-- **What OrbitX adopts:** feature-level influence only — per-version instance isolation
-  (`instances/<version>/`), multi-renderer support including VirGL and Zink, and the
-  approach of running the Forge installer jar with a provisioned JVM rather than
-  reimplementing the installer. No FCL code is included.
+## What OrbitX changed relative to Zalith Launcher 1.4.1.4
 
-### ZaynLauncher — https://github.com/VenZ9/Zaynlauncher (same author)
-- **Licence:** as published by the author.
-- **What OrbitX adopts:** the Custom Controls editor pattern — normalized 0..1 control
-  geometry, live-state drag/resize via `rememberUpdatedState`, px→dp conversion through
-  `LocalDensity`, canvas-bounds clamping, `key(c.id)` item identity, per-layout reset,
-  and deterministic placement of new controls.
+Modification date: **2026-09-20**.
 
-## Runtime and native components (downloaded at runtime, not distributed here)
+1. **Branding.** App label set to "OrbitX Launcher" (`launcher_name` /
+   `launcher_app_name` in `ZalithLauncher/gradle.properties`), and the shipped
+   application id changed to `com.orbitx.launcher` (debug variant
+   `com.orbitx.launcher.debug`).
+2. **Launcher icon.** The upstream icon art was replaced with the supplied OrbitX
+   ring artwork: adaptive-icon background/foreground plus the mdpi→xxxhdpi legacy
+   and round icons. Generation is reproducible from
+   `tools/generate_orbitx_icons.py`.
+3. **Colour palette.** `ZalithLauncher/src/main/res/values/colors.xml` and
+   `values-night/colors_night.xml` were recoloured to a red palette (primary
+   `#D32F2F`, deep surfaces `#7F0000`, highlight `#E53935`/`#E57373`, status bar
+   `#B71C1C`). The launcher UI is entirely XML-resource driven, so this one file
+   pair repaints the launcher, its dialogs and the in-game control overlay.
+4. **Build memory settings.** `gradle.properties` was re-tuned so the build fits a
+   2048 MB container (upstream ships `-Xmx4096M`).
 
-These are fetched on demand by the launcher and remain under their own licences:
+### Java package namespaces were deliberately NOT renamed
 
-| Component | Licence | Use |
+The shipped **application id** is `com.orbitx.launcher`, but the internal Java
+packages remain `com.movtery.zalithlauncher` and `net.kdt.pojavlaunch`.
+
+This is intentional and is the honest engineering trade-off, not an oversight:
+
+- 549 source files reference those namespaces directly;
+- the native code resolves classes by **hardcoded path strings** —
+  `net/kdt/pojavlaunch/MainActivity`, `net/kdt/pojavlaunch/CriticalNativeTest`,
+  `net/kdt/pojavlaunch/Logger$eventLogListener`,
+  `com/movtery/zalithlauncher/ui/activity/ErrorActivity` — and registers 17 JNI
+  symbols whose names derive from the Java package path;
+- renaming the packages would therefore break the JNI bindings and the launcher's
+  ability to start a game session.
+
+Holding the package names stable is what keeps the runtime working. This does not
+reduce any user-visible OrbitX branding: the app name, icon, colours and shipped
+application id are all OrbitX.
+
+## Bundled and downloaded components
+
+These ship inside the APK or are fetched on demand at runtime, and remain under
+their own licences. The authoritative terms are in each project's own distribution.
+
+| Component | Role | Licence |
 |---|---|---|
-| Android OpenJDK runtimes (`angelauramc-openjdk-build`, successor of `android-openjdk-build-multiarch`) | GPL-2.0 (OpenJDK) | The JRE that runs the game |
-| LWJGL 3 | BSD-3-Clause | Java bindings for OpenGL/OpenAL |
-| GL4ES | MIT | OpenGL → OpenGL ES translation |
-| Mesa 3D (Zink) | MIT | OpenGL → Vulkan translation |
-| ANGLE | BSD-3-Clause | GLES over Vulkan |
-| VirGL renderer | MIT | Virtualised GL passthrough |
-| OpenAL Soft | LGPL-2.1 | Audio |
-| Minecraft client, assets and libraries | Mojang EULA | Downloaded from Mojang's public endpoints; not redistributed |
-| Fabric loader | Apache-2.0 | Mod loader |
-| Minecraft Forge | LGPL-2.1 | Mod loader |
+| OpenJDK runtimes (`jre-8/17/21/25`) | Android JRE used to run Minecraft | GPL-2.0 **with Classpath Exception** |
+| LWJGL 3 (+ GLFW) | OpenGL/GLFW Java bindings | BSD-3-Clause |
+| gl4es | OpenGL 1.x → GLES translation | MIT |
+| OSMesa / Mesa | software GL / Zink driver | MIT |
+| virglrenderer | virtual GPU translation | MIT |
+| ANGLE (`libEGL_angle`, `libGLESv2_angle`) | GLES over Vulkan/other | BSD-3-Clause |
+| Vulkan freedreno layer | Adreno Vulkan support | MIT |
+| OpenAL Soft | audio | LGPL-2.0-or-later |
+| caciocavallo / caciocavallo17 | AWT-on-Android bridge | GPL-2.0 with Classpath Exception |
+| bytehook | native hooking | Apache-2.0 |
+| exp4j | expression parser (upstream fork) | Apache-2.0 |
+| xz (org.tukaani) | LZMA/XZ decompression | Public domain |
+| Gson | JSON | Apache-2.0 |
+| toml4j | TOML parsing | MIT |
+| OkHttp | HTTP | Apache-2.0 |
+| EventBus | in-app events | Apache-2.0 |
+| Glide | image loading | BSD-3 / MIT / Apache-2.0 |
+| HtmlCleaner | HTML cleaning | BSD-3-Clause |
+| StringFog | string obfuscation plugin | Apache-2.0 |
+| AndroidX / Material Components | UI toolkit | Apache-2.0 |
+| TouchController proxy client | third-party touch controller bridge | see upstream |
 
-## Build dependencies
+**Minecraft itself and its assets are not redistributed here.** The launcher
+downloads the game client, libraries and assets from Mojang's servers at first run,
+under the user's own account terms. OrbitX is not affiliated with, endorsed by, or
+associated with Mojang Studios or Microsoft.
 
-AndroidX (Apache-2.0), Jetpack Compose (Apache-2.0), Kotlin (Apache-2.0),
-Apache Commons Compress (Apache-2.0), XZ for Java (public domain), Apache Commons IO
-(Apache-2.0), kotlinx.coroutines (Apache-2.0).
+## Licence of the resulting project
 
-## Not affiliated
+Because it is built on **GPL-3.0** Zalith Launcher (and, through it, LGPL-3.0
+PojavLauncher), the combined work distributed in `android/` is licensed
+**GNU GPL-3.0**. The full text is in [`LICENSE`](LICENSE). Anyone redistributing a
+build from this directory must keep that licence, these notices, and must publish
+the corresponding source.
 
-OrbitX Launcher is not affiliated with, endorsed by, or sponsored by Mojang Studios,
-Microsoft, PojavLauncher, the Zalith team, or the FCL team. "Minecraft" is a trademark
-of Mojang Studios. A valid Minecraft account is required to play online; the launcher's
-offline profile mode is intended for local play and for servers that permit it.
+The web application that lives elsewhere in this repository is a separate work and
+is not covered by this file.

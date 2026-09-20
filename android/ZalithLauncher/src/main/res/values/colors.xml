@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  OrbitX Launcher - RED palette.
+
+  Every colour the launcher draws comes through this file (the UI is 100% XML
+  driven; there are no hardcoded colour literals in the Kotlin/Java sources), so
+  recolouring here repaints the launcher UI, its dialogs, the buttons and the
+  in-game control overlay in one place.
+
+  Base hues: primary #D32F2F (Material Red 700), deep surface #7F0000,
+  highlight #E57373, status/navigation bar #B71C1C.
+
+  Text contrast: `text_*_on_red` are the light-on-red pairs; `primary_text`
+  stays near-black for text drawn on the light surfaces (dialogs, list rows).
+-->
+<resources>
+    <color name="black_or_white">#000000</color>
+
+    <!-- Base surfaces: light neutrals with a warm red cast -->
+    <color name="background_app">#FFEBEE</color>
+    <color name="background_app_error">#FFCDD2</color>
+    <color name="background_overlay">#E0B4B4</color>
+    <color name="background_status_bar">#B71C1C</color>
+
+    <!-- Header / menu bars: the strong red brand surfaces -->
+    <color name="background_menu_top">#D32F2F</color>
+    <color name="background_menu_top_error">#B71C1C</color>
+    <color name="background_menu_element">#E53935</color>
+    <color name="background_ripple_effect">#40FFFFFF</color>
+
+    <!-- Buttons -->
+    <color name="button_background">#FFCDD2</color>
+    <color name="button_background_selected">#EF9A9A</color>
+    <color name="dialog_background">#FFEBEE</color>
+
+    <!-- Menu bar / overlays / progress -->
+    <color name="menu_bar">#FFEBEE</color>
+    <color name="menu_bar_text">#FFEBEE</color>
+    <color name="menu_overlay">#BEFFF5F5</color>
+    <color name="menu_progress">#E53935</color>
+
+    <!-- List rows -->
+    <color name="background_item">#CCFFFFFF</color>
+    <color name="background_item_selected">#D8F1DEE0</color>
+    <color name="background_item_disabled">#D9FFCDD2</color>
+    <color name="background_sponsor_intermediate">#CCFFCB8B</color>
+    <color name="background_sponsor_advanced">#CCFDA28A</color>
+
+    <!-- Input fields -->
+    <color name="edit_box_fill">#FDECEA</color>
+    <color name="edit_box_fill_selected">#F8D7D5</color>
+
+    <!-- Category chips / text plates -->
+    <color name="mod_category_fill">#80D1D1D1</color>
+    <color name="text_background_fill">#B3F5DEDE</color>
+
+    <!-- Section headers -->
+    <color name="settings_category">#C62828</color>
+
+    <color name="favorite_color">#E53935</color>
+
+    <!-- Icons on red surfaces -->
+    <color name="icon_color">#FFFFFF</color>
+
+    <!-- Body text on light surfaces (dialog_background / background_item) -->
+    <color name="primary_text">#1A0A0A</color>
+
+    <!-- Text drawn directly on the red header/menu surfaces -->
+    <color name="text_on_red">#FFFFFFFF</color>
+    <color name="text_on_red_secondary">#FFFFCDD2</color>
+</resources>
