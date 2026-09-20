@@ -65,6 +65,34 @@ data class Profile(
     }
 }
 
+/**
+ * The bindable actions.
+ *
+ * Stored as plain strings so a layout written by an older build still loads, and so a
+ * layout can reference an action this build does not recognise without failing to parse.
+ */
+val ControlActions = listOf(
+    "JUMP", "SNEAK", "SPRINT", "ATTACK", "USE", "INVENTORY", "DROP",
+    "SWAP_HANDS", "CHAT", "PAUSE", "PERSPECTIVE",
+    "MOVE_UP", "MOVE_LEFT", "MOVE_DOWN", "MOVE_RIGHT",
+    "SLOT_1", "SLOT_2", "SLOT_3", "SLOT_4", "SLOT_5",
+    "SLOT_6", "SLOT_7", "SLOT_8", "SLOT_9",
+)
+
+/** Human-readable label for an action id. */
+fun controlLabel(action: String): String = when (action) {
+    "MOVE_UP" -> "▲"
+    "MOVE_LEFT" -> "◀"
+    "MOVE_DOWN" -> "▼"
+    "MOVE_RIGHT" -> "▶"
+    "ATTACK" -> "LMB"
+    "USE" -> "RMB"
+    "SWAP_HANDS" -> "SWAP"
+    "INVENTORY" -> "INV"
+    "PERSPECTIVE" -> "VIEW"
+    else -> action.replace('_', ' ')
+}
+
 /** A control binding in the Custom Controls editor (normalized 0..1 coordinates). */
 data class Control(
     val id: String = UUID.randomUUID().toString(),
@@ -94,6 +122,10 @@ data class Control(
             opacity = o.optDouble("opacity", 1.0).toFloat(),
             enabled = o.optBoolean("enabled", true),
         )
+
+        /** Shorthand for the built-in layouts. */
+        fun at(action: String, x: Float, y: Float, w: Float, h: Float) =
+            Control(action = action, x = x, y = y, w = w, h = h)
     }
 }
 
@@ -116,30 +148,68 @@ data class Layout(
             return Layout(
                 id = o.optString("id", UUID.randomUUID().toString()),
                 name = o.optString("name", "Layout"),
-                controls = list,
+                // A layout saved by an older build can hold a control that sits past the
+                // canvas edge; clamping on load is what stops it rendering outside.
+                controls = list.map { it.clampIntoCanvas() }.toMutableList(),
             )
         }
 
+        /** Nine hotbar slots laid out as a centred row. */
+        private fun hotbar(startX: Float, y: Float, w: Float = 0.062f, h: Float = 0.085f) =
+            (1..9).map { i -> Control.at("SLOT_$i", startX + (i - 1) * w, y, w, h) }
+
+        /** A four-way movement pad: up, left, down, right around a cell grid. */
+        private fun dPad(cx: Float, cy: Float) = listOf(
+            Control.at("MOVE_UP", cx - 0.030f, cy - 0.135f, 0.075f, 0.130f),
+            Control.at("MOVE_LEFT", cx - 0.105f, cy, 0.075f, 0.130f),
+            Control.at("MOVE_DOWN", cx - 0.030f, cy + 0.135f, 0.075f, 0.130f),
+            Control.at("MOVE_RIGHT", cx + 0.045f, cy, 0.075f, 0.130f),
+        )
+
         /**
-         * The built-in Default layout: the survival hotbar plus movement.
-         * Geometry is chosen so every control already satisfies
-         * x >= 0, y >= 0, x + w <= 1, y + h <= 1.
+         * The stock layout: the arrangement PojavLauncher and Zalith Launcher ship with.
+         *
+         * Movement and the toggles sit under the left thumb, look/attack/use and jump
+         * under the right, the status buttons run along the top-right, and the hotbar is a
+         * centred row along the bottom. Every rectangle satisfies x + w <= 1 and
+         * y + h <= 1 by construction, so nothing can render outside the canvas.
          */
         fun default(): Layout = Layout(
             name = "Default",
-            controls = mutableListOf(
-                Control(action = "JUMP", x = 0.80f, y = 0.62f, w = 0.13f, h = 0.13f),
-                Control(action = "SNEAK", x = 0.80f, y = 0.78f, w = 0.13f, h = 0.13f),
-                Control(action = "SPRINT", x = 0.93f, y = 0.78f, w = 0.07f, h = 0.13f),
-                Control(action = "ATTACK", x = 0.03f, y = 0.72f, w = 0.14f, h = 0.14f),
-                Control(action = "USE", x = 0.03f, y = 0.55f, w = 0.14f, h = 0.14f),
-                Control(action = "INVENTORY", x = 0.03f, y = 0.38f, w = 0.14f, h = 0.12f),
-                Control(action = "SLOT_1", x = 0.22f, y = 0.90f, w = 0.055f, h = 0.08f),
-                Control(action = "SLOT_2", x = 0.285f, y = 0.90f, w = 0.055f, h = 0.08f),
-                Control(action = "SLOT_3", x = 0.35f, y = 0.90f, w = 0.055f, h = 0.08f),
-                Control(action = "SLOT_4", x = 0.415f, y = 0.90f, w = 0.055f, h = 0.08f),
-                Control(action = "SLOT_5", x = 0.48f, y = 0.90f, w = 0.055f, h = 0.08f),
-            ),
+            controls = (
+                dPad(cx = 0.140f, cy = 0.625f) + listOf(
+                    Control.at("SNEAK", 0.030f, 0.250f, 0.095f, 0.150f),
+                    Control.at("SPRINT", 0.030f, 0.845f, 0.095f, 0.140f),
+                    Control.at("ATTACK", 0.760f, 0.430f, 0.150f, 0.150f),
+                    Control.at("USE", 0.760f, 0.600f, 0.150f, 0.150f),
+                    Control.at("JUMP", 0.870f, 0.760f, 0.115f, 0.170f),
+                    Control.at("INVENTORY", 0.620f, 0.175f, 0.090f, 0.130f),
+                    Control.at("CHAT", 0.720f, 0.175f, 0.075f, 0.130f),
+                    Control.at("DROP", 0.810f, 0.175f, 0.075f, 0.130f),
+                    Control.at("PAUSE", 0.900f, 0.175f, 0.075f, 0.130f),
+                ) + hotbar(startX = 0.215f, y = 0.895f)
+                ).toMutableList(),
+        )
+
+        /**
+         * The PvP layout: attack/use enlarged under the right thumb, movement and the
+         * hotbar pushed left, and the utility buttons along the top.
+         */
+        fun pvp(): Layout = Layout(
+            name = "PvP",
+            controls = (
+                dPad(cx = 0.105f, cy = 0.670f) + listOf(
+                    Control.at("SPRINT", 0.700f, 0.315f, 0.095f, 0.115f),
+                    Control.at("SWAP_HANDS", 0.810f, 0.315f, 0.095f, 0.115f),
+                    Control.at("INVENTORY", 0.700f, 0.150f, 0.110f, 0.145f),
+                    Control.at("DROP", 0.820f, 0.150f, 0.095f, 0.145f),
+                    Control.at("CHAT", 0.925f, 0.150f, 0.070f, 0.145f),
+                    Control.at("ATTACK", 0.820f, 0.560f, 0.165f, 0.175f),
+                    Control.at("USE", 0.820f, 0.365f, 0.165f, 0.175f),
+                    Control.at("SNEAK", 0.880f, 0.845f, 0.110f, 0.145f),
+                    Control.at("JUMP", 0.470f, 0.700f, 0.120f, 0.145f),
+                ) + hotbar(startX = 0.300f, y = 0.885f, h = 0.100f)
+                ).toMutableList(),
         )
     }
 }

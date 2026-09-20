@@ -41,7 +41,7 @@ object Store {
         val s = loaded ?: LauncherState()
         // First run: seed the built-in layouts and a default profile.
         if (s.layouts.isEmpty()) {
-            s.layouts = mutableListOf(Layout.default(), pvpLayout())
+            s.layouts = mutableListOf(Layout.default(), Layout.pvp())
             s.selectedLayoutId = s.layouts.first().id
         }
         if (s.profiles.isEmpty()) {
@@ -54,20 +54,6 @@ object Store {
         _state.value = s
         if (loaded == null) save()
     }
-
-    private fun pvpLayout(): Layout = Layout(
-        name = "PvP",
-        controls = mutableListOf(
-            Control(action = "ATTACK", x = 0.84f, y = 0.60f, w = 0.14f, h = 0.14f),
-            Control(action = "USE", x = 0.84f, y = 0.44f, w = 0.14f, h = 0.14f),
-            Control(action = "JUMP", x = 0.68f, y = 0.78f, w = 0.13f, h = 0.13f),
-            Control(action = "SNEAK", x = 0.84f, y = 0.78f, w = 0.13f, h = 0.13f),
-            Control(action = "SPRINT", x = 0.02f, y = 0.80f, w = 0.10f, h = 0.12f),
-            Control(action = "SWAP_HANDS", x = 0.14f, y = 0.80f, w = 0.10f, h = 0.12f),
-            Control(action = "INVENTORY", x = 0.02f, y = 0.64f, w = 0.11f, h = 0.11f),
-            Control(action = "DROP", x = 0.15f, y = 0.64f, w = 0.09f, h = 0.11f),
-        ),
-    )
 
     private fun parse(o: JSONObject): LauncherState {
         val profiles = mutableListOf<Profile>()
@@ -122,6 +108,16 @@ object Store {
         _state.value.profiles.firstOrNull { it.id == _state.value.selectedProfileId }
             ?: _state.value.profiles.firstOrNull()
 
+    /**
+     * Look a profile up by id, falling back to the selected one.
+     *
+     * This exists so a launch can be described *for a specific profile* — the one whose
+     * Play button was pressed — rather than for whatever happens to be selected when the
+     * background thread gets around to reading the state.
+     */
+    fun lookupProfile(id: String?): Profile? =
+        _state.value.profiles.firstOrNull { it.id == id } ?: currentProfile()
+
     // --- Layout operations ---------------------------------------------------
 
     fun addLayout(l: Layout) {
@@ -149,8 +145,15 @@ object Store {
 
     /**
      * Reset the CURRENTLY SELECTED layout back to its built-in geometry.
-     * A custom layout has no built-in definition, so it is emptied instead; control
-     * identity is preserved for the built-ins so nothing else referencing them breaks.
+     *
+     * Only the selected layout is touched — the previous generation reset "Default" no
+     * matter which layout was being edited, which silently discarded the user's work in
+     * the layout they were actually looking at.
+     *
+     * Control identity is carried across the reset: a control whose action already exists
+     * keeps its id, so anything holding a reference to it (a selected control in the
+     * editor, a future binding) stays valid. Built-in Default and PvP restore their stock
+     * arrangement; a custom layout has no stock definition, so it is cleared.
      */
     fun resetSelectedLayout() {
         mutate { s ->
@@ -159,10 +162,15 @@ object Store {
             val current = s.layouts[idx]
             val fresh = when (current.name.lowercase()) {
                 "default" -> Layout.default()
-                "pvp" -> pvpLayout()
+                "pvp" -> Layout.pvp()
                 else -> Layout(name = current.name)
             }
-            s.layouts[idx] = current.copy(controls = fresh.controls)
+            val reused = ArrayList<Control>(fresh.controls.size)
+            for (c in fresh.controls) {
+                val previous = current.controls.firstOrNull { it.action == c.action }
+                reused += if (previous == null) c else c.copy(id = previous.id)
+            }
+            s.layouts[idx] = current.copy(controls = reused)
         }
     }
 
@@ -176,7 +184,7 @@ object Store {
     fun resetAll() {
         _state.value = LauncherState(
             profiles = mutableListOf(Profile(name = "Player").also { }),
-            layouts = mutableListOf(Layout.default(), pvpLayout()),
+            layouts = mutableListOf(Layout.default(), Layout.pvp()),
         ).also {
             it.selectedProfileId = it.profiles.first().id
             it.selectedLayoutId = it.layouts.first().id

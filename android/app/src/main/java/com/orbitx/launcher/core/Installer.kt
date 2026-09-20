@@ -51,22 +51,44 @@ object Installer {
         v
     }
 
-    /** Install a Fabric loader profile on top of an installed vanilla version. */
+    /**
+     * Install a Fabric loader profile on top of an installed vanilla version.
+     *
+     * The parent must exist before the profile is written: a Fabric profile
+     * `inheritsFrom` its vanilla version, so installing it against a missing parent
+     * produces a profile that cannot resolve its client jar or its base libraries.
+     * The loader version is resolved from the Fabric meta API rather than trusted, and
+     * the loader's own libraries are then downloaded from the repositories each library
+     * names in the json.
+     */
     suspend fun installFabric(
         gameVersion: String,
-        loaderVersion: String,
+        loaderVersion: String? = null,
         onStage: (String) -> Unit,
+        onProgress: ((Progress) -> Unit)? = null,
     ): String = withContext(Dispatchers.IO) {
-        onStage("Installing Fabric $loaderVersion for $gameVersion")
-        val id = LoaderApi.installFabric(gameVersion, loaderVersion)
-        // The profile inherits the vanilla version, so its parent must be present.
+        // 1. Parent first.
         if (!OrbitPaths.versionJson(gameVersion).isFile) {
-            throw IllegalStateException("install vanilla $gameVersion first")
+            throw IllegalStateException(
+                "Minecraft $gameVersion is not installed. Install the vanilla version " +
+                    "first, then add Fabric to it."
+            )
         }
+        // 2. A loader version that actually exists for this game version.
+        onStage("Resolving Fabric loader for $gameVersion")
+        val loader = LoaderApi.resolveLoader(gameVersion, loaderVersion)
+        val tag = if (loader.stable) "stable" else "beta"
+        onStage("Installing Fabric ${loader.version} ($tag) for $gameVersion")
+
+        // 3. Profile json.
+        val id = LoaderApi.installFabric(gameVersion, loader.version)
         val v = MojangApi.resolveWithParents(id)
-        onStage("Downloading Fabric libraries")
-        MojangApi.installLibraries(v)
-        onStage("Fabric $loaderVersion installed")
+
+        // 4. The loader's libraries, each from its own repository.
+        onStage("Downloading ${v.libraries.size} libraries for $id")
+        MojangApi.installLibraries(v, onProgress)
+        OrbitLog.i("Fabric ${loader.version} installed as $id")
+        onStage("Fabric ${loader.version} installed")
         id
     }
 
@@ -75,16 +97,22 @@ object Installer {
         gameVersion: String,
         forgeVersion: String,
         onStage: (String) -> Unit,
+        onProgress: ((Progress) -> Unit)? = null,
         onLog: (String) -> Unit,
     ): String = withContext(Dispatchers.IO) {
+        if (!OrbitPaths.versionJson(gameVersion).isFile) {
+            throw IllegalStateException(
+                "Minecraft $gameVersion is not installed. Install the vanilla version first."
+            )
+        }
         onStage("Provisioning Java 8 for the Forge installer")
         val runtime = GameLauncher.provisionRuntime(8, onStage, onLog)
         val javaExe = File(runtime, "bin/java")
         onStage("Running the Forge installer")
         val id = LoaderApi.installForge(gameVersion, forgeVersion, javaExe, onLog)
         val v = MojangApi.resolveWithParents(id)
-        onStage("Downloading Forge libraries")
-        MojangApi.installLibraries(v)
+        onStage("Downloading ${v.libraries.size} libraries for $id")
+        MojangApi.installLibraries(v, onProgress)
         onStage("Forge $forgeVersion installed")
         id
     }

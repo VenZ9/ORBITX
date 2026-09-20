@@ -171,17 +171,24 @@ fun VersionsScreen() {
                             TextButton(enabled = !busy, onClick = {
                                 scope.launch {
                                     busy = true; error = null; progress = null
+                                    // The loader version is resolved from the Fabric meta
+                                    // API inside installFabric, and the vanilla parent is
+                                    // required first, so this reports exactly what is
+                                    // missing instead of failing mid-download.
                                     runCatching {
-                                        val loaders = Installer.fabricLoaders(v.id)
-                                        val chosen = loaders.firstOrNull { it.stable } ?: loaders.firstOrNull()
-                                            ?: throw IllegalStateException("no Fabric loader published for ${v.id}")
-                                        stage = "Fabric ${chosen.version}"
-                                        Installer.installFabric(v.id, chosen.version) { stage = it }
-                                    }.onSuccess { refresh() }
-                                        .onFailure {
-                                            error = "fabric: ${it.message}"
-                                            OrbitLog.e("fabric", it)
-                                        }
+                                        Installer.installFabric(
+                                            gameVersion = v.id,
+                                            loaderVersion = null,
+                                            onStage = { stage = it },
+                                            onProgress = { progress = it },
+                                        )
+                                    }.onSuccess { id ->
+                                        refresh()
+                                        stage = "Installed $id"
+                                    }.onFailure {
+                                        error = "fabric: ${it.message}"
+                                        OrbitLog.e("fabric install ${v.id}", it)
+                                    }
                                     busy = false; progress = null
                                 }
                             }) { Text("+ Fabric") }

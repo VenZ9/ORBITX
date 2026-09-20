@@ -1,9 +1,7 @@
 package com.orbitx.launcher.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,15 +10,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
@@ -34,7 +29,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -42,73 +36,53 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.input.pointer.positionChange
-import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.orbitx.launcher.data.Control
+import com.orbitx.launcher.data.ControlActions
 import com.orbitx.launcher.data.Layout
 import com.orbitx.launcher.data.Store
-
-/**
- * The bindable actions. Kept as a plain list of names so the stored data stays a
- * simple string (and therefore forward-compatible if more are added later).
- */
-val ControlActions = listOf(
-    "JUMP", "SNEAK", "SPRINT", "ATTACK", "USE", "INVENTORY", "DROP",
-    "SWAP_HANDS", "CHAT", "PAUSE", "PERSPECTIVE", "SLOT_1", "SLOT_2",
-    "SLOT_3", "SLOT_4", "SLOT_5", "SLOT_6", "SLOT_7", "SLOT_8", "SLOT_9",
-)
-
-private const val MIN_SIZE = 0.06f
-private const val MAX_SIZE = 0.5f
+import com.orbitx.launcher.data.clampControlX
+import com.orbitx.launcher.data.clampControlY
+import com.orbitx.launcher.data.clampIntoCanvas
+import com.orbitx.launcher.data.companionPlacement
+import com.orbitx.launcher.data.controlLabel
+import com.orbitx.launcher.data.movedBy
+import com.orbitx.launcher.data.resizedBy
 
 /**
  * Custom Controls editor.
  *
- * Geometry is stored normalized (0..1) against the *measured* canvas, so a layout is
- * resolution- and orientation-independent: the same percentages describe a portrait
- * 9:16 and a landscape 16:9 canvas, and dragging always uses the current canvas size.
+ * Geometry is stored normalized (0..1) against the *measured* canvas, so one layout
+ * describes both a portrait 9:16 and a landscape 16:9 canvas and dragging always divides
+ * by the live dimensions. Rendering, gesture math and clamping all live in
+ * [ControlOverlay] and the `clampControl*` helpers, so the editor and the in-game overlay
+ * cannot disagree about where a control is.
  *
- * Two classes of bug are deliberately designed out here:
- *  1. Stale gesture state. Reading `control` directly inside a `pointerInput` lambda
- *     captures the value from the composition that created it; because the gesture
- *     modifier is keyed on the id alone it is never rebuilt, so drag deltas get added
- *     to a frozen origin and the control stops following the finger. Every gesture
- *     here reads through `rememberUpdatedState`, so each event sees the live value.
- *  2. Pixel/dp confusion. The canvas is measured in pixels; layout offsets/sizes must
- *     be converted with the current density before being handed to Compose, otherwise
- *     rendered geometry and touch coordinates diverge by the density factor.
+ * Editing is gated behind an explicit edit mode: outside it the canvas is a live preview
+ * and controls are inert, which is what PojavLauncher and Zalith Launcher do and what stops
+ * a stray drag from rearranging the layout while playing.
  */
 @Composable
 fun ControlsScreen() {
     val state by Store.state.collectAsState()
     val layout = state.layouts.firstOrNull { it.id == state.selectedLayoutId }
-    val density = LocalDensity.current
 
     // Editor works on a draft; Save commits it. Keyed on the layout id so switching
-    // layouts (or resetting) reloads rather than keeping the previous draft.
-    var draft by remember(layout?.id) { mutableStateOf(layout?.controls?.toList() ?: emptyList()) }
-    var canvas by remember { mutableStateOf(IntSize.Zero) }
+    // layouts (or resetting) reloads rather than keeping the previous draft. The type
+    // parameter is explicit: `?: emptyList()` alone leaves Kotlin inferring Any?.
+    var draft by remember(layout?.id) {
+        mutableStateOf<List<Control>>(layout?.controls?.map { it.clampIntoCanvas() } ?: emptyList())
+    }
     var selectedId by remember(layout?.id) { mutableStateOf<String?>(null) }
+    var editMode by remember(layout?.id) { mutableStateOf(false) }
     var showAdd by remember { mutableStateOf(false) }
     var confirmReset by remember { mutableStateOf(false) }
     var pendingName by remember { mutableStateOf<String?>(null) }
 
     val liveDraft = rememberUpdatedState(draft)
-    val liveCanvas = rememberUpdatedState(canvas)
     fun update(mutator: (List<Control>) -> List<Control>) { draft = mutator(liveDraft.value) }
-
-    fun Control.clampedPosition(): Control {
-        val cx = x.coerceIn(0f, (1f - w).coerceAtLeast(0f))
-        val cy = y.coerceIn(0f, (1f - h).coerceAtLeast(0f))
-        return copy(x = cx, y = cy)
-    }
 
     if (layout == null) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -118,11 +92,13 @@ fun ControlsScreen() {
     }
 
     val selected = draft.firstOrNull { it.id == selectedId }
+    val dirty = draft != layout.controls
 
     Column(Modifier.fillMaxWidth()) {
         SectionHeader(
             "Custom Controls",
-            "Drag to move, drag the corner to resize. Coordinates are stored as 0..1 of the canvas.",
+            "Match PojavLauncher's arrangement, or make your own. Coordinates are stored " +
+                "as 0..1 of the canvas, so a layout fits any screen.",
         )
 
         // --- Layout chooser -----------------------------------------------------
@@ -159,144 +135,64 @@ fun ControlsScreen() {
             }
         }
 
-        Spacer(Modifier.height(8.dp))
+        // --- Edit mode toggle ---------------------------------------------------
+        Row(
+            Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Box(
+                Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(if (editMode) OrbitMint.copy(alpha = 0.20f) else OrbitSurfaceHi)
+                    .clickable {
+                        editMode = !editMode
+                        if (!editMode) selectedId = null
+                    }
+                    .padding(horizontal = 14.dp, vertical = 8.dp),
+            ) {
+                Text(
+                    if (editMode) "Editing — tap to lock" else "Preview (tap to edit)",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = if (editMode) OrbitMint else OrbitMuted,
+                    fontWeight = if (editMode) FontWeight.SemiBold else FontWeight.Normal,
+                )
+            }
+            Text(
+                if (editMode) "Drag to move, corner handle to resize."
+                else "Controls are inert here. Long-press one in game to edit.",
+                style = MaterialTheme.typography.labelSmall,
+                color = OrbitMuted,
+            )
+        }
 
         // --- Canvas -------------------------------------------------------------
         Box(Modifier.fillMaxWidth().weight(1f).padding(horizontal = 12.dp)) {
-            Box(
-                Modifier
+            ControlOverlay(
+                controls = draft,
+                editMode = editMode,
+                globalOpacity = 0.85f,
+                selectedId = selectedId,
+                onSelect = { selectedId = it },
+                onMove = { c, dx, dy ->
+                    update { list -> list.map { if (it.id == c.id) it.movedBy(dx, dy) else it } }
+                },
+                onResize = { c, dw, dh ->
+                    update { list -> list.map { if (it.id == c.id) it.resizedBy(dw, dh) else it } }
+                },
+                modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(14.dp))
-                    .background(Color(0xFF04060A))
-                    .border(1.dp, OrbitSurfaceHi, RoundedCornerShape(14.dp))
-                    .onSizeChanged { canvas = it },
-            ) {
-                // Grid guides, purely visual.
-                Box(Modifier.fillMaxWidth().height(1.dp).offset(y = 0.dp).background(OrbitSurfaceHi))
+                    .background(Color(0xFF04060A)),
+            )
 
-                draft.forEach { c ->
-                    // key() keeps remembered per-item state bound to the right control
-                    // when controls are added or removed.
-                    key(c.id) {
-                        val isSelected = c.id == selectedId
-                        val cState = rememberUpdatedState(c)
-
-                        Box(
-                            Modifier
-                                .offset(
-                                    x = with(density) { (c.x * canvas.width).toDp() },
-                                    y = with(density) { (c.y * canvas.height).toDp() },
-                                )
-                                .size(
-                                    width = with(density) { (c.w * canvas.width).toDp() },
-                                    height = with(density) { (c.h * canvas.height).toDp() },
-                                )
-                                .clip(RoundedCornerShape(9.dp))
-                                .background(
-                                    (if (isSelected) OrbitMint else OrbitViolet)
-                                        .copy(alpha = 0.20f * c.opacity)
-                                )
-                                .border(
-                                    width = if (isSelected) 2.dp else 1.dp,
-                                    color = if (isSelected) OrbitMint else OrbitViolet.copy(alpha = 0.6f),
-                                    shape = RoundedCornerShape(9.dp),
-                                )
-                                .clickable { selectedId = c.id }
-                                // Keyed on the id AND the measured canvas: the handler is
-                                // rebuilt when the canvas changes (rotation) so the math
-                                // always divides by the live canvas dimensions.
-                                .pointerInput(c.id, canvas) {
-                                    detectDragGestures(
-                                        onDragStart = { selectedId = c.id },
-                                        onDrag = { change, _ ->
-                                            change.consume()
-                                            val w = liveCanvas.value.width.toFloat()
-                                            val h = liveCanvas.value.height.toFloat()
-                                            if (w <= 0f || h <= 0f) return@detectDragGestures
-                                            // positionChange() is the movement since the
-                                            // previous event, so accumulating it against
-                                            // the LIVE value tracks the finger exactly.
-                                            val dx = change.positionChange().x / w
-                                            val dy = change.positionChange().y / h
-                                            val cur = cState.value
-                                            update { list ->
-                                                list.map {
-                                                    if (it.id != cur.id) it
-                                                    else it.copy(
-                                                        x = (it.x + dx).coerceIn(0f, (1f - it.w).coerceAtLeast(0f)),
-                                                        y = (it.y + dy).coerceIn(0f, (1f - it.h).coerceAtLeast(0f)),
-                                                    )
-                                                }
-                                            }
-                                        },
-                                    )
-                                },
-                        ) {
-                            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                Text(
-                                    c.action.replace('_', ' '),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = OrbitText,
-                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                                )
-                            }
-
-                            // Resize handle. Declared inside the control so it is hit
-                            // before the parent's drag detector.
-                            Box(
-                                Modifier
-                                    .align(Alignment.BottomEnd)
-                                    .size(20.dp)
-                                    .pointerInput(c.id, canvas) {
-                                        detectDragGestures { change, _ ->
-                                            change.consume()
-                                            val w = liveCanvas.value.width.toFloat()
-                                            val h = liveCanvas.value.height.toFloat()
-                                            if (w <= 0f || h <= 0f) return@detectDragGestures
-                                            val dw = change.positionChange().x / w
-                                            val dh = change.positionChange().y / h
-                                            val cur = cState.value
-                                            update { list ->
-                                                list.map {
-                                                    if (it.id != cur.id) it
-                                                    else {
-                                                        val nw = (it.w + dw).coerceIn(MIN_SIZE, MAX_SIZE)
-                                                        val nh = (it.h + dh).coerceIn(MIN_SIZE, MAX_SIZE)
-                                                        // Re-clamp the position so growing a
-                                                        // control near an edge cannot push
-                                                        // it outside the canvas.
-                                                        it.copy(
-                                                            w = nw,
-                                                            h = nh,
-                                                            x = it.x.coerceIn(0f, (1f - nw).coerceAtLeast(0f)),
-                                                            y = it.y.coerceIn(0f, (1f - nh).coerceAtLeast(0f)),
-                                                        )
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    },
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                Box(
-                                    Modifier
-                                        .size(10.dp)
-                                        .clip(RoundedCornerShape(2.dp))
-                                        .background(if (isSelected) OrbitMint else OrbitMuted),
-                                )
-                            }
-                        }
-                    }
-                }
-
-                if (draft.isEmpty()) {
-                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(
-                            "No controls yet — tap Add control below.",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = OrbitMuted,
-                        )
-                    }
+            if (draft.isEmpty()) {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(
+                        "No controls yet — tap Add control below.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = OrbitMuted,
+                    )
                 }
             }
         }
@@ -312,7 +208,7 @@ fun ControlsScreen() {
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(
-                                c.action.replace('_', ' '),
+                                controlLabel(c.action),
                                 style = MaterialTheme.typography.titleSmall,
                                 color = OrbitText,
                             )
@@ -322,7 +218,17 @@ fun ControlsScreen() {
                             }) { Icon(Icons.Filled.Delete, "Delete", tint = OrbitMuted) }
                         }
                         LabelValue("Position", "%.3f, %.3f".format(c.x, c.y))
-                        LabelValue("Size", "%.3f × %.3f".format(c.w, c.h))
+                        LabelValue(
+                            "Size",
+                            "%.3f × %.3f".format(c.w, c.h),
+                        )
+                        // Show the bounds invariant explicitly: this is the value that used
+                        // to be violated (a control past x + w <= 1) with no visible cause.
+                        LabelValue(
+                            "Right / bottom edge",
+                            "%.3f, %.3f".format(c.x + c.w, c.y + c.h),
+                            if (c.x + c.w <= 1.001f && c.y + c.h <= 1.001f) OrbitMint else OrbitError,
+                        )
                         Text("Opacity", style = MaterialTheme.typography.labelSmall, color = OrbitMuted)
                         Slider(
                             value = c.opacity,
@@ -340,6 +246,14 @@ fun ControlsScreen() {
                             Spacer(Modifier.width(6.dp))
                             Text("Enabled", style = MaterialTheme.typography.bodySmall, color = OrbitText)
                         }
+                        GhostButton("Re-clamp into canvas") {
+                            update { list ->
+                                list.map { if (it.id == c.id) it.copy(
+                                    x = clampControlX(it.x, it.w),
+                                    y = clampControlY(it.y, it.h),
+                                ) else it }
+                            }
+                        }
                     }
                 }
             }
@@ -355,15 +269,15 @@ fun ControlsScreen() {
             GhostButton("Reset") { confirmReset = true }
             Spacer(Modifier.fillMaxWidth().weight(1f))
             TextButton(
-                enabled = draft != layout.controls,
+                enabled = dirty,
                 onClick = {
                     Store.updateLayout(layout.id) { it.controls = draft.toMutableList() }
                 },
-            ) { Text("Save", color = if (draft != layout.controls) OrbitMint else OrbitMuted) }
+            ) { Text("Save", color = if (dirty) OrbitMint else OrbitMuted) }
         }
         Text(
-            "Reset restores the layout you are editing. Built-in Default and PvP restore " +
-                "their stock bindings; a custom layout is cleared.",
+            "Reset restores the layout you are editing — Default and PvP go back to their " +
+                "stock arrangement, and a custom layout is cleared. Other layouts are untouched.",
             style = MaterialTheme.typography.labelSmall,
             color = OrbitMuted,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp),
@@ -380,29 +294,22 @@ fun ControlsScreen() {
                     Spacer(Modifier.height(6.dp))
                     LazyRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         items(ControlActions) { a ->
-                            GhostButton(a.replace('_', ' ')) {
-                                // Deterministic cascade instead of stacking every new
-                                // control at the same point: step across, then wrap down.
-                                val i = draft.size
-                                val col = i % 6
-                                val row = (i / 6) % 5
-                                val nc = Control(
-                                    action = a,
-                                    x = (0.04f + col * 0.16f),
-                                    y = (0.06f + row * 0.17f),
-                                    w = 0.13f,
-                                    h = 0.13f,
-                                ).clampedPosition()
+                            GhostButton(controlLabel(a)) {
+                                // Deterministic cascade instead of stacking every new control
+                                // at the same point, clamped so it is always fully visible.
+                                val nc = Control(action = a, x = 0f, y = 0f, w = 0.13f, h = 0.13f)
+                                    .companionPlacement(draft.size)
                                 draft = draft + nc
                                 selectedId = nc.id
+                                editMode = true
                                 showAdd = false
                             }
                         }
                     }
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "New controls are placed at the next free slot and are always fully " +
-                            "inside the canvas.",
+                        "New controls land in the next free slot and are always fully inside " +
+                            "the canvas.",
                         style = MaterialTheme.typography.labelSmall,
                         color = OrbitMuted,
                     )
@@ -420,7 +327,7 @@ fun ControlsScreen() {
             confirmButton = {
                 TextButton(onClick = {
                     Store.resetSelectedLayout()
-                    draft = Store.currentLayout()?.controls?.toList() ?: emptyList()
+                    draft = Store.currentLayout()?.controls?.map { it.clampIntoCanvas() } ?: emptyList()
                     selectedId = null
                     confirmReset = false
                 }) { Text("Reset") }

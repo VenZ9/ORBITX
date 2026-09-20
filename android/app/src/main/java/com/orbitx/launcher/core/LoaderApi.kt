@@ -34,18 +34,57 @@ object LoaderApi {
     }
 
     /**
+     * The loader to install for [gameVersion].
+     *
+     * The loader version is always resolved from meta.fabricmc.net rather than assumed:
+     * loader versions are published per game version, and asking for one that does not
+     * exist returns a 404 from the profile endpoint (or, worse, a profile whose
+     * libraries do not exist). Preferences: an explicitly requested version if it is
+     * real, else the newest stable, else the newest published at all.
+     */
+    fun resolveLoader(gameVersion: String, requested: String? = null): FabricLoader {
+        val loaders = fabricLoaders(gameVersion)
+        if (loaders.isEmpty()) {
+            throw IllegalStateException(
+                "No Fabric loader is published for Minecraft $gameVersion. " +
+                    "Fabric supports release versions only; pick a release version. " +
+                    "(checked $FABRIC_META/versions/loader/$gameVersion)"
+            )
+        }
+        requested?.takeIf { it.isNotBlank() }?.let { want ->
+            loaders.firstOrNull { it.version == want }?.let { return it }
+            throw IllegalStateException(
+                "Fabric loader $want does not exist for Minecraft $gameVersion. " +
+                    "Newest available: ${loaders.first().version}"
+            )
+        }
+        return loaders.firstOrNull { it.stable } ?: loaders.first()
+    }
+
+    /**
      * Install a Fabric loader profile for [gameVersion].
      * Returns the generated profile version id (e.g. "fabric-loader-0.15.11-1.21").
+     * [loaderVersion] is verified to exist first, and the failure message names the
+     * exact url and status when the meta API refuses.
      */
     fun installFabric(gameVersion: String, loaderVersion: String): String {
+        // Fail with a precise message before writing anything if the pair is not real.
+        resolveLoader(gameVersion, loaderVersion)
         val profileUrl = "$FABRIC_META/versions/loader/$gameVersion/$loaderVersion/profile/json"
-        val txt = Downloader.getText(profileUrl, 30_000)
+        val txt = try {
+            Downloader.getText(profileUrl, 30_000)
+        } catch (e: Exception) {
+            throw IllegalStateException(
+                "Fabric profile unavailable for Minecraft $gameVersion, loader $loaderVersion. " +
+                    "Tried: $profileUrl -> ${e.message}", e
+            )
+        }
         val obj = JSONObject(txt)
         val id = obj.optString("id").ifBlank { "fabric-loader-$loaderVersion-$gameVersion" }
         val dest = OrbitPaths.versionJson(id)
         dest.parentFile?.mkdirs()
         dest.writeText(obj.toString(2))
-        OrbitLog.i("installed Fabric profile $id")
+        OrbitLog.i("installed Fabric profile $id (${obj.optJSONArray("libraries")?.length() ?: 0} libraries)")
         return id
     }
 

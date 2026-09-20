@@ -101,18 +101,44 @@ object MojangApi {
         val jobs = ArrayList<DownloadJob>()
         for (lib in v.libraries) {
             if (!RuleEvaluator.allowed(lib.rules)) continue
-            val rel = lib.artifactPath ?: lib.mavenPath()
-            val url = lib.artifactUrl ?: "$LIBRARIES/$rel"
+            // Every candidate repository for this library, in priority order. A mod
+            // loader's libraries name their own maven; only Mojang's own entries fall
+            // back to libraries.minecraft.net.
+            val candidates = lib.artifactCandidates()
+            val rel = candidates.first().path
             val dest = File(OrbitPaths.librariesDir, rel)
-            jobs += DownloadJob(url, dest, lib.artifactSha1, lib.artifactSize)
+            jobs += DownloadJob(
+                urls = candidates.map { it.url },
+                dest = dest,
+                sha1 = lib.artifactSha1,
+                size = lib.artifactSize,
+                label = lib.name,
+            )
         }
         Downloader.fetchAll(jobs, onProgress)
     }
 
-    fun classpathFor(v: VersionJson): List<File> =
-        v.libraries.filter { RuleEvaluator.allowed(it.rules) }
+    /**
+     * The runtime classpath: every allowed library, de-duplicated so one artifact cannot
+     * contribute two versions.
+     *
+     * A merged Fabric/Forge profile is the parent version's library list plus the
+     * loader's, and both can name the same artifact at different versions. Loading both
+     * makes class resolution order-dependent — the JVM takes the first match on the path,
+     * which is exactly how a launch dies with NoSuchMethodError long after it looked fine.
+     */
+    fun classpathFor(v: VersionJson): List<File> {
+        val winners = LinkedHashMap<String, Library>()
+        for (lib in v.libraries) {
+            if (!RuleEvaluator.allowed(lib.rules)) continue
+            val key = lib.dedupeKey()
+            val existing = winners[key]
+            if (existing == null || lib.dedupeVersion() >= existing.dedupeVersion()) winners[key] = lib
+        }
+        return winners.values
             .map { File(OrbitPaths.librariesDir, it.artifactPath ?: it.mavenPath()) }
             .filter { it.isFile }
+    }
 
     /** Download an asset index and every object it references. */
     fun installAssets(v: VersionJson, onProgress: ((Progress) -> Unit)? = null) {
@@ -152,11 +178,16 @@ object MojangApi {
             if (!RuleEvaluator.allowed(lib.rules)) continue
             if (!lib.name.startsWith("org.lwjgl")) continue
             val nativesKey = lib.natives.keys.firstOrNull { it == "natives-linux" || it == "linux" } ?: continue
-            val nat = lib.natives[nativesKey] ?: continue
-            if (nat.url.isBlank()) continue
-            val jar = File(OrbitPaths.librariesDir, nat.path)
+            val candidates = lib.nativeCandidates(nativesKey)
+            val jar = File(OrbitPaths.librariesDir, candidates.first().path)
             runCatching {
-                Downloader.fetch(nat.url, jar, nat.sha1, nat.size)
+                Downloader.fetchAny(
+                    urls = candidates.map { it.url },
+                    dest = jar,
+                    sha1 = lib.natives[nativesKey]?.sha1,
+                    size = lib.natives[nativesKey]?.size ?: 0L,
+                    label = "${lib.name}:$nativesKey",
+                )
                 unzipFlat(jar, outDir)
             }.onFailure { OrbitLog.w("natives extract failed for ${lib.name}: ${it.message}") }
         }
