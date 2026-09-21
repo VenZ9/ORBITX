@@ -47,11 +47,33 @@
     <dimen name="orbitx_header_action">@dimen/_36sdp</dimen>
     <dimen name="orbitx_brand_mark">@dimen/_32sdp</dimen>
 
-    <!-- The dominant primary action.  Tall enough to be the obvious target on a
-         low-end phone: 56dp tall, comfortably over the 48dp minimum. -->
+    <!-- The dominant primary action.  Deliberately left at 56dp: it stays the one
+         tall filled block at the foot of the screen so it keeps its dominance even
+         now that the quick-action tiles are taller than it. -->
     <dimen name="orbitx_action_height">@dimen/_56sdp</dimen>
 
-    <!-- Minimum row/tile height, again over the 48dp touch-target minimum. -->
+    <!-- List row height (instance / version / settings rows). -->
     <dimen name="orbitx_row_height">@dimen/_56sdp</dimen>
+
+    <!-- Section label above each band. -->
+    <dimen name="orbitx_section_label">@dimen/_11ssp</dimen>
+
+    <!-- Quick actions.  These tiles are the main touch targets for large fingers,
+         so they are sized well past Android's 48dp minimum and past the 56-64dp
+         band the reference launchers use:
+             76dp on the half-width tiles, 64dp on the full-width row.
+         Padding, icon and label are scaled up with the tile so it reads as one
+         comfortable target rather than a big empty box.  The previous 56dp tile
+         with a 22dp icon and 11sp label was too small and too fiddly under a
+         thumb. -->
+    <dimen name="orbitx_tile_height">@dimen/_76sdp</dimen>
+    <dimen name="orbitx_tile_height_wide">@dimen/_64sdp</dimen>
+    <dimen name="orbitx_tile_padding_h">@dimen/_16sdp</dimen>
+    <dimen name="orbitx_tile_icon">@dimen/_30sdp</dimen>
+    <dimen name="orbitx_tile_icon_gap">@dimen/_12sdp</dimen>
+    <dimen name="orbitx_tile_text">@dimen/_13ssp</dimen>
+    <!-- Gutter between tiles.  8dp read as one continuous block under a thumb, so
+         tiles are now separated by 12dp both across and down. -->
+    <dimen name="orbitx_tile_gutter">@dimen/_12sdp</dimen>
 
 </resources>

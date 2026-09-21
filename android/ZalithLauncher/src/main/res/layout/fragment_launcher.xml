@@ -16,6 +16,16 @@
   split is gone rather than restyled.
 
   Every id referenced by MainMenuFragment is preserved so behaviour is identical.
+
+  Quick actions sizing: the tiles were too small and too fiddly to scroll with a
+  large thumb, so they are now 76dp tall (64dp for the full-width row) with 16dp
+  side padding, a 30dp icon, a 13sp label and a 12dp gutter - every tile is a
+  comfortable target well past Android's 48dp minimum.  All of those values come
+  from the orbitx_tile_* tokens in orbitx_ui.xml, so the scale stays consistent.
+  The band keeps android:layout_weight="1" so it absorbs all leftover height and
+  the tile row stays a real scroll surface; the instance card (wrap_content) and
+  the Play block (wrap_content) are never squeezed, and the ScrollView still
+  clips rather than pushing them off a short screen.
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -51,7 +61,7 @@
             android:text="@string/orbitx_home_profile"
             android:textAllCaps="true"
             android:textColor="@color/orbitx_section_label"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/orbitx_section_label"
             android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,7 +156,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/orbitx_space_xl"
+            android:layout_marginTop="@dimen/orbitx_space_md"
             android:layout_weight="1"
             android:scrollbars="none">
 
@@ -164,7 +174,7 @@
                     android:text="@string/orbitx_home_shortcuts"
                     android:textAllCaps="true"
                     android:textColor="@color/orbitx_section_label"
-                    android:textSize="@dimen/_10ssp"
+                    android:textSize="@dimen/orbitx_section_label"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -176,18 +186,18 @@
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/about_button"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/orbitx_row_height"
-                        android:layout_marginEnd="@dimen/orbitx_space_sm"
+                        android:layout_height="@dimen/orbitx_tile_height"
+                        android:layout_marginEnd="@dimen/orbitx_tile_gutter"
                         android:layout_weight="1"
                         android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="@dimen/orbitx_space_md"
+                        android:paddingHorizontal="@dimen/orbitx_tile_padding_h"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/about_icon"
-                            android:layout_width="@dimen/_22sdp"
-                            android:layout_height="@dimen/_22sdp"
+                            android:layout_width="@dimen/orbitx_tile_icon"
+                            android:layout_height="@dimen/orbitx_tile_icon"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:scaleX="0.93"
@@ -201,28 +211,28 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/orbitx_space_sm"
+                            android:layout_marginStart="@dimen/orbitx_tile_icon_gap"
                             android:layout_toEndOf="@id/about_icon"
                             android:maxLines="2"
                             android:textColor="@color/orbitx_on_surface"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/orbitx_tile_text" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/custom_control_button"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/orbitx_row_height"
+                        android:layout_height="@dimen/orbitx_tile_height"
                         android:layout_weight="1"
                         android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="@dimen/orbitx_space_md"
+                        android:paddingHorizontal="@dimen/orbitx_tile_padding_h"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/custom_control_icon"
-                            android:layout_width="@dimen/_22sdp"
-                            android:layout_height="@dimen/_22sdp"
+                            android:layout_width="@dimen/orbitx_tile_icon"
+                            android:layout_height="@dimen/orbitx_tile_icon"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             app:srcCompat="@drawable/ic_menu_custom_controls"
@@ -233,12 +243,12 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/orbitx_space_sm"
+                            android:layout_marginStart="@dimen/orbitx_tile_icon_gap"
                             android:layout_toEndOf="@id/custom_control_icon"
                             android:maxLines="2"
                             android:text="@string/custom_control_title"
                             android:textColor="@color/orbitx_on_surface"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/orbitx_tile_text" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
@@ -247,25 +257,25 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/orbitx_space_sm"
+                    android:layout_marginTop="@dimen/orbitx_tile_gutter"
                     android:baselineAligned="false"
                     android:orientation="horizontal">
 
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/open_main_dir_button"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/orbitx_row_height"
-                        android:layout_marginEnd="@dimen/orbitx_space_sm"
+                        android:layout_height="@dimen/orbitx_tile_height"
+                        android:layout_marginEnd="@dimen/orbitx_tile_gutter"
                         android:layout_weight="1"
                         android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="@dimen/orbitx_space_md"
+                        android:paddingHorizontal="@dimen/orbitx_tile_padding_h"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/open_main_dir_icon"
-                            android:layout_width="@dimen/_22sdp"
-                            android:layout_height="@dimen/_22sdp"
+                            android:layout_width="@dimen/orbitx_tile_icon"
+                            android:layout_height="@dimen/orbitx_tile_icon"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             app:srcCompat="@drawable/ic_folder"
@@ -276,29 +286,29 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/orbitx_space_sm"
+                            android:layout_marginStart="@dimen/orbitx_tile_icon_gap"
                             android:layout_toEndOf="@id/open_main_dir_icon"
                             android:maxLines="2"
                             android:text="@string/main_open_main_dir"
                             android:textColor="@color/orbitx_on_surface"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/orbitx_tile_text" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/install_jar_button"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/orbitx_row_height"
+                        android:layout_height="@dimen/orbitx_tile_height"
                         android:layout_weight="1"
                         android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="@dimen/orbitx_space_md"
+                        android:paddingHorizontal="@dimen/orbitx_tile_padding_h"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/install_jar_icon"
-                            android:layout_width="@dimen/_22sdp"
-                            android:layout_height="@dimen/_22sdp"
+                            android:layout_width="@dimen/orbitx_tile_icon"
+                            android:layout_height="@dimen/orbitx_tile_icon"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             app:srcCompat="@drawable/ic_java"
@@ -309,12 +319,12 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/orbitx_space_sm"
+                            android:layout_marginStart="@dimen/orbitx_tile_icon_gap"
                             android:layout_toEndOf="@id/install_jar_icon"
                             android:maxLines="2"
                             android:text="@string/main_install_jar_file"
                             android:textColor="@color/orbitx_on_surface"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/orbitx_tile_text" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
@@ -323,17 +333,17 @@
                 <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                     android:id="@+id/share_logs_button"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/orbitx_row_height"
-                    android:layout_marginTop="@dimen/orbitx_space_sm"
+                    android:layout_height="@dimen/orbitx_tile_height_wide"
+                    android:layout_marginTop="@dimen/orbitx_tile_gutter"
                     android:background="@drawable/orbitx_tile"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="@dimen/orbitx_space_md"
+                    android:paddingHorizontal="@dimen/orbitx_tile_padding_h"
                     app:ripple_for_relative="true">
 
                     <ImageView
                         android:id="@+id/share_logs_icon"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
+                        android:layout_width="@dimen/orbitx_tile_icon"
+                        android:layout_height="@dimen/orbitx_tile_icon"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         app:srcCompat="@drawable/ic_share"
@@ -344,11 +354,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/orbitx_space_sm"
+                        android:layout_marginStart="@dimen/orbitx_tile_icon_gap"
                         android:layout_toEndOf="@id/share_logs_icon"
                         android:text="@string/main_share_logs"
                         android:textColor="@color/orbitx_on_surface"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/orbitx_tile_text" />
 
                 </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
@@ -360,7 +370,7 @@
             android:id="@+id/play_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/orbitx_space_lg">
+            android:layout_marginTop="@dimen/orbitx_space_md">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/play_buttons_layout"

@@ -255,3 +255,41 @@ does not declare one - so all pre-existing usages render exactly as before.
 
 No runtime, JRE-provisioning, native-bridge, GL-layer, launch or control-overlay behaviour was
 changed by this round.
+
+## OrbitX round 4 - Quick actions made thumb-friendly
+
+Date: 2026-09-21. Base: unchanged from the entries above.
+
+Reported on device: the Quick actions area on the home screen was too small and hard to scroll
+with large fingers. This is a **layout/token-only** change; no runtime, launch, JRE, native-bridge,
+GL-layer or control-overlay code was touched.
+
+### Dimensions changed (`res/values/orbitx_ui.xml`, `res/layout/fragment_launcher.xml`)
+
+| Element | Before | After |
+| --- | --- | --- |
+| Half-width tile height | 56dp (`orbitx_row_height`) | **76dp** (`orbitx_tile_height`) |
+| Full-width row height | 56dp (`orbitx_row_height`) | **64dp** (`orbitx_tile_height_wide`) |
+| Tile horizontal padding | 12dp (`orbitx_space_md`) | **16dp** (`orbitx_tile_padding_h`) |
+| Icon size | 22dp (literal) | **30dp** (`orbitx_tile_icon`) |
+| Icon-to-label gap | 8dp (`orbitx_space_sm`) | **12dp** (`orbitx_tile_icon_gap`) |
+| Label size | 11sp (literal) | **13sp** (`orbitx_tile_text`) |
+| Section label size | 10sp (literal) | **11sp** (`orbitx_section_label`) |
+| Gutter between tiles | 8dp (`orbitx_space_sm`) | **12dp** (`orbitx_tile_gutter`) |
+| Band top margin | 24dp (`orbitx_space_xl`) | **12dp** (`orbitx_space_md`) |
+| Play block top margin | 16dp (`orbitx_space_lg`) | **12dp** (`orbitx_space_md`) |
+
+Every tile is now a **64-76dp** touch target, comfortably past Android's 48dp minimum. The previous
+literal 22dp icon / 11sp label / 10sp section-label values were replaced with `orbitx_tile_*` and
+`orbitx_section_label` tokens so the scale stays consistent. Those `_22sdp` / `_11ssp` / `_10ssp`
+dimensions are library-provided and remain available to other screens; only the home screen stopped
+using them, so the shared dimension resources were left untouched.
+
+### Vertical space
+
+The Quick actions band keeps `android:layout_weight="1"`, so it absorbs **all** leftover height and
+gets a larger scroll surface as the tiles grow; the instance card and the Play block are both
+`wrap_content` and are therefore never squeezed. `orbitx_action_height` stays 56dp so Play remains
+the single dominant filled block, and the ScrollView still clips rather than pushing content off a
+short screen.
+
