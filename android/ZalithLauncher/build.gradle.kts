@@ -98,6 +98,10 @@ android {
             initWith(getByName("debug"))
             isMinifyEnabled = true
             isShrinkResources = true
+            // OrbitX lightweighting: the bundled JRE tarballs are assets copied verbatim
+            // into the APK, so nothing here removes them - the per-ABI assets trim above
+            // does that.  These flags strip unused code and resources for low-end devices.
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         create("proguardNoDebug") {
             initWith(getByName("proguard"))
@@ -106,6 +110,12 @@ android {
         getByName("release") {
             // Don't set to true or java.awt will be a.a or something similar.
             isMinifyEnabled = false
+            // OrbitX note: `isShrinkResources` is deliberately NOT set here.  AGP
+            // rejects resource shrinking without code shrinking ("Removing unused
+            // resources requires unused code shrinking to be turned on"), and
+            // minification must stay off for this build type because java.awt is
+            // reached reflectively.  Resource shrinking therefore stays on the
+            // `proguard` variant only, which already enables both flags.
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             resValue("string", "storageProviderAuthorities", storageProviderId)
             signingConfig = signingConfigs.getByName("releaseBuild")
@@ -124,14 +134,47 @@ android {
                         task.doLast {
                             val arch = System.getProperty("arch", "all")
                             val assetsDir = task.outputDir.get().asFile
-                            val jreList = listOf("jre-8", "jre-17", "jre-21")
-                            println("arch:$arch")
-                            jreList.forEach { jreVersion ->
-                                val runtimeDir = File("$assetsDir/components/$jreVersion")
-                                println("runtimeDir:${runtimeDir.absolutePath}")
-                                runtimeDir.listFiles()?.forEach {
-                                    if (arch != "all" && it.name != "version" && !it.name.contains("universal") && it.name != "bin-${arch}.tar.xz") {
-                                        println("delete:${it} : ${it.delete()}")
+
+                            // OrbitX lightweighting (recorded in LICENSE-THIRD-PARTY.md).
+                            //
+                            // The bundled Android JREs are the single largest thing in this APK
+                            // (~105 MB of the ~150 MB baseline).  Each JRE ships one architecture
+                            // independent `universal.tar.xz` plus one `bin-<arch>.tar.xz` per ABI,
+                            // and the unpacker only ever reads the pair that matches the device:
+                            //   UnpackJreTask -> MultiRTUtils.installRuntimeNamedBinpack(
+                            //       .../universal.tar.xz,
+                            //       .../bin-<archAsString(DEVICE_ARCHITECTURE)>.tar.xz )
+                            // So the tarballs for every other ABI are dead weight in an arm64 APK
+                            // (and, because the unpacker copies the whole folder to the data dir,
+                            // dead weight on the device too).
+                            //
+                            // Two fixes over the inherited logic:
+                            //   1. The JRE dirs are discovered, not hardcoded.  The inherited list
+                            //      was listOf("jre-8", "jre-17", "jre-21") and omitted jre-25, so
+                            //      an arm64 build still shipped jre-25's dead bin-arm.tar.xz and
+                            //      bin-x86_64.tar.xz (~10 MB).
+                            //   2. Only the target ABI's tarball is kept.  `universal.tar.xz`
+                            //      (architecture independent) and the `version` marker (read by
+                            //      UnpackJreTask.isNeedUnpack) are always kept.
+                            //
+                            // With arch == "all" nothing is removed.  Otherwise an unsupported
+                            // ABI simply has no runtime tarball: UnpackJreTask.isNeedUnpack()
+                            // fails its runCatching and the runtime is reported unavailable
+                            // rather than crashing, matching the fact that the native .so files
+                            // for that ABI are not in the APK either.
+                            val componentsDir = File("$assetsDir/components")
+                            val jreDirs = componentsDir.listFiles()
+                                ?.filter { it.isDirectory && it.name.startsWith("jre-") }
+                                ?.sortedBy { it.name }
+                                ?: emptyList()
+                            println("OrbitX/JRE-trim arch:$arch -> ${jreDirs.map { it.name }}")
+                            jreDirs.forEach { runtimeDir ->
+                                val keep = "bin-$arch.tar.xz"
+                                runtimeDir.listFiles()?.forEach { entry ->
+                                    val isArchTarball = entry.name.startsWith("bin-") && entry.name.endsWith(".tar.xz")
+                                    // `version` and `universal.tar.xz` are never architecture specific.
+                                    if (arch != "all" && isArchTarball && entry.name != keep) {
+                                        println("OrbitX/JRE-trim delete:${entry.name} (${entry.length()} bytes) -> ${entry.delete()}")
                                     }
                                 }
                             }

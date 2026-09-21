@@ -159,3 +159,99 @@ than the framework default accent.
 The files above are the complete set of this round's changes; nothing outside
 `android/ZalithLauncher/src/main/res/`, `AllSettings.kt` and `LauncherActivity.java`
 was touched.
+
+---
+
+## OrbitX round 3 - flat restyle (DroidBridge / HyperLauncher language) and low-end optimisation
+
+Date: 2026-09-21. Base: unchanged from the entry above.
+
+### Reference research (what was actually looked at)
+
+* **DroidBridge Launcher** (`nanowx26/DroidBridgeLauncher`, `ca.dnamobile.droidbridgelauncher`).
+  Its public repository was cloned and inspected: it contains **no UI layouts at all** -
+  `app/src/main/res/` holds only `drawable/`, `mipmap-*` and three `values*` files, and the
+  only UI source is `ui/view/RoundedClipFrameLayout.java` plus one shape-appearance overlay
+  declaring an **18dp rounded corner**. The method/`instance`/`settings`/`controls` packages are
+  framework-side, not screens. The published store listings' screenshots were analysed for the
+  visual language instead.
+* **HyperLauncher** (`hollowlauncher/HyperLauncher`, a MojoLauncher fork ultimately based on
+  PojavLauncher). Its UI is **Jetpack Compose** (`activity_pojav_launcher.xml` is a bare
+  `ComposeView`); its Material 3 theme (`ui/theme/Theme.kt`), colour roles
+  (`ui/theme/ColorTheme.kt`) and screen structure were read directly.
+
+### The visual language taken from the references
+
+Both are flat and dark-leaning: depth comes from a **thin 1px outline and a surface value step,
+never from drop shadows**; large corner radii (~18-24dp) on cards and stadium/pill shapes on
+controls; generous internal padding (12-16dp); no dividers (spacing and value steps separate
+regions); a single solid filled primary action; and a compact top bar with a couple of flat
+outline icon actions. A single-column list of instances is the main screen, with the primary
+action as one dominant element rather than a side rail.
+
+### 1. Home screen recomposed (not merely recoloured)
+
+`res/layout/fragment_launcher.xml` was rewritten. The previous OrbitX composition still kept
+upstream's **two-column split** (a full-height action column against a right Play rail) and only
+re-ordered its contents. That split is now gone: the screen is one vertical column with three
+bands - the current instance as a card, the quick actions as a tile grid inside a scrolling
+middle band, and the Play action as the single dominant filled block at the bottom.
+`res/layout/activity_launcher.xml` likewise dropped the translucent action pill and the drop
+shadow strip, replacing them with a compact flat bar (brand block start, two flat outline icon
+actions end) separated from the content by a surface value step. All view ids referenced by
+`MainMenuFragment` and `LauncherActivity` are preserved.
+
+### 2. Secondary screens restyled
+
+Settings, Downloads and About: the side rails moved onto a rounded outlined card surface with a
+margin, their drop-shadow strips were removed, and the pager's negative end margin was dropped;
+the About panel is now a card on the page background. `res/layout/item_version.xml` (the
+instance/version list row) moved from the legacy `background_item` to the flat outlined row with
+a larger icon and a bolder title.
+
+### 3. New flat design tokens
+
+New `res/values/orbitx_colors.xml` and `res/values-night/orbitx_colors.xml` (surface /
+surface_raised / surface_sunken, `orbitx_outline`, the solid accent and its on-colour, text
+roles). New drawables: `orbitx_card`, `orbitx_card_raised`, `orbitx_row`,
+`orbitx_row_pressed`, `orbitx_tile` (+ normal/pressed/disabled), `orbitx_action_button`
+(+ normal/pressed/disabled). `res/values/orbitx_ui.xml` gained an extended spacing scale, the
+`orbitx_radius_row` / `_tile` radii, an `orbitx_stroke` hairline token, an `orbitx_row_height`
+touch-target token and an `orbitx_action_height` token.
+
+Contrast note: the solid accent is **#D32F2F**, not the #E53935 highlight, because white on
+#D32F2F measures 4.98:1 (WCAG AA) while white on #E53935 measures only 4.22:1 and would fail AA
+for the Play button label. #E53935 remains the accent for graphics drawn on light surfaces.
+
+### 4. `AnimButton` now honours an XML background
+
+`ui/view/AnimButton.kt` unconditionally replaced its background with a ripple wrapping
+`button_background`, so a background declared in XML was silently discarded and the primary
+action could not be restyled without editing that class. It now preserves an **explicitly
+declared** `android:background` (detected via `obtainStyledAttributes(..., {android.R.attr.background})`
+/ `hasValue`) as the ripple content, and keeps the old `button_background` for every button that
+does not declare one - so all pre-existing usages render exactly as before.
+
+### 5. Low-end device optimisation
+
+* **Per-ABI JRE asset trim fixed.** The `merge<Variant>Assets` task trimmed architecture-specific
+  JRE tarballs using the hardcoded list `listOf("jre-8", "jre-17", "jre-21")`, which **omitted
+  `jre-25`** - so an arm64 build still shipped jre-25's unusable `bin-arm.tar.xz` and
+  `bin-x86_64.tar.xz`. The list is now discovered from the assets directory. `universal.tar.xz`
+  (architecture independent) and the `version` marker (read by `UnpackJreTask.isNeedUnpack`) are
+  always kept, and only the target ABI's `bin-<arch>.tar.xz` is retained; with `arch=all` nothing
+  is removed.
+* **Resource shrinking for release.** Attempted via `release { isShrinkResources = true }`, but AGP
+  rejects that combination ("Removing unused resources requires unused code shrinking to be turned
+  on") and `isMinifyEnabled` must stay off for the release variant because java.awt is reached
+  reflectively.  Resource shrinking therefore remains on the `proguard` variant (which already
+  enables minify + shrinkResources); the release variant is left unchanged.
+* The GL translation layers were **not** trimmed. All 51 are user-selectable renderer backends
+  (gl4es, OSMesa, VirGL, ANGLE, Zink/LTW) exposed through the renderer picker and the renderer
+  plugin mechanism. Removing any of them would change or break rendering on a device that selects
+  it, so with the launch path being the thing this project must not break, they were all kept.
+* The native libraries were **already stripped** upstream (verified with `readelf`: no `.debug_*`
+  or `.symtab` sections), so no symbol-stripping saving was available.
+
+No runtime, JRE-provisioning, native-bridge, GL-layer, launch or control-overlay behaviour was
+changed by this round.

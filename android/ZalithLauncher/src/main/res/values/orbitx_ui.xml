@@ -4,8 +4,8 @@
 
   Kept in one file so the OrbitX-specific additions are reviewable at a glance and
   never get tangled with the large upstream values files. Colours themselves live in
-  colors.xml / colors_night.xml; this file holds the OrbitX spacing scale, corner
-  radii and the brand strings.
+  orbitx_colors.xml / orbitx_colors.xml (night); this file holds the OrbitX spacing
+  scale, corner radii, surface strokes and the brand strings.
 -->
 <resources>
 
@@ -14,23 +14,44 @@
     <string name="orbitx_brand_tagline" translatable="false">Minecraft Java Edition</string>
     <string name="orbitx_home_shortcuts" translatable="false">Quick actions</string>
     <string name="orbitx_home_profile" translatable="false">Instance</string>
+    <string name="orbitx_home_launch" translatable="false">Play</string>
     <string name="orbitx_desc_download" translatable="false">Downloads</string>
     <string name="orbitx_desc_settings" translatable="false">Settings</string>
 
-    <!-- Spacing scale used by the OrbitX-reworked screens -->
+    <!-- Spacing scale used by the OrbitX-reworked screens.
+         Generous padding is a defining trait of the flat reference style: cards
+         get 16dp inside, sections are separated by 24dp of air, and gutters are
+         8-12dp.  No dividers are used; spacing and the surface value step carry
+         the separation instead. -->
     <dimen name="orbitx_space_xs">@dimen/_4sdp</dimen>
     <dimen name="orbitx_space_sm">@dimen/_8sdp</dimen>
     <dimen name="orbitx_space_md">@dimen/_12sdp</dimen>
     <dimen name="orbitx_space_lg">@dimen/_16sdp</dimen>
     <dimen name="orbitx_space_xl">@dimen/_24sdp</dimen>
+    <dimen name="orbitx_space_xxl">@dimen/_32sdp</dimen>
 
-    <!-- Corner radii: cards are noticeably rounder than upstream's flat 8dp -->
-    <dimen name="orbitx_radius_card">@dimen/_14sdp</dimen>
-    <dimen name="orbitx_radius_pill">@dimen/_20sdp</dimen>
+    <!-- Corner radii.  The flat reference style is built on large, soft radii
+         (DroidBridge's own icon overlay is 18dp; its store screenshots use
+         ~24dp cards and stadium pills), so the card radius is 18dp and the pill
+         radius is large enough to read as a true pill at any control height. -->
+    <dimen name="orbitx_radius_card">@dimen/_18sdp</dimen>
+    <dimen name="orbitx_radius_row">@dimen/_14sdp</dimen>
+    <dimen name="orbitx_radius_tile">@dimen/_16sdp</dimen>
+    <dimen name="orbitx_radius_pill">@dimen/_24sdp</dimen>
 
-    <!-- Shell header -->
-    <dimen name="orbitx_header_height">@dimen/_52sdp</dimen>
-    <dimen name="orbitx_header_action">@dimen/_34sdp</dimen>
-    <dimen name="orbitx_brand_mark">@dimen/_30sdp</dimen>
+    <!-- The 1px hairline that replaces elevation in the flat language. -->
+    <dimen name="orbitx_stroke">1dp</dimen>
+
+    <!-- Shell header: compact, with the brand block and a pill of actions. -->
+    <dimen name="orbitx_header_height">@dimen/_56sdp</dimen>
+    <dimen name="orbitx_header_action">@dimen/_36sdp</dimen>
+    <dimen name="orbitx_brand_mark">@dimen/_32sdp</dimen>
+
+    <!-- The dominant primary action.  Tall enough to be the obvious target on a
+         low-end phone: 56dp tall, comfortably over the 48dp minimum. -->
+    <dimen name="orbitx_action_height">@dimen/_56sdp</dimen>
+
+    <!-- Minimum row/tile height, again over the 48dp touch-target minimum. -->
+    <dimen name="orbitx_row_height">@dimen/_56sdp</dimen>
 
 </resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  OrbitX Launcher - flat surface + accent tokens (light).
+
+  OrbitX UI modification (recorded in LICENSE-THIRD-PARTY.md).
+
+  The DroidBridge / HyperLauncher visual language that this round restyles the
+  launcher to is a FLAT one: depth comes from a thin 1px outline and a surface
+  value step, not from drop shadows, and the single primary action is a solid
+  filled block.  These tokens carry that, kept in their own file so the large
+  inherited palette in colors.xml is left alone except where it must change.
+
+  Colour choice note: the solid accent is #D32F2F rather than the #E53935
+  highlight used for borders/focus.  #D32F2F against white text measures 4.98:1
+  (WCAG AA for normal text); #E53935 only reaches 4.22:1, which would fail AA for
+  the Play button label.  #E53935 is still used for accents drawn *on* light
+  surfaces, where it is a graphic element rather than text.
+-->
+<resources>
+    <!-- Surfaces: a warm off-white base with a pure-white raised card, so the
+         card reads as a value step without needing a shadow. -->
+    <color name="orbitx_surface">#FFFBFA</color>
+    <color name="orbitx_surface_raised">#FFFFFFFF</color>
+    <color name="orbitx_surface_sunken">#F6ECEB</color>
+
+    <!-- The single 1px hairline that defines every card and row. -->
+    <color name="orbitx_outline">#E8D8D6</color>
+    <color name="orbitx_outline_strong">#DCC6C4</color>
+
+    <!-- Accent: solid filled primary action.  #D32F2F = 4.98:1 on white text. -->
+    <color name="orbitx_accent">#D32F2F</color>
+    <color name="orbitx_accent_pressed">#B71C1C</color>
+    <color name="orbitx_accent_disabled">#EF9A9A</color>
+    <color name="orbitx_on_accent">#FFFFFFFF</color>
+    <color name="orbitx_accent_tint">#1FD32F2F</color>
+
+    <!-- Text roles for the flat surfaces. -->
+    <color name="orbitx_on_surface">#1A0A0A</color>
+    <color name="orbitx_on_surface_variant">#6B5350</color>
+    <color name="orbitx_section_label">#C62828</color>
+
+    <!-- Fill for a quiet/secondary action (flat, outlined, no fill). -->
+    <color name="orbitx_quiet_fill">#F6ECEB</color>
+</resources>

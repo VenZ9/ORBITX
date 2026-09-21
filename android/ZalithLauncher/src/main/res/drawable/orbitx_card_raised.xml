@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- OrbitX: raised flat card - one surface value step above orbitx_card, still
+     outlined rather than shadowed.  Used for the instance card and the panels
+     that should read as "closer" than the page background. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="@dimen/orbitx_radius_card" />
+    <solid android:color="@color/orbitx_surface_raised" />
+    <stroke
+        android:width="@dimen/orbitx_stroke"
+        android:color="@color/orbitx_outline_strong" />
+</shape>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@color/orbitx_surface"
     android:orientation="vertical">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -32,7 +32,7 @@
             android:id="@+id/shadowView"
             android:layout_width="@dimen/_4sdp"
             android:layout_height="match_parent"
-            android:background="@drawable/shadow_gradient_left"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/operate_layout"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,9 @@
             android:id="@+id/operate_main_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/background_rail"
+            android:background="@drawable/orbitx_card"
+            android:layout_marginVertical="@dimen/orbitx_space_sm"
+            android:layout_marginStart="@dimen/orbitx_space_sm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/shadowView"
             app:layout_constraintStart_toStartOf="parent"

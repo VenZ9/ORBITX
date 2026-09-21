@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  OrbitX Launcher - flat surface + accent tokens (dark).
+
+  Mirrors values/orbitx_colors.xml.  The flat language is dark-first in both
+  references (DroidBridge and HyperLauncher default to a near-black warm surface),
+  so the night variant is the closest to the source material: a deep red-plum base
+  with slightly raised cards and the same solid red primary action.
+-->
+<resources>
+    <color name="orbitx_surface">#171213</color>
+    <color name="orbitx_surface_raised">#221A1B</color>
+    <color name="orbitx_surface_sunken">#120D0E</color>
+
+    <color name="orbitx_outline">#3A2C2C</color>
+    <color name="orbitx_outline_strong">#4C3838</color>
+
+    <!-- Same red as light: white on #D32F2F is 4.98:1 in either mode. -->
+    <color name="orbitx_accent">#D32F2F</color>
+    <color name="orbitx_accent_pressed">#B71C1C</color>
+    <color name="orbitx_accent_disabled">#7F3B3B</color>
+    <color name="orbitx_on_accent">#FFFFFFFF</color>
+    <color name="orbitx_accent_tint">#33E53935</color>
+
+    <color name="orbitx_on_surface">#F2E7E7</color>
+    <color name="orbitx_on_surface_variant">#C7A9A6</color>
+    <color name="orbitx_section_label">#EF9A9A</color>
+
+    <color name="orbitx_quiet_fill">#241A1B</color>
+</resources>

@@ -2,56 +2,158 @@
 <!--
   OrbitX Launcher - home screen.
 
-  OrbitX UI modification (recorded in LICENSE-THIRD-PARTY.md):
-    Upstream stacked the secondary actions as ONE full-height vertical list on the
-    left and pushed the account + version + play button to a right rail. OrbitX
-    re-composes the same controls into a different hierarchy:
+  OrbitX UI modification (recorded in LICENSE-THIRD-PARTY.md).
 
-      left  - a titled "Quick actions" card containing a 2x2 tile grid with the
-              share-logs action spanning the full width underneath it;
-      right - an "Instance" block that orders the hierarchy instance selector ->
-              profile gear -> account -> primary Play action, with Play anchored
-              as the single dominant element at the bottom.
+  Restyled to the flat, single-column language of DroidBridge Launcher and
+  HyperLauncher: one vertical column with the current instance as a card at the
+  top, the secondary actions as a grid inside a scrolling middle band, and the
+  primary Play action as the single dominant filled block pinned at the bottom.
 
-    Every id referenced by MainMenuFragment is preserved so behaviour is identical.
+  This replaces the earlier OrbitX composition, which kept upstream's two-column
+  split (full-height action column against a right Play rail) and only re-ordered
+  what was inside it.  Neither reference launcher uses a side rail or a two-column
+  split on the main screen - they are a single column with one big action - so the
+  split is gone rather than restyled.
+
+  Every id referenced by MainMenuFragment is preserved so behaviour is identical.
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_menu_main"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@android:color/transparent"
-    android:gravity="top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orbitx_surface"
     android:orientation="vertical"
     tools:ignore="ContentDescription">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/launcher_menu"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/orbitx_space_lg"
+        android:paddingTop="@dimen/orbitx_space_md"
+        android:paddingEnd="@dimen/orbitx_space_lg"
+        android:paddingBottom="@dimen/orbitx_space_lg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/play_layout"
-        app:layout_constraintHorizontal_weight="7"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- ============ Band 1: the current instance ============ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/orbitx_space_xs"
+            android:layout_marginBottom="@dimen/orbitx_space_sm"
+            android:letterSpacing="0.12"
+            android:text="@string/orbitx_home_profile"
+            android:textAllCaps="true"
+            android:textColor="@color/orbitx_section_label"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
+                android:id="@+id/version"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_64sdp"
+                android:background="@drawable/orbitx_row"
+                app:layout_constraintEnd_toStartOf="@+id/manager_profile_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:ripple_for_relative="true">
+
+                <ImageView
+                    android:id="@+id/version_icon"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/orbitx_space_md"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_minecraft" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="@dimen/orbitx_space_md"
+                    android:layout_toEndOf="@id/version_icon"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/version_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="start"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text="@string/version_no_versions"
+                        android:textColor="@color/orbitx_on_surface"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/version_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="start"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:textColor="@color/orbitx_on_surface_variant"
+                        android:textSize="@dimen/_11ssp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
+
+            <ImageButton
+                android:id="@+id/manager_profile_button"
+                android:layout_width="@dimen/_44sdp"
+                android:layout_height="@dimen/_44sdp"
+                android:layout_marginStart="@dimen/orbitx_space_sm"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_setting"
+                app:layout_constraintBottom_toBottomOf="@id/version"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/version" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/view_account"
+            layout="@layout/view_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/orbitx_space_sm" />
+
+        <!-- ============ Band 2: quick actions (the scrollable middle) ============ -->
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/orbitx_space_xl"
+            android:layout_weight="1"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/orbitx_space_md"
-                android:paddingTop="@dimen/orbitx_space_md"
-                android:paddingEnd="@dimen/orbitx_space_sm"
-                android:paddingBottom="@dimen/orbitx_space_md">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,11 +163,10 @@
                     android:letterSpacing="0.12"
                     android:text="@string/orbitx_home_shortcuts"
                     android:textAllCaps="true"
-                    android:textColor="@color/settings_category"
+                    android:textColor="@color/orbitx_section_label"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="bold" />
 
-                <!-- Row 1 of the quick-action tile grid -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,26 +176,24 @@
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/about_button"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/orbitx_space_xs"
+                        android:layout_height="@dimen/orbitx_row_height"
+                        android:layout_marginEnd="@dimen/orbitx_space_sm"
                         android:layout_weight="1"
-                        android:background="@drawable/background_item"
+                        android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:minHeight="@dimen/_52sdp"
-                        android:paddingHorizontal="@dimen/orbitx_space_sm"
-                        android:paddingVertical="@dimen/orbitx_space_md"
-                        android:translationZ="4dp"
+                        android:paddingHorizontal="@dimen/orbitx_space_md"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/about_icon"
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
+                            android:layout_width="@dimen/_22sdp"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:scaleX="0.93"
                             android:scaleY="0.93"
-                            android:src="@drawable/ic_about" />
+                            app:srcCompat="@drawable/ic_about"
+                            app:tint="@color/orbitx_accent" />
 
                         <TextView
                             android:id="@+id/about_text"
@@ -105,7 +204,7 @@
                             android:layout_marginStart="@dimen/orbitx_space_sm"
                             android:layout_toEndOf="@id/about_icon"
                             android:maxLines="2"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/orbitx_on_surface"
                             android:textSize="@dimen/_11ssp" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -113,24 +212,21 @@
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/custom_control_button"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/orbitx_space_xs"
+                        android:layout_height="@dimen/orbitx_row_height"
                         android:layout_weight="1"
-                        android:background="@drawable/background_item"
+                        android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:minHeight="@dimen/_52sdp"
-                        android:paddingHorizontal="@dimen/orbitx_space_sm"
-                        android:paddingVertical="@dimen/orbitx_space_md"
-                        android:translationZ="4dp"
+                        android:paddingHorizontal="@dimen/orbitx_space_md"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/custom_control_icon"
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
+                            android:layout_width="@dimen/_22sdp"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_menu_custom_controls" />
+                            app:srcCompat="@drawable/ic_menu_custom_controls"
+                            app:tint="@color/orbitx_accent" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -141,14 +237,13 @@
                             android:layout_toEndOf="@id/custom_control_icon"
                             android:maxLines="2"
                             android:text="@string/custom_control_title"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/orbitx_on_surface"
                             android:textSize="@dimen/_11ssp" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                 </LinearLayout>
 
-                <!-- Row 2 of the quick-action tile grid -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,24 +254,22 @@
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/open_main_dir_button"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/orbitx_space_xs"
+                        android:layout_height="@dimen/orbitx_row_height"
+                        android:layout_marginEnd="@dimen/orbitx_space_sm"
                         android:layout_weight="1"
-                        android:background="@drawable/background_item"
+                        android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:minHeight="@dimen/_52sdp"
-                        android:paddingHorizontal="@dimen/orbitx_space_sm"
-                        android:paddingVertical="@dimen/orbitx_space_md"
-                        android:translationZ="4dp"
+                        android:paddingHorizontal="@dimen/orbitx_space_md"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/open_main_dir_icon"
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
+                            android:layout_width="@dimen/_22sdp"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_folder" />
+                            app:srcCompat="@drawable/ic_folder"
+                            app:tint="@color/orbitx_accent" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -187,7 +280,7 @@
                             android:layout_toEndOf="@id/open_main_dir_icon"
                             android:maxLines="2"
                             android:text="@string/main_open_main_dir"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/orbitx_on_surface"
                             android:textSize="@dimen/_11ssp" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -195,24 +288,21 @@
                     <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                         android:id="@+id/install_jar_button"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/orbitx_space_xs"
+                        android:layout_height="@dimen/orbitx_row_height"
                         android:layout_weight="1"
-                        android:background="@drawable/background_item"
+                        android:background="@drawable/orbitx_tile"
                         android:gravity="center_vertical"
-                        android:minHeight="@dimen/_52sdp"
-                        android:paddingHorizontal="@dimen/orbitx_space_sm"
-                        android:paddingVertical="@dimen/orbitx_space_md"
-                        android:translationZ="4dp"
+                        android:paddingHorizontal="@dimen/orbitx_space_md"
                         app:ripple_for_relative="true">
 
                         <ImageView
                             android:id="@+id/install_jar_icon"
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
+                            android:layout_width="@dimen/_22sdp"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_java" />
+                            app:srcCompat="@drawable/ic_java"
+                            app:tint="@color/orbitx_accent" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -223,34 +313,31 @@
                             android:layout_toEndOf="@id/install_jar_icon"
                             android:maxLines="2"
                             android:text="@string/main_install_jar_file"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/orbitx_on_surface"
                             android:textSize="@dimen/_11ssp" />
 
                     </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                 </LinearLayout>
 
-                <!-- Share logs spans the full width of the grid -->
                 <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                     android:id="@+id/share_logs_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/orbitx_row_height"
                     android:layout_marginTop="@dimen/orbitx_space_sm"
-                    android:background="@drawable/background_item"
+                    android:background="@drawable/orbitx_tile"
                     android:gravity="center_vertical"
-                    android:minHeight="@dimen/_48sdp"
-                    android:paddingHorizontal="@dimen/orbitx_space_sm"
-                    android:paddingVertical="@dimen/orbitx_space_md"
-                    android:translationZ="4dp"
+                    android:paddingHorizontal="@dimen/orbitx_space_md"
                     app:ripple_for_relative="true">
 
                     <ImageView
                         android:id="@+id/share_logs_icon"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_share" />
+                        app:srcCompat="@drawable/ic_share"
+                        app:tint="@color/orbitx_accent" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -260,7 +347,7 @@
                         android:layout_marginStart="@dimen/orbitx_space_sm"
                         android:layout_toEndOf="@id/share_logs_icon"
                         android:text="@string/main_share_logs"
-                        android:textColor="@color/primary_text"
+                        android:textColor="@color/orbitx_on_surface"
                         android:textSize="@dimen/_11ssp" />
 
                 </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -268,155 +355,38 @@
             </LinearLayout>
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/play_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintStart_toEndOf="@+id/launcher_menu"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:id="@+id/shadowView"
-            android:layout_width="@dimen/_4sdp"
-            android:layout_height="match_parent"
-            android:background="@drawable/shadow_gradient_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/play_layout"
-            app:layout_constraintTop_toTopOf="parent" />
-
+        <!-- ============ Band 3: the single dominant primary action ============ -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/play_main_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_card"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/shadowView"
-            app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/play_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/orbitx_space_lg">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/play_buttons_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <com.movtery.zalithlauncher.ui.view.AnimButton
                     android:id="@+id/play_button"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/orbitx_space_sm"
-                    android:layout_marginBottom="@dimen/orbitx_space_md"
+                    android:layout_height="@dimen/orbitx_action_height"
+                    android:background="@drawable/orbitx_action_button"
                     android:text="@string/main_launch"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/orbitx_on_accent"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints" />
-
-                <include
-                    android:id="@+id/view_account"
-                    layout="@layout/view_account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@id/play_button"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/orbitx_instance_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/orbitx_space_xs"
-                    android:letterSpacing="0.12"
-                    android:text="@string/orbitx_home_profile"
-                    android:textAllCaps="true"
-                    android:textColor="@color/settings_category"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/version"
-                    app:layout_constraintStart_toStartOf="@id/version" />
-
-                <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/version"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_48sdp"
-                    android:layout_marginBottom="@dimen/orbitx_space_sm"
-                    android:background="@drawable/background_card"
-                    app:layout_constraintBottom_toTopOf="@id/view_account"
-                    app:layout_constraintEnd_toStartOf="@+id/manager_profile_button"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
-
-                    <ImageView
-                        android:id="@+id/version_icon"
-                        android:layout_width="@dimen/_36sdp"
-                        android:layout_height="@dimen/_36sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/orbitx_space_sm"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_minecraft" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/orbitx_space_sm"
-                        android:layout_toEndOf="@id/version_icon"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/version_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:gravity="start"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="@string/version_no_versions" />
-
-                        <TextView
-                            android:id="@+id/version_info"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:gravity="start"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:visibility="gone" />
-
-                    </LinearLayout>
-
-                </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
-
-                <ImageButton
-                    android:id="@+id/manager_profile_button"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/orbitx_space_xs"
-                    android:layout_marginEnd="@dimen/orbitx_space_sm"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_setting"
-                    app:layout_constraintBottom_toBottomOf="@id/version"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/version" />
+                    tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

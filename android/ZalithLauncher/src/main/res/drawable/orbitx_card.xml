@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- OrbitX: flat card surface - a solid fill with a single 1px hairline outline
+     instead of a drop shadow.  This is the depth model the flat reference
+     launchers use ("depth is achieved solely through the contrast of nested
+     shades and thin, lighter-coloured outlines"). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="@dimen/orbitx_radius_card" />
+    <solid android:color="@color/orbitx_surface" />
+    <stroke
+        android:width="@dimen/orbitx_stroke"
+        android:color="@color/orbitx_outline" />
+</shape>
