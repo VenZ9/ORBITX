@@ -1,18 +1,29 @@
 /.gradle
 /build
 /*/build
+app_pojavlauncher/src/main/assets/components/jre
+/app_pojavlauncher/src/main/assets/components/jre-new/
+/app_pojavlauncher/src/main/assets/components/jre-21/
 local.properties
 .idea/
-.vscode/
+app_pojavlauncher/.cxx/
+.vs/
 /curseforge_key.txt
-/ZalithLauncher/.cxx/
-# NOTE: OrbitX ships components/lwjgl3/lwjgl-glfw-classes.jar. Upstream generates it
-# from the :jre_lwjgl3glfw module, but on a plain `assembleDebug` Gradle does not
-# regenerate it, so it is committed here and must NOT be ignored.
-/ZalithLauncher/release/
+/app_pojavlauncher/libs/ltw-release.aar
+/jre_lwjgl3glfw/gradle/
+/jre_lwjgl3glfw/**/build/
+/jre_lwjgl3glfw/**/.gradle/
+/app_pojavlauncher/curseforge_key.txt
 
-# Upstream's RELEASE signing keystore.  It is deliberately not carried into OrbitX:
-# a release private key does not belong in a public repository, it is not needed to
-# build (the release build type also needs MOVTERY_KEYSTORE_PASSWORD, which is
-# upstream's own and which we do not have), and the debug build uses debug.keystore.
-/movtery-key.jks
+# Junk / scratch files
+PROMPT.md
+ParseTest.java
+scratch.java
+patch.sh
+test_fabric.sh
+index.html
+loader.json
+fs-manager-udroid/
+
+# Agent local skills
+.agents/

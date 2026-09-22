@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- OrbitX: rounded side rail used by the settings / download / about screens. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <corners android:radius="@dimen/orbitx_radius_card" />
-    <solid android:color="@color/menu_overlay" />
-</shape>

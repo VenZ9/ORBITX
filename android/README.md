@@ -1,98 +1,53 @@
-# OrbitX Launcher (Android)
+CS Launcher Plus
 
-A Minecraft: Java Edition launcher for Android, rebranded and recoloured as
-**OrbitX**. This directory is a modified redistribution of **Zalith Launcher
-1.4.1.4** (GPL-3.0), which itself carries the **PojavLauncher** runtime
-(LGPL-3.0). See [`LICENSE-THIRD-PARTY.md`](LICENSE-THIRD-PARTY.md) for full
-attribution and the exact list of changes.
+CS Launcher Plus is a powerful Minecraft launcher focused on performance, customisation, and a smooth user experience.
 
-<p align="center">
-  <img src="ZalithLauncher/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="140" alt="OrbitX Launcher icon"/>
-</p>
+Features
 
-## What OrbitX is
+Modern & Redesigned UI
 
-| | |
-|---|---|
-| App name | **OrbitX Launcher** |
-| Application ID | `com.orbitx.launcher` (debug: `com.orbitx.launcher.debug`) |
-| minSdk / targetSdk | 26 / 34 |
-| Runtime | Java Edition via a bundled Android JRE (8 / 17 / 21 / 25) |
-| Renderers | GL4ES, VirGL, Zink (OSMesa), ANGLE — selectable per instance |
-| Mod loaders | Fabric, Forge, NeoForge, Quilt, OptiFine |
-| Controls | PojavLauncher's control system, recoloured red, incl. custom-key buttons |
-| Auth | Offline accounts supported; no account needed to launch |
+A major redesign has been made across the launcher. Almost every UI component has been improved for a cleaner and more polished experience.
 
-## Layout
+Control Customisation
 
-```
-android/
-├── ZalithLauncher/          the app module (Kotlin + Java + XML/Compose UI)
-│   ├── src/main/java/       app sources (namespaces retained upstream, see below)
-│   ├── src/main/jni/        native bridge, built with the NDK
-│   ├── src/main/jniLibs/    prebuilt GL translation layers (.so)
-│   ├── src/main/assets/     bundled JREs (8/17/21/25), LWJGL, caciocavallo
-│   └── src/main/res/        icons, layouts, strings, colours
-├── jre_lwjgl3glfw/          LWJGL/GLFW shim compiled into the APK assets
-├── build.gradle.kts         root build
-├── gradle.properties        memory-fitted Gradle settings
-└── gradlew                  Gradle wrapper (pinned)
-```
+Fully customise your in-game controls.
 
-## Building
+- Move control buttons freely around the screen
+- Resize controls according to your preference
+- Add custom images to control buttons
+- Create a more personalised control layout
 
-Requirements: **JDK 17**, Android SDK with **platform 34**, **build-tools
-34.0.0**, and **NDK 25.2.9519653** — the native bridge is compiled with the NDK,
-so the build fails at `externalNativeBuild` without it.
+Custom Settings Button
 
-```bash
-export ANDROID_HOME=/opt/android-sdk          # or your SDK location
-export JAVA_HOME=/path/to/jdk-17
+The Control Customisation Settings Button has additional customisation options.
 
-cd android
-./gradlew assembleDebug -Darch=arm64          # or -Darch=all, -Darch=arm, ...
-```
+- Add a custom image
+- Change its size
+- Move it anywhere on the screen
 
-The APK lands in `ZalithLauncher/build/outputs/apk/debug/`.
+Performance Improvements
 
-`-Darch=<abi>` selects the ABI (`all`, `arm`, `arm64`, `x86`, `x86_64`). For a
-device-only build `arm64` keeps the APK far smaller.
+CS Launcher Plus includes major performance and optimisation improvements for a faster, smoother, and more responsive experience.
 
-### Memory
+Bug Fixes
 
-`gradle.properties` is deliberately tuned for a **2048 MB container with no
-swap** — upstream ships `-Xmx4096M`, which gets the daemon OOM-killed
-immediately. These settings bound the *total* JVM footprint (heap 768 MB,
-metaspace 320 MB, explicit `CompressedClassSpaceSize`) because the Gradle
-daemon grows to ~1.4 GB RSS while compiling this project, and Jetifier is off
-since every dependency is already AndroidX. On a normal 8 GB+ machine you can
-raise `org.gradle.jvmargs` back toward `-Xmx4096M` for a faster build.
+A large number of bugs and stability issues have been fixed in this release.
 
-### Java package namespace
+Download
 
-The shipped **application ID is `com.orbitx.launcher`**, but the internal Java
-packages deliberately remain `com.movtery.zalithlauncher` and
-`net.kdt.pojavlaunch`. 549 sources reference those namespaces and the native
-code resolves classes by hardcoded path strings, so renaming them would break
-the JNI bindings and game launching. All user-visible branding — app name,
-icon, colours, application ID — is OrbitX. This is explained in full in
-[`LICENSE-THIRD-PARTY.md`](LICENSE-THIRD-PARTY.md).
+Download the latest version of CS Launcher Plus from GitHub Releases:
 
-## Controls
+"Download the Latest Release" (https://github.com/craftstudioteam/CS-LAUNCHER-PLUS/releases)
 
-The control overlay is PojavLauncher's: movement D-pad, jump/sneak/sprint,
-attack/use, inventory, drop, chat, pause and the hotbar row — recoloured to the
-OrbitX red palette. Custom-key buttons are supported: in the controls editor
-you can add a control and bind it to any keyboard key or mouse action.
-Layouts are stored normalised `0..1`, with Default / PvP / Custom presets and
-separate portrait and landscape arrangements.
+Latest Release
 
-## Licence
+Check the Releases section for the latest version, changelog, and available downloads.
 
-**GNU GPL-3.0** — see [`LICENSE`](LICENSE), with third-party attribution in
-[`LICENSE-THIRD-PARTY.md`](LICENSE-THIRD-PARTY.md). Because this is a
-derivative of GPL-3.0 Zalith Launcher, any redistributed build must keep these
-notices and publish its source.
+Community
 
-Not affiliated with, endorsed by, or associated with Mojang Studios or
-Microsoft. Minecraft is a trademark of Mojang Studios.
+Stay updated with CS Launcher Plus and follow the project for future updates, improvements, and new features.
+
+---
+
+CS Launcher Plus
+Faster. Smoother. More Customisable.
