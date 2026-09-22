@@ -32,10 +32,9 @@ public final class FirebaseSyncManager {
     public static void showMarkdownDialog(Activity act, String title, String markdown, boolean fullPage) {
         if (act == null) return;
         try {
-            String body = Markdown.toPlain(markdown == null ? "" : markdown);
             new android.app.AlertDialog.Builder(act)
                     .setTitle(title == null ? "OrbitX" : title)
-                    .setMessage(body)
+                    .setMessage(markdown == null ? "" : markdown)
                     .setPositiveButton(android.R.string.ok, null)
                     .show();
         } catch (Throwable ignored) { }

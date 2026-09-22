@@ -848,17 +848,17 @@ public class LauncherActivity extends BaseActivity {
     }
 
     /**
-     * OrbitX Official Partner welcome dialog. Shown once (flag persisted),
+     * Infrawire — Official Partner welcome dialog. Shown once (flag persisted),
      * never again. Explore opens the partner page; Skip just dismisses.
      */
     private void maybeShowOrbitXWelcome() {
-        if (net.kdt.pojavlaunch.sponsor.OrbitXPartner.wasWelcomeShown(this)) return;
+        if (net.kdt.pojavlaunch.sponsor.InfrawirePartner.wasWelcomeShown(this)) return;
         View root = findViewById(android.R.id.content);
         if (root == null) return;
         root.postDelayed(() -> {
             if (isFinishing() || isDestroyed()) return;
-            if (net.kdt.pojavlaunch.sponsor.OrbitXPartner.wasWelcomeShown(this)) return;
-            net.kdt.pojavlaunch.sponsor.OrbitXPartner.markWelcomeShown(this);
+            if (net.kdt.pojavlaunch.sponsor.InfrawirePartner.wasWelcomeShown(this)) return;
+            net.kdt.pojavlaunch.sponsor.InfrawirePartner.markWelcomeShown(this);
 
             View dialogView = getLayoutInflater().inflate(R.layout.dialog_infrawire_welcome, null);
             android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(this)
@@ -872,16 +872,16 @@ public class LauncherActivity extends BaseActivity {
 
             View explore = dialogView.findViewById(R.id.infrawire_welcome_btn_explore);
             View skip = dialogView.findViewById(R.id.infrawire_welcome_btn_skip);
-            net.kdt.pojavlaunch.sponsor.OrbitXPartner.applyPressAnimation(explore);
-            net.kdt.pojavlaunch.sponsor.OrbitXPartner.applyPressAnimation(skip);
+            net.kdt.pojavlaunch.sponsor.InfrawirePartner.applyPressAnimation(explore);
+            net.kdt.pojavlaunch.sponsor.InfrawirePartner.applyPressAnimation(skip);
             explore.setOnClickListener(v -> {
                 dialog.dismiss();
-                net.kdt.pojavlaunch.sponsor.OrbitXPartner.openPartnerPage(this);
+                net.kdt.pojavlaunch.sponsor.InfrawirePartner.openPartnerPage(this);
             });
             skip.setOnClickListener(v -> dialog.dismiss());
 
             dialog.show();
-            net.kdt.pojavlaunch.sponsor.OrbitXPartner.fadeIn(
+            net.kdt.pojavlaunch.sponsor.InfrawirePartner.fadeIn(
                     dialogView.findViewById(R.id.infrawire_welcome_root), 0);
         }, 700);
     }

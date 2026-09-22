@@ -106,8 +106,8 @@ public class ScreenRecorder {
             int height = size.y;
             int longEdge = Math.max(width, height);
             float scale = longEdge > 1920 ? 1920f / longEdge : 1f;
-            int encWidth = even(width * scale);
-            int encHeight = even(height * scale);
+            int encWidth = even((int) (width * scale));
+            int encHeight = even((int) (height * scale));
 
             mOutputFile = RecorderPaths.newRecordingFile(mContext, format);
 

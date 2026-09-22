@@ -1102,36 +1102,36 @@ public class LauncherPreferenceFragment extends Fragment {
                         break;
                     }
                     sponsorItems.add(new SettingItem("infrawire_partner_info", SettingItem.TYPE_INFO,
-                            "OrbitX — Official Hosting Partner",
+                            "Infrawire — Official Hosting Partner",
                             "High-Performance VPS & Cloud Hosting • Official Cloud Hosting Partner of ORBITX", null));
                     sponsorItems.add(new SettingItem("infrawire_about_info", SettingItem.TYPE_INFO,
                             "Official Sponsor",
-                            "OrbitX powers ORBITX with latest-generation VPS & cloud infrastructure — NVMe SSD storage, DDR4 memory, a 10 Gbps independent global network, multi-layer Anti-DDoS protection, hourly billing from €0.007/hour and 24/7 expert support.", null));
+                            "Infrawire powers ORBITX with latest-generation VPS & cloud infrastructure — NVMe SSD storage, DDR4 memory, a 10 Gbps independent global network, multi-layer Anti-DDoS protection, hourly billing from €0.007/hour and 24/7 expert support.", null));
                     sponsorItems.add(new SettingItem("infrawire_view_partner_page", SettingItem.TYPE_ACTION,
                             "View Partner Page", "Plans, benefits, and promotions — inside the launcher", null)
                             .setAction(() -> Tools.swapFragment(requireActivity(),
-                                    net.kdt.pojavlaunch.sponsor.OrbitXPartnerFragment.class,
-                                    net.kdt.pojavlaunch.sponsor.OrbitXPartnerFragment.TAG, null)));
+                                    net.kdt.pojavlaunch.sponsor.InfrawirePartnerFragment.class,
+                                    net.kdt.pojavlaunch.sponsor.InfrawirePartnerFragment.TAG, null)));
                     sponsorItems.add(new SettingItem("infrawire_visit_website", SettingItem.TYPE_ACTION,
                             "Visit Website", "infrawire.net — VPS, cloud and dedicated infrastructure", null)
-                            .setAction(() -> net.kdt.pojavlaunch.sponsor.OrbitXPartner.openLink(requireContext(),
-                                    net.kdt.pojavlaunch.sponsor.OrbitXPartner.URL_WEBSITE)));
+                            .setAction(() -> net.kdt.pojavlaunch.sponsor.InfrawirePartner.openLink(requireContext(),
+                                    net.kdt.pojavlaunch.sponsor.InfrawirePartner.URL_WEBSITE)));
                     sponsorItems.add(new SettingItem("infrawire_deploy_vps", SettingItem.TYPE_ACTION,
                             "Deploy VPS", "High-performance VPS from €0.007/hour — deploy in ~55 seconds", null)
-                            .setAction(() -> net.kdt.pojavlaunch.sponsor.OrbitXPartner.openLink(requireContext(),
-                                    net.kdt.pojavlaunch.sponsor.OrbitXPartner.URL_VPS)));
+                            .setAction(() -> net.kdt.pojavlaunch.sponsor.InfrawirePartner.openLink(requireContext(),
+                                    net.kdt.pojavlaunch.sponsor.InfrawirePartner.URL_VPS)));
                     sponsorItems.add(new SettingItem("infrawire_promotions", SettingItem.TYPE_ACTION,
-                            "Latest Promotions", "Current offers and seasonal deals from OrbitX", null)
-                            .setAction(() -> net.kdt.pojavlaunch.sponsor.OrbitXPartner.openLink(requireContext(),
-                                    net.kdt.pojavlaunch.sponsor.OrbitXPartner.URL_PROMOTIONS)));
+                            "Latest Promotions", "Current offers and seasonal deals from Infrawire", null)
+                            .setAction(() -> net.kdt.pojavlaunch.sponsor.InfrawirePartner.openLink(requireContext(),
+                                    net.kdt.pojavlaunch.sponsor.InfrawirePartner.URL_PROMOTIONS)));
                     sponsorItems.add(new SettingItem("infrawire_documentation", SettingItem.TYPE_ACTION,
                             "Documentation", "Guides and the OrbitX knowledge base", null)
-                            .setAction(() -> net.kdt.pojavlaunch.sponsor.OrbitXPartner.openLink(requireContext(),
-                                    net.kdt.pojavlaunch.sponsor.OrbitXPartner.URL_DOCS)));
+                            .setAction(() -> net.kdt.pojavlaunch.sponsor.InfrawirePartner.openLink(requireContext(),
+                                    net.kdt.pojavlaunch.sponsor.InfrawirePartner.URL_DOCS)));
                     sponsorItems.add(new SettingItem("infrawire_support", SettingItem.TYPE_ACTION,
-                            "Support — 24/7", "Get help from OrbitX's expert technical team", null)
-                            .setAction(() -> net.kdt.pojavlaunch.sponsor.OrbitXPartner.openLink(requireContext(),
-                                    net.kdt.pojavlaunch.sponsor.OrbitXPartner.URL_SUPPORT)));
+                            "Support — 24/7", "Get help from Infrawire's expert technical team", null)
+                            .setAction(() -> net.kdt.pojavlaunch.sponsor.InfrawirePartner.openLink(requireContext(),
+                                    net.kdt.pojavlaunch.sponsor.InfrawirePartner.URL_SUPPORT)));
                     categories.add(new SettingCategory("Official Sponsors", sponsorItems));
                     break;
             }

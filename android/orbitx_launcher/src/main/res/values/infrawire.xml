@@ -8,7 +8,7 @@
     <string name="infrawire_badge_live">PARTNER</string>
     <string name="infrawire_deploy_vps">Deploy VPS</string>
     <string name="infrawire_learn_more">Learn More</string>
-    <string name="infrawire_description">OrbitX is the Official Hosting Partner of ORBITX — high-performance VPS and cloud infrastructure on latest-generation hardware with NVMe SSD storage, DDR4 memory and an independent 10 Gbps global network. Enterprise-grade security with multi-layer Anti-DDoS protection, hourly billing and worldwide datacenters.</string>
+    <string name="infrawire_description">Infrawire is the Official Hosting Partner of ORBITX — high-performance VPS and cloud infrastructure on latest-generation hardware with NVMe SSD storage, DDR4 memory and an independent 10 Gbps global network. Enterprise-grade security with multi-layer Anti-DDoS protection, hourly billing and worldwide datacenters.</string>
 
     <!-- Chips -->
     <string name="infrawire_chip_uptime">✓ 99.99% Uptime</string>
@@ -30,7 +30,7 @@
     <string name="infrawire_link_cloud">Cloud</string>
     <string name="infrawire_link_docs">Docs</string>
     <string name="infrawire_link_support">Support</string>
-    <string name="infrawire_footer_note">OrbitX is the Official Cloud Hosting Partner of ORBITX.\nLinks open in your browser — never inside the game.</string>
+    <string name="infrawire_footer_note">Infrawire is the Official Cloud Hosting Partner of ORBITX.\nLinks open in your browser — never inside the game.</string>
 
     <!-- Downloads badge -->
     <string name="infrawire_powered_badge">⚡ Powered by OrbitX Cloud Infrastructure</string>
