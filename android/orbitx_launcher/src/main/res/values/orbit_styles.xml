@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  ORBIT — shared component styles
+  ══════════════════════════════════════════════════════════════════════════
+
+  Widget styles so a screen can be assembled out of the design language
+  instead of re-deciding type sizes, letter-spacing and colours every time.
+  Anything reusable belongs here; page layouts should reference these.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<resources>
+
+    <!-- ── Type roles ───────────────────────────────────────────────────
+         Each role is a fixed (size, weight, tracking, colour) combination.
+         Using a role instead of inline attributes is what keeps two screens
+         from inventing two different "small grey captions". -->
+
+    <style name="OrbitText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/ox_text_primary</item>
+        <item name="android:textSize">@dimen/orb_text_body</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Hero figure: exactly one per screen. Tight tracking, near-white. -->
+    <style name="OrbitText.Display" parent="OrbitText">
+        <item name="android:textSize">@dimen/orb_text_display</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/orb_text_display_tracking</item>
+    </style>
+
+    <!-- Page title. Uses an explicit fontFamily so it can never inherit a
+         serif fallback from a host theme. -->
+    <style name="OrbitText.Title" parent="OrbitText">
+        <item name="android:textSize">@dimen/orb_text_title_l</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="OrbitText.TitleS" parent="OrbitText">
+        <item name="android:textSize">@dimen/orb_text_title_s</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Section heading: uppercase micro-label over a container. This is the
+         house style — it reads as a labelled field, not a sentence. -->
+    <style name="OrbitText.Section" parent="OrbitText">
+        <item name="android:textSize">@dimen/orb_text_label</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/orb_text_label_tracking</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/ox_text_tertiary</item>
+    </style>
+
+    <!-- Body copy. -->
+    <style name="OrbitText.Body" parent="OrbitText">
+        <item name="android:textSize">@dimen/orb_text_body</item>
+        <item name="android:textColor">@color/ox_text_secondary</item>
+        <item name="android:lineSpacingMultiplier">@dimen/orb_line_body</item>
+    </style>
+
+    <!-- Muted caption. -->
+    <style name="OrbitText.Caption" parent="OrbitText">
+        <item name="android:textSize">@dimen/orb_text_body_s</item>
+        <item name="android:textColor">@color/ox_text_tertiary</item>
+    </style>
+
+    <!-- Monospace data: versions, checksums, build ids, log lines. -->
+    <style name="OrbitText.Mono" parent="OrbitText">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/orb_text_mono</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">@color/ox_text_secondary</item>
+    </style>
+
+    <!-- Ember value: the one figure a screen wants you to read. -->
+    <style name="OrbitText.Ember" parent="OrbitText">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/orb_text_mono_s</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textColor">@color/ox_ember_bright</item>
+    </style>
+
+    <!-- ── Containers ─────────────────────────────────────────────────── -->
+
+    <!-- A raised block: one step up from the page, hairline rim, 14dp. -->
+    <style name="OrbitCard">
+        <item name="android:background">@drawable/bg_skinv2_card</item>
+        <item name="android:padding">@dimen/orb_card_pad</item>
+    </style>
+
+    <!-- A flat section: NO background. Structure comes from the heading and
+         the hairline rule the layout draws under it. -->
+    <style name="OrbitSection">
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">@dimen/orb_space_5</item>
+        <item name="android:paddingBottom">@dimen/orb_space_2</item>
+    </style>
+
+    <!-- A single list/action row. Flat; the layout supplies the hairline. -->
+    <style name="OrbitRow">
+        <item name="android:minHeight">@dimen/orb_row_height</item>
+        <item name="android:foreground">@drawable/orb_row_surface</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- ── Controls ───────────────────────────────────────────────────── -->
+
+    <!-- Primary action: the ONE soft filled object on a screen. -->
+    <style name="OrbitButton.Primary" parent="android:Widget.Button">
+        <item name="android:background">@drawable/pe4_btn_save</item>
+        <item name="android:textColor">@color/ox_on_ember</item>
+        <item name="android:textSize">@dimen/orb_text_label</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/orb_text_label_tracking</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:minHeight">@dimen/orb_touch_min</item>
+        <item name="android:minWidth">@dimen/orb_touch_min</item>
+        <item name="android:paddingStart">@dimen/orb_space_6</item>
+        <item name="android:paddingEnd">@dimen/orb_space_6</item>
+    </style>
+
+    <!-- Secondary action: hairline outline, no fill. -->
+    <style name="OrbitButton.Ghost" parent="android:Widget.Button">
+        <item name="android:background">@drawable/st_btn_ghost</item>
+        <item name="android:textColor">@color/ox_text_primary</item>
+        <item name="android:textSize">@dimen/orb_text_label</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/orb_text_label_tracking</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:minHeight">@dimen/orb_touch_min</item>
+        <item name="android:minWidth">@dimen/orb_touch_min</item>
+        <item name="android:paddingStart">@dimen/orb_space_5</item>
+        <item name="android:paddingEnd">@dimen/orb_space_5</item>
+    </style>
+
+    <!-- The hairline rule used to open a section. A 1dp View with this. -->
+    <style name="OrbitRule">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/ox_hairline</item>
+    </style>
+
+    <!-- A small square tile that holds one icon. -->
+    <style name="OrbitIconWell">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/orb_icon_tile</item>
+    </style>
+
+</resources>

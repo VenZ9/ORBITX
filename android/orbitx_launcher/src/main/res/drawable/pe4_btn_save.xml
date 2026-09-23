@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Aurora SAVE button — teal gradient, dark text -->
-<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="#22000000">
+<!-- ORBIT — primary (Save) action. The ONE soft, filled, high-contrast object
+     on a screen: pill radius, solid ember, white label. Nothing else in the
+     interface competes with it. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FFFFFF">
     <item>
         <selector>
             <item android:state_enabled="false">
                 <shape android:shape="rectangle">
-                    <corners android:radius="18dp" />
-                    <solid android:color="#301B1C" />
+                    <corners android:radius="999dp" />
+                    <solid android:color="@color/ox_surface_raised" />
+                    <stroke android:width="1dp" android:color="@color/ox_hairline" />
                 </shape>
             </item>
             <item android:state_pressed="true">
                 <shape android:shape="rectangle">
-                    <corners android:radius="18dp" />
-                    <gradient
-                        android:angle="135"
-                        android:startColor="#D8C9CA"
-                        android:endColor="#BFAEAF" />
+                    <corners android:radius="999dp" />
+                    <solid android:color="@color/ox_ember_deep" />
                 </shape>
             </item>
             <item>
                 <shape android:shape="rectangle">
-                    <corners android:radius="18dp" />
-                    <gradient
-                        android:angle="135"
-                        android:startColor="#E0D4D5"
-                        android:endColor="#C7B9BA" />
+                    <corners android:radius="999dp" />
+                    <solid android:color="@color/ox_ember" />
                 </shape>
             </item>
         </selector>

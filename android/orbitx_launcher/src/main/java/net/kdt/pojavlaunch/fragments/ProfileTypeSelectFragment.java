@@ -73,7 +73,7 @@ public class ProfileTypeSelectFragment extends Fragment {
         animateBlock(view.findViewById(R.id.section_more), 250, rise);
 
         final int[] cards = {
-                R.id.modded_profile_bta, R.id.vanilla_profile, R.id.jar_import_profile,
+                R.id.vanilla_profile, R.id.jar_import_profile,
                 R.id.modded_profile_fabric, R.id.modded_profile_quilt,
                 R.id.modded_profile_forge, R.id.modded_profile_neoforge,
                 R.id.modded_profile_modpack
@@ -131,12 +131,6 @@ public class ProfileTypeSelectFragment extends Fragment {
         b = view.findViewById(R.id.modded_profile_quilt);
         b.setOnClickListener(v -> tryInstall(QuiltInstallFragment.class, QuiltInstallFragment.TAG));
         setupTouchAnimation(b);
-
-        b = view.findViewById(R.id.modded_profile_bta);
-        if (b != null) {
-            b.setOnClickListener(v -> navigateTo(CsClientVersionsFragment.class, CsClientVersionsFragment.TAG, null));
-            setupTouchAnimation(b);
-        }
     }
 
     /** Scale-press micro-interaction for all interactive buttons */

@@ -1259,6 +1259,7 @@ Third-party components (GL4ES, MobileGlues, ANGLE, Zink/Mesa, LWJGL, OpenJDK, SD
     <string name="orbitx_recorder_service_title">OrbitX is recording</string>
     <string name="orbitx_recorder_service_text">Capturing the screen — no overlay is drawn on the game</string>
     <string name="orbitx_recorder_channel_name">Recording</string>
+    <string name="orbitx_record_mic_denied">Microphone not granted — recording without game audio</string>
 
     <!-- ── OrbitX starting-overlay control ─────────────────────────────── -->
     <!-- Login labels (absent from the default locale upstream). -->

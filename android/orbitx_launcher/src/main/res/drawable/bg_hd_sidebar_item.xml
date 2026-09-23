@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Sidebar icon button — idle (subtle), pressed (light), selected (violet glow pill with rim). -->
+<!--
+  ORBIT — navigation rail item.
+
+  REST     bare tile, nothing drawn. The rail is not a row of buttons; it is a
+           column of positions. Only one of them is ever "on".
+  PRESSED  a flat ember wash, no lift.
+  SELECTED the tile gains a raised fill, a 1dp ember rim and an ember spine
+           running down its outer edge. Selection is therefore carried by
+           shape and position as well as hue, which survives a washed-out
+           panel and reads for colour-blind users.
+
+  There are no gradients-as-decoration and no shadows: the whole rail is flat
+  colour plus hairlines.
+-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item android:state_selected="true">
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <gradient android:angle="135" android:startColor="#F57580" android:endColor="#B71C1C" />
-                    <corners android:radius="15dp" />
-                    <stroke android:width="1dp" android:color="#FAB8BE" />
+                    <solid android:color="@color/ox_surface_raised" />
+                    <corners android:radius="14dp" />
+                    <stroke android:width="1dp" android:color="@color/ox_ember" />
                 </shape>
             </item>
-            <!-- inner top gloss -->
-            <item android:top="1dp" android:left="1dp" android:right="1dp" android:bottom="18dp">
+            <!-- outer-edge spine: a soft ember wash bleeding in from the rail's
+                 outer border. Size-independent, so it needs no dp math. -->
+            <item>
                 <shape android:shape="rectangle">
-                    <gradient android:angle="270" android:startColor="#33FFFFFF" android:endColor="#00FFFFFF" />
-                    <corners android:topLeftRadius="14dp" android:topRightRadius="14dp" />
+                    <gradient
+                        android:angle="0"
+                        android:startColor="#66FF3B30"
+                        android:centerColor="#1AFF3B30"
+                        android:endColor="#00FF3B30" />
+                    <corners android:radius="14dp" />
                 </shape>
             </item>
         </layer-list>
     </item>
+
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#33FFFFFF" />
-            <corners android:radius="15dp" />
-            <stroke android:width="1dp" android:color="#4DFF3B30" />
+            <solid android:color="@color/ox_ember_soft" />
+            <corners android:radius="14dp" />
+            <stroke android:width="1dp" android:color="@color/ox_hairline_strong" />
         </shape>
     </item>
+
     <item>
         <shape android:shape="rectangle">
-            <gradient android:angle="315" android:startColor="#26331A1A" android:endColor="#14221011" />
-            <corners android:radius="15dp" />
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="14dp" />
         </shape>
     </item>
 </selector>

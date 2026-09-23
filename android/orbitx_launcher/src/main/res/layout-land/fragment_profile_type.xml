@@ -75,65 +75,6 @@
             android:orientation="vertical"
             android:layout_marginEnd="5dp">
 
-            <FrameLayout
-                android:id="@+id/modded_profile_bta"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/bg_cs_client_promo_card"
-                android:clickable="true"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_press_anim">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <FrameLayout
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="@drawable/bg_deck_icon_tile">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/cs_logo" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="9dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/pt_bta_name"
-                        android:textColor="#F3F0F0"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:text="@string/pt_bta_desc"
-                        android:textColor="#7C7C88"
-                        android:textSize="9sp" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="top|end"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_chevron_right"
-                    android:tint="#565661" />
-            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/jar_import_profile"
@@ -521,7 +462,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/bg_cs_client_promo_card"
+                android:background="@drawable/bg_profile_type_card"
                 android:clickable="true"
                 android:focusable="true"
                 android:stateListAnimator="@animator/card_press_anim">

@@ -22,7 +22,7 @@ public final class MinecraftSkinUploader {
         if (!account.isMicrosoft || account.accessToken == null || "0".equals(account.accessToken)) {
             throw new IllegalStateException("A valid Microsoft Minecraft session is required");
         }
-        String boundary = "----CSLauncherSkin" + System.currentTimeMillis();
+        String boundary = "----OrXSkin" + System.currentTimeMillis();
         HttpURLConnection c = (HttpURLConnection) new URL(
                 "https://api.minecraftservices.com/minecraft/profile/skins").openConnection();
         c.setRequestMethod("POST"); c.setDoOutput(true);
@@ -30,7 +30,7 @@ public final class MinecraftSkinUploader {
         c.setRequestProperty("Authorization", "Bearer " + account.accessToken);
         c.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
         c.setRequestProperty("Accept", "application/json");
-        c.setRequestProperty("User-Agent", "CSLauncher/" + BuildConfig.VERSION_NAME);
+        c.setRequestProperty("User-Agent", "OrX/" + BuildConfig.VERSION_NAME);
         try (OutputStream out = c.getOutputStream()) {
             write(out, "--" + boundary + "\r\nContent-Disposition: form-data; name=\"variant\"\r\n\r\n"
                     + (slim ? "slim" : "classic") + "\r\n");

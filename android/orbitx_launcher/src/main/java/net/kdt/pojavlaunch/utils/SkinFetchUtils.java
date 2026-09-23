@@ -53,7 +53,7 @@ public class SkinFetchUtils {
             try {
                 connection = (HttpURLConnection)new URL(value).openConnection();
                 connection.setConnectTimeout(6000); connection.setReadTimeout(7000);
-                connection.setRequestProperty("User-Agent", "CSLauncher");
+                connection.setRequestProperty("User-Agent", "OrX");
                 if (connection.getResponseCode() == 200) return true;
             } catch (Throwable ignored) {}
             finally { if (connection != null) connection.disconnect(); }

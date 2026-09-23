@@ -21,6 +21,9 @@ public class DrawerPullButton extends View {
     private static final String PREFS = "drawer_button_custom";
     private static final String KEY_X = "x_fraction", KEY_Y = "y_fraction";
     private static final String KEY_W = "width_dp", KEY_H = "height_dp", KEY_IMAGE = "image";
+    /** OrbitX setting: hide this handle from the game screen entirely. */
+    public static final String PREF_HIDE = "orbitx_hide_drawer_handle";
+    private SharedPreferences.OnSharedPreferenceChangeListener mPrefListener;
     private final Paint mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint mBitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
     private VectorDrawableCompat mDrawable;
@@ -39,7 +42,50 @@ public class DrawerPullButton extends View {
 
     @Override protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        applyHiddenPreference();
+        // OrbitX: react to the "hide in-game settings handle" toggle live, so
+        // turning it on removes this control without restarting the game.
+        SharedPreferences p = prefs();
+        if (p != null && mPrefListener == null) {
+            mPrefListener = (sp, key) -> {
+                if (PREF_HIDE.equals(key)) applyHiddenPreference();
+            };
+            p.registerOnSharedPreferenceChangeListener(mPrefListener);
+        }
         post(this::applySavedLayout);
+    }
+
+    @Override protected void onDetachedFromWindow() {
+        SharedPreferences p = prefs();
+        if (p != null && mPrefListener != null) {
+            p.unregisterOnSharedPreferenceChangeListener(mPrefListener);
+            mPrefListener = null;
+        }
+        super.onDetachedFromWindow();
+    }
+
+    /** Launcher preferences backing store, or null if it is not ready yet. */
+    private static SharedPreferences prefs() {
+        try {
+            return net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    /** True when the player asked for this handle to stay off the game screen. */
+    public static boolean isHiddenByPreference(@Nullable Context context) {
+        if (context == null) return false;
+        SharedPreferences p = prefs();
+        if (p == null) {
+            p = context.getSharedPreferences("launcher_pref", Context.MODE_PRIVATE);
+        }
+        return p != null && p.getBoolean(PREF_HIDE, false);
+    }
+
+    /** Applies the hide preference to this view immediately. */
+    public void applyHiddenPreference() {
+        setVisibility(isHiddenByPreference(getContext()) ? View.GONE : View.VISIBLE);
     }
 
     public void applySavedLayout() {

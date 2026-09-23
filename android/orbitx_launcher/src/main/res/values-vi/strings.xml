@@ -378,7 +378,6 @@
     <string name="controller_remapper_expand_entry">Mở rộng để thay đổi mã phím</string>
     <string name="preference_remap_controller_title">Thay đổi sơ đồ phím tay cầm</string>
     <string name="preference_remap_controller_description">Cho phép bạn sửa đổi sơ đồ phím được gán với mỗi nút của tay cầm</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">GPU của bạn không thể kết xuất với khoảng cách trên 7 đoạn khúc nếu không cài đặt Sodium hoặc các bản mod tương tự khác. Khoảng cách kết xuất sẽ tự động giảm xuống khi bạn nhấn \"OK\".</string>
     <string name="mcl_button_open_directory">Mở thư mục trò chơi</string>
     <string name="local_login_bad_username_title">Tên người dùng không phù hợp</string>

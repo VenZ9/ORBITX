@@ -379,7 +379,6 @@
     <string name="controller_remapper_expand_entry">展開以更改鍵碼</string>
     <string name="preference_remap_controller_title">更改手柄按鍵綁定</string>
     <string name="preference_remap_controller_description">允許您修改每個手柄按鈕綁定的鍵盤按鍵</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">如果沒有 Sodium 或其他類似模組，你的 GPU 將無法渲染 7 以上的渲染距離。點擊「確定」後，顯示距離將自動減小。</string>
     <string name="mcl_button_open_directory">打開游戲資料夾</string>
     <string name="local_login_bad_username_title">用户名非法</string>

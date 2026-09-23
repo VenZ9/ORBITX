@@ -378,7 +378,6 @@
     <string name="controller_remapper_expand_entry">Kembangkan untuk menukar kod kunci</string>
     <string name="preference_remap_controller_title">Tukar ikatan kekunci pengawal</string>
     <string name="preference_remap_controller_description">Membolehkan anda mengubah suai kekunci papan kekunci yang terikat pada setiap butang pengawal</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">GPU anda tidak mampu memaparkan jarak penglihatan melebihi 7 tanpa Sodium atau mod serupa yang lain. Jarak pemaparan akan dikurangkan secara automatik apabila anda mengklik \"OK\".</string>
     <string name="mcl_button_open_directory">Buka direktori permainan</string>
     <string name="local_login_bad_username_title">Nama pengguna yang tidak sesuai</string>

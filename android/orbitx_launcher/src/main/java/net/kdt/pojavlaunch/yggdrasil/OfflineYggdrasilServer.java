@@ -404,7 +404,7 @@ public class OfflineYggdrasilServer {
         HttpURLConnection c = null;
         try {
             c = (HttpURLConnection)new URL(url.replace("http://textures.minecraft.net/", "https://textures.minecraft.net/")).openConnection();
-            c.setConnectTimeout(7000); c.setReadTimeout(10000); c.setRequestProperty("User-Agent", "CSLauncher-SkinBridge");
+            c.setConnectTimeout(7000); c.setReadTimeout(10000); c.setRequestProperty("User-Agent", "OrX-SkinBridge");
             if (c.getResponseCode() != 200) return null;
             try (InputStream in = c.getInputStream(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
                 byte[] buf = new byte[8192]; int n; int total = 0;
@@ -447,7 +447,7 @@ public class OfflineYggdrasilServer {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(3500);
             conn.setReadTimeout(3500);
-            conn.setRequestProperty("User-Agent", "CSLauncher");
+            conn.setRequestProperty("User-Agent", "OrX");
             int code = conn.getResponseCode();
             if (code != 200) return null;
             StringBuilder sb = new StringBuilder();

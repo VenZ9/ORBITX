@@ -98,7 +98,7 @@ public class ProfileIconCache {
 
         String cacheKey = (key != null ? key : "bg") + "_bg";
 
-        // One-time compatibility alias for OrbitX Client profiles created by the
+        // One-time compatibility alias for profiles created by an earlier build.
         // previous build. Render them with the original animated background
         // without changing the profile-card layout or dimensions.
         if ("cs_client_artwork".equals(background)

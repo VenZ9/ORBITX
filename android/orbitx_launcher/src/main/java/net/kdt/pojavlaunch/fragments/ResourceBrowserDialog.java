@@ -65,7 +65,7 @@ public final class ResourceBrowserDialog extends DialogFragment {
 
     public static final String TAG = "cs_resource_browser";
 
-    private static final String UA = "CSLauncherPlus/1.0";
+    private static final String UA = "OrX/1.0";
     private static final String API = "https://api.modrinth.com/v2";
     private static final int PAGE = 24;
     private static final int TYPE_PACKS = 0;

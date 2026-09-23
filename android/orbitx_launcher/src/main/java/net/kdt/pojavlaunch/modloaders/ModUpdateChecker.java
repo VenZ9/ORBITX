@@ -203,7 +203,7 @@ public final class ModUpdateChecker {
             c = (HttpURLConnection) new URL(url).openConnection();
             c.setConnectTimeout(TIMEOUT_MS);
             c.setReadTimeout(TIMEOUT_MS);
-            c.setRequestProperty("User-Agent", "CSLauncherPlus/1.0");
+            c.setRequestProperty("User-Agent", "OrX/1.0");
             if (c.getResponseCode() != 200) return null;
             return read(c.getInputStream());
         } catch (Throwable t) {
@@ -222,7 +222,7 @@ public final class ModUpdateChecker {
             c.setRequestMethod("POST");
             c.setDoOutput(true);
             c.setRequestProperty("Content-Type", "application/json");
-            c.setRequestProperty("User-Agent", "CSLauncherPlus/1.0");
+            c.setRequestProperty("User-Agent", "OrX/1.0");
             try (OutputStream os = c.getOutputStream()) {
                 os.write(json.getBytes(StandardCharsets.UTF_8));
             }

@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Frosted glass surface: floating dock, account chip, continue pill.
-     Warm near-black gradient + hairline ember-kissed rim, so it reads as the
-     same material as the cards instead of a cooler panel floating above them. -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="rectangle">
-            <gradient
-                android:angle="90"
-                android:startColor="#F0301313"
-                android:endColor="#F01F1010" />
-            <corners android:radius="22dp" />
-            <stroke android:width="1dp" android:color="#5F383B" />
-        </shape>
-    </item>
-    <!-- top inner sheen -->
-    <item android:top="1dp" android:left="1dp" android:right="1dp" android:bottom="40dp">
-        <shape android:shape="rectangle">
-            <gradient android:angle="270" android:startColor="#18FFFFFF" android:endColor="#00FFFFFF" />
-            <corners android:topLeftRadius="21dp" android:topRightRadius="21dp" />
-        </shape>
-    </item>
-</layer-list>
+<!--
+  ORBIT — the navigation rail container.
+
+  A flat obsidian panel with one hairline border. No gradient, no inner sheen,
+  no shadow: the rail is part of the page, not a card floating above it. That
+  single decision is what stops the shell looking like a stack of widgets.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/ox_obsidian" />
+    <corners android:radius="18dp" />
+    <stroke android:width="1dp" android:color="@color/ox_hairline" />
+</shape>

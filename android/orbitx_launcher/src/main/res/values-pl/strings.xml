@@ -380,7 +380,6 @@
     <string name="controller_remapper_expand_entry">Rozwiń, aby zmienić kody kluczy</string>
     <string name="preference_remap_controller_title">Zmień przypisania przycisków kontrolera</string>
     <string name="preference_remap_controller_description">Pozwala modyfikować klawisze klawiatury przypisane do każdego przycisku kontrolera</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">Twoja karta graficzna nie jest w stanie renderować odległości większej niż 7 bez modyfikacji Sodium lub innych podobnych. Odległość renderowania zostanie automatycznie zmniejszona po kliknięciu „OK”.</string>
     <string name="mcl_button_open_directory">Otwórz folder z grą</string>
     <string name="local_login_bad_username_title">Nieodpowiednia nazwa użytkownika</string>

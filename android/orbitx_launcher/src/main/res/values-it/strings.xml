@@ -370,7 +370,6 @@ se vuoi scaricare dalla sorgente ufficiale premi \"Passa al sito ufficiale"\ e r
     <string name="controller_remapper_expand_entry">Espandi per modificare i keycode</string>
     <string name="preference_remap_controller_title">Cambia associazioni tasti controller</string>
     <string name="preference_remap_controller_description">Consente di modificare i tasti della tastiera legati a ciascun pulsante del controller</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">La GPU non è in grado di eseguire il rendering a una distanza superiore a 7 senza Sodium o altre modifiche simili. La distanza di rendering verrà automaticamente ridotta quando si fa clic su \"OK\".</string>
     <string name="mcl_button_open_directory">Aprire la directory del gioco</string>
     <string name="local_login_bad_username_title">Nome utente non adatto</string>

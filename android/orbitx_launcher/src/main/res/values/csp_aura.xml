@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════════
-     ORBITX — "graphite" design tokens, shared by the Control
-     Customisation drawer, the Button inspector sheet, the Skin Wardrobe and
-     the Runtime page.
+<!-- ══════════════════════════════════════════════════════════════════════════
+     ORBIT — legacy token bridge.
 
-     One language: dark graphite + grey, contrast carried by elevation and
-     hairlines rather than colour. A single neutral light accent is reserved
-     for the state the user is actually acting on (selected / progress /
-     primary action); errors get one muted red and nothing else is saturated.
-     ═══════════════════════════════════════════════════════════════════════ -->
+     These keys were originally a SECOND design language: a silver/near-white
+     "aurora" accent over untinted grey surfaces, used by the Control
+     Customisation drawer, the Button inspector, the Skin Wardrobe and the
+     Runtime page. Two accents in one app is the single loudest tell that an
+     interface is assembled rather than designed.
+
+     Rather than rewrite the ~40 files that reference these keys, they are now
+     aliases onto the ORBIT tokens: ONE accent (ember), warm obsidian surfaces,
+     warm-washed hairlines and the ORBIT type tones. Selected/active states here
+     now read ember exactly like they do everywhere else in the app.
+
+     Do not add new `au_` keys. Add ORBIT tokens to values/orbit_design.xml and
+     reference those instead.
+     ══════════════════════════════════════════════════════════════════════════ -->
 <resources>
-    <!-- accent: near-white neutral, NOT a hue -->
-    <color name="au_accent">#EDE6E6</color>
-    <color name="au_accent_deep">#C0AEAF</color>
-    <color name="au_accent_fill">#14EDE6E6</color>
-    <color name="au_accent_line">#59EDE6E6</color>
+    <!-- accent: the single ORBIT ember. -->
+    <color name="au_accent">#FF3B30</color>
+    <color name="au_accent_deep">#C62828</color>
+    <color name="au_accent_fill">#26FF3B30</color>
+    <color name="au_accent_line">#66FF3B30</color>
 
     <!-- ground -->
-    <color name="au_page">#FF0D0A0A</color>
-    <color name="au_page_glow">#10FFFFFF</color>
-    <color name="au_surface">#F5171212</color>
+    <color name="au_page">#FF0E0B0B</color>
+    <color name="au_page_glow">#12FF3B30</color>
+    <color name="au_surface">#FA141010</color>
 
-    <!-- elevations (translucent white over the page = grey, never tinted) -->
-    <color name="au_tile">#14FFFFFF</color>
-    <color name="au_tile_press">#24FFFFFF</color>
+    <!-- elevations: warm, not neutral grey -->
+    <color name="au_tile">#14FF3B30</color>
+    <color name="au_tile_press">#26FF3B30</color>
     <color name="au_inset">#0AFFFFFF</color>
-    <color name="au_line">#1EFFFFFF</color>
-    <color name="au_line_strong">#3DFFFFFF</color>
+    <color name="au_line">#2A2323</color>
+    <color name="au_line_strong">#3A2E2E</color>
 
-    <!-- type -->
-    <color name="au_text">#FFF5F2F2</color>
-    <color name="au_text_mid">#FFC8BABB</color>
-    <color name="au_text_dim">#FF868D97</color>
-    <color name="au_text_faint">#FF5F666F</color>
-    <color name="au_on_accent">#FF181011</color>
+    <!-- type: the ORBIT ladder -->
+    <color name="au_text">#FFF5F5F5</color>
+    <color name="au_text_mid">#FFAF9C9D</color>
+    <color name="au_text_dim">#FF8A7979</color>
+    <color name="au_text_faint">#FF6B5C5C</color>
+    <!-- text drawn ON an ember fill must be white, never near-black -->
+    <color name="au_on_accent">#FFFFFFFF</color>
 
-    <!-- the only saturated colour on any of these screens, used once per state -->
-    <color name="au_danger">#FFE09A96</color>
+    <color name="au_danger">#FFFF4444</color>
 </resources>

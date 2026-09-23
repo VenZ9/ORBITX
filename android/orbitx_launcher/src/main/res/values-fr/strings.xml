@@ -365,7 +365,6 @@
     <string name="controller_remapper_expand_entry">Développer pour changer les codes de touches</string>
     <string name="preference_remap_controller_title">Modifier les liaisons de touches de la manette</string>
     <string name="preference_remap_controller_description">Permet de modifier les touches du clavier associées à chaque bouton de lla manette</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">Votre GPU n\'est pas capable d\'afficher au dessus de 7 tronçons de rendu sans Sodium ou d\'autres mods similaires. La distance de rendu sera automatiquement réduite lorsque vous appuierez sur \"OK\".</string>
     <string name="mcl_button_open_directory">Ouvrir le répertoire du jeu</string>
     <string name="local_login_bad_username_title">Nom d\'utilisateur inadapté</string>

@@ -13,45 +13,39 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:textSize">@dimen/_12ssp</item>
-        <item name="colorBgApp">#0E0B0B</item>
-        <item name="colorBgBottomBar">#0E0B0B</item>
-        <item name="colorBgStatusBar">#0E0B0B</item>
-        <item name="colorDivider">#1AFFFFFF</item>
-        <item name="themeAccent">@color/cs_accent</item>
-        <item name="colorTextPrimary">@color/text_primary_white</item>
-        <item name="colorTextSecondary">@color/text_secondary_light</item>
-        <item name="bgMainDrawable">@drawable/bg_premium_cosmic_gradient</item>
-        <item name="android:windowBackground">@drawable/bg_premium_cosmic_gradient</item>
-        <!-- Explicit Material 3 palette: blocks its built-in #FAC1C5 lavender fallback. -->
-        <item name="colorPrimary">#FFFFFF</item>
-        <item name="colorOnPrimary">#0D0D0D</item>
-        <item name="colorPrimaryContainer">#FFFFFF</item>
-        <item name="colorOnPrimaryContainer">#0D0D0D</item>
-        <item name="colorSecondary">#D0D0D0</item>
-        <item name="colorOnSecondary">#0D0D0D</item>
-        <item name="colorSecondaryContainer">#2D2525</item>
-        <item name="colorOnSecondaryContainer">#FFFFFF</item>
-        <item name="colorTertiary">#B8B8B8</item>
-        <item name="colorOnTertiary">#0D0D0D</item>
-        <item name="colorAccent">#D0D0D0</item>
-        <item name="colorOnSurface">@color/text_primary_white</item>
-        <item name="colorOnSurfaceVariant">@color/text_secondary_light</item>
-        <item name="colorSurface">#191414</item>
-        <item name="colorSurfaceVariant">#221B1B</item>
-        <!-- ORBITX RED IS THE DEFAULT IDENTITY, not an optional accent. The
-             Material palette itself is red so framework-drawn controls
-             (switches, ripples, focus rings, progress) come out on-brand with
-             no extra wiring, and no built-in lavender fallback can leak in. -->
-        <item name="colorPrimary">@color/cs_accent</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorPrimaryContainer">@color/cs_accent_deep</item>
-        <item name="colorOnPrimaryContainer">#FFFFFF</item>
-        <item name="colorSecondary">@color/cs_accent_light</item>
-        <item name="colorOnSecondary">#1A0A0A</item>
-        <item name="colorTertiary">@color/cs_accent</item>
-        <item name="colorOnTertiary">#FFFFFF</item>
-        <item name="colorAccent">@color/cs_accent</item>
-        <item name="colorError">@color/cs_danger</item>
+        <!-- ORBIT ground. One obsidian, no painted strip at either edge. -->
+        <item name="colorBgApp">@color/ox_obsidian</item>
+        <item name="colorBgBottomBar">@color/ox_obsidian</item>
+        <item name="colorBgStatusBar">@color/ox_obsidian</item>
+        <item name="colorDivider">@color/ox_hairline</item>
+        <item name="themeAccent">@color/ox_ember</item>
+        <item name="colorTextPrimary">@color/ox_text_primary</item>
+        <item name="colorTextSecondary">@color/ox_text_secondary</item>
+        <item name="bgMainDrawable">@drawable/orb_page</item>
+        <item name="android:windowBackground">@drawable/orb_page</item>
+        <!-- ── Material palette ────────────────────────────────────────────
+             Bound to the ORBIT ember so framework-drawn controls — switches,
+             ripples, focus rings, progress — come out on-brand with no extra
+             wiring, and Material's built-in #FAC1C5 lavender fallback can
+             never leak into a screen. Ember is the ONLY accent: secondary and
+             tertiary are shades of it, not new hues. -->
+        <item name="colorPrimary">@color/ox_ember</item>
+        <item name="colorOnPrimary">@color/ox_on_ember</item>
+        <item name="colorPrimaryContainer">@color/ox_ember_deep</item>
+        <item name="colorOnPrimaryContainer">@color/ox_on_ember</item>
+        <item name="colorSecondary">@color/ox_ember_bright</item>
+        <item name="colorOnSecondary">@color/ox_on_ember</item>
+        <item name="colorSecondaryContainer">@color/ox_surface_raised</item>
+        <item name="colorOnSecondaryContainer">@color/ox_text_primary</item>
+        <item name="colorTertiary">@color/ox_ember_deep</item>
+        <item name="colorOnTertiary">@color/ox_on_ember</item>
+        <item name="colorAccent">@color/ox_ember</item>
+        <item name="colorError">@color/ox_danger</item>
+        <item name="colorOnSurface">@color/ox_text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/ox_text_secondary</item>
+        <item name="colorSurface">@color/ox_surface</item>
+        <item name="colorSurfaceVariant">@color/ox_surface_raised</item>
+        <item name="colorOutline">@color/ox_hairline_strong</item>
     </style>
     <style name="AppTheme.Gradient">
         <item name="bgMainDrawable">@drawable/bg_gradient_default</item>
@@ -278,10 +272,17 @@
     <style name="SettingsFullScreenTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/settings_bg</item>
+        <item name="android:windowBackground">@drawable/orb_page</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowAnimationStyle">@style/SettingsActivityAnim</item>
+        <!-- ORBIT palette, so framework-drawn controls (seekbars, switches,
+             dialogs, ripples) inside the settings activity match the shell. -->
+        <item name="colorPrimary">@color/ox_ember</item>
+        <item name="colorPrimaryDark">@color/ox_obsidian</item>
+        <item name="colorAccent">@color/ox_ember</item>
+        <item name="android:textColorPrimary">@color/ox_text_primary</item>
+        <item name="android:textColorSecondary">@color/ox_text_secondary</item>
     </style>
 
     <style name="SettingsActivityAnim" parent="@android:style/Animation.Activity">

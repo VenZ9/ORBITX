@@ -369,7 +369,6 @@
     <string name="controller_remapper_expand_entry">펼쳐서 키 변경</string>
     <string name="preference_remap_controller_title">컨트롤러 키 할당 변경</string>
     <string name="preference_remap_controller_description">컨트롤러 버튼에 키보드 키를 할당합니다</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">사용 중인 GPU의 성능이 부족해 Sodium과 같은 최적화 모드 없이는 렌더 거리를 7 이상으로 설정할 수 없습니다. \'확인\'을 누르면 렌더 거리가 자동으로 감소합니다.</string>
     <string name="mcl_button_open_directory">게임 디렉터리 열기</string>
     <string name="local_login_bad_username_title">사용자 이름 사용 불가</string>

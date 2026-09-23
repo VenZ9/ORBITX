@@ -380,7 +380,6 @@
     <string name="controller_remapper_expand_entry">Розгорніть, щоб змінити коди клавіш</string>
     <string name="preference_remap_controller_title">Змінити прив’язки клавіш контролера</string>
     <string name="preference_remap_controller_description">Дозволяє змінювати клавіші клавіатури, пов’язані з кожною кнопкою контролера</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">Ваш ГП не здатний відтворювати відстань вище 7 без Sodium чи інших подібних модів. Дальність промальовування буде автоматично зменшено, коли ви натиснете «ОК».</string>
     <string name="mcl_button_open_directory">Відкрити теку гри</string>
     <string name="local_login_bad_username_title">Невідповідне ім\'я користувача</string>

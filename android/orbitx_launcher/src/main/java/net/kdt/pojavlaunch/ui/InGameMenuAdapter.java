@@ -11,9 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.kdt.pojavlaunch.Anime;
 import net.kdt.pojavlaunch.R;
+
+import java.util.Locale;
 
 /**
  * Phase 9 — the in-game drawer adapter. Still an {@code ArrayAdapter<String>}
@@ -62,15 +65,23 @@ public class InGameMenuAdapter extends ArrayAdapter<String> {
 
         title.setText(getItem(position));
         subtitle.setText(position < mSubtitles.length ? mSubtitles[position] : "");
-        key.setText(String.valueOf(position + 1));
+        // ORBIT: zero-padded index (01, 02, ...) so the column reads as an
+        // aligned table of keyed entries rather than a numbered list.
+        key.setText(String.format(Locale.US, "%02d", position + 1));
         if (position < mIcons.length) icon.setImageResource(mIcons[position]);
 
         boolean danger = position == mDangerIndex;
-        view.setBackgroundResource(danger ? R.drawable.igm_card_danger : R.drawable.igm_card);
-        well.setBackgroundResource(danger ? R.drawable.igm_icon_well_danger : R.drawable.igm_icon_well);
-        icon.setColorFilter(danger ? 0xFFF08A92 : 0xFFE6E9EF);
-        title.setTextColor(danger ? 0xFFFFD9DC : 0xFFF4F6F9);
-        subtitle.setTextColor(danger ? 0xFFB9868B : 0xFF8A909C);
+        Context ctx = getContext();
+        view.setBackgroundResource(danger ? R.drawable.igm_card_danger : R.drawable.orb_row_surface);
+        well.setBackgroundResource(danger ? R.drawable.igm_icon_well_danger : R.drawable.orb_icon_tile);
+        icon.setColorFilter(ContextCompat.getColor(ctx,
+                danger ? R.color.ox_ember_bright : R.color.ox_text_tertiary));
+        title.setTextColor(ContextCompat.getColor(ctx,
+                danger ? R.color.ox_danger : R.color.ox_text_primary));
+        subtitle.setTextColor(ContextCompat.getColor(ctx,
+                danger ? R.color.ox_ember_deep : R.color.ox_text_muted));
+        key.setTextColor(ContextCompat.getColor(ctx,
+                danger ? R.color.ox_danger : R.color.ox_text_tertiary));
 
         // Staggered slide-in from the right (drawer edge) for ~700ms after arming.
         if (mEntranceArmed && System.currentTimeMillis() - mArmedAt < 700) {

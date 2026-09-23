@@ -208,7 +208,7 @@ public class ProfileLogActivity extends AppCompatActivity {
         conn.setDoOutput(true);
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
         conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("User-Agent", "CSLauncher/" + BuildConfig.VERSION_NAME);
+        conn.setRequestProperty("User-Agent", "OrX/" + BuildConfig.VERSION_NAME);
         JSONObject body = new JSONObject();
         body.put("content", content); body.put("source", "ORBITX");
         JSONArray metadata = new JSONArray();

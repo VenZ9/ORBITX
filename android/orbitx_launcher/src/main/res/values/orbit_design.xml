@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  ORBIT — the ORBITX interface language
+  ══════════════════════════════════════════════════════════════════════════
+
+  This file is the single source of truth for the launcher's visual language:
+  the type scale, the spacing grid, the corner/shape system, the motion
+  vocabulary and the elevation model.
+
+  WHY IT IS BUILT THIS WAY
+
+  ORBITX is used one-handed, at night, by someone who wants to be in a world
+  within a few seconds. The interface therefore behaves like an instrument
+  panel rather than a storefront:
+
+    • Structure is carried by ALIGNMENT and RULE-LINES, not by boxes inside
+      boxes. A hairline where two regions meet replaces a card border.
+    • Emphasis is carried by ONE accent (ember) and by WEIGHT, never by a
+      second hue. If everything is coloured, nothing reads as important.
+    • Depth is carried by a two-step surface shift plus a hairline. There are
+      no drop shadows anywhere except the one floating control that must clear
+      the game canvas.
+    • Type is set in tracked-out, uppercase micro-labels so a 10sp string
+      stays legible on a cheap panel, paired with tight, larger numbers for
+      the data a player actually reads (RAM, FPS, version).
+
+  THE SIGNATURE ELEMENT — the ORBIT RING
+
+  The app mark is an incomplete annulus. ORBIT reuses that annulus as its
+  state language so the identity and the interaction are the same idea:
+
+      rest      → no stroke            (nothing drawn)
+      hover     → hairline at 40%      (a hint)
+      selected  → ember stroke + wash  (a ring, drawn)
+      busy      → ember arc, rotating  (the ring animating)
+
+  Selection is therefore readable as SHAPE and not only as colour, which
+  matters for colour-blind users and for washed-out phone panels.
+
+  NAMING
+
+  Every token is prefixed `orb_`. Anything unprefixed in colors.xml is either
+  legacy (kept so old references still resolve) or a per-theme preset value.
+  Do not add new unprefixed tokens — extend this file instead.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<resources>
+
+    <!-- ══ 1. SPACING — a strict 4dp grid ══════════════════════════════════
+         Every margin, padding and gap in ORBIT picks one of these. Arbitrary
+         values (13dp, 27dp) are what make an interface feel unconsidered. -->
+    <dimen name="orb_space_0">0dp</dimen>
+    <dimen name="orb_space_1">4dp</dimen>
+    <dimen name="orb_space_2">8dp</dimen>
+    <dimen name="orb_space_3">12dp</dimen>
+    <dimen name="orb_space_4">16dp</dimen>
+    <dimen name="orb_space_5">20dp</dimen>
+    <dimen name="orb_space_6">24dp</dimen>
+    <dimen name="orb_space_8">32dp</dimen>
+    <dimen name="orb_space_10">40dp</dimen>
+    <dimen name="orb_space_12">48dp</dimen>
+
+    <!-- Screen gutter: the single inset every page title and content block
+         aligns to. One value means every screen has the same left edge. -->
+    <dimen name="orb_gutter">16dp</dimen>
+    <!-- Dense gutter for full-bleed rails and edge-to-edge lists. -->
+    <dimen name="orb_gutter_tight">12dp</dimen>
+
+    <!-- ══ 2. SHAPE — corner radii ═════════════════════════════════════════
+         A deliberately small set. The launcher reads as "technical" because
+         large radii are used ONLY for the primary action, so the one button
+         that matters is the one soft object on screen. -->
+    <dimen name="orb_radius_sharp">2dp</dimen>
+    <dimen name="orb_radius_sm">6dp</dimen>
+    <dimen name="orb_radius_md">10dp</dimen>
+    <dimen name="orb_radius_lg">14dp</dimen>
+    <dimen name="orb_radius_xl">20dp</dimen>
+    <dimen name="orb_radius_pill">999dp</dimen>
+
+    <!-- Stroke weights. Hairlines do the structural work. -->
+    <dimen name="orb_stroke_hairline">1dp</dimen>
+    <dimen name="orb_stroke_ring">2dp</dimen>
+    <dimen name="orb_stroke_focus">2dp</dimen>
+
+    <!-- ══ 3. TYPE SCALE ══════════════════════════════════════════════════
+         Ratio ~1.25 from a 12sp base. Sizes are chosen to survive a low-DPI
+         panel; nothing informative is set below 11sp. -->
+
+    <!-- Display: reserved for the one number on a hero card. Tight tracking. -->
+    <dimen name="orb_text_display">34sp</dimen>
+    <dimen name="orb_text_display_tracking">-0.02</dimen>
+
+    <!-- Titles -->
+    <dimen name="orb_text_title_l">22sp</dimen>
+    <dimen name="orb_text_title_m">18sp</dimen>
+    <dimen name="orb_text_title_s">15sp</dimen>
+
+    <!-- Body -->
+    <dimen name="orb_text_body_l">15sp</dimen>
+    <dimen name="orb_text_body">13sp</dimen>
+    <dimen name="orb_text_body_s">12sp</dimen>
+
+    <!-- Micro-label: always uppercase + wide tracking. This is the house
+         style that makes a row read as "labelled data" not "chat sentence". -->
+    <dimen name="orb_text_label">11sp</dimen>
+    <dimen name="orb_text_label_tracking">0.14</dimen>
+    <dimen name="orb_text_label_xs">9sp</dimen>
+    <dimen name="orb_text_label_xs_tracking">0.18</dimen>
+
+    <!-- Monospace: version ids, checksums, log lines. -->
+    <dimen name="orb_text_mono">12sp</dimen>
+    <dimen name="orb_text_mono_s">10sp</dimen>
+
+    <!-- Line heights (use with android:lineSpacingMultiplier on body copy) -->
+    <item name="orb_line_body" format="float" type="dimen">1.45</item>
+    <item name="orb_line_tight" format="float" type="dimen">1.15</item>
+
+    <!-- ══ 4. STRUCTURE — the fixed furniture of the shell ═════════════════ -->
+    <!-- The navigation rail. 72dp = a 44dp target with the gutters it needs. -->
+    <dimen name="orb_rail_width">72dp</dimen>
+    <dimen name="orb_rail_item_w">56dp</dimen>
+    <dimen name="orb_rail_item_h">52dp</dimen>
+    <dimen name="orb_rail_icon">22dp</dimen>
+
+    <!-- Top bar of a content pane. -->
+    <dimen name="orb_topbar_height">56dp</dimen>
+
+    <!-- Rows. 56dp is the minimum that stays comfortable with a two-line row
+         while still fitting six of them on a 360dp-tall landscape viewport. -->
+    <dimen name="orb_row_height">56dp</dimen>
+    <dimen name="orb_row_height_dense">48dp</dimen>
+    <dimen name="orb_row_height_tall">64dp</dimen>
+    <dimen name="orb_row_icon">20dp</dimen>
+    <dimen name="orb_row_gap">1dp</dimen>       <!-- the hairline between rows -->
+
+    <!-- Minimum interactive target, per accessibility guidance. -->
+    <dimen name="orb_touch_min">48dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="orb_card_min_h">104dp</dimen>
+    <dimen name="orb_card_pad">14dp</dimen>
+
+    <!-- The one floating control that sits over the game canvas. -->
+    <dimen name="orb_fab_size">48dp</dimen>
+
+    <!-- ══ 5. MOTION ══════════════════════════════════════════════════════
+         Four durations only. Anything the user waits for is <= 240ms; the
+         celebratory beats are the only thing allowed past 320ms. -->
+    <integer name="orb_motion_instant">90</integer>   <!-- state flash -->
+    <integer name="orb_motion_quick">140</integer>    <!-- press / release -->
+    <integer name="orb_motion_base">200</integer>     <!-- enter / exit -->
+    <integer name="orb_motion_slow">320</integer>     <!-- panel / page -->
+    <integer name="orb_motion_stagger">45</integer>   <!-- list item offset -->
+
+    <!-- ══ 6. ALPHA LADDER ════════════════════════════════════════════════
+         Named opacities so hairlines and washes are consistent and no screen
+         invents its own "slightly see-through" value. -->
+    <item name="orb_alpha_hairline" format="float" type="dimen">0.10</item>
+    <item name="orb_alpha_pressed" format="float" type="dimen">0.14</item>
+    <item name="orb_alpha_wash" format="float" type="dimen">0.16</item>
+    <item name="orb_alpha_ring" format="float" type="dimen">0.55</item>
+    <item name="orb_alpha_disabled" format="float" type="dimen">0.38</item>
+    <item name="orb_alpha_scrim" format="float" type="dimen">0.72</item>
+
+</resources>

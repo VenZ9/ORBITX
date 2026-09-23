@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- SETTINGS ROW — CS glass card (obsidian fill + soft stroke + ripple). -->
-<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="#14FFFFFF">
+<!-- ORBIT — a settings row. Flat raised surface, warm hairline, ember ripple.
+     Rows are separated by hairlines in the layouts, so no radius stacking. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ox_ember_soft">
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
-            <corners android:radius="16dp" />
-            <solid android:color="#151517" />
-            <stroke android:width="1dp" android:color="#1AFFFFFF" />
+            <corners android:radius="10dp" />
+            <solid android:color="@color/ox_surface" />
+            <stroke android:width="1dp" android:color="@color/ox_hairline" />
         </shape>
     </item>
 </ripple>

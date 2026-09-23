@@ -214,7 +214,7 @@
                         android:layout_height="26dp"
                         android:layout_gravity="center"
                         android:contentDescription="@null"
-                        android:src="@drawable/cs_logo" />
+                        android:src="@drawable/orbitx_mark" />
                 </FrameLayout>
 
                 <LinearLayout

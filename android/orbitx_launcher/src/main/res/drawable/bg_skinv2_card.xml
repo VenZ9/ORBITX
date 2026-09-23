@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT — content card: one surface step up from the page, hairline rim.
+     Flat by design: no gradient, so cards never look like separate widgets. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <corners android:radius="16dp" />
-    <gradient android:angle="270" android:startColor="#23191A" android:endColor="#1A1212" />
-    <stroke android:width="1dp" android:color="#322425" />
+    <corners android:radius="14dp" />
+    <solid android:color="@color/ox_surface" />
+    <stroke android:width="1dp" android:color="@color/ox_hairline" />
 </shape>

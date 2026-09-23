@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT — the instance library (home).
+
+  Structure: one header band, then a full-bleed list of instance cards, then a
+  two-object action bar pinned to the bottom. There is deliberately no floating
+  circular FAB: a lone circle on a dark field is the single most copied gesture
+  in Android launchers, so ORBIT uses a labelled pill instead — it says what it
+  does and gives a 56dp target.
+
+  The wallpaper layer stays wired to `right_pane_wallpaper` and every action id
+  is unchanged, so the fragment's binding keeps working: restyle, not re-wire.
+-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_launcher_dark">
+    android:background="@drawable/orb_page">
 
     <!-- Custom wallpaper — invisible by default, loaded dynamically -->
     <ImageView
@@ -15,66 +27,139 @@
         android:visibility="gone"
         android:contentDescription="@null" />
 
-    <!-- (Req: the big "Profiles" heading bar was removed — the activity header
-         bar already brands the screen, and cards deserve the full viewport.) -->
+    <!-- ── Header band ────────────────────────────────────────────────────
+         Orientation over inventory: the kicker labels the page, the title
+         states what the list is, the count is a live figure. -->
+    <LinearLayout
+        android:id="@+id/home_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/orb_gutter"
+        android:paddingEnd="@dimen/orb_gutter"
+        android:paddingTop="@dimen/orb_space_5"
+        android:paddingBottom="@dimen/orb_space_3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Profile Cards -->
+        <TextView
+            android:id="@+id/home_kicker"
+            style="@style/OrbitText.Section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Library" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/orb_space_1"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_title"
+                style="@style/OrbitText.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Instances" />
+
+            <TextView
+                android:id="@+id/home_count"
+                style="@style/OrbitText.Ember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/orb_space_3"
+            android:background="@color/ox_hairline" />
+    </LinearLayout>
+
+    <!-- ── The list ─────────────────────────────────────────────────────── -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home_profiles"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingTop="10dp"
-        android:paddingBottom="96dp"
         android:overScrollMode="never"
-        android:paddingHorizontal="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:paddingStart="@dimen/orb_gutter_tight"
+        android:paddingEnd="@dimen/orb_gutter_tight"
+        android:paddingTop="@dimen/orb_space_1"
+        android:paddingBottom="96dp"
+        app:layout_constraintTop_toBottomOf="@id/home_header"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Floating "+" Create Profile button (bottom-center, hardware-accelerated) -->
+    <!-- ── Action bar ─────────────────────────────────────────────────────
+         Primary action: a labelled pill. Repeated-action refresh: a square
+         ghost. Two objects, one hierarchy. -->
     <FrameLayout
         android:id="@+id/fab_create_profile"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/bg_fab_create_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginBottom="@dimen/orb_space_5"
+        android:background="@drawable/pe4_btn_save"
         android:clickable="true"
         android:focusable="true"
-        android:elevation="8dp"
+        android:elevation="6dp"
+        android:minWidth="172dp"
+        android:paddingStart="@dimen/orb_space_4"
+        android:paddingEnd="@dimen/orb_space_5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:src="@drawable/ic_add"
-            android:tint="@color/bg_primary"
-            android:contentDescription="Create Profile" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_add"
+                android:tint="@color/ox_on_ember" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/orb_space_2"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="@dimen/orb_text_label_tracking"
+                android:text="New instance"
+                android:textAllCaps="true"
+                android:textColor="@color/ox_on_ember"
+                android:textSize="@dimen/orb_text_label" />
+        </LinearLayout>
     </FrameLayout>
 
-    <!-- Refresh Profiles button -->
     <FrameLayout
         android:id="@+id/btn_refresh_profiles"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/background_image_rounded"
+        android:layout_width="@dimen/orb_touch_min"
+        android:layout_height="@dimen/orb_touch_min"
+        android:layout_marginBottom="@dimen/orb_space_5"
+        android:layout_marginEnd="@dimen/orb_gutter"
+        android:background="@drawable/st_btn_ghost"
         android:clickable="true"
         android:focusable="true"
-        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
+            android:contentDescription="Refresh instances"
             android:src="@drawable/ic_redo"
-            android:tint="@color/accent_primary"
-            android:contentDescription="Refresh Profiles" />
+            android:tint="@color/ox_text_secondary" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

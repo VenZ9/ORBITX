@@ -710,6 +710,9 @@ public class LauncherPreferenceFragment extends Fragment {
                         "Recording format", "Container written while capturing. Export to the others afterwards from the in-game Record / Replay menu", 0)
                         .setDropdownOptions(new String[]{"MP4 (H.264 + AAC)", "WebM (VP8 + Vorbis)"},
                                 new String[]{"0", "1"}));
+                items.add(new SettingItem("orbitx_hide_drawer_handle", SettingItem.TYPE_SWITCH,
+                        "Hide in-game settings handle",
+                        "Remove the floating gear button that sits over the game while you play", false));
                 items.add(new SettingItem("orbitx_launch_overlay_opacity", SettingItem.TYPE_DROPDOWN,
                         getString(R.string.orbitx_launch_overlay_title), getString(R.string.orbitx_launch_overlay_summary), 100)
                         .setDropdownOptions(new String[]{"100%", "85%", "70%", "50%", "30%", "Hide"},

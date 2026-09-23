@@ -378,7 +378,6 @@
     <string name="controller_remapper_expand_entry">Tuș kodlarını değiștirmek için genişlet</string>
     <string name="preference_remap_controller_title">Kontrolcü tuș atamalarını değiştir</string>
     <string name="preference_remap_controller_description">Her bir kontrolcü düğmesine atanmış klavye tuşlarını değiştirmenizi sağlar</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">Ekran kartınız, Sodium veya benzeri modlar olmadan 7\'nin üzerinde görüş mesafesi işleyemez. “Tamam”a tıkladığınızda görüş mesafesi otomatik olarak düşürülecek.</string>
     <string name="mcl_button_open_directory">Oyun dizinini aç</string>
     <string name="local_login_bad_username_title">Kullanım için uyumsuz Kullanıcı adı</string>

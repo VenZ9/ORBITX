@@ -11,6 +11,7 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -19,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -315,11 +317,13 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                             "Type a key the on-screen pad lacks",
                             "Resolution, gyro, mouse, gestures",
                             "Edit / move / resize on-screen controls",
-                            "Resource packs & shaders without leaving"
+                            "Resource packs & shaders without leaving",
+                            "Capture a clean clip - no overlay is drawn"
                     },
                     new int[]{
                             R.drawable.ic_igm_power, R.drawable.ic_igm_terminal, R.drawable.ic_igm_keyboard,
-                            R.drawable.ic_igm_sliders, R.drawable.ic_igm_controls, R.drawable.ic_igm_packs
+                            R.drawable.ic_igm_sliders, R.drawable.ic_igm_controls, R.drawable.ic_igm_packs,
+                            R.drawable.ic_igm_record
                     }, 0);
             setupInGameDrawerChrome();
             gameActionClickListener = (parent, view, position, id) -> {
@@ -332,6 +336,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     case 3: openQuickSettings(); break;
                     case 4: openCustomControls(); break;
                     case 5: openResourceBrowser(); break; // user req: packs/shaders without leaving the game
+                    case 6: toggleRecording(); break;      // OrbitX replay/recording mod
                 }
                 drawerLayout.closeDrawers();
             };
@@ -422,6 +427,9 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
     }
 
+    /** Request code for the microphone permission the recorder asks for. */
+    private static final int REQUEST_MIC_FOR_RECORDING = 0x4F52;
+
     /**
      * OrbitX replay/recording mod.
      *
@@ -432,9 +440,42 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
      */
     private void toggleRecording() {
         RecorderManager manager = RecorderManager.get();
+        if (!manager.isRecording()) {
+            // The output container always carries a microphone audio track, so a
+            // hard denial would make capture fail outright. Ask first, and fall
+            // back to a silent recording rather than refusing to record.
+            if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},
+                        REQUEST_MIC_FOR_RECORDING);
+                return;
+            }
+            manager.toggle(this);
+            return;
+        }
         boolean wasRecording = manager.isRecording();
         manager.toggle(this);
         if (wasRecording) postExportDialog();
+    }
+
+    /**
+     * Recorder mic-permission round trip. Without this the grant was collected
+     * by the system and then dropped on the floor, so recording never actually
+     * began.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode != REQUEST_MIC_FOR_RECORDING) return;
+        boolean granted = grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+        if (!granted) {
+            Toast.makeText(this, R.string.orbitx_record_mic_denied, Toast.LENGTH_LONG).show();
+        }
+        // Start either way: RecorderManager builds the audio track only when it
+        // can actually open the microphone, so a denial yields a silent clip
+        // instead of a dead button.
+        RecorderManager.get().toggle(this);
     }
 
     private void postExportDialog() {
@@ -908,6 +949,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // OrbitX replay/recording mod: the MediaProjection consent round-trip.
+        // Without this the consent grant was dropped on the floor and capture
+        // could never actually start.
+        if (RecorderManager.get().handleActivityResult(requestCode, resultCode, data)) return;
+
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             // Reload PREF_DEFAULTCTRL_PATH
             // If the storage root got unmounted/unreadable we won't be able to load the file anyway,
@@ -1018,8 +1064,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         // Use the exact account carried across the launcher → game process
         // boundary. Re-reading async SharedPreferences here could select a stale
         // local account and wrongly enable the offline skin injector.
+        // OrbitX Client / CS Launcher Plus bundled-core verification was removed
+        // along with the CS client product. Game files are now verified by the
+        // normal asset-integrity pass (verifyManifest) instead.
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, mLaunchAccountName);
-        try { if(net.kdt.pojavlaunch.csclient.CsClientManagedFiles.ensureForProfile(this,minecraftProfile)) Log.i("CSClient","Bundled managed core verified before launch"); } catch(Exception updateError){ throw new RuntimeException("Unable to verify bundled OrbitX Client",updateError); }
         JREUtils.redirectAndPrintJRELog();
         LauncherProfiles.load();
         int requiredJavaVersion = 8;

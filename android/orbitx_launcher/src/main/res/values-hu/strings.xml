@@ -380,7 +380,6 @@ mcl_indítás_letöltés_folyamatban"</string>
     <string name="controller_remapper_expand_entry">Kibontás a kulcskódok módosításához</string>
     <string name="preference_remap_controller_title">Kontroller billentyűk összerendelésének megváltoztatása</string>
     <string name="preference_remap_controller_description">Lehetővé teszi, hogy módosítsd a billentyűket a kontroller gombjaira</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">A GPU-d képtelen 7 vagy nagyobb megjelenítési távolságot renderelni Sodium vagy ahoz hasonló modok nélkül. A mehjelenítési távolság automatikusan csókkentve lesz, hogy ha megnyomod az \"OK\" gombot.</string>
     <string name="mcl_button_open_directory">Játékkönyvtár megnyitása</string>
     <string name="local_login_bad_username_title">Nem megfelelő felhasználónév</string>

@@ -87,7 +87,7 @@ public class AboutFragment extends Fragment {
                             .start();
                 }
                 // The OrbitX mark pops in with a jelly overshoot.
-                View logo = view.findViewById(R.id.about_cs_logo);
+                View logo = view.findViewById(R.id.about_orbitx_logo);
                 if (logo != null) UiMotion.popIn(logo);
 
                 // Staggered cascade: hero → features → legal

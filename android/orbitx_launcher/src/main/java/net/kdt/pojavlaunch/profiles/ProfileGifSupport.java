@@ -232,7 +232,7 @@ public final class ProfileGifSupport {
                 conn.setConnectTimeout(10000);
                 conn.setReadTimeout(15000);
                 conn.setInstanceFollowRedirects(true);
-                conn.setRequestProperty("User-Agent", "CSLauncherPlus/1.0");
+                conn.setRequestProperty("User-Agent", "OrX/1.0");
                 if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) return;
                 try (InputStream in = conn.getInputStream();
                      OutputStream out = new FileOutputStream(cacheFile)) {

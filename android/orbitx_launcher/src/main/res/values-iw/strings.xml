@@ -359,7 +359,6 @@
     <string name="controller_remapper_expand_entry">הרחב כדי לשנות keycodes</string>
     <string name="preference_remap_controller_title">שינוי כריכות מקשים של בקר</string>
     <string name="preference_remap_controller_description">מאפשר לך לשנות את מקשי המקלדת הקשורים לכל כפתור בקר</string>
-    <string name="mcl_button_discord">דיסקורד</string>
     <string name="ltw_render_distance_warning_msg">המעבד הגרפי שלך לא מסוגל לבצע רינדור של מעל מרחק רינדור 7 ללא Sodium או מודדים דומים אחרים. מרחק הרינדור יקטן אוטומטית כשתלחץ על \"אישור\".</string>
     <string name="mcl_button_open_directory">פתח תייקית משחק</string>
     <string name="local_login_bad_username_title">שם משתמש לא מתאים</string>

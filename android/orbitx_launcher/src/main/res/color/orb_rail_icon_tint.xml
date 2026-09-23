@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT — rail icon tint: the active destination turns ember, the rest stay
+     in the tertiary text tone so the rail never competes with the content. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:color="@color/ox_ember" />
+    <item android:state_pressed="true" android:color="@color/ox_ember_bright" />
+    <item android:color="@color/ox_text_tertiary" />
+</selector>

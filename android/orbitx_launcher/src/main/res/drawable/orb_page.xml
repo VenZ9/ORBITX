@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT — the page ground.
+
+  A flat obsidian fill with one very faint ember bloom bleeding down from the
+  top edge. The bloom is the only gradient permitted anywhere in the shell, and
+  it exists to tie the page to the red identity without painting a coloured
+  band on screen. Everything else in ORBIT is flat colour plus hairlines.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ox_obsidian" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="#1FFF3B30"
+                android:centerColor="#0AFF3B30"
+                android:endColor="#00FF3B30"
+                android:type="linear" />
+        </shape>
+    </item>
+</layer-list>

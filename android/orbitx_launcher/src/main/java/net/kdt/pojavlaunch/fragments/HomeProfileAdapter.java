@@ -318,7 +318,7 @@ public class HomeProfileAdapter extends RecyclerView.Adapter<HomeProfileAdapter.
 
         // 4) Absolute safety net: the official ORBITX logo
         if (drawable == null) {
-            drawable = ContextCompat.getDrawable(target.getContext(), R.drawable.ic_cs_logo_placeholder);
+            drawable = ContextCompat.getDrawable(target.getContext(), R.drawable.orbitx_mark);
         }
         target.setImageDrawable(drawable);
         target.setClipToOutline(true);

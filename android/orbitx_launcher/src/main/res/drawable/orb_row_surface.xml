@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT — in-game drawer row surface.
+
+  The row is a bare panel: no card, no radius, no gap. Separation comes from
+  the hairline the layout draws at the bottom of each row, and feedback is a
+  faint ember wash. Keeping the rows flat is what makes the drawer read as a
+  checklist of actions rather than a stack of unrelated cards.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ox_ember_soft">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ox_ember"/>
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+</ripple>
