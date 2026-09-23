@@ -11,10 +11,19 @@ on:
       - 'android/**'
   workflow_dispatch:
 
+concurrency:
+  group: orbitx-android-${{ github.ref }}
+  cancel-in-progress: true
+
+# Needed so the rolling debug release below can be created/updated with GITHUB_TOKEN.
+permissions:
+  contents: write
+
 jobs:
   build:
     name: assembleDebug
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -26,14 +35,43 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # The launcher compiles a native bridge (src/main/jni, ndkBuild) and links a
-      # prefab dependency, so the NDK is required - the build fails at
-      # externalNativeBuild without it.  The version is pinned to match the one the
-      # project declares in ZalithLauncher/build.gradle.kts.
-      - name: Set up Android SDK and NDK
+      - name: Set up Android command-line tools
         uses: android-actions/setup-android@v3
-        with:
-          packages: 'platforms;android-34 build-tools;34.0.0 platform-tools ndk;25.2.9519653 cmake;3.22.1'
+
+      # android/orbitx_launcher/build.gradle pins an exact NDK via `ndkVersion = ...`
+      # and AGP aborts outright when that version is not installed.  Read the pin out
+      # of the build script and install precisely that one, rather than hardcoding a
+      # version here: the previous revision of this workflow hardcoded NDK
+      # 25.2.9519653 while the module requires 27.3.13750724, so the build could never
+      # get past configuration.
+      - name: Install SDK packages and the NDK the project pins
+        run: |
+          set -euo pipefail
+          NDK_VERSION="$(grep -oE 'ndkVersion[[:space:]]*=[[:space:]]*"[^"]+"' android/orbitx_launcher/build.gradle \
+            | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+          if [ -z "$NDK_VERSION" ]; then
+            echo "::error::Could not read ndkVersion from android/orbitx_launcher/build.gradle"
+            exit 1
+          fi
+          echo "Project requires NDK $NDK_VERSION"
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          sdkmanager --install \
+            "platforms;android-34" \
+            "build-tools;34.0.0" \
+            "platform-tools" \
+            "cmake;3.22.1" \
+            "ndk;$NDK_VERSION"
+          echo "NDK_VERSION=$NDK_VERSION" >> "$GITHUB_ENV"
+
+      - name: Verify toolchain
+        run: |
+          set -euo pipefail
+          java -version
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "--- installed NDKs ---"
+          ls -1 "$ANDROID_HOME/ndk"
+          test -d "$ANDROID_HOME/ndk/$NDK_VERSION" \
+            || { echo "::error::NDK $NDK_VERSION was not installed"; exit 1; }
 
       - name: Cache Gradle
         uses: actions/cache@v4
@@ -47,30 +85,56 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
 
+      # Both `platforms;android-34` and the NDK are installed above; the module's own
+      # abiFilters limit the output to arm64-v8a + armeabi-v7a, so no -Darch switch is
+      # passed (the old workflow passed -Darch=arm64, which no build script reads).
       - name: Build debug APK
         working-directory: android
-        # arm64 only: one ABI keeps the APK (and the build) far smaller.  On a normal
-        # CI runner raise the memory settings in gradle.properties to speed this up.
-        run: ./gradlew assembleDebug --no-daemon -Darch=arm64 --stacktrace
+        run: ./gradlew --no-daemon --stacktrace assembleDebug
 
       - name: Verify APK
         working-directory: android
         run: |
-          APK=$(find . -name '*.apk' -path '*/outputs/apk/debug/*' -print -quit)
+          set -euo pipefail
+          APK="$(find orbitx_launcher/build/outputs/apk/debug -name '*.apk' -print -quit)"
+          test -n "$APK" || { echo "::error::no debug APK was produced"; exit 1; }
           echo "APK: $APK"
           ls -la "$APK"
           unzip -t "$APK" > /dev/null && echo "unzip -t: OK"
           echo "--- native libraries ---"
           unzip -l "$APK" | grep -c '\.so$' | sed 's/^/so files: /'
           unzip -l "$APK" | grep -q 'libpojavexec.so' && echo "libpojavexec.so: present"
+          unzip -l "$APK" | grep -q 'libmobileglues.so' && echo "libmobileglues.so: present"
+          unzip -l "$APK" | grep -q 'libltw.so' && echo "libltw.so: present"
           echo "--- manifest ---"
-          "$ANDROID_HOME"/build-tools/34.0.0/aapt dump badging "$APK" | grep -E '^package|^application-label:'
-          echo "sha256:"; sha256sum "$APK"
+          "$ANDROID_HOME"/build-tools/34.0.0/aapt dump badging "$APK" \
+            | grep -E '^package|^application-label:'
+          echo "sha256:"
+          sha256sum "$APK"
 
-      - name: Upload debug APK
+      - name: Upload debug APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: orbitx-launcher-debug
-          path: android/ZalithLauncher/build/outputs/apk/debug/*.apk
+          path: android/orbitx_launcher/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 30
+
+      # A run artifact needs an authenticated download; a release asset is a plain
+      # public URL that can be opened straight from a phone browser and installed.
+      - name: Publish APK to the rolling debug release
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          APK="$(find android/orbitx_launcher/build/outputs/apk/debug -name '*.apk' -print -quit)"
+          TAG="orbitx-debug-latest"
+          if ! gh release view "$TAG" > /dev/null 2>&1; then
+            gh release create "$TAG" \
+              --title "ORBITX debug build (rolling)" \
+              --notes "Rolling debug APK for device testing. Rebuilt and re-uploaded by the Android build workflow on every push to main." \
+              --prerelease
+          fi
+          gh release upload "$TAG" "$APK" --clobber
+          echo "Direct download: https://github.com/${{ github.repository }}/releases/download/$TAG/$(basename "$APK")"
