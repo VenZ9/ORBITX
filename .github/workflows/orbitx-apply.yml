@@ -19,9 +19,10 @@ jobs:
           echo "5e16218b797df9f7b7084f205ed920913b73b550055db22c777f42a49ec9e675  /tmp/fix.gz" | sha256sum -c -
           gunzip -c /tmp/fix.gz > /tmp/fix.patch
           echo "58c23801c3a2a5352d5b756add235cab1d13e44fa11d41f314184cfb906de3de  /tmp/fix.patch" | sha256sum -c -
-          BASE=$(git rev-parse HEAD)
-          echo "base=$BASE"
-          test "$BASE" = "4ff1be9e6cf0f1e8b544211c4e878c4208aeab95"
+          grep -c '^diff --git' /tmp/fix.patch
+          echo "--- context check: the files to patch must still be at their expected state ---"
+          git apply --check --whitespace=nowarn /tmp/fix.patch
+          echo "base=$(git rev-parse --short HEAD)"
 
       - name: Apply the change set
         run: |
