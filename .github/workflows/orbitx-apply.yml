@@ -15,42 +15,32 @@ jobs:
       - name: Fetch and verify the change set
         run: |
           set -euo pipefail
-          curl -sSfL -o /tmp/fix.gz "https://litter.catbox.moe/q84key.gz"
-          echo "12a661849b74e348c43d70ce4e2b4df359888894136926710bbe343ac5c78140  /tmp/fix.gz" | sha256sum -c -
+          curl -sSfL -o /tmp/fix.gz "https://litter.catbox.moe/17nyx0.gz"
+          echo "6e30b3a8381f3a26e8731c46244787f1a281cf9f23487414b85c33ea86d47256  /tmp/fix.gz" | sha256sum -c -
           gunzip -c /tmp/fix.gz > /tmp/fix.patch
-          echo "3462e4767cc232a6bc9eecfed1e0b3ca4ec5850be42bbd5ec3cd1ee012591411  /tmp/fix.patch" | sha256sum -c -
-          test "$(grep -c '^diff --git' /tmp/fix.patch)" -eq 21
-          echo "--- context check ---"
+          echo "3010ee74d98d52bf2cbd9aa89544ef0e42f8d3d1cfdb53f38ec022ee86061efa  /tmp/fix.patch" | sha256sum -c -
           git apply --check --whitespace=nowarn /tmp/fix.patch
-          echo "base=$(git rev-parse --short HEAD)"
 
-      - name: Apply the change set
+      - name: Apply, assert and push
         run: |
           set -euo pipefail
           git apply --index --whitespace=nowarn /tmp/fix.patch
-          git rm -q android/orbitx_launcher/libs/lwjgl3-natives-release.aar
-          echo "--- asserts ---"
-          grep -q "fetchLwjglNatives" android/orbitx_launcher/build.gradle
-          grep -q "applyDrawerPullVisibility" android/orbitx_launcher/src/main/java/net/kdt/pojavlaunch/MainActivity.java
-          grep -q "extractLwjglNativesNow" android/orbitx_launcher/src/main/java/net/kdt/pojavlaunch/Tools.java
-          grep -q "nsetupEnvData" android/orbitx_launcher/src/main/java/net/kdt/pojavlaunch/tasks/AsyncAssetManager.java
-          test "$(grep -c 'CSLauncher' android/orbitx_launcher/src/main/java/com/kdt/LoggerView.java || true)" -eq 0
-          grep -q "orb_bar_item" android/orbitx_launcher/src/main/res/layout/include_lh_dock.xml
-          echo "--- staged ---"
-          git status --porcelain
-
-      - name: Commit and push to main
-        run: |
-          set -euo pipefail
+          # The whole point of this patch: the id the activity binds must exist again.
+          grep -q 'android:id="@+id/lh_nav_settings"' android/orbitx_launcher/src/main/res/layout/include_lh_dock.xml
+          grep -q 'R.id.lh_nav_settings' android/orbitx_launcher/src/main/java/net/kdt/pojavlaunch/LauncherActivity.java
+          python3 -c "import xml.dom.minidom;xml.dom.minidom.parse('android/orbitx_launcher/src/main/res/layout/include_lh_dock.xml')"
           git config user.email "orbitx@teamily.ai"
           git config user.name "ORBITX Build Agent"
-          git commit -q \
-            -m "fix(launcher): ship working LWJGL natives, wire the in-game handle option, fix the recorder, rebuild the shell" \
-            -m "Crash root cause: the game died with UnsatisfiedLinkError at the renderer bind because the packaged liblwjgl.so was built from a different LWJGL revision than the lwjgl.jar on the classpath. The shipped AAR's liblwjgl.so does not export nsetupEnvData, the JNI entry point lwjgl.jar 3.3.3's ThreadLocalUtil binds. Compounding it, the extraction routine read from an asset path that does not exist in the APK, so AssetManager.list threw, the component job aborted, and because the caller only logs, the launcher still started with an empty natives directory. The version file was then written anyway, so later launches skipped re-extraction and the directory stayed empty." \
-            -m "Fix: drop the mismatched natives AAR; fetch the natives at build time from Maven Central using the version directories this module actually ships so the native revision cannot drift from the jar, verifying each liblwjgl.so for the symbol its own jar binds; read from the real asset path, clear stale directories, verify the full .so set and publish the version file only after verification; re-extract synchronously at launch when the directory is empty or incomplete." \
-            -m "Recorder: the MediaProjection was obtained before its foreground service was running, which Android 14+ rejects, so every capture failed behind a generic toast. Start the service first, then take the projection. Audio is now best-effort so a denied microphone permission degrades to a silent clip instead of no clip." \
-            -m "In-game handle: the hide preference existed but three setVisibility(VISIBLE) calls re-showed the handle, so the option appeared to do nothing. All call sites now route through one accessor that respects the preference and the boot overlay. Log branding: the game log rendered a vector two-letter product mark, which is the CS that leaked into the log screen; the slot now shows the launcher's own ring mark." \
-            -m "Shell: replace the copied left icon rail with ORBITX's own bottom command bar, selection carried by shape and an outer-edge spine, action glyphs in a right-hand stack, account and settings in the bar's trailing edge. View IDs preserved so existing activity bindings are untouched."
+          git commit -q -F - <<'MSG'
+fix(launcher): restore the settings destination in the bottom command bar
+
+LauncherActivity resolves R.id.lh_nav_settings twice — once to wire the click
+handler and once in setDockSelected. Rebuilding the dock as a bottom command
+bar dropped that view, so the resource id no longer existed and compilation
+failed. The Settings page is reachable only through this id, so removing it
+broke navigation as well as the build.
+
+Add it back as the bar's fifth destination, laid out like the other four.
+MSG
           git push origin HEAD:main
-          echo "--- pushed ---"
           git log --oneline -2
