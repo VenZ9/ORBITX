@@ -1,64 +1,89 @@
 # Third-party attribution — OrbitX Launcher
 
-OrbitX Launcher is a **modified redistribution of Zalith Launcher 1.4.1.4**, which in
-turn is a derivative of PojavLauncher. This file records the upstream projects, their
-licences, and exactly what was changed here. It is required by the GNU GPL and it is
-deliberately explicit: nothing upstream has been stripped or hidden.
+OrbitX Launcher is a **modified distribution built on the CS Launcher Plus +
+Amethyst Launcher lineage**, which in turn descend from PojavLauncher. This file
+records the upstream projects, their licences, and exactly what was changed here.
+It is required by the GNU GPL and it is deliberately explicit: nothing upstream
+has been stripped or hidden.
 
 ## Upstream projects
 
-### Zalith Launcher — the direct base
-- Source: https://github.com/ZalithLauncher/ZalithLauncher
-- Version imported: **1.4.1.4** (`launcher_version_code=141400`)
+### CS Launcher Plus — the direct base
+- Source: https://github.com/craftstudioteam/CS-LAUNCHER-PLUS
 - Licence: **GNU GPL-3.0** — full text retained in [`LICENSE`](LICENSE)
-- Copyright: the Zalith Launcher contributors (principally MovTery and contributors).
+- Copyright: the CS Launcher Plus / Craft Studio authors and contributors.
 
-### PojavLauncher — the runtime engine beneath Zalith
+### Amethyst Launcher — the second base
+- Source: https://github.com/AngelAuraMC/Amethyst-Android
+- Licence: **GNU LGPL-3.0**
+- Copyright: the AngelAuraMC authors and contributors.
+- Used as the second code base, per the project's stated build direction, for the
+  launcher shell and runtime-provisioning behaviour this tree carries forward.
+
+### PojavLauncher — the runtime engine beneath both
 - Source: https://github.com/PojavLauncherTeam/PojavLauncher
 - Licence: **GNU LGPL-3.0**
 - Copyright: PojavLauncherTeam and contributors.
 
-Zalith Launcher carries the whole PojavLauncher Java-side runtime and its control
-system forward; OrbitX therefore contains LGPL-3.0-derived code by inheritance. The
-`net.kdt.pojavlaunch` namespaces and the `pojavexec` native module originate there.
+Both bases carry the PojavLauncher Java-side runtime forward; OrbitX therefore
+contains LGPL-3.0-derived code by inheritance. The `net.kdt.pojavlaunch`
+namespaces and the `pojavexec` native module originate there.
 
-## What OrbitX changed relative to Zalith Launcher 1.4.1.4
+### Zalith Launcher — dropped, not a base
+**Zalith Launcher is no longer part of this project.** The `ZalithLauncher`
+module, its Gradle scripts, its libraries and its entire resource tree were
+removed from the repository and replaced by the single rebranded module
+`android/orbitx_launcher`. No Zalith code ships in the current build.
 
-Modification date: **2026-09-20**.
+## What OrbitX changed relative to the CS Launcher Plus + Amethyst base
 
-1. **Branding.** App label set to "OrbitX Launcher" (`launcher_name` /
-   `launcher_app_name` in `ZalithLauncher/gradle.properties`), and the shipped
-   application id changed to `com.orbitx.launcher` (debug variant
-   `com.orbitx.launcher.debug`).
-2. **Launcher icon.** The upstream icon art was replaced with the supplied OrbitX
-   ring artwork: adaptive-icon background/foreground plus the mdpi→xxxhdpi legacy
-   and round icons. Generation is reproducible from
-   `tools/generate_orbitx_icons.py`.
-3. **Colour palette.** `ZalithLauncher/src/main/res/values/colors.xml` and
-   `values-night/colors_night.xml` were recoloured to a red palette (primary
-   `#D32F2F`, deep surfaces `#7F0000`, highlight `#E53935`/`#E57373`, status bar
-   `#B71C1C`). The launcher UI is entirely XML-resource driven, so this one file
-   pair repaints the launcher, its dialogs and the in-game control overlay.
-4. **Build memory settings.** `gradle.properties` was re-tuned so the build fits a
-   2048 MB container (upstream ships `-Xmx4096M`).
+Modification date: **2026-09-23**.
+
+1. **Module + identity.** One module, `:orbitx_launcher`. Package
+   `net.kdt.pojavlaunch`, application id `com.orbitx.launcher` (debug variant
+   `com.orbitx.launcher.debug`), label `ORBITX`, compile/targetSdk 34,
+   minSdk 21, ABIs `arm64-v8a` and `armeabi-v7a`.
+2. **Launcher icon and brand mark.** The upstream icon art was replaced with the
+   supplied OrbitX ring artwork: adaptive-icon background/foreground plus the
+   mdpi→xxxhdpi legacy and round icons, and an alpha-keyed ring mark for dark
+   surfaces. Generation is reproducible from `tools/make_brand_assets.py`.
+3. **Colour system.** The violet/silver accent family was replaced throughout
+   with a single OrbitX ember accent (`#FF3B30`, with `#FF6B6B` bright and
+   `#C62828` deep steps) on warmed near-black surfaces. Red is the default theme.
+4. **UI recomposition.** The navigation rail, home stage, instance library and
+   About screen were rebuilt as an OrbitX design language rather than a copy of
+   the CS Launcher Plus layout.
+5. **In-game replay recorder.** A new `net.kdt.pojavlaunch.recorder` package
+   captures via `MediaProjection` + `MediaRecorder` with **no on-screen overlay
+   while recording**, exporting `.MP4` natively plus `.WebM` and `.GIF`.
+6. **Starting-overlay opacity.** The boot-log / settings panel shown while the
+   game starts can be dimmed or hidden — Launcher settings → **Starting
+   overlay**: `100% · 85% · 70% · 50% · 30% · Hide`.
+7. **Bundled renderers.** MobileGlues and LTW ship inside the APK in `jniLibs`
+   for both ABIs, so no separate renderer download is required.
+8. **First-run onboarding removed.** No welcome popup, no guided tour, no
+   overlay — the launcher opens straight into Home.
+9. **Community links removed.** All Discord, GitHub and YouTube destinations
+   were removed from the app UI.
+10. **Remote admin panel removed.** The remote config / announcement panel was
+    replaced by inert local stubs; the launcher makes no remote config calls.
 
 ### Java package namespaces were deliberately NOT renamed
 
 The shipped **application id** is `com.orbitx.launcher`, but the internal Java
-packages remain `com.movtery.zalithlauncher` and `net.kdt.pojavlaunch`.
+packages remain `net.kdt.pojavlaunch`.
 
 This is intentional and is the honest engineering trade-off, not an oversight:
 
-- 549 source files reference those namespaces directly;
+- a large number of source files reference that namespace directly;
 - the native code resolves classes by **hardcoded path strings** —
   `net/kdt/pojavlaunch/MainActivity`, `net/kdt/pojavlaunch/CriticalNativeTest`,
-  `net/kdt/pojavlaunch/Logger$eventLogListener`,
-  `com/movtery/zalithlauncher/ui/activity/ErrorActivity` — and registers 17 JNI
-  symbols whose names derive from the Java package path;
-- renaming the packages would therefore break the JNI bindings and the launcher's
-  ability to start a game session.
+  `net/kdt/pojavlaunch/Logger$eventLogListener` — and registers JNI symbols
+  whose names derive from the Java package path;
+- renaming the packages would therefore break the JNI bindings and the
+  launcher's ability to start a game session.
 
-Holding the package names stable is what keeps the runtime working. This does not
+Holding the package name stable is what keeps the runtime working. This does not
 reduce any user-visible OrbitX branding: the app name, icon, colours and shipped
 application id are all OrbitX.
 
@@ -69,6 +94,8 @@ their own licences. The authoritative terms are in each project's own distributi
 
 | Component | Role | Licence |
 |---|---|---|
+| MobileGlues | bundled GL renderer | **LGPL-2.1** |
+| LTW (Zink/OSMesa path) | bundled GL renderer | see upstream |
 | OpenJDK runtimes (`jre-8/17/21/25`) | Android JRE used to run Minecraft | GPL-2.0 **with Classpath Exception** |
 | LWJGL 3 (+ GLFW) | OpenGL/GLFW Java bindings | BSD-3-Clause |
 | gl4es | OpenGL 1.x → GLES translation | MIT |
@@ -98,198 +125,45 @@ associated with Mojang Studios or Microsoft.
 
 ## Licence of the resulting project
 
-Because it is built on **GPL-3.0** Zalith Launcher (and, through it, LGPL-3.0
-PojavLauncher), the combined work distributed in `android/` is licensed
-**GNU GPL-3.0**. The full text is in [`LICENSE`](LICENSE). Anyone redistributing a
-build from this directory must keep that licence, these notices, and must publish
-the corresponding source.
+Because it is built on **GPL-3.0** CS Launcher Plus (and, through it,
+**LGPL-3.0** Amethyst Launcher and PojavLauncher), the combined work distributed
+in `android/` is licensed **GNU GPL-3.0**. The full text is in [`LICENSE`](LICENSE).
+Anyone redistributing a build from this directory must keep that licence, these
+notices, and must publish the corresponding source.
 
 The web application that lives elsewhere in this repository is a separate work and
 is not covered by this file.
 
-## OrbitX UI modifications (2026-09-20)
+## Revision history
 
-This is a UI-only round: no runtime, launch, JRE, native-bridge, GL-translation or
-control-overlay behaviour was changed. Upstream's copyright notices and the GPL-3.0
-text remain intact and unmodified.
+Rounds 1–4 (2026-09-20 / 2026-09-21) were carried out **against the
+`android/ZalithLauncher/` tree, which has since been removed entirely**. Their
+records — the notice-popup removal, the early shell and home reorganisations, the
+flat restyle and the Quick-actions sizing pass — are retained below only as a
+historical log of a tree that no longer exists, and they must not be read as
+describing the current `android/orbitx_launcher/` module.
 
-**1. Upstream remote-notice popup removed.**
-`net/kdt/pojavlaunch/LauncherActivity` called
-`com.movtery.zalithlauncher.feature.notice.CheckNewNotice`, which fetched
-`launcher_notice.json` from the `ZalithLauncher/Zalith-Info` GitHub repository and
-rendered it in the `notice_layout` view. Its current content is a notice about the
-Zalith Launcher Discord server being discontinued, and it is configured to show on
-first launch. Removed: the `checkNotice()` and `setNotice()` methods, the
-`checkNotice`/`noticeAnimPlayer` fields, the `notice_layout` subtree and its
-`DraggableViewWrapper` drag binding, the `notice_got_button` click handler, and the
-`noticeCheck` / `noticeNumbering` / `noticeDefault` preference keys in
-`AllSettings`. The launcher now opens directly on the home screen. The upstream
-automatic update check was also unsubscribed from the launch path for the same
-reason (a stale downloaded package is still reported from Settings).
+**Round 5 — base swap to CS Launcher Plus + Amethyst, and the OrbitX identity
+(2026-09-23).** This is the round that produced the current tree: Zalith dropped,
+`android/orbitx_launcher/` created, the ember palette and design system applied
+across all surfaces, the navigation rail and screens recomposed, the replay
+recorder added, the starting-overlay opacity control added, MobileGlues and LTW
+bundled, the Microsoft / ely.by / offline login paths wired, the community links
+and remote admin panel removed, and the first-run onboarding system deleted
+(the `net.kdt.pojavlaunch.tutorial` package, `PlusWelcomeDialog`,
+`CsSoundPlayer` and the Home demo-card plumbing).
 
-**2. Launcher shell and home screen reorganised.**
-`res/layout/activity_launcher.xml`: the header was restructured from a bare title
-plus two loose icons into a brand block (mark + wordmark + product line) and a
-translucent action pill holding the download and settings buttons.
-`res/layout/fragment_launcher.xml`: upstream's composition (one full-height
-vertical action list on the left, account/version/Play rail on the right) was
-replaced with a different hierarchy - a titled "Quick actions" card containing a 2x2
-tile grid with share-logs spanning beneath it, and an "Instance" block ordering
-instance selector, profile gear, account and the primary Play action. All view ids
-referenced by `MainMenuFragment` are preserved.
+### Historical: rounds 1–4 (Zalith-based tree, since removed)
 
-**3. Secondary screens reorganised.**
-Settings and Downloads: the category tab rail moved from the left edge to the right
-edge (indicators and shadow flipped to match). About: the info pager and the
-operate/action panel swapped sides and the split guideline moved from 0.69 to 0.31.
-Version manager: the section headers moved from a centered title to a left-aligned
-overline style, and the shortcuts-vs-management column widths were rebalanced
-(0.85 / 1.15). Download/settings rails and the about panel now sit on a rounded
-surface instead of a flat overlay colour.
-
-**4. OrbitX visual identity.**
-New `res/values/orbitx_ui.xml` (spacing scale, corner radii, brand strings),
-`res/drawable/background_header_pill.xml` and
-`res/drawable/background_rail.xml`. New `background_header_pill` colour in
-`values/colors.xml` and `values-night/colors_night.xml`. Card/row radii raised to
-`orbitx_radius_card`. The base theme now sets `colorPrimary` / `colorPrimaryDark` /
-`colorAccent` so dialogs, buttons and system chrome inherit the red palette rather
-than the framework default accent.
-
-The files above are the complete set of this round's changes; nothing outside
-`android/ZalithLauncher/src/main/res/`, `AllSettings.kt` and `LauncherActivity.java`
-was touched.
-
----
-
-## OrbitX round 3 - flat restyle (DroidBridge / HyperLauncher language) and low-end optimisation
-
-Date: 2026-09-21. Base: unchanged from the entry above.
-
-### Reference research (what was actually looked at)
-
-* **DroidBridge Launcher** (`nanowx26/DroidBridgeLauncher`, `ca.dnamobile.droidbridgelauncher`).
-  Its public repository was cloned and inspected: it contains **no UI layouts at all** -
-  `app/src/main/res/` holds only `drawable/`, `mipmap-*` and three `values*` files, and the
-  only UI source is `ui/view/RoundedClipFrameLayout.java` plus one shape-appearance overlay
-  declaring an **18dp rounded corner**. The method/`instance`/`settings`/`controls` packages are
-  framework-side, not screens. The published store listings' screenshots were analysed for the
-  visual language instead.
-* **HyperLauncher** (`hollowlauncher/HyperLauncher`, a MojoLauncher fork ultimately based on
-  PojavLauncher). Its UI is **Jetpack Compose** (`activity_pojav_launcher.xml` is a bare
-  `ComposeView`); its Material 3 theme (`ui/theme/Theme.kt`), colour roles
-  (`ui/theme/ColorTheme.kt`) and screen structure were read directly.
-
-### The visual language taken from the references
-
-Both are flat and dark-leaning: depth comes from a **thin 1px outline and a surface value step,
-never from drop shadows**; large corner radii (~18-24dp) on cards and stadium/pill shapes on
-controls; generous internal padding (12-16dp); no dividers (spacing and value steps separate
-regions); a single solid filled primary action; and a compact top bar with a couple of flat
-outline icon actions. A single-column list of instances is the main screen, with the primary
-action as one dominant element rather than a side rail.
-
-### 1. Home screen recomposed (not merely recoloured)
-
-`res/layout/fragment_launcher.xml` was rewritten. The previous OrbitX composition still kept
-upstream's **two-column split** (a full-height action column against a right Play rail) and only
-re-ordered its contents. That split is now gone: the screen is one vertical column with three
-bands - the current instance as a card, the quick actions as a tile grid inside a scrolling
-middle band, and the Play action as the single dominant filled block at the bottom.
-`res/layout/activity_launcher.xml` likewise dropped the translucent action pill and the drop
-shadow strip, replacing them with a compact flat bar (brand block start, two flat outline icon
-actions end) separated from the content by a surface value step. All view ids referenced by
-`MainMenuFragment` and `LauncherActivity` are preserved.
-
-### 2. Secondary screens restyled
-
-Settings, Downloads and About: the side rails moved onto a rounded outlined card surface with a
-margin, their drop-shadow strips were removed, and the pager's negative end margin was dropped;
-the About panel is now a card on the page background. `res/layout/item_version.xml` (the
-instance/version list row) moved from the legacy `background_item` to the flat outlined row with
-a larger icon and a bolder title.
-
-### 3. New flat design tokens
-
-New `res/values/orbitx_colors.xml` and `res/values-night/orbitx_colors.xml` (surface /
-surface_raised / surface_sunken, `orbitx_outline`, the solid accent and its on-colour, text
-roles). New drawables: `orbitx_card`, `orbitx_card_raised`, `orbitx_row`,
-`orbitx_row_pressed`, `orbitx_tile` (+ normal/pressed/disabled), `orbitx_action_button`
-(+ normal/pressed/disabled). `res/values/orbitx_ui.xml` gained an extended spacing scale, the
-`orbitx_radius_row` / `_tile` radii, an `orbitx_stroke` hairline token, an `orbitx_row_height`
-touch-target token and an `orbitx_action_height` token.
-
-Contrast note: the solid accent is **#D32F2F**, not the #E53935 highlight, because white on
-#D32F2F measures 4.98:1 (WCAG AA) while white on #E53935 measures only 4.22:1 and would fail AA
-for the Play button label. #E53935 remains the accent for graphics drawn on light surfaces.
-
-### 4. `AnimButton` now honours an XML background
-
-`ui/view/AnimButton.kt` unconditionally replaced its background with a ripple wrapping
-`button_background`, so a background declared in XML was silently discarded and the primary
-action could not be restyled without editing that class. It now preserves an **explicitly
-declared** `android:background` (detected via `obtainStyledAttributes(..., {android.R.attr.background})`
-/ `hasValue`) as the ripple content, and keeps the old `button_background` for every button that
-does not declare one - so all pre-existing usages render exactly as before.
-
-### 5. Low-end device optimisation
-
-* **Per-ABI JRE asset trim fixed.** The `merge<Variant>Assets` task trimmed architecture-specific
-  JRE tarballs using the hardcoded list `listOf("jre-8", "jre-17", "jre-21")`, which **omitted
-  `jre-25`** - so an arm64 build still shipped jre-25's unusable `bin-arm.tar.xz` and
-  `bin-x86_64.tar.xz`. The list is now discovered from the assets directory. `universal.tar.xz`
-  (architecture independent) and the `version` marker (read by `UnpackJreTask.isNeedUnpack`) are
-  always kept, and only the target ABI's `bin-<arch>.tar.xz` is retained; with `arch=all` nothing
-  is removed.
-* **Resource shrinking for release.** Attempted via `release { isShrinkResources = true }`, but AGP
-  rejects that combination ("Removing unused resources requires unused code shrinking to be turned
-  on") and `isMinifyEnabled` must stay off for the release variant because java.awt is reached
-  reflectively.  Resource shrinking therefore remains on the `proguard` variant (which already
-  enables minify + shrinkResources); the release variant is left unchanged.
-* The GL translation layers were **not** trimmed. All 51 are user-selectable renderer backends
-  (gl4es, OSMesa, VirGL, ANGLE, Zink/LTW) exposed through the renderer picker and the renderer
-  plugin mechanism. Removing any of them would change or break rendering on a device that selects
-  it, so with the launch path being the thing this project must not break, they were all kept.
-* The native libraries were **already stripped** upstream (verified with `readelf`: no `.debug_*`
-  or `.symtab` sections), so no symbol-stripping saving was available.
-
-No runtime, JRE-provisioning, native-bridge, GL-layer, launch or control-overlay behaviour was
-changed by this round.
-
-## OrbitX round 4 - Quick actions made thumb-friendly
-
-Date: 2026-09-21. Base: unchanged from the entries above.
-
-Reported on device: the Quick actions area on the home screen was too small and hard to scroll
-with large fingers. This is a **layout/token-only** change; no runtime, launch, JRE, native-bridge,
-GL-layer or control-overlay code was touched.
-
-### Dimensions changed (`res/values/orbitx_ui.xml`, `res/layout/fragment_launcher.xml`)
-
-| Element | Before | After |
-| --- | --- | --- |
-| Half-width tile height | 56dp (`orbitx_row_height`) | **76dp** (`orbitx_tile_height`) |
-| Full-width row height | 56dp (`orbitx_row_height`) | **64dp** (`orbitx_tile_height_wide`) |
-| Tile horizontal padding | 12dp (`orbitx_space_md`) | **16dp** (`orbitx_tile_padding_h`) |
-| Icon size | 22dp (literal) | **30dp** (`orbitx_tile_icon`) |
-| Icon-to-label gap | 8dp (`orbitx_space_sm`) | **12dp** (`orbitx_tile_icon_gap`) |
-| Label size | 11sp (literal) | **13sp** (`orbitx_tile_text`) |
-| Section label size | 10sp (literal) | **11sp** (`orbitx_section_label`) |
-| Gutter between tiles | 8dp (`orbitx_space_sm`) | **12dp** (`orbitx_tile_gutter`) |
-| Band top margin | 24dp (`orbitx_space_xl`) | **12dp** (`orbitx_space_md`) |
-| Play block top margin | 16dp (`orbitx_space_lg`) | **12dp** (`orbitx_space_md`) |
-
-Every tile is now a **64-76dp** touch target, comfortably past Android's 48dp minimum. The previous
-literal 22dp icon / 11sp label / 10sp section-label values were replaced with `orbitx_tile_*` and
-`orbitx_section_label` tokens so the scale stays consistent. Those `_22sdp` / `_11ssp` / `_10ssp`
-dimensions are library-provided and remain available to other screens; only the home screen stopped
-using them, so the shared dimension resources were left untouched.
-
-### Vertical space
-
-The Quick actions band keeps `android:layout_weight="1"`, so it absorbs **all** leftover height and
-gets a larger scroll surface as the tiles grow; the instance card and the Play block are both
-`wrap_content` and are therefore never squeezed. `orbitx_action_height` stays 56dp so Play remains
-the single dominant filled block, and the ScrollView still clips rather than pushing content off a
-short screen.
-
+- **Round 1 (2026-09-20)** — upstream remote-notice popup removed; launcher shell
+  and home screen reorganised; secondary screens (settings, downloads, about,
+  version manager) restructured; first OrbitX visual-identity tokens added.
+- **Round 2 (2026-09-20)** — OrbitX UI modifications, as recorded at the time:
+  UI-only, no runtime, launch, JRE, native-bridge, GL-translation or
+  control-overlay behaviour changed.
+- **Round 3 (2026-09-21)** — flat restyle drawing on the DroidBridge and
+  HyperLauncher visual languages; home recomposed into a single vertical column;
+  flat design tokens introduced; `AnimButton` made to honour an XML background;
+  per-ABI JRE asset trim fixed to discover the runtime list dynamically.
+- **Round 4 (2026-09-21)** — Quick actions made thumb-friendly: tiles raised to
+  64–76dp touch targets, icon and label sizes tokenised, band spacing tightened.
