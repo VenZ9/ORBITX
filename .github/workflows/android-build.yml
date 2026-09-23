@@ -75,6 +75,73 @@ jobs:
           unzip -l $APK | grep -q libmobileglues.so
           unzip -l $APK | grep -q libltw.so
           $ANDROID_HOME/build-tools/34.0.0/aapt dump badging $APK | grep -E '^package|^application-label:'
+
+          # ── LWJGL natives guard ────────────────────────────────────────────
+          # This is the check that was missing when the game crashed on device
+          # with UnsatisfiedLinkError at the renderer bind.
+          #
+          # The launcher does not load LWJGL from lib/; it loads it from the .so
+          # files it extracts out of assets/components/lwjgl-<ver>-natives/<abi>/
+          # and points LD_LIBRARY_PATH at. Two independent failures can reach the
+          # user while every other check here stays green:
+          #
+          #   1. The payload is not in the APK at all (wrong asset path, or the
+          #      natives were never fetched).
+          #   2. The payload is present but was built from a different LWJGL
+          #      revision than the lwjgl.jar on the classpath. The Java side then
+          #      binds a JNI entry point the .so does not export, and the game
+          #      dies on the first frame with UnsatisfiedLinkError.
+          #
+          # Checking that the files merely exist only catches (1). Catching (2)
+          # needs the actual symbol: liblwjgl.so must export the ThreadLocalUtil
+          # entry point that the bundled lwjgl.jar binds against. Asserting the
+          # symbol per ABI is what makes this guard able to fail on the real bug
+          # instead of passing beside it.
+          rm -rf /tmp/apkx && mkdir -p /tmp/apkx
+          unzip -q "$APK" 'assets/components/lwjgl-*-natives/*' -d /tmp/apkx
+
+          # The JNI entry point differs by LWJGL revision: 3.3.x binds
+          # nsetupEnvData, 3.4.x binds setupEnvData. Ask each version for the
+          # symbol its own bundled lwjgl.jar actually binds, or this guard would
+          # reject a correct build. The ABI lists differ too — 3.4.x adds
+          # liblwjgl_spng.so.
+          guard_version() {
+            ver=$1; sym=$2; shift 2
+            for abi in arm64-v8a armeabi-v7a; do
+              D=/tmp/apkx/assets/components/lwjgl-$ver-natives/$abi
+              if [ ! -d "$D" ]; then
+                echo "::error::LWJGL $ver natives for $abi are not packaged — the game would fail to start"
+                exit 1
+              fi
+              for so in "$@"; do
+                if [ ! -s "$D/$so" ]; then
+                  echo "::error::LWJGL $ver/$abi is missing $so"
+                  exit 1
+                fi
+              done
+              if ! grep -aq "$sym" "$D/liblwjgl.so"; then
+                echo "::error::LWJGL $ver/$abi liblwjgl.so does not export $sym — these natives were built from a different LWJGL revision than the bundled lwjgl.jar, so the game would crash with UnsatisfiedLinkError at the renderer bind."
+                exit 1
+              fi
+              echo "OK  lwjgl-$ver/$abi  ($(du -sh "$D" | cut -f1), $sym present)"
+            done
+          }
+
+          guard_version 3.3.3 nsetupEnvData \
+            liblwjgl.so liblwjgl_opengl.so liblwjgl_stb.so liblwjgl_tinyfd.so \
+            liblwjgl_vma.so liblwjgl_nanovg.so libfreetype.so libshaderc.so
+          guard_version 3.4.1 setupEnvData \
+            liblwjgl.so liblwjgl_opengl.so liblwjgl_stb.so liblwjgl_tinyfd.so \
+            liblwjgl_vma.so liblwjgl_nanovg.so liblwjgl_spng.so libfreetype.so libshaderc.so
+
+          # The mismatched natives AAR that caused this crash shipped liblwjgl.so
+          # into lib/. That file made every other check pass while the launcher
+          # loaded the broken pair. It must never come back.
+          if unzip -l "$APK" | grep -qE 'lib/[^/]+/liblwjgl\.so'; then
+            echo "::error::liblwjgl.so is packaged in lib/ again — a stale LWJGL natives AAR has been reintroduced. LWJGL must only ship as versioned assets."
+            exit 1
+          fi
+          echo "LWJGL natives guard passed"
           sha256sum $APK
 
       - name: Upload debug APK artifact
