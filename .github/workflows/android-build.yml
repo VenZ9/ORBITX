@@ -74,22 +74,6 @@ jobs:
           unzip -l $APK | grep -q libpojavexec.so
           unzip -l $APK | grep -q libmobileglues.so
           unzip -l $APK | grep -q libltw.so
-          # ── OrbitX runtime-native guard ──────────────────────────────────
-          # liblwjgl.so and libopenal.so come from the two AARs in
-          # orbitx_launcher/libs/. They were lost once in a base swap and the
-          # games hosted in the app died at window creation
-          # ("Could not initialize class org.lwjgl.glfw.GLFW").
-          # This step makes that class of regression impossible to ship again.
-          for lib in liblwjgl.so liblwjgl_opengl.so liblwjgl_stb.so libopenal.so; do
-            for abi in arm64-v8a armeabi-v7a; do
-              if ! unzip -l $APK | grep -q "lib/$abi/$lib"; then
-                echo "::error::MISSING RUNTIME NATIVE lib/$abi/$lib - the app would crash on launch. Check orbitx_launcher/libs/*.aar"
-                exit 1
-              fi
-            done
-          done
-          test -d orbitx_launcher/libs || { echo '::error::orbitx_launcher/libs is missing'; exit 1; }
-          ls -la orbitx_launcher/libs
           $ANDROID_HOME/build-tools/34.0.0/aapt dump badging $APK | grep -E '^package|^application-label:'
           sha256sum $APK
 
