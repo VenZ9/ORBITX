@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
-        android:textColor="#F4F6F9"
+        android:textColor="#F9F4F4"
         android:textSize="16sp" />
 
     <TextView
@@ -24,6 +24,6 @@
         android:layout_marginTop="2dp"
         android:letterSpacing="0.1"
         android:textAllCaps="true"
-        android:textColor="#6B7180"
+        android:textColor="#806B6C"
         android:textSize="8.5sp" />
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Aurora tab: teal underline when selected -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#26D4D8E0">
+    android:color="#26E0D4D5">
     <item>
         <selector>
             <item android:state_selected="true">
@@ -14,7 +14,7 @@
                     <item android:top="41dp">
                         <shape android:shape="rectangle">
                             <corners android:radius="2dp" />
-                            <solid android:color="#D4D8E0" />
+                            <solid android:color="#E0D4D5" />
                         </shape>
                     </item>
                 </layer-list>

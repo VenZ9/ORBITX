@@ -2,6 +2,6 @@
 <!-- OrbitX Client graphite row — selected: luminous silver ring. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
     <corners android:radius="18dp" />
-    <gradient android:angle="270" android:startColor="#26282E" android:endColor="#1D1F25" />
-    <stroke android:width="1.5dp" android:color="#C9CED8" />
+    <gradient android:angle="270" android:startColor="#2E2626" android:endColor="#251D1D" />
+    <stroke android:width="1.5dp" android:color="#D8C9CA" />
 </shape>

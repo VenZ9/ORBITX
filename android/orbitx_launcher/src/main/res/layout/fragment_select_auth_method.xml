@@ -59,7 +59,7 @@
                         android:fontFamily="monospace"
                         android:gravity="center"
                         android:text="ID"
-                        android:textColor="#F4F6F9"
+                        android:textColor="#F9F4F4"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:letterSpacing="0.18"
                         android:text="IDENTITY  ·  SIGN IN"
-                        android:textColor="#8A909C"
+                        android:textColor="#9C8A8B"
                         android:textSize="9.5sp" />
                 </LinearLayout>
 
@@ -81,7 +81,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Who is playing?"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="24sp" />
 
                 <TextView
@@ -90,14 +90,14 @@
                     android:layout_marginTop="6dp"
                     android:lineSpacingMultiplier="1.2"
                     android:text="Pick how this launcher should identify you. You can add more accounts later from the account switcher."
-                    android:textColor="#9AA0AC"
+                    android:textColor="#AC9A9B"
                     android:textSize="12sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
-                    android:background="#22252D" />
+                    android:background="#2D2223" />
 
                 <!-- capability ledger -->
                 <LinearLayout
@@ -162,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:text="Microsoft account"
-                            android:textColor="#141519"
+                            android:textColor="#191414"
                             android:textSize="15sp" />
 
                         <TextView
@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
                             android:text="Premium · full online play"
-                            android:textColor="#3F434D"
+                            android:textColor="#4D3F40"
                             android:textSize="11sp" />
                     </LinearLayout>
 
@@ -182,7 +182,7 @@
                         android:gravity="center"
                         android:paddingHorizontal="8dp"
                         android:text="1  →"
-                        android:textColor="#E6E9EF"
+                        android:textColor="#EFE6E7"
                         android:textSize="9.5sp" />
                 </LinearLayout>
 
@@ -228,7 +228,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:text="ely.by account"
-                            android:textColor="#F4F6F9"
+                            android:textColor="#F9F4F4"
                             android:textSize="15sp" />
 
                         <TextView
@@ -236,7 +236,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
                             android:text="Free · skins &amp; capes, ely-enabled servers"
-                            android:textColor="#8A909C"
+                            android:textColor="#9C8A8B"
                             android:textSize="11sp" />
                     </LinearLayout>
 
@@ -248,7 +248,7 @@
                         android:gravity="center"
                         android:paddingHorizontal="8dp"
                         android:text="2  →"
-                        android:textColor="#C9CED8"
+                        android:textColor="#D8C9CA"
                         android:textSize="9.5sp" />
                 </LinearLayout>
 
@@ -294,7 +294,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:text="Local profile"
-                            android:textColor="#F4F6F9"
+                            android:textColor="#F9F4F4"
                             android:textSize="15sp" />
 
                         <TextView
@@ -302,7 +302,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
                             android:text="Offline · pick any name, no password"
-                            android:textColor="#8A909C"
+                            android:textColor="#9C8A8B"
                             android:textSize="11sp" />
                     </LinearLayout>
 
@@ -314,7 +314,7 @@
                         android:gravity="center"
                         android:paddingHorizontal="8dp"
                         android:text="3  →"
-                        android:textColor="#C9CED8"
+                        android:textColor="#D8C9CA"
                         android:textSize="9.5sp" />
                 </LinearLayout>
 
@@ -326,7 +326,7 @@
                     android:fontFamily="monospace"
                     android:paddingHorizontal="4dp"
                     android:text="// credentials go straight to the provider — the launcher never sees your password"
-                    android:textColor="#4F5460"
+                    android:textColor="#604F50"
                     android:textSize="9.5sp" />
             </LinearLayout>
         </LinearLayout>

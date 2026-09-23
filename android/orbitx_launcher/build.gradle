@@ -6,7 +6,7 @@ static def getDate() { return new Date().format('yyyyMMdd') }
 
 def getVersionName = {
     // Show clean "ORBITX v3.1" style version names.
-    String semVer = "3.1.0"
+    String semVer = "3.2.0"
     
     // Try to get a git tag for the full version
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
@@ -84,7 +84,7 @@ android {
         applicationId "com.orbitx.launcher"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 10010000
+        versionCode 10020000
         versionName getVersionName()
         multiDexEnabled true //important
         resValue 'string', 'curseforge_api_key', getCFApiKey()

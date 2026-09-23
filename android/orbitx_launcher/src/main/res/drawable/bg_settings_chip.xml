@@ -4,11 +4,11 @@
     android:color="#2662D99B">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#151B23" />
+            <solid android:color="#231516" />
             <corners android:radius="999dp" />
             <stroke
                 android:width="1dp"
-                android:color="#333E4E" />
+                android:color="#4E3335" />
         </shape>
     </item>
 </ripple>

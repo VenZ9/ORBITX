@@ -13,7 +13,7 @@
         android:pathData="M12.5,2h9.5v9.5h-9.5z" />
     <!-- Bottom-Left: Blue -->
     <path
-        android:fillColor="#00A4EF"
+        android:fillColor="#DE111E"
         android:pathData="M2,12.5h9.5v9.5h-9.5z" />
     <!-- Bottom-Right: Yellow -->
     <path

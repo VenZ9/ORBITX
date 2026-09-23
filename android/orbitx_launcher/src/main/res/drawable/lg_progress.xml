@@ -4,14 +4,14 @@
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
             <corners android:radius="4dp" />
-            <solid android:color="#1E2028" />
+            <solid android:color="#281E1E" />
         </shape>
     </item>
     <item android:id="@android:id/progress">
         <clip>
             <shape android:shape="rectangle">
                 <corners android:radius="4dp" />
-                <gradient android:angle="0" android:startColor="#9AA0AC" android:endColor="#E6E9EF" />
+                <gradient android:angle="0" android:startColor="#AC9A9B" android:endColor="#EFE6E7" />
             </shape>
         </clip>
     </item>

@@ -65,7 +65,7 @@
             android:layout_marginEnd="4dp"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textColor="#F0F0F3"
+            android:textColor="#F3F0F0"
             android:textSize="12sp"
             android:textStyle="bold"
             android:includeFontPadding="false" />
@@ -77,7 +77,7 @@
             android:layout_height="0dp"
             android:visibility="gone"
             android:textSize="9sp"
-            android:textColor="#A6A1B5"
+            android:textColor="#B5A1A3"
             android:includeFontPadding="false" />
 
         <!-- Quick play — small ghost circle -->

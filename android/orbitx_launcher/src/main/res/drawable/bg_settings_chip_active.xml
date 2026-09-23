@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Aurora settings active chip — teal gradient pill, dark text. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#22080E11">
+    android:color="#22110809">
     <item>
         <shape android:shape="rectangle">
             <gradient

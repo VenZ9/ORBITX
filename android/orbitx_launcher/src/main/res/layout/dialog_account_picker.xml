@@ -41,7 +41,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.16"
                 android:text="ACCOUNTS"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="8sp"
                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -53,7 +53,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:includeFontPadding="false"
                 android:text="Who is playing?"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="15sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
@@ -70,7 +70,7 @@
             android:letterSpacing="0.06"
             android:paddingHorizontal="9dp"
             android:text="0"
-            android:textColor="#C9CED8"
+            android:textColor="#D8C9CA"
             android:textSize="8.5sp"
             tools:ignore="HardcodedText" />
 
@@ -84,7 +84,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="✕"
-            android:textColor="#C9CED8"
+            android:textColor="#D8C9CA"
             android:textSize="12sp"
             tools:ignore="HardcodedText" />
     </LinearLayout>
@@ -94,7 +94,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="10dp"
-        android:background="#262932" />
+        android:background="#322626" />
 
     <ScrollView
         android:id="@+id/acc_scroll"

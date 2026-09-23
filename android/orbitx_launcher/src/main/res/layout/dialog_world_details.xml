@@ -59,7 +59,7 @@
                     android:layout_marginTop="3dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="#6B7280"
+                    android:textColor="#806B6C"
                     android:textSize="10.5sp"
                     tools:text="New World-" />
             </LinearLayout>
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textColor="#9CA3AF"
+                    android:textColor="#AF9C9D"
                     android:textIsSelectable="true"
                     android:textSize="10sp"
                     tools:text="/storage/emulated/0/games/Amethyst/.minecraft/saves/New World-" />
@@ -129,7 +129,7 @@
             android:layout_marginBottom="6dp"
             android:text="@string/cs_world_actions"
             android:textAllCaps="true"
-            android:textColor="#9CA3AF"
+            android:textColor="#AF9C9D"
             android:textSize="11sp"
             android:textStyle="bold"
             android:letterSpacing="0.12" />

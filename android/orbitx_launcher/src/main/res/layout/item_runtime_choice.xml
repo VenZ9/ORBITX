@@ -34,7 +34,7 @@
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:text="21"
-            android:textColor="#F8FAFC"
+            android:textColor="#FCF8F8"
             android:textSize="20sp" />
     </FrameLayout>
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Java 21"
-                android:textColor="#F8FAFC"
+                android:textColor="#FCF8F8"
                 android:textSize="16.5sp" />
 
             <TextView
@@ -74,7 +74,7 @@
                 android:paddingEnd="8dp"
                 android:paddingBottom="2dp"
                 android:text="RECOMMENDED"
-                android:textColor="#CBD5E1"
+                android:textColor="#E1CBCC"
                 android:textSize="9.5sp"
                 android:visibility="gone" />
         </LinearLayout>
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:text="Minecraft 1.20.5 and newer"
-            android:textColor="#94A3B8"
+            android:textColor="#B89496"
             android:textSize="12.5sp" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="arm64-v8a · ~60 MB"
-            android:textColor="#64748B"
+            android:textColor="#8B6467"
             android:textSize="11sp" />
 
         <!-- Live Progress Track (Shown only during download / install) -->
@@ -128,7 +128,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="0%"
-                android:textColor="#F8FAFC"
+                android:textColor="#FCF8F8"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

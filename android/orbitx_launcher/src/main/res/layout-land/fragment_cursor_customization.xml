@@ -30,7 +30,7 @@
             android:contentDescription="@string/global_back"
             android:padding="10dp"
             android:src="@drawable/ic_chevron_left"
-            app:tint="#EAECEF" />
+            app:tint="#EFEAEA" />
 
         <FrameLayout
             android:layout_width="34dp"
@@ -43,7 +43,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_mouse_pointer"
-                app:tint="#E6E8EE" />
+                app:tint="#EEE6E6" />
         </FrameLayout>
 
         <LinearLayout
@@ -82,7 +82,7 @@
             android:contentDescription="Favorite"
             android:padding="9dp"
             android:src="@drawable/ic_heart_outline"
-            app:tint="#9AA0AE" />
+            app:tint="#AE9A9B" />
 
         <TextView
             android:id="@+id/btn_save_cursor"
@@ -94,7 +94,7 @@
             android:gravity="center"
             android:letterSpacing="0.06"
             android:text="SAVE &amp; APPLY"
-            android:textColor="#14151A"
+            android:textColor="#1A1414"
             android:textSize="10sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -135,7 +135,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
                     android:text="LIVE PREVIEW"
-                    android:textColor="#F0F1F5"
+                    android:textColor="#F5F0F0"
                     android:textSize="8.5sp"
                     android:textStyle="bold" />
 
@@ -147,7 +147,7 @@
                     android:layout_margin="14dp"
                     android:letterSpacing="0.06"
                     android:text="ACTIVE"
-                    android:textColor="#C6CAD3"
+                    android:textColor="#D3C6C7"
                     android:textSize="9sp"
                     android:textStyle="bold" />
 
@@ -190,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="CS"
-                            android:textColor="#B9BEC9"
+                            android:textColor="#C9B9BA"
                             android:textSize="10.5sp" />
 
                         <TextView
@@ -198,7 +198,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="6dp"
                             android:text="·"
-                            android:textColor="#5C6070"
+                            android:textColor="#705C5C"
                             android:textSize="10.5sp" />
 
                         <TextView
@@ -207,7 +207,7 @@
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.06"
                             android:text="SYSTEM"
-                            android:textColor="#9AA0AE"
+                            android:textColor="#AE9A9B"
                             android:textSize="10.5sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -230,7 +230,7 @@
                     android:gravity="center"
                     android:letterSpacing="0.08"
                     android:text="RESET"
-                    android:textColor="#B9BEC9"
+                    android:textColor="#C9B9BA"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
 
@@ -244,7 +244,7 @@
                     android:gravity="center"
                     android:letterSpacing="0.08"
                     android:text="EXPORT"
-                    android:textColor="#B9BEC9"
+                    android:textColor="#C9B9BA"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -300,14 +300,14 @@
                             android:layout_height="20dp"
                             android:contentDescription="@null"
                             android:src="@drawable/ic_mouse_pointer"
-                            app:tint="#C6CAD3" />
+                            app:tint="#D3C6C7" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:letterSpacing="0.08"
                             android:text="CLASSIC"
-                            android:textColor="#F0F1F5"
+                            android:textColor="#F5F0F0"
                             android:textSize="9sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -328,14 +328,14 @@
                             android:layout_height="20dp"
                             android:contentDescription="@null"
                             android:src="@drawable/ic_menu_custom_controls"
-                            app:tint="#C6CAD3" />
+                            app:tint="#D3C6C7" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:letterSpacing="0.08"
                             android:text="GAMEPAD"
-                            android:textColor="#F0F1F5"
+                            android:textColor="#F5F0F0"
                             android:textSize="9sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -356,14 +356,14 @@
                             android:layout_height="20dp"
                             android:contentDescription="@null"
                             android:src="@drawable/ic_edit_profile"
-                            app:tint="#C6CAD3" />
+                            app:tint="#D3C6C7" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:letterSpacing="0.08"
                             android:text="CUSTOM"
-                            android:textColor="#F0F1F5"
+                            android:textColor="#F5F0F0"
                             android:textSize="9sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -478,7 +478,7 @@
                         android:gravity="center"
                         android:letterSpacing="0.1"
                         android:text="＋  IMPORT PNG  ·  MAKE IT YOURS"
-                        android:textColor="#C6CAD3"
+                        android:textColor="#D3C6C7"
                         android:textSize="11sp"
                         android:textStyle="bold" />
                 </FrameLayout>

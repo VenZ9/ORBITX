@@ -73,7 +73,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_arrow_back_white"
-                    app:tint="#F4F6F9" />
+                    app:tint="#F9F4F4" />
             </FrameLayout>
 
             <LinearLayout
@@ -92,7 +92,7 @@
                     android:includeFontPadding="false"
                     android:maxLines="1"
                     android:text="Settings"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="22sp" />
 
                 <TextView
@@ -102,7 +102,7 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="#8A909C"
+                    android:textColor="#9C8A8B"
                     android:textSize="12.5sp" />
             </LinearLayout>
 
@@ -114,7 +114,7 @@
                 android:contentDescription="@null"
                 android:src="@drawable/ic_menu_settings"
                 android:visibility="gone"
-                app:tint="#C9CED8" />
+                app:tint="#D8C9CA" />
 
             <TextView
                 android:id="@+id/settings_live_badge"
@@ -143,7 +143,7 @@
                 android:layout_height="17dp"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_cs_search"
-                app:tint="#8A909C" />
+                app:tint="#9C8A8B" />
 
             <EditText
                 android:id="@+id/settings_search_input"
@@ -157,7 +157,7 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textColorHint="#5C6068"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -209,7 +209,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:text="Unsaved changes"
-                android:textColor="#E6E9EF"
+                android:textColor="#EFE6E7"
                 android:textSize="13.5sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -225,7 +225,7 @@
                 android:stateListAnimator="@null"
                 android:text="Save"
                 android:textAllCaps="false"
-                android:textColor="#141519"
+                android:textColor="#191414"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>

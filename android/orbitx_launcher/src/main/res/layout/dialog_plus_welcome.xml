@@ -80,7 +80,7 @@
                         android:letterSpacing="0.03"
                         android:maxLines="1"
                         android:text="@string/plus_welcome_title"
-                        android:textColor="#F4F6F9"
+                        android:textColor="#F9F4F4"
                         android:textSize="19sp"
                         android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                             android:includeFontPadding="false"
                             android:letterSpacing="0.12"
                             android:text="@string/plus_welcome_subtitle"
-                            android:textColor="#9AA0AC"
+                            android:textColor="#AC9A9B"
                             android:textSize="9.5sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -120,7 +120,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:lineSpacingExtra="4dp"
                 android:text="@string/plus_welcome_hero"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                 android:layout_marginTop="10dp"
                 android:lineSpacingExtra="4dp"
                 android:text="@string/plus_welcome_intro"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="14sp" />
 
             <View
@@ -179,7 +179,7 @@
                     android:layout_weight="1"
                     android:letterSpacing="0.16"
                     android:text="@string/plus_welcome_kicker"
-                    android:textColor="#6B7180"
+                    android:textColor="#806B6C"
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
@@ -193,7 +193,7 @@
                     android:focusable="true"
                     android:gravity="center"
                     android:text="@string/plus_welcome_cancel_symbol"
-                    android:textColor="#C7CBD4"
+                    android:textColor="#D4C7C8"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -266,7 +266,7 @@
                 android:gravity="center"
                 android:letterSpacing="0.05"
                 android:text="@string/plus_welcome_continue"
-                android:textColor="#0E0E11"
+                android:textColor="#110E0E"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

@@ -37,7 +37,7 @@
                             android:angle="0"
                             android:startColor="#33D0D0D0"
                             android:centerColor="#59FFFFFF"
-                            android:endColor="#80F2F2F5" />
+                            android:endColor="#80F5F2F2" />
                     </shape>
                 </item>
                 <!-- crisp fill core -->
@@ -48,8 +48,8 @@
                         <gradient
                             android:angle="0"
                             android:startColor="#A9ABB4"
-                            android:centerColor="#DBDCE1"
-                            android:endColor="#F5F5F7" />
+                            android:centerColor="#E1DBDB"
+                            android:endColor="#F7F5F5" />
                     </shape>
                 </item>
             </layer-list>

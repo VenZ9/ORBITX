@@ -25,7 +25,7 @@
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.04"
             android:maxLines="1"
-            android:textColor="#9AA0AC"
+            android:textColor="#AC9A9B"
             android:textSize="13sp" />
 
         <TextView

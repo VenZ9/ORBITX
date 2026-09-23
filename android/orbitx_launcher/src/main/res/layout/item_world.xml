@@ -64,7 +64,7 @@
                 android:layout_marginTop="3dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="#9CA3AF"
+                android:textColor="#AF9C9D"
                 android:textSize="9.5sp"
                 tools:text="1.20.1  •  2d ago" />
         </LinearLayout>
@@ -78,7 +78,7 @@
             android:contentDescription="@string/cs_world_actions"
             android:padding="7dp"
             android:src="@drawable/ic_cs_more"
-            app:tint="#9CA3AF" />
+            app:tint="#AF9C9D" />
     </LinearLayout>
 
     <!-- ── Bottom row: chips ── -->
@@ -95,7 +95,7 @@
             android:background="@drawable/bg_cs_chip"
             android:gravity="center"
             android:paddingHorizontal="8dp"
-            android:textColor="#9CA3AF"
+            android:textColor="#AF9C9D"
             android:textSize="9sp"
             android:textStyle="bold"
             tools:text="842 MB" />

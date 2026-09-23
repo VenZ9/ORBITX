@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Featured profile card — white CTA gradient with a dark ripple -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#330E0E11">
+    android:color="#33110E0E">
     <item>
         <shape android:shape="rectangle">
             <gradient
                 android:angle="270"
-                android:startColor="#F2F2F5"
-                android:centerColor="#DBDCE1"
+                android:startColor="#F5F2F2"
+                android:centerColor="#E1DBDB"
                 android:endColor="#C6C7CD" />
             <corners android:radius="16dp" />
         </shape>

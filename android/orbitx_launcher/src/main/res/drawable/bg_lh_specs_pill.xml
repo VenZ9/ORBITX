@@ -5,10 +5,10 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="90"
-                android:startColor="#E6161822"
-                android:endColor="#E6101219" />
+                android:startColor="#E6221616"
+                android:endColor="#E6191010" />
             <corners android:radius="14dp" />
-            <stroke android:width="1dp" android:color="#2A2E3D" />
+            <stroke android:width="1dp" android:color="#3D2A2A" />
         </shape>
     </item>
 </layer-list>

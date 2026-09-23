@@ -90,7 +90,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif-light"
                             android:text="Fabric Installer"
-                            android:textColor="#F2F2F5"
+                            android:textColor="#F5F2F2"
                             android:textSize="24sp" />
 
                         <TextView
@@ -173,7 +173,7 @@
                     android:layout_height="36dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_arrow_back"
-                    app:tint="#F0F0F3" />
+                    app:tint="#F3F0F0" />
 
                 <TextView
                     android:id="@+id/fabric_step2_title"
@@ -182,7 +182,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:text="Select Loader"
-                    android:textColor="#F0F0F3"
+                    android:textColor="#F3F0F0"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -194,7 +194,7 @@
                     android:paddingHorizontal="11dp"
                     android:paddingVertical="4dp"
                     android:text="--"
-                    android:textColor="#DADDE5"
+                    android:textColor="#E5DADB"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -259,7 +259,7 @@
                             android:text="INSTALL FABRIC"
                             android:textAllCaps="true"
                             android:background="@drawable/bg_install_button_primary"
-                            android:textColor="#0B0B0E"
+                            android:textColor="#0E0B0B"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:letterSpacing="0.08"
@@ -270,7 +270,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_gravity="center"
-                            android:indeterminateTint="#0B0B0E"
+                            android:indeterminateTint="#0E0B0B"
                             android:visibility="gone" />
                     </FrameLayout>
 
@@ -300,7 +300,7 @@
                             android:minWidth="140dp"
                             android:text="@string/global_retry"
                             android:background="@drawable/bg_fabric_retry_button"
-                            android:textColor="#F0F0F3"
+                            android:textColor="#F3F0F0"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:stateListAnimator="@null" />
@@ -315,7 +315,7 @@
         android:id="@+id/fabric_install_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F2141419"
+        android:background="#F2191414"
         android:visibility="gone"
         android:clickable="true"
         android:focusable="true"
@@ -358,7 +358,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Installing Fabric..."
-                android:textColor="#F0F0F3"
+                android:textColor="#F3F0F0"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -418,14 +418,14 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_check"
-                    app:tint="#0B0B0E" />
+                    app:tint="#0E0B0B" />
             </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Installation Complete!"
-                android:textColor="#F0F0F3"
+                android:textColor="#F3F0F0"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -446,7 +446,7 @@
                 android:layout_height="56dp"
                 android:text="DONE"
                 android:background="@drawable/bg_install_button_primary"
-                android:textColor="#0B0B0E"
+                android:textColor="#0E0B0B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.08"

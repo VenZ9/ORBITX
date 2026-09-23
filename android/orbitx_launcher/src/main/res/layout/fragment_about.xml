@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════
-     ABOUT — "BUILD MANIFEST" (Phase 9 redesign)
-     Top status bar (back · title · version key-cap), then a two-column
-     dossier: LEFT fixed identity card (logo, name, tagline, channel
-     links), RIGHT scrolling manifest with numbered sections —
-     01 TEAM (2×2 tiles) · 02 LINEAGE (Pojav / Amethyst) · 03 LEGAL.
-     Ids used by AboutFragment preserved (about_*).
-     ═══════════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════════
+     ORBITX — ABOUT (v3) · "the product page, not a credits page"
+
+     Rebuilt so the page reads as OrbitX's OWN identity:
+       LEFT  identity card  — the OrbitX ring mark, wordmark, tagline and
+                              the live build facts (version / id / ABI).
+       RIGHT manifest       — 01 FEATURES (what OrbitX actually ships)
+                              · 02 LEGAL (GPL v3, unchanged).
+
+     Removed per product direction: the people/team cards, the lineage
+     credit block, and every community link (Discord / GitHub / YouTube).
+     Ids used by AboutFragment are preserved (about_*).
+     ══════════════════════════════════════════════════════════════════════ -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -43,7 +48,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.14"
-            android:text="BUILD MANIFEST  ·  ABOUT"
+            android:text="ORBITX  ·  ABOUT"
             android:textColor="#8A909C"
             android:textSize="10sp" />
 
@@ -78,34 +83,37 @@
             android:padding="18dp">
 
             <FrameLayout
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@drawable/au9_icon_well">
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/ab_logo_well">
 
                 <ImageView
                     android:id="@+id/about_cs_logo"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
-                    android:src="@drawable/cs_logo" />
+                    android:src="@drawable/orbitx_mark" />
             </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.04"
                 android:text="@string/cs_about_name"
                 android:textColor="#F4F6F9"
-                android:textSize="17sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
                 android:fontFamily="monospace"
-                android:letterSpacing="0.1"
+                android:letterSpacing="0.08"
+                android:lineSpacingMultiplier="1.2"
                 android:text="@string/cs_about_tagline"
                 android:textColor="#8A909C"
                 android:textSize="9sp" />
@@ -113,54 +121,98 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="14dp"
-                android:background="#2B2F38" />
+                android:layout_marginTop="16dp"
+                android:background="#332B2F38" />
 
+            <!-- Build facts — the useful part of an About page for a modded
+                 launcher: exactly which build is installed. -->
             <TextView
-                android:id="@+id/about_links_heading"
+                android:id="@+id/about_build_heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
-                android:text="CHANNELS"
+                android:text="THIS BUILD"
                 android:textColor="#6B7180"
                 android:textSize="9sp" />
 
             <LinearLayout
-                android:id="@+id/about_link_discord"
-                style="@style/AbLink">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <ImageView style="@style/AbLinkIcon" android:src="@drawable/ic_discord" />
-                <LinearLayout style="@style/AbLinkTextCol">
-                    <TextView style="@style/AbLinkTitle" android:text="@string/cs_about_discord_title" />
-                    <TextView style="@style/AbLinkSub" android:text="@string/cs_about_discord_sub" />
-                </LinearLayout>
-                <TextView style="@style/AbLinkArrow" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:text="VERSION"
+                    android:textColor="#6B7180"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/about_build_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="—"
+                    android:textColor="#DFE3EA"
+                    android:textSize="9.5sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/about_link_website"
-                style="@style/AbLink">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <ImageView style="@style/AbLinkIcon" android:src="@drawable/ic_website_orbit" />
-                <LinearLayout style="@style/AbLinkTextCol">
-                    <TextView style="@style/AbLinkTitle" android:text="@string/cs_about_website_title" />
-                    <TextView style="@style/AbLinkSub" android:text="@string/cs_about_website_sub" />
-                </LinearLayout>
-                <TextView style="@style/AbLinkArrow" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:text="CHANNEL"
+                    android:textColor="#6B7180"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/about_build_channel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="—"
+                    android:textColor="#FF6B6B"
+                    android:textSize="9.5sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/about_link_github"
-                style="@style/AbLink">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <ImageView style="@style/AbLinkIcon" android:src="@drawable/ic_github" />
-                <LinearLayout style="@style/AbLinkTextCol">
-                    <TextView style="@style/AbLinkTitle" android:text="@string/cs_about_github_title" />
-                    <TextView style="@style/AbLinkSub" android:text="@string/cs_about_github_sub" />
-                </LinearLayout>
-                <TextView style="@style/AbLinkArrow" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:text="ABI"
+                    android:textColor="#6B7180"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/about_build_abi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="arm64-v8a"
+                    android:textColor="#DFE3EA"
+                    android:textSize="9.5sp" />
             </LinearLayout>
 
             <Space
@@ -172,6 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
+                android:lineSpacingMultiplier="1.25"
                 android:text="@string/cs_about_footer"
                 android:textColor="#4F5460"
                 android:textSize="8.5sp" />
@@ -192,12 +245,12 @@
                 android:orientation="vertical"
                 android:paddingBottom="12dp">
 
-                <!-- 01 TEAM -->
+                <!-- 01 FEATURES — what OrbitX ships (no people, no credits) -->
                 <LinearLayout style="@style/AbSectionHead">
                     <TextView style="@style/AbIndex" android:text="01" />
-                    <TextView android:id="@+id/about_credits_heading" style="@style/AbSectionTitle" android:text="Team" />
+                    <TextView android:id="@+id/about_credits_heading" style="@style/AbSectionTitle" android:text="Features" />
                     <View style="@style/AbRule" />
-                    <TextView style="@style/AbSectionMeta" android:text="CRAFT STUDIO" />
+                    <TextView style="@style/AbSectionMeta" android:text="IN THIS BUILD" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -206,24 +259,16 @@
                     android:baselineAligned="false"
                     android:orientation="horizontal">
 
-                    <LinearLayout style="@style/AbTeamTile" android:layout_marginEnd="5dp">
-                        <FrameLayout style="@style/AbAvatarRing">
-                            <net.kdt.pojavlaunch.ui.AvatarView style="@style/AbAvatar" android:src="@drawable/cs_team_rohit" />
-                        </FrameLayout>
-                        <LinearLayout style="@style/AbTeamTextCol">
-                            <TextView style="@style/AbTeamName" android:text="ROHIT_45" />
-                            <TextView style="@style/AbTeamRole" android:text="LEAD DEVELOPER" />
-                        </LinearLayout>
+                    <LinearLayout style="@style/AbFeatureTile" android:layout_marginEnd="5dp">
+                        <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_browser_resources" />
+                        <TextView style="@style/AbFeatureTitle" android:text="Modrinth browser" />
+                        <TextView style="@style/AbFeatureLine" android:text="Search and install mods, resource packs and shaders in-app." />
                     </LinearLayout>
 
-                    <LinearLayout style="@style/AbTeamTile" android:layout_marginStart="5dp">
-                        <FrameLayout style="@style/AbAvatarRing">
-                            <net.kdt.pojavlaunch.ui.AvatarView style="@style/AbAvatar" android:src="@drawable/cs_team_notdanger" />
-                        </FrameLayout>
-                        <LinearLayout style="@style/AbTeamTextCol">
-                            <TextView style="@style/AbTeamName" android:text="NOT DANGER" />
-                            <TextView style="@style/AbTeamRole" android:text="FOUNDER" />
-                        </LinearLayout>
+                    <LinearLayout style="@style/AbFeatureTile" android:layout_marginStart="5dp">
+                        <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_folder" />
+                        <TextView style="@style/AbFeatureTitle" android:text="Instance backup" />
+                        <TextView style="@style/AbFeatureLine" android:text="Export a whole instance to a single archive and restore it later." />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -234,67 +279,42 @@
                     android:baselineAligned="false"
                     android:orientation="horizontal">
 
-                    <LinearLayout style="@style/AbTeamTile" android:layout_marginEnd="5dp">
-                        <FrameLayout style="@style/AbAvatarRing">
-                            <net.kdt.pojavlaunch.ui.AvatarView style="@style/AbAvatar" android:src="@drawable/cs_team_mineradi" />
-                        </FrameLayout>
-                        <LinearLayout style="@style/AbTeamTextCol">
-                            <TextView style="@style/AbTeamName" android:text="MINER_ADI" />
-                            <TextView style="@style/AbTeamRole" android:text="FOUNDER" />
-                        </LinearLayout>
+                    <LinearLayout style="@style/AbFeatureTile" android:layout_marginEnd="5dp">
+                        <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_menu_settings" />
+                        <TextView style="@style/AbFeatureTitle" android:text="Bundled renderers" />
+                        <TextView style="@style/AbFeatureLine" android:text="MobileGlues and LTW ship inside the app — nothing to download." />
                     </LinearLayout>
 
-                    <LinearLayout style="@style/AbTeamTile" android:layout_marginStart="5dp">
-                        <FrameLayout style="@style/AbAvatarRing">
-                            <net.kdt.pojavlaunch.ui.AvatarView style="@style/AbAvatar" android:src="@drawable/cs_team_ender" />
-                        </FrameLayout>
-                        <LinearLayout style="@style/AbTeamTextCol">
-                            <TextView style="@style/AbTeamName" android:text="ENDER" />
-                            <TextView style="@style/AbTeamRole" android:text="FOUNDER" />
-                        </LinearLayout>
+                    <LinearLayout style="@style/AbFeatureTile" android:layout_marginStart="5dp">
+                        <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_info" />
+                        <TextView style="@style/AbFeatureTitle" android:text="In-game recorder" />
+                        <TextView style="@style/AbFeatureLine" android:text="Record with no overlay on screen; export to MP4, WebM or GIF." />
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- 02 LINEAGE -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout style="@style/AbFeatureTile" android:layout_marginEnd="5dp">
+                        <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_profile_player" />
+                        <TextView style="@style/AbFeatureTitle" android:text="Three logins" />
+                        <TextView style="@style/AbFeatureLine" android:text="Microsoft, ely.by or fully offline with a local profile." />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/AbFeatureTile" android:layout_marginStart="5dp">
+                        <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_manage_skin" />
+                        <TextView style="@style/AbFeatureTitle" android:text="Low-end first" />
+                        <TextView style="@style/AbFeatureLine" android:text="Corner boot console and light surfaces tuned for weaker phones." />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 02 LEGAL -->
                 <LinearLayout style="@style/AbSectionHead">
                     <TextView style="@style/AbIndex" android:text="02" />
-                    <TextView style="@style/AbSectionTitle" android:text="Lineage" />
-                    <View style="@style/AbRule" />
-                    <TextView style="@style/AbSectionMeta" android:text="@string/cs_about_credit_badge" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/about_pojav_card"
-                    style="@style/AbLineageCard">
-
-                    <FrameLayout style="@style/AbLineageIconWell">
-                        <ImageView style="@style/AbLineageIcon" android:src="@drawable/pojav_logo" />
-                    </FrameLayout>
-                    <LinearLayout style="@style/AbLineageTextCol">
-                        <TextView style="@style/AbLineageName" android:text="@string/cs_about_pojav_name" />
-                        <TextView style="@style/AbLineageRole" android:text="@string/cs_about_pojav_role" />
-                        <TextView style="@style/AbLineageDesc" android:text="@string/cs_about_pojav_desc" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/about_amethyst_card"
-                    style="@style/AbLineageCard"
-                    android:layout_marginTop="10dp">
-
-                    <FrameLayout style="@style/AbLineageIconWell">
-                        <ImageView style="@style/AbLineageIcon" android:src="@drawable/amethyst_logo" />
-                    </FrameLayout>
-                    <LinearLayout style="@style/AbLineageTextCol">
-                        <TextView style="@style/AbLineageName" android:text="@string/cs_about_amethyst_name" />
-                        <TextView style="@style/AbLineageRole" android:text="@string/cs_about_amethyst_role" />
-                        <TextView style="@style/AbLineageDesc" android:text="@string/cs_about_amethyst_desc" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- 03 LEGAL -->
-                <LinearLayout style="@style/AbSectionHead">
-                    <TextView style="@style/AbIndex" android:text="03" />
                     <TextView android:id="@+id/about_legal_heading" style="@style/AbSectionTitle" android:text="@string/cs_about_legal_heading" />
                     <View style="@style/AbRule" />
                     <TextView style="@style/AbSectionMeta" android:text="GPL-3.0" />

@@ -45,7 +45,7 @@
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
-            android:textColor="#F4F6F9"
+            android:textColor="#F9F4F4"
             android:textSize="13.5sp" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_marginTop="1dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#8A909C"
+            android:textColor="#9C8A8B"
             android:textSize="10.5sp" />
     </LinearLayout>
 
@@ -67,6 +67,6 @@
         android:background="@drawable/igm_key_pill"
         android:fontFamily="monospace"
         android:gravity="center"
-        android:textColor="#8A909C"
+        android:textColor="#9C8A8B"
         android:textSize="9.5sp" />
 </LinearLayout>

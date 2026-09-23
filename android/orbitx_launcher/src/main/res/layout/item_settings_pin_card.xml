@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:contentDescription="@null"
             android:src="@drawable/ic_csp_star_filled"
-            app:tint="#E6E9EF" />
+            app:tint="#EFE6E7" />
     </FrameLayout>
 
     <LinearLayout
@@ -40,7 +40,7 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:maxWidth="160dp"
-            android:textColor="#F4F6F9"
+            android:textColor="#F9F4F4"
             android:textSize="12sp" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:maxLines="1"
-            android:textColor="#6B7180"
+            android:textColor="#806B6C"
             android:textSize="9sp" />
     </LinearLayout>
 
@@ -62,5 +62,5 @@
         android:contentDescription="@null"
         android:padding="8dp"
         android:src="@drawable/ic_rb_close"
-        app:tint="#6B7180" />
+        app:tint="#806B6C" />
 </LinearLayout>

@@ -308,6 +308,7 @@ public class ServerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             motd=v.findViewById(R.id.fs_motd); ping=v.findViewById(R.id.fs_ping);
             players=v.findViewById(R.id.fs_players); version=v.findViewById(R.id.fs_version);
             btnPlay=v.findViewById(R.id.fs_btn_play); btnDiscord=v.findViewById(R.id.fs_btn_discord);
+            if(btnDiscord!=null) btnDiscord.setVisibility(View.GONE);
             icon=v.findViewById(R.id.fs_icon); banner=v.findViewById(R.id.fs_banner);
             iconCard=v.findViewById(R.id.fs_icon_card);
             glow=v.findViewById(R.id.fs_glow); shine=v.findViewById(R.id.fs_shine);

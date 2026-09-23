@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="←"
-                android:textColor="#F0F1F5"
+                android:textColor="#F5F0F0"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -58,7 +58,7 @@
         android:layout_marginTop="10dp"
         android:lineSpacingExtra="2dp"
         android:text="@string/customctrl_editor_exit_msg"
-        android:textColor="#8D93A1"
+        android:textColor="#A18D8E"
         android:textSize="10.5sp" />
 
     <LinearLayout
@@ -79,7 +79,7 @@
             android:letterSpacing="0.08"
             android:text="@string/global_no"
             android:textAllCaps="true"
-            android:textColor="#9AA0AE"
+            android:textColor="#AE9A9B"
             android:textSize="10.5sp"
             android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
             android:letterSpacing="0.08"
             android:text="@string/global_yes"
             android:textAllCaps="true"
-            android:textColor="#14151A"
+            android:textColor="#1A1414"
             android:textSize="10.5sp"
             android:textStyle="bold" />
     </LinearLayout>

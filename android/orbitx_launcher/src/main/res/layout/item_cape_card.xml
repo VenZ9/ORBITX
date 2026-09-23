@@ -46,7 +46,7 @@
             android:gravity="center"
             android:paddingHorizontal="6dp"
             android:text="EQUIPPED"
-            android:textColor="#0E1017"
+            android:textColor="#170E0E"
             android:textSize="8sp"
             android:textStyle="bold"
             android:visibility="gone" />
@@ -69,7 +69,7 @@
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:text="Minecon 2011"
-        android:textColor="#F4F6F9"
+        android:textColor="#F9F4F4"
         android:textSize="12sp" />
 
     <TextView
@@ -80,7 +80,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Official • Mojang"
-        android:textColor="#7F8593"
+        android:textColor="#937F80"
         android:textSize="9.5sp" />
 
     <!-- Quick Action Row -->
@@ -100,7 +100,7 @@
             android:gravity="center"
             android:letterSpacing="0.06"
             android:text="EQUIP"
-            android:textColor="#0B0B0E"
+            android:textColor="#0E0B0B"
             android:textSize="9sp"
             android:textStyle="bold" />
 

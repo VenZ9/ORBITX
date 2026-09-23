@@ -328,19 +328,13 @@
     <string name="cs_about_amethyst_role">THE UPSTREAM WE GREW FROM</string>
     <string name="cs_about_amethyst_desc">Amethyst is the modern, polished fork of PojavLauncher that gave ORBITX its direct DNA — its architecture, its renderer stack and its commitment to performance. From Amethyst we inherited the rock-solid launch pipeline and the multi-renderer engine (GL4ES, Zink, MobileGlues and more), and then we rebuilt the whole experience on top of it. Thank you, Amethyst team.</string>
     <string name="cs_about_links_heading">Find Us</string>
-    <string name="cs_about_discord_title">Discord Community</string>
-    <string name="cs_about_discord_sub">Join the server — help, mods, builds &amp; friends</string>
-    <string name="cs_about_website_title">Official Website</string>
-    <string name="cs_about_website_sub">cs-launcher.netlify.app — news, guides &amp; downloads</string>
-    <string name="cs_about_github_title">GitHub</string>
-    <string name="cs_about_github_sub">orbitx — open source, free forever</string>
     <string name="cs_about_legal_heading">Legal Notice</string>
     <string name="cs_about_legal_text">ORBITX is free, open-source software released under the GNU General Public License v3.0 (GPL v3). It is a fork of Amethyst (AngelAuraMC/Amethyst-Android), which itself builds upon PojavLauncher (PojavLauncherTeam/PojavLauncher) and the original Boardwalk by zhuowei. We are deeply grateful to all of these projects and their contributors.
 
 Minecraft is a trademark of Mojang Synergies AB / Microsoft Corporation. ORBITX is an independent community project and is NOT affiliated with, endorsed by, or sponsored by Mojang or Microsoft. All Minecraft assets and content belong to their respective owners. To play online you need a legitimate Minecraft: Java Edition account.
 
 Third-party components (GL4ES, MobileGlues, ANGLE, Zink/Mesa, LWJGL, OpenJDK, SDL, and more) remain under their own respective licenses. See the NOTICE and LICENSE files inside the repository for full details.</string>
-    <string name="cs_about_footer">CRAFT STUDIO • FREE FOREVER • MADE WITH PASSION</string>
+    <string name="cs_about_footer">ORBITX • FREE FOREVER • MADE WITH PASSION</string>
     <string name="cs_about_coming_soon">The full About page is coming soon. For now: %1$s</string>
     <string name="cs_launch_gif_title">Launch Screen GIF</string>
     <string name="cs_launch_gif_summary">Launch stays a clean black screen. Pick any GIF from storage to play on it while the game loads (up to 50 MB).</string>
@@ -614,7 +608,6 @@ Third-party components (GL4ES, MobileGlues, ANGLE, Zink/Mesa, LWJGL, OpenJDK, SD
     <string name="controller_remapper_expand_entry">Expand to change keycodes</string>
     <string name="preference_remap_controller_title">Change controller key bindings</string>
     <string name="preference_remap_controller_description">Allows you to modify the keyboard keys bound to each controller button</string>
-    <string name="mcl_button_discord">Discord</string>
     <string name="mcl_section_quick_actions">Quick Actions</string>
     <string name="mcl_section_instance_tools">Instance Tools</string>
     <string name="mcl_section_instances">Select Instance</string>
@@ -644,7 +637,6 @@ Third-party components (GL4ES, MobileGlues, ANGLE, Zink/Mesa, LWJGL, OpenJDK, SD
     <string name="delete">Delete</string>
     <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced when you click "OK".</string>
     <string name="mcl_button_open_directory">Open game directory</string>
-    <string name="discord_invite" translatable="false">https://discord.gg/8WzF2RVAq4</string>
     <string name="local_login_bad_username_title">Unsuitable username</string>
     <string name="local_login_bad_username_text">The username must be between 3–16 characters long, and must only contain latin letters, numbers 0–9 and underscores.</string>
     <string name="quick_setting_title">Quick settings</string>

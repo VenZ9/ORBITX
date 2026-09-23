@@ -19,7 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0B0713">
+    android:background="#130708">
 
     <!-- Background artwork (two layers for a crossfade when the primary changes) -->
     <ImageView
@@ -54,10 +54,9 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.47" />
 
-        <!-- ═══ BRAND CLUSTER (top-left, Phase 8) ═══
-             Launcher mark + name, then two community pills: YouTube (red)
-             and Discord (blurple). Mirrors the account chip on the right.
-             Links come from CsLinks (same URLs as the About page). -->
+        <!-- ═══ BRAND CLUSTER (top-left) ═══
+             The OrbitX identity card: ring mark + wordmark. The old YouTube /
+             Discord community pills were removed with the other outbound links. -->
         <LinearLayout
             android:id="@+id/lh_brand_cluster"
             android:layout_width="wrap_content"
@@ -83,7 +82,7 @@
                     android:layout_height="22dp"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
-                    android:src="@drawable/cs_logo" />
+                    android:src="@drawable/orbitx_mark" />
             </FrameLayout>
 
             <LinearLayout
@@ -132,83 +131,13 @@
                         android:letterSpacing="0.14"
                         android:maxLines="1"
                         android:text="MADE IN INDIA"
-                        android:textColor="#C9CED8"
+                        android:textColor="#D8C9CA"
                         android:textSize="7.5sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,SmallSp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="8dp"
-                android:background="#2EFFFFFF" />
-
-            <LinearLayout
-                android:id="@+id/lh_btn_youtube"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:background="@drawable/bg_lh_pill_youtube"
-                android:clickable="true"
-                android:contentDescription="Open the ORBITX YouTube channel"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="9dp"
-                android:paddingEnd="11dp">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_brand_youtube" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:includeFontPadding="false"
-                    android:letterSpacing="0.04"
-                    android:text="YouTube"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10.5sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lh_btn_discord"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginStart="6dp"
-                android:background="@drawable/bg_lh_pill_discord"
-                android:clickable="true"
-                android:contentDescription="Join the ORBITX Discord"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="9dp"
-                android:paddingEnd="11dp">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="12dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_brand_discord" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:includeFontPadding="false"
-                    android:letterSpacing="0.04"
-                    android:text="Discord"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10.5sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
         </LinearLayout>
 
         <!-- ═══ ACCOUNT CHIP (top-right) ═══ -->
@@ -375,7 +304,7 @@
                         android:layout_height="16dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_download"
-                        app:tint="#0E0C15"
+                        app:tint="#150C0C"
                         android:contentDescription="@null" />
                 </FrameLayout>
 
@@ -418,7 +347,7 @@
                     android:gravity="end"
                     android:fontFamily="@font/minecraftia"
                     android:text="0%"
-                    android:textColor="#EDEAF7"
+                    android:textColor="#F7EAEA"
                     android:textSize="13sp"
                     android:includeFontPadding="false" />
                     android:textStyle="bold"
@@ -478,7 +407,7 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:src="@drawable/ic_play_arrow"
-                        app:tint="#0E0E11"
+                        app:tint="#110E0E"
                         android:contentDescription="@null" />
 
                     <TextView
@@ -487,7 +416,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="LAUNCH"
-                        android:textColor="#0E0E11"
+                        android:textColor="#110E0E"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:letterSpacing="0.12"
@@ -527,14 +456,14 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lh_library">
+            app:layout_constraintBottom_toTopOf="@id/lh_prod_strip">
 
             <ImageView
                 android:id="@+id/lh_spec_java_icon"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_settings_java"
-                app:tint="#9DA3B4"
+                app:tint="#B49D9F"
                 android:contentDescription="@null" />
 
             <TextView
@@ -559,7 +488,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_settings_performance"
-                app:tint="#9DA3B4"
+                app:tint="#B49D9F"
                 android:contentDescription="@null" />
 
             <TextView
@@ -572,6 +501,82 @@
                 android:textSize="11sp"
                 android:fontFamily="sans-serif-medium"
                 android:includeFontPadding="false" />
+        </LinearLayout>
+
+        <!-- ═══ ORBITX PRODUCT STRIP ═══
+             The launcher's own tools, one tap from Home: browse Modrinth
+             content for this instance, review installed content, or export the
+             instance to a backup archive. Sits directly above the library so
+             it belongs to the launch column rather than floating loose. -->
+        <LinearLayout
+            android:id="@+id/lh_prod_strip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_lh_specs_pill"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/lh_library">
+
+            <TextView
+                android:id="@+id/lh_prod_browser"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_lh_prod_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_browser_resources"
+                android:drawablePadding="6dp"
+                android:letterSpacing="0.05"
+                android:paddingHorizontal="11dp"
+                android:text="CONTENT"
+                android:textColor="#E8E4E4"
+                android:textSize="9.5sp"
+                android:textStyle="bold"
+                app:drawableTint="#FF6B6B" />
+
+            <TextView
+                android:id="@+id/lh_prod_manage"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_lh_prod_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_folder"
+                android:drawablePadding="6dp"
+                android:letterSpacing="0.05"
+                android:paddingHorizontal="11dp"
+                android:text="PACKS"
+                android:textColor="#E8E4E4"
+                android:textSize="9.5sp"
+                android:textStyle="bold"
+                app:drawableTint="#FF6B6B" />
+
+            <TextView
+                android:id="@+id/lh_prod_backup"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_lh_prod_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_menu_install_jar"
+                android:drawablePadding="6dp"
+                android:letterSpacing="0.05"
+                android:paddingHorizontal="11dp"
+                android:text="BACKUP"
+                android:textColor="#E8E4E4"
+                android:textSize="9.5sp"
+                android:textStyle="bold"
+                app:drawableTint="#FF6B6B" />
         </LinearLayout>
 
         <!-- ═══ INSTANCE LIBRARY CAROUSEL (bottom, clear of the dock) ═══ -->

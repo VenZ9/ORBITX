@@ -30,7 +30,7 @@
             android:contentDescription="@string/global_back"
             android:padding="10dp"
             android:src="@drawable/ic_chevron_left"
-            app:tint="#EAECEF" />
+            app:tint="#EFEAEA" />
 
         <FrameLayout
             android:layout_width="34dp"
@@ -43,7 +43,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_folder"
-                app:tint="#E6E8EE" />
+                app:tint="#EEE6E6" />
         </FrameLayout>
 
         <LinearLayout
@@ -83,7 +83,7 @@
             android:contentDescription="@string/global_add"
             android:padding="9dp"
             android:src="@drawable/ic_add"
-            app:tint="#14151A" />
+            app:tint="#1A1414" />
     </LinearLayout>
 
     <!-- ── MOD LIST (cascade entrance) ─────────────────────────────── -->
@@ -130,7 +130,7 @@
             android:layout_marginTop="14dp"
             android:gravity="center"
             android:text="@string/manage_mods_empty"
-            android:textColor="#9AA0AE"
+            android:textColor="#AE9A9B"
             android:textSize="12.5sp"
             android:textStyle="bold" />
 
@@ -140,7 +140,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="Tap the + button to browse and install mods."
-            android:textColor="#5C6070"
+            android:textColor="#705C5C"
             android:textSize="10.5sp" />
     </LinearLayout>
 

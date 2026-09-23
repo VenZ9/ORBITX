@@ -96,7 +96,7 @@
                 android:letterSpacing="0.08"
                 android:paddingHorizontal="9dp"
                 android:text="LOCAL SKIN SERVER"
-                android:textColor="#9AA0AE"
+                android:textColor="#AE9A9B"
                 android:textSize="7sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -157,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#B3101116"
+                    android:background="#B3161010"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingStart="12dp"
@@ -180,7 +180,7 @@
                             android:letterSpacing="0.06"
                             android:maxLines="1"
                             android:text="FLAT SKIN"
-                            android:textColor="#F2F2F4"
+                            android:textColor="#F4F2F2"
                             android:textSize="10sp"
                             android:textStyle="bold" />
 
@@ -243,7 +243,7 @@
                     android:letterSpacing="0.08"
                     android:paddingHorizontal="9dp"
                     android:text="EMPTY SLOT"
-                    android:textColor="#9AA0AE"
+                    android:textColor="#AE9A9B"
                     android:textSize="7sp"
                     android:textStyle="bold" />
 
@@ -269,7 +269,7 @@
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="10dp"
                         android:text="2D"
-                        android:textColor="#C9CDD8"
+                        android:textColor="#D8C9CA"
                         android:textSize="9sp"
                         android:textStyle="bold" />
 
@@ -285,7 +285,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="⤢"
-                            android:textColor="#C9CDD8"
+                            android:textColor="#D8C9CA"
                             android:textSize="13sp"
                             android:textStyle="bold" />
                     </FrameLayout>
@@ -303,7 +303,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="✕"
-                            android:textColor="#C9CDD8"
+                            android:textColor="#D8C9CA"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </FrameLayout>
@@ -325,7 +325,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="No skin in selected slot"
-                        android:textColor="#F0F1F5"
+                        android:textColor="#F5F0F0"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -384,7 +384,7 @@
                             android:letterSpacing="0.08"
                             android:paddingHorizontal="8dp"
                             android:text="3 SLOTS"
-                            android:textColor="#9AA0AE"
+                            android:textColor="#AE9A9B"
                             android:textSize="6.8sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -423,7 +423,7 @@
                             android:layout_marginTop="5dp"
                             android:lineSpacingExtra="2dp"
                             android:text="Import a Minecraft skin PNG into the selected slot, or clear it."
-                            android:textColor="#8D93A1"
+                            android:textColor="#A18D8E"
                             android:textSize="9.5sp" />
 
                         <LinearLayout
@@ -441,7 +441,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.1"
                                 android:text="IMPORT SKIN"
-                                android:textColor="#14151A"
+                                android:textColor="#1A1414"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
 
@@ -494,7 +494,7 @@
                                 android:layout_height="wrap_content"
                                 android:letterSpacing="0.05"
                                 android:text="optional"
-                                android:textColor="#5F6572"
+                                android:textColor="#725F60"
                                 android:textSize="7.5sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -507,7 +507,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:text="No custom cape selected"
-                            android:textColor="#C9CDD8"
+                            android:textColor="#D8C9CA"
                             android:textSize="10sp"
                             android:textStyle="bold" />
 
@@ -526,7 +526,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.08"
                                 android:text="BROWSE CAPES"
-                                android:textColor="#14151A"
+                                android:textColor="#1A1414"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
 
@@ -540,7 +540,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.08"
                                 android:text="IMPORT PNG"
-                                android:textColor="#C9CDD8"
+                                android:textColor="#D8C9CA"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
 
@@ -554,7 +554,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.08"
                                 android:text="CLEAR"
-                                android:textColor="#9AA0AE"
+                                android:textColor="#AE9A9B"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -599,8 +599,8 @@
                                 android:inputType="text"
                                 android:paddingHorizontal="12dp"
                                 android:singleLine="true"
-                                android:textColor="#F0F1F5"
-                                android:textColorHint="#5F6572"
+                                android:textColor="#F5F0F0"
+                                android:textColorHint="#725F60"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -613,7 +613,7 @@
                                 android:letterSpacing="0.1"
                                 android:paddingHorizontal="16dp"
                                 android:text="FETCH"
-                                android:textColor="#14151A"
+                                android:textColor="#1A1414"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -635,7 +635,7 @@
                             android:gravity="center"
                             android:letterSpacing="0.12"
                             android:text="SET AS ACTIVE SKIN"
-                            android:textColor="#14151A"
+                            android:textColor="#1A1414"
                             android:textSize="11.5sp"
                             android:textStyle="bold" />
 
@@ -648,7 +648,7 @@
                             android:gravity="center"
                             android:letterSpacing="0.1"
                             android:text="RESET ALL SLOTS"
-                            android:textColor="#9AA0AE"
+                            android:textColor="#AE9A9B"
                             android:textSize="10sp"
                             android:textStyle="bold" />
                     </LinearLayout>

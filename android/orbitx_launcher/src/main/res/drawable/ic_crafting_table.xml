@@ -17,12 +17,12 @@
     <!-- 3x3 grid knocked out of the body -->
     <path
         android:fillColor="#00000000"
-        android:strokeColor="#FF0E0B16"
+        android:strokeColor="#FF160B0C"
         android:strokeWidth="1.1"
         android:pathData="M9.1,12.1 v4.6 M14.9,12.1 v4.6 M7.1,13.6 h9.8 M7.1,16.1 h9.8" />
     <!-- Grid dots -->
     <path
-        android:fillColor="#FF0E0B16"
+        android:fillColor="#FF160B0C"
         android:pathData="M8.2,12.4 h1.2 v1.2 h-1.2 Z M11.4,12.4 h1.2 v1.2 h-1.2 Z M14.6,12.4 h1.2 v1.2 h-1.2 Z
                           M8.2,15.4 h1.2 v1.2 h-1.2 Z M11.4,15.4 h1.2 v1.2 h-1.2 Z M14.6,15.4 h1.2 v1.2 h-1.2 Z" />
 </vector>

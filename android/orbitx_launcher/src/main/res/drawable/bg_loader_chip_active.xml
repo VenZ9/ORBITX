@@ -3,7 +3,7 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="#33000000">
     <item>
         <shape android:shape="rectangle">
-            <gradient android:angle="135" android:startColor="#E6E9EF" android:endColor="#B9BEC8" />
+            <gradient android:angle="135" android:startColor="#EFE6E7" android:endColor="#C8B9BA" />
             <corners android:radius="16dp" />
         </shape>
     </item>

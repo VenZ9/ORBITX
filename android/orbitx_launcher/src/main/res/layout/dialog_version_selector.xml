@@ -40,7 +40,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="MC"
-            android:textColor="#E6E9EF"
+            android:textColor="#EFE6E7"
             android:textSize="11sp"
             tools:ignore="HardcodedText" />
 
@@ -58,7 +58,7 @@
                 android:fontFamily="@font/minecraftia"
                 android:includeFontPadding="false"
                 android:text="SELECT VERSION"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="14sp"
                 tools:ignore="HardcodedText" />
 
@@ -70,7 +70,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.12"
                 android:text="MOJANG MANIFEST  ·  LOADING"
-                android:textColor="#6B7180"
+                android:textColor="#806B6C"
                 android:textSize="9sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
@@ -85,7 +85,7 @@
             android:focusable="true"
             android:gravity="center"
             android:text="✕"
-            android:textColor="#C9CED8"
+            android:textColor="#D8C9CA"
             android:textSize="13sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
@@ -131,7 +131,7 @@
             android:fontFamily="@font/minecraftia"
             android:includeFontPadding="false"
             android:text=">"
-            android:textColor="#8A909C"
+            android:textColor="#9C8A8B"
             android:textSize="11sp"
             tools:ignore="HardcodedText" />
 
@@ -147,7 +147,7 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:maxLines="1"
-            android:textColor="#F4F6F9"
+            android:textColor="#F9F4F4"
             android:textColorHint="#5C6068"
             android:textSize="13sp"
             tools:ignore="HardcodedText" />
@@ -160,7 +160,7 @@
             android:includeFontPadding="false"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
-            android:textColor="#8A909C"
+            android:textColor="#9C8A8B"
             android:textSize="9sp"
             tools:text="128" />
     </LinearLayout>

@@ -102,7 +102,7 @@
             android:includeFontPadding="false"
             android:letterSpacing="0.06"
             android:text="SEARCHING"
-            android:textColor="#E6E9EF"
+            android:textColor="#EFE6E7"
             android:textSize="9sp"
             tools:ignore="HardcodedText,SmallSp" />
     </LinearLayout>
@@ -162,7 +162,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:text="@string/cs_notif_banner_title"
-                android:textColor="#F2F3F7"
+                android:textColor="#F7F2F2"
                 android:textSize="11.5sp"
                 android:textStyle="bold" />
 

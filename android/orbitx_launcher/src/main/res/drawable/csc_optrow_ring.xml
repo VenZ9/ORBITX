@@ -2,5 +2,5 @@
 <!-- Breathing silver ring behind the featured row (animated alpha in code). -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
     <corners android:radius="18dp" />
-    <stroke android:width="1.5dp" android:color="#7AC9CED8" />
+    <stroke android:width="1.5dp" android:color="#7AD8C9CA" />
 </shape>

@@ -3,13 +3,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#100E16" />
+            <solid android:color="#160E0F" />
         </shape>
     </item>
     <item android:top="-2dp" android:left="-2dp" android:right="-2dp">
         <shape android:shape="rectangle">
             <solid android:color="@android:color/transparent" />
-            <stroke android:width="1dp" android:color="#221F2E" />
+            <stroke android:width="1dp" android:color="#2E1F1F" />
         </shape>
     </item>
 </layer-list>

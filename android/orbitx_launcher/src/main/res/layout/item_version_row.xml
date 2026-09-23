@@ -58,7 +58,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:includeFontPadding="false"
                 android:maxLines="1"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="13.5sp"
                 android:textStyle="bold"
                 tools:text="sodium-fabric-0.6.0-beta.1" />
@@ -76,7 +76,7 @@
                 android:paddingEnd="8dp"
                 android:paddingBottom="3dp"
                 android:text="★ RECOMMENDED"
-                android:textColor="#141519"
+                android:textColor="#191414"
                 android:textSize="8.5sp"
                 android:textStyle="bold"
                 android:visibility="gone"
@@ -113,7 +113,7 @@
                 android:paddingEnd="7dp"
                 android:paddingBottom="3dp"
                 android:text="Fabric"
-                android:textColor="#D2D6DE"
+                android:textColor="#DED2D3"
                 android:textSize="9sp"
                 android:textStyle="bold"
                 android:visibility="gone"
@@ -133,7 +133,7 @@
                 android:paddingEnd="7dp"
                 android:paddingBottom="3dp"
                 android:text="✓ Compatible"
-                android:textColor="#D2D6DE"
+                android:textColor="#DED2D3"
                 android:textSize="9sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
@@ -154,7 +154,7 @@
                 android:paddingTop="5dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="3dp"
-                android:textColor="#E6E9EF"
+                android:textColor="#EFE6E7"
                 android:textSize="9sp"
                 tools:text="1.21.1" />
         </LinearLayout>

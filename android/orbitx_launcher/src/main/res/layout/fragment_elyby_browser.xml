@@ -28,7 +28,7 @@
             android:letterSpacing="0.06"
             android:paddingHorizontal="12dp"
             android:text="←  BACK"
-            android:textColor="#E6E9EF"
+            android:textColor="#EFE6E7"
             android:textSize="10.5sp" />
 
         <FrameLayout
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="ely.by  ·  account &amp; skins"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="13sp" />
 
             <TextView
@@ -79,7 +79,7 @@
             android:letterSpacing="0.06"
             android:paddingHorizontal="12dp"
             android:text="↻  RELOAD"
-            android:textColor="#E6E9EF"
+            android:textColor="#EFE6E7"
             android:textSize="10.5sp" />
     </LinearLayout>
 

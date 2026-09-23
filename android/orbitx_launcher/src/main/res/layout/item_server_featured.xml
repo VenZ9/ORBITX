@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        app:cardBackgroundColor="#111520"
+        app:cardBackgroundColor="#201112"
         app:cardCornerRadius="16dp"
         app:cardElevation="5dp">
 
@@ -91,7 +91,7 @@
                             android:background="@drawable/bg_featured_chip"
                             android:gravity="center"
                             android:paddingHorizontal="9dp"
-                            android:textColor="#EDEEF2"
+                            android:textColor="#F2EDED"
                             android:textSize="8.5sp"
                             tools:text="83 ms" />
                     </LinearLayout>
@@ -140,7 +140,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="1"
                                 android:text="play.plantmc.fun:25627"
-                                android:textColor="#93A0AF"
+                                android:textColor="#AF9395"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -152,7 +152,7 @@
                             android:background="@drawable/bg_featured_chip"
                             android:gravity="center"
                             android:paddingHorizontal="9dp"
-                            android:textColor="#EDEEF2"
+                            android:textColor="#F2EDED"
                             android:textSize="8.5sp"
                             android:visibility="gone"
                             tools:text="Paper 1.21.1"
@@ -172,7 +172,7 @@
                         android:minHeight="40dp"
                         android:paddingHorizontal="11dp"
                         android:paddingVertical="8dp"
-                        android:textColor="#E7EAF0"
+                        android:textColor="#F0E7E8"
                         android:textSize="11.5sp"
                         tools:text="⚡ PLAY.PLANTMC.FUN ⚡" />
 
@@ -196,19 +196,12 @@
                             android:textSize="12.5sp"
                             android:textStyle="bold" />
 
+                        <!-- Community link removed app-wide (id kept for code). -->
                         <TextView
                             android:id="@+id/fs_btn_discord"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/bg_featured_discord"
-                            android:elevation="2dp"
-                            android:gravity="center"
-                            android:paddingHorizontal="18dp"
-                            android:text="DISCORD"
-                            android:textColor="#FFFFFF"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -221,7 +214,7 @@
                 android:layout_gravity="top|start"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="86dp"
-                app:cardBackgroundColor="#0C0F16"
+                app:cardBackgroundColor="#160C0D"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="8dp">
 

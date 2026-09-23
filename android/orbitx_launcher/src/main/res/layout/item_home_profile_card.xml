@@ -104,7 +104,7 @@
                     android:id="@+id/tv_profile_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#F4F4F8"
+                    android:textColor="#F8F4F4"
                     android:textSize="15sp"
                     android:fontFamily="@font/minecraftia"
                     android:includeFontPadding="false"
@@ -211,7 +211,7 @@
                     android:layout_height="18dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_profile_drag_handle"
-                    android:tint="#B9BBC4" />
+                    android:tint="#C4B9B9" />
             </FrameLayout>
 
             <!-- Browse Resources -->
@@ -231,7 +231,7 @@
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_profile_download"
-                    android:tint="#D9DAE0" />
+                    android:tint="#E0D9D9" />
             </FrameLayout>
 
             <!-- Play — Phase 3 premium launch morph (wave + glow + particles) -->
@@ -248,7 +248,7 @@
                     android:layout_height="17dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_play_arrow"
-                    android:tint="#0E0E11" />
+                    android:tint="#110E0E" />
             </net.kdt.pojavlaunch.ui.PremiumPlayButtonView>
         </LinearLayout>
 

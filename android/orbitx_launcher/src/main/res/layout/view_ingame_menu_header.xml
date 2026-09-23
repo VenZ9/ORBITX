@@ -30,7 +30,7 @@
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.18"
             android:text="GAME MENU"
-            android:textColor="#8A909C"
+            android:textColor="#9C8A8B"
             android:textSize="9.5sp" />
 
         <TextView
@@ -55,7 +55,7 @@
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:text="Profile"
-        android:textColor="#F4F6F9"
+        android:textColor="#F9F4F4"
         android:textSize="17sp" />
 
     <TextView
@@ -67,12 +67,12 @@
         android:fontFamily="monospace"
         android:maxLines="1"
         android:text="1.21"
-        android:textColor="#8A909C"
+        android:textColor="#9C8A8B"
         android:textSize="10.5sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="12dp"
-        android:background="#2B2F38" />
+        android:background="#382B2C" />
 </LinearLayout>

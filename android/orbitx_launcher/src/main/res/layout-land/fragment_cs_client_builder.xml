@@ -43,7 +43,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="‹"
-                android:textColor="#D2D6DE"
+                android:textColor="#DED2D3"
                 android:textSize="24sp" />
 
             <LinearLayout
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="Profile Architect"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="16sp" />
 
                 <TextView
@@ -68,7 +68,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.08"
                     android:text="STEP 2 OF 3  •  BUILD PROFILE"
-                    android:textColor="#9AA0AC"
+                    android:textColor="#AC9A9B"
                     android:textSize="8sp" />
             </LinearLayout>
 
@@ -82,7 +82,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="OrbitX Client"
                     android:src="@drawable/cs_logo"
-                    app:tint="#D2D6DE" />
+                    app:tint="#DED2D3" />
             </FrameLayout>
         </LinearLayout>
 
@@ -103,7 +103,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="✓"
-                android:textColor="#141519"
+                android:textColor="#191414"
                 android:textSize="13sp" />
 
             <View
@@ -120,7 +120,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="2"
-                android:textColor="#E6E9EF"
+                android:textColor="#EFE6E7"
                 android:textSize="12sp" />
 
             <View
@@ -180,7 +180,7 @@
                                 android:layout_gravity="center"
                                 android:contentDescription="OrbitX Client"
                                 android:src="@drawable/cs_logo"
-                                app:tint="#E6E9EF" />
+                                app:tint="#EFE6E7" />
                         </FrameLayout>
 
                         <TextView
@@ -190,7 +190,7 @@
                             android:fontFamily="sans-serif-medium"
                             android:letterSpacing="0.03"
                             android:text="ORBITX CLIENT PROFILE"
-                            android:textColor="#F4F6F9"
+                            android:textColor="#F9F4F4"
                             android:textSize="15sp" />
 
                         <TextView
@@ -199,7 +199,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif"
-                            android:textColor="#9AA0AC"
+                            android:textColor="#AC9A9B"
                             android:textSize="11sp"
                             tools:text="MINECRAFT 1.21" />
 
@@ -212,7 +212,7 @@
                             android:fontFamily="sans-serif-medium"
                             android:gravity="center"
                             android:paddingVertical="9dp"
-                            android:textColor="#C4C9D2"
+                            android:textColor="#D2C4C5"
                             android:textSize="10sp"
                             tools:text="ORBITX CLIENT 1.0 • FABRIC" />
 
@@ -238,7 +238,7 @@
                                     android:layout_weight="1"
                                     android:fontFamily="sans-serif-medium"
                                     android:includeFontPadding="false"
-                                    android:textColor="#F4F6F9"
+                                    android:textColor="#F9F4F4"
                                     android:textSize="18sp"
                                     android:textStyle="bold"
                                     tools:text="3" />
@@ -249,7 +249,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:letterSpacing="0.08"
                                     android:text="MODULES"
-                                    android:textColor="#9AA0AC"
+                                    android:textColor="#AC9A9B"
                                     android:textSize="9sp" />
                             </LinearLayout>
 
@@ -270,7 +270,7 @@
                                     android:layout_weight="1"
                                     android:fontFamily="sans-serif-medium"
                                     android:includeFontPadding="false"
-                                    android:textColor="#D2D6DE"
+                                    android:textColor="#DED2D3"
                                     android:textSize="13sp"
                                     android:textStyle="bold"
                                     tools:text="FABRIC" />
@@ -281,7 +281,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:letterSpacing="0.08"
                                     android:text="LOADER"
-                                    android:textColor="#9AA0AC"
+                                    android:textColor="#AC9A9B"
                                     android:textSize="9sp" />
                             </LinearLayout>
 
@@ -302,7 +302,7 @@
                                     android:layout_weight="1"
                                     android:fontFamily="sans-serif-medium"
                                     android:includeFontPadding="false"
-                                    android:textColor="#C9CED8"
+                                    android:textColor="#D8C9CA"
                                     android:textSize="13sp"
                                     android:textStyle="bold"
                                     tools:text="NONE" />
@@ -313,7 +313,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:letterSpacing="0.08"
                                     android:text="MODPACK"
-                                    android:textColor="#9AA0AC"
+                                    android:textColor="#AC9A9B"
                                     android:textSize="9sp" />
                             </LinearLayout>
                         </LinearLayout>
@@ -360,7 +360,7 @@
                                     android:fontFamily="sans-serif-medium"
                                     android:letterSpacing="0.06"
                                     android:text="WHAT WILL BE INSTALLED"
-                                    android:textColor="#F4F6F9"
+                                    android:textColor="#F9F4F4"
                                     android:textSize="12sp" />
 
                                 <TextView
@@ -398,7 +398,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.04"
                                 android:text="＋ BROWSE MODS"
-                                android:textColor="#D2D6DE"
+                                android:textColor="#DED2D3"
                                 android:textSize="11sp"
                                 tools:ignore="HardcodedText" />
 
@@ -415,7 +415,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.04"
                                 android:text="SELECT MODPACK"
-                                android:textColor="#D2D6DE"
+                                android:textColor="#DED2D3"
                                 android:textSize="11sp"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
@@ -448,7 +448,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
                         android:text="Ready to build"
-                        android:textColor="#F4F6F9"
+                        android:textColor="#F9F4F4"
                         android:textSize="12sp"
                         tools:ignore="HardcodedText" />
 
@@ -458,7 +458,7 @@
                         android:layout_marginTop="1dp"
                         android:fontFamily="sans-serif"
                         android:text="Atomic install • verified files"
-                        android:textColor="#8A909C"
+                        android:textColor="#9C8A8B"
                         android:textSize="9sp"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
@@ -476,7 +476,7 @@
                     android:minWidth="150dp"
                     android:paddingHorizontal="22dp"
                     android:text="CREATE"
-                    android:textColor="#141519"
+                    android:textColor="#191414"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />

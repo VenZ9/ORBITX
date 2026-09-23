@@ -43,7 +43,7 @@
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.18"
             android:text="PREMIUM  ·  MICROSOFT"
-            android:textColor="#8A909C"
+            android:textColor="#9C8A8B"
             android:textSize="9sp" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-medium"
             android:text="Sign in"
-            android:textColor="#F4F6F9"
+            android:textColor="#F9F4F4"
             android:textSize="22sp" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_marginTop="6dp"
             android:lineSpacingMultiplier="1.2"
             android:text="Use the Microsoft page on the right. The launcher only receives the final token."
-            android:textColor="#8A909C"
+            android:textColor="#9C8A8B"
             android:textSize="11sp" />
 
         <!-- step tracker -->
@@ -73,7 +73,7 @@
 
             <LinearLayout style="@style/Au9Step">
                 <View android:id="@+id/ms_step_1_dot" style="@style/Au9StepDot" android:background="@drawable/mvs_state_ok" />
-                <TextView android:id="@+id/ms_step_1" style="@style/Au9StepText" android:text="Microsoft login" android:textColor="#F4F6F9" />
+                <TextView android:id="@+id/ms_step_1" style="@style/Au9StepText" android:text="Microsoft login" android:textColor="#F9F4F4" />
             </LinearLayout>
 
             <LinearLayout style="@style/Au9Step">
@@ -103,7 +103,7 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="8dp"
             android:text="// waiting for login.live.com"
-            android:textColor="#6B7180"
+            android:textColor="#806B6C"
             android:textSize="9.5sp" />
     </LinearLayout>
 

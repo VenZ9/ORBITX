@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0B10"
+    android:background="#100A0A"
     android:orientation="vertical">
 
     <!-- Top Navigation & Header Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#10131B"
+        android:background="#1B1011"
         android:gravity="center_vertical"
         android:paddingHorizontal="20dp"
         android:paddingVertical="8dp">
@@ -48,7 +48,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Equipped: None"
-                android:textColor="#7C8494"
+                android:textColor="#947C7E"
                 android:textSize="10.5sp" />
         </LinearLayout>
 
@@ -97,7 +97,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="14dp"
                     android:text="Official &amp; Events"
-                    android:textColor="#0E1017"
+                    android:textColor="#170E0E"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="14dp"
                     android:text="Online Gallery"
-                    android:textColor="#8890A0"
+                    android:textColor="#A0888A"
                     android:textSize="10.5sp" />
 
                 <TextView
@@ -122,7 +122,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="14dp"
                     android:text="My Collection"
-                    android:textColor="#8890A0"
+                    android:textColor="#A0888A"
                     android:textSize="10.5sp" />
             </LinearLayout>
 
@@ -145,7 +145,7 @@
                     android:inputType="text"
                     android:paddingHorizontal="12dp"
                     android:textColor="#FFFFFF"
-                    android:textColorHint="#5A6275"
+                    android:textColorHint="#755A5C"
                     android:textSize="11.5sp" />
 
                 <ImageButton
@@ -157,7 +157,7 @@
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_close"
                     android:visibility="gone"
-                    app:tint="#7F8593" />
+                    app:tint="#937F80" />
             </FrameLayout>
 
             <Button
@@ -195,7 +195,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="ALL"
-                    android:textColor="#0E1017"
+                    android:textColor="#170E0E"
                     android:textSize="9.5sp"
                     android:textStyle="bold" />
 
@@ -209,7 +209,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="MINECON"
-                    android:textColor="#8890A0"
+                    android:textColor="#A0888A"
                     android:textSize="9.5sp" />
 
                 <TextView
@@ -222,7 +222,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="OFFICIAL"
-                    android:textColor="#8890A0"
+                    android:textColor="#A0888A"
                     android:textSize="9.5sp" />
 
                 <TextView
@@ -235,7 +235,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="ANIMATED"
-                    android:textColor="#8890A0"
+                    android:textColor="#A0888A"
                     android:textSize="9.5sp" />
 
                 <TextView
@@ -248,7 +248,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="TOP RATED"
-                    android:textColor="#8890A0"
+                    android:textColor="#A0888A"
                     android:textSize="9.5sp" />
             </LinearLayout>
         </HorizontalScrollView>
@@ -293,7 +293,7 @@
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:src="@drawable/ic_search"
-                    app:tint="#4A5265" />
+                    app:tint="#654A4C" />
 
                 <TextView
                     android:id="@+id/cape_tv_empty_title"
@@ -312,7 +312,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="Try another search query or check your connection"
-                    android:textColor="#6C7486"
+                    android:textColor="#866C6E"
                     android:textSize="10.5sp" />
             </LinearLayout>
         </FrameLayout>
@@ -343,7 +343,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:fontFamily="monospace"
                 android:text="PAGE 1"
-                android:textColor="#8890A0"
+                android:textColor="#A0888A"
                 android:textSize="10.5sp" />
 
             <Button

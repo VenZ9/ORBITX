@@ -17,15 +17,15 @@
     <!-- Ashoka Chakra ring -->
     <path
         android:fillColor="#00000000"
-        android:strokeColor="#000080"
+        android:strokeColor="#770909"
         android:strokeWidth="0.7"
         android:pathData="M15,10 m-2.6,0 a2.6,2.6 0 1 0 5.2,0 a2.6,2.6 0 1 0 -5.2,0" />
     <!-- hub -->
-    <path android:fillColor="#000080" android:pathData="M15,10 m-0.6,0 a0.6,0.6 0 1 0 1.2,0 a0.6,0.6 0 1 0 -1.2,0" />
+    <path android:fillColor="#770909" android:pathData="M15,10 m-0.6,0 a0.6,0.6 0 1 0 1.2,0 a0.6,0.6 0 1 0 -1.2,0" />
     <!-- 8 spokes (stylised 24 at this size) -->
     <path
         android:fillColor="#00000000"
-        android:strokeColor="#000080"
+        android:strokeColor="#770909"
         android:strokeWidth="0.35"
         android:pathData="M15,7.6 V12.4 M12.6,10 H17.4 M13.3,8.3 L16.7,11.7 M16.7,8.3 L13.3,11.7" />
 </vector>

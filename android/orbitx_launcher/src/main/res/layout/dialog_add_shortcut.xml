@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0B10"
+    android:background="#100A0A"
     android:fillViewport="true"
     android:overScrollMode="never">
 
@@ -60,7 +60,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="Pin instant launch shortcut to Home Screen"
-                    android:textColor="#7C8494"
+                    android:textColor="#947C7E"
                     android:textSize="11.5sp" />
             </LinearLayout>
 
@@ -152,7 +152,7 @@
                     android:layout_marginTop="4dp"
                     android:lineSpacingExtra="2dp"
                     android:text="Your launcher or home screen will render this exact icon with high-DPI scaling and dynamic badge."
-                    android:textColor="#8890A0"
+                    android:textColor="#A0888A"
                     android:textSize="11.5sp" />
             </LinearLayout>
         </LinearLayout>
@@ -187,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            app:boxBackgroundColor="#10131B"
+            app:boxBackgroundColor="#1B1011"
             app:boxStrokeColor="#5BD097"
             app:counterEnabled="true"
             app:counterMaxLength="25"
@@ -229,7 +229,7 @@
                 android:text="Profile"
                 android:textColor="#FFFFFF"
                 android:textSize="10.5sp"
-                app:backgroundTint="#181B26"
+                app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -244,7 +244,7 @@
                 android:text="Skin Face"
                 android:textColor="#FFFFFF"
                 android:textSize="10.5sp"
-                app:backgroundTint="#181B26"
+                app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -259,7 +259,7 @@
                 android:text="Loader"
                 android:textColor="#FFFFFF"
                 android:textSize="10.5sp"
-                app:backgroundTint="#181B26"
+                app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -274,7 +274,7 @@
                 android:text="Custom"
                 android:textColor="#FFFFFF"
                 android:textSize="10.5sp"
-                app:backgroundTint="#181B26"
+                app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
         </LinearLayout>
 
@@ -301,7 +301,7 @@
                 android:text="Squircle"
                 android:textColor="#C8C8C8"
                 android:textSize="10sp"
-                app:strokeColor="#222736" />
+                app:strokeColor="#362222" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/shape_circle"
@@ -312,7 +312,7 @@
                 android:text="Circle"
                 android:textColor="#C8C8C8"
                 android:textSize="10sp"
-                app:strokeColor="#222736" />
+                app:strokeColor="#362222" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/shape_rounded"
@@ -323,7 +323,7 @@
                 android:text="Rounded"
                 android:textColor="#C8C8C8"
                 android:textSize="10sp"
-                app:strokeColor="#222736" />
+                app:strokeColor="#362222" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/shape_square"
@@ -334,7 +334,7 @@
                 android:text="Square"
                 android:textColor="#C8C8C8"
                 android:textSize="10sp"
-                app:strokeColor="#222736" />
+                app:strokeColor="#362222" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <!-- ── Section: Advanced Settings & Badging ───────────────── -->
@@ -370,7 +370,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginVertical="10dp"
-                android:background="#161924" />
+                android:background="#241616" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/shortcut_switch_badge"
@@ -391,7 +391,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginVertical="10dp"
-                android:background="#161924" />
+                android:background="#241616" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/shortcut_switch_dynamic"
@@ -418,7 +418,7 @@
             android:background="@drawable/st_btn_primary"
             android:letterSpacing="0.06"
             android:text="+ PIN SHORTCUT TO HOME SCREEN"
-            android:textColor="#0B0B0E"
+            android:textColor="#0E0B0B"
             android:textSize="13sp"
             android:textStyle="bold" />
 

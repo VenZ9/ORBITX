@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:contentDescription="@null"
             android:src="@drawable/ic_menu_settings"
-            app:tint="#E6E9EF" />
+            app:tint="#EFE6E7" />
     </FrameLayout>
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
-            android:textColor="#F4F6F9"
+            android:textColor="#F9F4F4"
             android:textSize="16.5sp" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#8A909C"
+            android:textColor="#9C8A8B"
             android:textSize="12.5sp" />
     </LinearLayout>
 
@@ -75,5 +75,5 @@
         android:layout_height="20dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_chevron_right"
-        app:tint="#6B7180" />
+        app:tint="#806B6C" />
 </LinearLayout>

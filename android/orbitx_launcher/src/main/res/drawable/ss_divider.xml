@@ -2,6 +2,6 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android" android:insetLeft="16dp">
     <shape android:shape="rectangle">
         <size android:height="1dp" />
-        <solid android:color="#23262E" />
+        <solid android:color="#2E2324" />
     </shape>
 </inset>

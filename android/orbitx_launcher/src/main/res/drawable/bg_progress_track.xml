@@ -2,7 +2,7 @@
 <!-- Phase-5 slim rounded track for the splash / install progress -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#202027" />
-    <stroke android:width="0.75dp" android:color="#26262E" />
+    <solid android:color="#272020" />
+    <stroke android:width="0.75dp" android:color="#2E2626" />
     <corners android:radius="4dp" />
 </shape>

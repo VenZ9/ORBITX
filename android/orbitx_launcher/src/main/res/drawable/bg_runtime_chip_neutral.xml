@@ -2,7 +2,7 @@
 <!-- Neutral size / status chip -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#1F1F26" />
+    <solid android:color="#261F1F" />
     <corners android:radius="10dp" />
     <padding android:left="8dp" android:top="2dp" android:right="8dp" android:bottom="2dp" />
 </shape>

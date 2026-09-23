@@ -51,7 +51,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="Back"
                     android:src="@drawable/ic_chevron_left"
-                    app:tint="#D2D6DE" />
+                    app:tint="#DED2D3" />
             </FrameLayout>
 
             <LinearLayout
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="Create Version"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="17sp" />
 
                 <TextView
@@ -76,7 +76,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.08"
                     android:text="CUSTOM PROFILE ARCHITECT"
-                    android:textColor="#9AA0AC"
+                    android:textColor="#AC9A9B"
                     android:textSize="9sp" />
             </LinearLayout>
 
@@ -89,7 +89,7 @@
                 android:letterSpacing="0.05"
                 android:paddingHorizontal="14dp"
                 android:text="CUSTOM"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -125,7 +125,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:letterSpacing="0.1"
                         android:text="PROFILE IDENTITY"
-                        android:textColor="#C9CED8"
+                        android:textColor="#D8C9CA"
                         android:textSize="10sp" />
 
                     <LinearLayout
@@ -166,7 +166,7 @@
                             android:inputType="textCapWords"
                             android:maxLines="1"
                             android:paddingHorizontal="16dp"
-                            android:textColor="#F1F5F9"
+                            android:textColor="#F9F1F2"
                             android:textColorHint="#7A808C"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -209,7 +209,7 @@
                             android:fontFamily="sans-serif-medium"
                             android:letterSpacing="0.05"
                             android:text="MOD LOADER ENGINE"
-                            android:textColor="#F4F6F9"
+                            android:textColor="#F9F4F4"
                             android:textSize="13sp" />
                     </LinearLayout>
 
@@ -243,7 +243,7 @@
                             android:fontFamily="sans-serif-medium"
                             android:letterSpacing="0.08"
                             android:text="FABRIC LOADER"
-                            android:textColor="#C9CED8"
+                            android:textColor="#D8C9CA"
                             android:textSize="9sp" />
 
                         <LinearLayout
@@ -265,7 +265,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="sans-serif"
                                 android:text="Select loader version"
-                                android:textColor="#8A909C"
+                                android:textColor="#9C8A8B"
                                 android:textSize="13sp" />
 
                             <ImageView
@@ -273,7 +273,7 @@
                                 android:layout_height="18dp"
                                 android:contentDescription="Select"
                                 android:src="@drawable/ic_chevron_down"
-                                app:tint="#C9CED8" />
+                                app:tint="#D8C9CA" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -297,7 +297,7 @@
                             android:fontFamily="sans-serif-medium"
                             android:letterSpacing="0.05"
                             android:text="MINECRAFT VERSION"
-                            android:textColor="#F4F6F9"
+                            android:textColor="#F9F4F4"
                             android:textSize="13sp" />
                     </LinearLayout>
 
@@ -327,7 +327,7 @@
                             android:layout_weight="1"
                             android:fontFamily="sans-serif"
                             android:text="Select version"
-                            android:textColor="#8A909C"
+                            android:textColor="#9C8A8B"
                             android:textSize="13sp" />
 
                         <ImageView
@@ -335,7 +335,7 @@
                             android:layout_height="18dp"
                             android:contentDescription="Select"
                             android:src="@drawable/ic_chevron_down"
-                            app:tint="#C9CED8" />
+                            app:tint="#D8C9CA" />
                     </LinearLayout>
 
                     <TextView
@@ -346,7 +346,7 @@
                         android:fontFamily="sans-serif"
                         android:lineSpacingMultiplier="1.2"
                         android:text="Pick a loader — the rest of the form follows."
-                        android:textColor="#9AA0AC"
+                        android:textColor="#AC9A9B"
                         android:textSize="11sp"
                         android:visibility="gone" />
                 </LinearLayout>
@@ -381,7 +381,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Ready to create"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="13sp"
                 tools:ignore="HardcodedText" />
 
@@ -392,7 +392,7 @@
                 android:layout_marginTop="1dp"
                 android:fontFamily="sans-serif"
                 android:text="Pick a loader and version"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="10sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
@@ -410,7 +410,7 @@
             android:minWidth="150dp"
             android:paddingHorizontal="22dp"
             android:text="CREATE PROFILE"
-            android:textColor="#141519"
+            android:textColor="#191414"
             android:textSize="13sp"
             android:textStyle="bold" />
     </LinearLayout>

@@ -50,7 +50,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.01"
                     android:text="Minecraft Versions"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="17sp" />
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_marginTop="2dp"
                     android:fontFamily="sans-serif"
                     android:text="Select a version build"
-                    android:textColor="#9AA0AC"
+                    android:textColor="#AC9A9B"
                     android:textSize="11sp" />
             </LinearLayout>
 
@@ -71,7 +71,7 @@
                 android:contentDescription="@string/global_back"
                 android:padding="9dp"
                 android:src="@drawable/ic_vp_close"
-                app:tint="#D2D6DE" />
+                app:tint="#DED2D3" />
         </LinearLayout>
 
         <!-- Search pill -->
@@ -90,7 +90,7 @@
                 android:layout_height="16dp"
                 android:contentDescription="Search"
                 android:src="@drawable/ic_search"
-                app:tint="#C9CED8" />
+                app:tint="#D8C9CA" />
 
             <EditText
                 android:id="@+id/vp_search"
@@ -103,7 +103,7 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="#F1F5F9"
+                android:textColor="#F9F1F2"
                 android:textColorHint="#7A808C"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -131,7 +131,7 @@
             <ProgressBar
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:indeterminateTint="#C9CED8" />
+                android:indeterminateTint="#D8C9CA" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -140,7 +140,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.04"
                 android:text="Loading versions…"
-                android:textColor="#9AA0AC"
+                android:textColor="#AC9A9B"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Unable to load versions"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="15sp" />
 
             <TextView
@@ -168,7 +168,7 @@
                 android:gravity="center"
                 android:fontFamily="sans-serif"
                 android:text="Check your connection and try again."
-                android:textColor="#9AA0AC"
+                android:textColor="#AC9A9B"
                 android:textSize="11sp" />
 
             <TextView
@@ -184,7 +184,7 @@
                 android:letterSpacing="0.06"
                 android:paddingHorizontal="28dp"
                 android:text="RETRY"
-                android:textColor="#D2D6DE"
+                android:textColor="#DED2D3"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -196,7 +196,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="No versions available"
-            android:textColor="#9AA0AC"
+            android:textColor="#AC9A9B"
             android:textSize="12sp"
             android:visibility="gone" />
     </LinearLayout>

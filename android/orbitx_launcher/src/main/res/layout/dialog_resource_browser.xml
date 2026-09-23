@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Browser Resources"
-                android:textColor="#F3F3F7"
+                android:textColor="#F7F3F3"
                 android:textSize="15.5sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold" />
@@ -138,7 +138,7 @@
             android:inputType="text"
             android:maxLines="1"
             android:textColor="#FFFFFF"
-            android:textColorHint="#6B7280"
+            android:textColorHint="#806B6C"
             android:textSize="12sp" />
 
         <ImageView
@@ -196,7 +196,7 @@
             android:layout_height="28dp"
             android:layout_gravity="center"
             android:indeterminate="true"
-            android:indeterminateTint="#B9BBC4" />
+            android:indeterminateTint="#C4B9B9" />
 
         <TextView
             android:id="@+id/cs_rb_empty"

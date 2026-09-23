@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.widget.Toast;
 import net.kdt.pojavlaunch.BuildConfig;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -20,17 +18,15 @@ import net.kdt.pojavlaunch.UiMotion;
 import net.kdt.pojavlaunch.utils.animation.MotionSpeed;
 
 /**
- * About page — premium animated page with the launcher story, credits to
- * PojavLauncher and Amethyst, community links and the GPL v3 legal notice.
+ * About page — the OrbitX product page.
+ *
+ * <p>Shows the OrbitX mark, the wordmark, the live build facts and the GPL v3
+ * notice. The old team/credits/community blocks (people cards, lineage tiles,
+ * Discord / GitHub / YouTube links) were removed with the surrounding UI.
  */
 public class AboutFragment extends Fragment {
 
     public static final String TAG = "AboutFragment";
-
-    // One source of truth (Phase 8): the home brand cluster uses the same links.
-    private static final String URL_DISCORD = net.kdt.pojavlaunch.CsLinks.DISCORD;
-    private static final String URL_WEBSITE = net.kdt.pojavlaunch.CsLinks.WEBSITE;
-    private static final String URL_GITHUB = net.kdt.pojavlaunch.CsLinks.GITHUB;
 
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -43,7 +39,26 @@ public class AboutFragment extends Fragment {
         // Version chip
         TextView versionChip = view.findViewById(R.id.about_version_chip);
         if (versionChip != null) {
-            versionChip.setText("OrbitX v" + net.kdt.pojavlaunch.BuildConfig.VERSION_NAME);
+            versionChip.setText("OrbitX v" + BuildConfig.VERSION_NAME);
+        }
+
+        // Build facts — exactly which build is installed.
+        TextView buildVersion = view.findViewById(R.id.about_build_version);
+        if (buildVersion != null) buildVersion.setText(BuildConfig.VERSION_NAME);
+
+        TextView buildChannel = view.findViewById(R.id.about_build_channel);
+        if (buildChannel != null) {
+            buildChannel.setText(BuildConfig.DEBUG ? "DEBUG" : "RELEASE");
+        }
+
+        TextView buildAbi = view.findViewById(R.id.about_build_abi);
+        if (buildAbi != null) {
+            String abi = "—";
+            try {
+                String[] abis = Build.SUPPORTED_ABIS;
+                if (abis != null && abis.length > 0) abi = abis[0];
+            } catch (Throwable ignored) { }
+            buildAbi.setText(abi);
         }
 
         // Back
@@ -57,16 +72,10 @@ public class AboutFragment extends Fragment {
                     @Override public void handleOnBackPressed() { navigateBack(); }
                 });
 
-        // Links
-        wireLink(view, R.id.about_link_discord, URL_DISCORD);
-        wireLink(view, R.id.about_link_website, URL_WEBSITE);
-        wireLink(view, R.id.about_link_github, URL_GITHUB);
-
         // ── Entrance choreography (best & fast; no-op when animations Off) ──
         if (MotionSpeed.isEnabled()) {
             view.post(() -> {
                 if (!isAdded() || isRemoving()) return;
-                // Welcome animation
                 View heroCard = view.findViewById(R.id.about_hero_card);
                 if (heroCard != null) {
                     heroCard.setAlpha(0f);
@@ -77,26 +86,20 @@ public class AboutFragment extends Fragment {
                             .setInterpolator(new android.view.animation.OvershootInterpolator(1.2f))
                             .start();
                 }
-                // Hero logo pops in with a jelly overshoot
+                // The OrbitX mark pops in with a jelly overshoot.
                 View logo = view.findViewById(R.id.about_cs_logo);
                 if (logo != null) UiMotion.popIn(logo);
 
-                // Staggered cascade: hero → credits → links → legal
+                // Staggered cascade: hero → features → legal
                 cascade(view.findViewById(R.id.about_credits_heading), 100);
-                cascade(view.findViewById(R.id.about_pojav_card), 170);
-                cascade(view.findViewById(R.id.about_amethyst_card), 240);
-                cascade(view.findViewById(R.id.about_links_heading), 310);
-                cascade(view.findViewById(R.id.about_link_discord), 370);
-                cascade(view.findViewById(R.id.about_link_website), 420);
-                cascade(view.findViewById(R.id.about_link_github), 470);
-                cascade(view.findViewById(R.id.about_legal_heading), 530);
-                cascade(view.findViewById(R.id.about_legal_card), 590);
+                cascade(view.findViewById(R.id.about_build_heading), 170);
+                cascade(view.findViewById(R.id.about_legal_heading), 250);
+                cascade(view.findViewById(R.id.about_legal_card), 320);
 
-                // Legal notice — TYPEWRITER reveal (user req: text appears as
-                // if being written), starts right after the legal card lands.
+                // Legal notice — TYPEWRITER reveal, starts right after the card lands.
                 mHandler.postDelayed(() -> typewriter(
                         view.findViewById(R.id.about_legal_text),
-                        getString(R.string.cs_about_legal_text)), 950);
+                        getString(R.string.cs_about_legal_text)), 700);
             });
         } else {
             // Animations off → show the legal text instantly.
@@ -139,19 +142,6 @@ public class AboutFragment extends Fragment {
                 .setDuration(MotionSpeed.scale(300L))
                 .setInterpolator(new android.view.animation.DecelerateInterpolator(1.5f))
                 .start();
-    }
-
-    private void wireLink(@NonNull View root, int id, final String url) {
-        View row = root.findViewById(id);
-        if (row == null) return;
-        UiMotion.pressFeedback(row);
-        row.setOnClickListener(v -> {
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-            } catch (Throwable t) {
-                Tools.showError(requireContext(), t);
-            }
-        });
     }
 
     private void navigateBack() {

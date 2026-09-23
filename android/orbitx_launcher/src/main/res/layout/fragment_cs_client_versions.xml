@@ -45,7 +45,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="‹"
-                android:textColor="#D2D6DE"
+                android:textColor="#DED2D3"
                 android:textSize="26sp" />
 
             <LinearLayout
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="New OrbitX Client"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="17sp" />
 
                 <TextView
@@ -70,7 +70,7 @@
                     android:letterSpacing="0.08"
                     android:layout_marginTop="1dp"
                     android:text="STEP 1 OF 3  •  PICK VERSION"
-                    android:textColor="#9AA0AC"
+                    android:textColor="#AC9A9B"
                     android:textSize="9sp" />
             </LinearLayout>
 
@@ -84,7 +84,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="OrbitX Client"
                     android:src="@drawable/cs_logo"
-                    app:tint="#D2D6DE" />
+                    app:tint="#DED2D3" />
             </FrameLayout>
         </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="1"
-                android:textColor="#E6E9EF"
+                android:textColor="#EFE6E7"
                 android:textSize="13sp" />
 
             <View
@@ -166,7 +166,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.05"
                 android:text="AVAILABLE MINECRAFT VERSIONS"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="13sp" />
 
             <TextView
@@ -178,7 +178,7 @@
                 android:letterSpacing="0.05"
                 android:paddingHorizontal="12dp"
                 android:text="FABRIC"
-                android:textColor="#9AA0AC"
+                android:textColor="#AC9A9B"
                 android:textSize="9sp" />
         </LinearLayout>
 
@@ -211,7 +211,7 @@
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:indeterminate="true"
-                android:indeterminateTint="#C9CED8" />
+                android:indeterminateTint="#D8C9CA" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

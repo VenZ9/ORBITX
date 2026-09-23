@@ -62,15 +62,9 @@ public final class ServerPlayDialog {
             bannerCard.setVisibility(View.VISIBLE);
             android.widget.ImageView banner = view.findViewById(R.id.spd_banner);
             if (banner != null && item != null && item.bannerRes != 0) banner.setImageResource(item.bannerRes);
-            if (item != null && item.discordUrl != null && !item.discordUrl.isEmpty()) {
-                btnDiscord.setVisibility(View.VISIBLE);
-                btnDiscord.setOnClickListener(v -> {
-                    press(v);
-                    openDiscord(ctx, item.discordUrl);
-                });
-            } else {
-                btnDiscord.setVisibility(View.GONE);
-            }
+            // The community invite was removed app-wide: the row stays
+            // resolved for view compatibility but is never shown.
+            btnDiscord.setVisibility(View.GONE);
         } else {
             bannerCard.setVisibility(View.GONE);
             btnDiscord.setVisibility(View.GONE);

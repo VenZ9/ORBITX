@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Rail label tint. Selected goes to full-brightness bone white — the ember
+     segment beside it carries the brand, so the label only has to be readable. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="true" android:color="#FFFFFF" />
-    <item android:color="#6B7280" />
+    <item android:state_selected="true" android:color="#F5F5F5" />
+    <item android:color="#806B6C" />
 </selector>

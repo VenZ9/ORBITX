@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- NAV-RAIL ITEM — selected state gets the CS platinum glow fill + edge. -->
+<!-- ORBIT RING SEGMENT — the signature marker for the active station.
+     Selected reads as a SOLID ember-washed capsule with an ember rim; the
+     inactive rows have no outline at all. The difference is therefore carried
+     by shape/fill as well as colour, which keeps it legible for colour-blind
+     users and on cheap panels.
+
+     Deliberately built from plain gradients + stroke only: layer-list
+     android:width/height on <item> is API 23+, and this app runs on API 21. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true">
         <shape android:shape="rectangle">
             <corners android:radius="12dp" />
             <gradient
                 android:angle="0"
-                android:startColor="#38FFFFFF"
-                android:endColor="#0FFFFFFF" />
-            <stroke android:width="1dp" android:color="#40FFFFFF" />
+                android:startColor="#33FF3B30"
+                android:centerColor="#1AFF3B30"
+                android:endColor="#0AFF3B30" />
+            <stroke android:width="1dp" android:color="#66FF3B30" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="12dp" />
-            <solid android:color="#14FFFFFF" />
+            <solid android:color="#1AFFFFFF" />
         </shape>
     </item>
     <item>

@@ -61,7 +61,7 @@
                     android:fontFamily="monospace"
                     android:letterSpacing="0.16"
                     android:text="PLAYER BADGE"
-                    android:textColor="#8A909C"
+                    android:textColor="#9C8A8B"
                     android:textSize="9sp" />
 
                 <TextView
@@ -73,7 +73,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="6dp"
                     android:text="LOCAL"
-                    android:textColor="#C9CED8"
+                    android:textColor="#D8C9CA"
                     android:textSize="8.5sp" />
             </LinearLayout>
 
@@ -133,7 +133,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:maxLines="1"
                         android:text="Player"
-                        android:textColor="#F4F6F9"
+                        android:textColor="#F9F4F4"
                         android:textSize="22sp" />
 
                     <TextView
@@ -152,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="Offline &amp; LAN worlds · skin from your file or a matching Mojang name"
-                        android:textColor="#8A909C"
+                        android:textColor="#9C8A8B"
                         android:textSize="10.5sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -173,7 +173,7 @@
                     android:layout_weight="1"
                     android:fontFamily="monospace"
                     android:text="ORBITX  ·  NO PASSWORD"
-                    android:textColor="#4F5460"
+                    android:textColor="#604F50"
                     android:textSize="8.5sp" />
 
                 <View
@@ -207,7 +207,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="Mint a local profile"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="18sp" />
 
                 <TextView
@@ -219,7 +219,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="8dp"
                     android:text="0 / 16"
-                    android:textColor="#8A909C"
+                    android:textColor="#9C8A8B"
                     android:textSize="9.5sp" />
             </LinearLayout>
 
@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Type the name other players will see. Nothing leaves your device."
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="11sp" />
 
             <!-- prompt-style field -->
@@ -247,7 +247,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text="&gt;_"
-                    android:textColor="#C9CED8"
+                    android:textColor="#D8C9CA"
                     android:textSize="14sp" />
 
                 <EditText
@@ -264,8 +264,8 @@
                     android:inputType="textNoSuggestions|textVisiblePassword"
                     android:maxLength="16"
                     android:maxLines="1"
-                    android:textColor="#F4F6F9"
-                    android:textColorHint="#4F5460"
+                    android:textColor="#F9F4F4"
+                    android:textColorHint="#604F50"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -303,7 +303,7 @@
                 android:gravity="center"
                 android:letterSpacing="0.1"
                 android:text="MINT PROFILE"
-                android:textColor="#141519"
+                android:textColor="#191414"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

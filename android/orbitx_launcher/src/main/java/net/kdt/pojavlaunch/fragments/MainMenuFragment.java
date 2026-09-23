@@ -162,7 +162,6 @@ public class MainMenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Button mNewsButton          = view.findViewById(R.id.news_button);
-        Button mDiscordButton       = view.findViewById(R.id.discord_button);
         Button mCustomControlButton = view.findViewById(R.id.custom_control_button);
         Button mInstallJarButton   = view.findViewById(R.id.install_jar_button);
         Button mShareLogsButton    = view.findViewById(R.id.share_logs_button);
@@ -209,7 +208,6 @@ public class MainMenuFragment extends Fragment {
         });
         if (mHomeButton != null) mHomeButton.setOnClickListener(v -> refreshHomeState());
         if (mNewsButton != null) mNewsButton.setOnClickListener(v -> Tools.openURL(requireActivity(), Tools.URL_HOME));
-        if (mDiscordButton != null) mDiscordButton.setOnClickListener(v -> Tools.openURL(requireActivity(), getString(R.string.discord_invite)));
         if (mCustomControlButton != null) mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
         if (mCursorCustomButton != null) mCursorCustomButton.setOnClickListener(v -> Tools.swapFragment(requireActivity(), CursorCustomizationFragment.class, CursorCustomizationFragment.TAG, null));
         if (mManageSkinButton != null) mManageSkinButton.setOnClickListener(v ->

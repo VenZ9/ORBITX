@@ -21,14 +21,14 @@
                 <shape android:shape="oval">
                     <gradient
                         android:angle="270"
-                        android:startColor="#F6F7FA"
-                        android:endColor="#C9CDD8" />
+                        android:startColor="#FAF6F6"
+                        android:endColor="#D8C9CA" />
                 </shape>
             </item>
             <!-- dark pupil -->
             <item android:left="11dp" android:top="11dp" android:right="11dp" android:bottom="11dp">
                 <shape android:shape="oval">
-                    <solid android:color="#14151A" />
+                    <solid android:color="#1A1414" />
                 </shape>
             </item>
         </layer-list>
@@ -49,14 +49,14 @@
                 <shape android:shape="oval">
                     <gradient
                         android:angle="270"
-                        android:startColor="#F6F7FA"
-                        android:endColor="#C9CDD8" />
+                        android:startColor="#FAF6F6"
+                        android:endColor="#D8C9CA" />
                 </shape>
             </item>
             <!-- dark pupil -->
             <item android:left="11dp" android:top="11dp" android:right="11dp" android:bottom="11dp">
                 <shape android:shape="oval">
-                    <solid android:color="#14151A" />
+                    <solid android:color="#1A1414" />
                 </shape>
             </item>
         </layer-list>

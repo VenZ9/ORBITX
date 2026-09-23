@@ -57,7 +57,7 @@
             android:contentDescription="@android:string/cancel"
             android:padding="6dp"
             android:src="@drawable/ic_rb_close"
-            app:tint="#C9CED8" />
+            app:tint="#D8C9CA" />
     </LinearLayout>
 
     <View

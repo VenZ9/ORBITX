@@ -41,7 +41,7 @@
                 android:contentDescription="@string/global_back"
                 android:padding="9dp"
                 android:src="@drawable/ic_chevron_left"
-                app:tint="#D2D6DE" />
+                app:tint="#DED2D3" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -57,7 +57,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.18"
                     android:text="STOREFRONT"
-                    android:textColor="#8A909C"
+                    android:textColor="#9C8A8B"
                     android:textSize="9sp" />
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="Download Mods"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="19sp" />
             </LinearLayout>
 
@@ -89,7 +89,7 @@
                     android:layout_width="1dp"
                     android:layout_height="14dp"
                     android:layout_marginHorizontal="7dp"
-                    android:background="#363A44" />
+                    android:background="#443637" />
 
                 <ImageView
                     android:layout_width="14dp"
@@ -115,7 +115,7 @@
                 android:layout_height="15dp"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_cs_search"
-                app:tint="#8A909C" />
+                app:tint="#9C8A8B" />
 
             <EditText
                 android:id="@+id/search_mod_edittext"
@@ -129,8 +129,8 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="#F4F6F9"
-                android:textColorHint="#4F5460"
+                android:textColor="#F9F4F4"
+                android:textColorHint="#604F50"
                 android:textSize="13.5sp" />
 
             <ImageButton
@@ -141,7 +141,7 @@
                 android:contentDescription="@null"
                 android:padding="8dp"
                 android:src="@drawable/ic_mr_sort"
-                app:tint="#E6E9EF" />
+                app:tint="#EFE6E7" />
         </LinearLayout>
     </LinearLayout>
 
@@ -151,8 +151,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:indeterminate="true"
-        android:indeterminateTint="#C9CED8"
-        android:progressBackgroundTint="#1C1F26"
+        android:indeterminateTint="#D8C9CA"
+        android:progressBackgroundTint="#261C1D"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -177,7 +177,7 @@
         android:paddingHorizontal="24dp"
         android:paddingVertical="18dp"
         android:text="No results found."
-        android:textColor="#6B7180"
+        android:textColor="#806B6C"
         android:textSize="12sp"
         android:visibility="gone" />
 </LinearLayout>

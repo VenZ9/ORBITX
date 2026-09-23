@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Frosted dark-violet glass surface: floating dock, account chip, continue pill.
-     Upgraded to a soft vertical gradient + brighter violet rim for depth. -->
+<!-- Frosted glass surface: floating dock, account chip, continue pill.
+     Warm near-black gradient + hairline ember-kissed rim, so it reads as the
+     same material as the cards instead of a cooler panel floating above them. -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
             <gradient
                 android:angle="90"
-                android:startColor="#F01A1330"
-                android:endColor="#F013101F" />
+                android:startColor="#F0301313"
+                android:endColor="#F01F1010" />
             <corners android:radius="22dp" />
-            <stroke android:width="1dp" android:color="#43385F" />
+            <stroke android:width="1dp" android:color="#5F383B" />
         </shape>
     </item>
     <!-- top inner sheen -->

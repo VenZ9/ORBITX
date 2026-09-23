@@ -13,31 +13,45 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:textSize">@dimen/_12ssp</item>
-        <item name="colorBgApp">#0B0B0E</item>
-        <item name="colorBgBottomBar">#0B0B0E</item>
-        <item name="colorBgStatusBar">#0B0B0E</item>
+        <item name="colorBgApp">#0E0B0B</item>
+        <item name="colorBgBottomBar">#0E0B0B</item>
+        <item name="colorBgStatusBar">#0E0B0B</item>
         <item name="colorDivider">#1AFFFFFF</item>
-        <item name="themeAccent">@color/premium_cyan</item>
+        <item name="themeAccent">@color/cs_accent</item>
         <item name="colorTextPrimary">@color/text_primary_white</item>
         <item name="colorTextSecondary">@color/text_secondary_light</item>
         <item name="bgMainDrawable">@drawable/bg_premium_cosmic_gradient</item>
         <item name="android:windowBackground">@drawable/bg_premium_cosmic_gradient</item>
-        <!-- Explicit Material 3 palette: blocks its built-in #D0BCFF lavender fallback. -->
+        <!-- Explicit Material 3 palette: blocks its built-in #FAC1C5 lavender fallback. -->
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorOnPrimary">#0D0D0D</item>
         <item name="colorPrimaryContainer">#FFFFFF</item>
         <item name="colorOnPrimaryContainer">#0D0D0D</item>
         <item name="colorSecondary">#D0D0D0</item>
         <item name="colorOnSecondary">#0D0D0D</item>
-        <item name="colorSecondaryContainer">#25262D</item>
+        <item name="colorSecondaryContainer">#2D2525</item>
         <item name="colorOnSecondaryContainer">#FFFFFF</item>
         <item name="colorTertiary">#B8B8B8</item>
         <item name="colorOnTertiary">#0D0D0D</item>
         <item name="colorAccent">#D0D0D0</item>
         <item name="colorOnSurface">@color/text_primary_white</item>
         <item name="colorOnSurfaceVariant">@color/text_secondary_light</item>
-        <item name="colorSurface">#141419</item>
-        <item name="colorSurfaceVariant">#1B1B22</item>
+        <item name="colorSurface">#191414</item>
+        <item name="colorSurfaceVariant">#221B1B</item>
+        <!-- ORBITX RED IS THE DEFAULT IDENTITY, not an optional accent. The
+             Material palette itself is red so framework-drawn controls
+             (switches, ripples, focus rings, progress) come out on-brand with
+             no extra wiring, and no built-in lavender fallback can leak in. -->
+        <item name="colorPrimary">@color/cs_accent</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">@color/cs_accent_deep</item>
+        <item name="colorOnPrimaryContainer">#FFFFFF</item>
+        <item name="colorSecondary">@color/cs_accent_light</item>
+        <item name="colorOnSecondary">#1A0A0A</item>
+        <item name="colorTertiary">@color/cs_accent</item>
+        <item name="colorOnTertiary">#FFFFFF</item>
+        <item name="colorAccent">@color/cs_accent</item>
+        <item name="colorError">@color/cs_danger</item>
     </style>
     <style name="AppTheme.Gradient">
         <item name="bgMainDrawable">@drawable/bg_gradient_default</item>
@@ -62,12 +76,12 @@
     <style name="CsAlertDialog" parent="ThemeOverlay.Material3.Dialog.Alert">
         <item name="android:windowBackground">@drawable/bg_cs_dialog</item>
         <item name="android:windowAnimationStyle">@style/DialogFadeScale</item>
-        <item name="android:colorBackground">#15161B</item>
-        <item name="colorSurface">#15161B</item>
-        <item name="android:textColorPrimary">#F2F3F6</item>
-        <item name="android:textColorSecondary">#B9BEC9</item>
-        <item name="colorPrimary">#E6E8EE</item>
-        <item name="colorAccent">#E6E8EE</item>
+        <item name="android:colorBackground">#1B1515</item>
+        <item name="colorSurface">#1B1515</item>
+        <item name="android:textColorPrimary">#F6F2F2</item>
+        <item name="android:textColorSecondary">#C9B9BA</item>
+        <item name="colorPrimary">#EEE6E6</item>
+        <item name="colorAccent">#EEE6E6</item>
     </style>
 
     <style name="DialogFadeScale" parent="@android:style/Animation.Dialog">
@@ -318,7 +332,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:fontFamily">monospace</item>
-        <item name="android:textColor">#9AA0AC</item>
+        <item name="android:textColor">#AC9A9B</item>
         <item name="android:textSize">10.5sp</item>
     </style>
     <style name="Au9Step">
@@ -336,7 +350,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">10dp</item>
-        <item name="android:textColor">#8A909C</item>
+        <item name="android:textColor">#9C8A8B</item>
         <item name="android:textSize">11sp</item>
     </style>
     <style name="Au9FieldLabel">
@@ -345,7 +359,7 @@
         <item name="android:layout_marginTop">14dp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:letterSpacing">0.14</item>
-        <item name="android:textColor">#6B7180</item>
+        <item name="android:textColor">#806B6C</item>
         <item name="android:textSize">9sp</item>
     </style>
     <!-- About "Build Manifest" (Phase 9) -->
@@ -379,7 +393,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">#F4F6F9</item>
+        <item name="android:textColor">#F9F4F4</item>
         <item name="android:textSize">11.5sp</item>
     </style>
     <style name="AbLinkSub">
@@ -387,7 +401,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textColor">#6B7180</item>
+        <item name="android:textColor">#806B6C</item>
         <item name="android:textSize">9sp</item>
     </style>
     <style name="AbLinkArrow">
@@ -395,7 +409,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">monospace</item>
         <item name="android:text">↗</item>
-        <item name="android:textColor">#8A909C</item>
+        <item name="android:textColor">#9C8A8B</item>
         <item name="android:textSize">12sp</item>
     </style>
     <style name="AbSectionHead">
@@ -412,7 +426,7 @@
         <item name="android:background">@drawable/ab_index</item>
         <item name="android:fontFamily">monospace</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">#141519</item>
+        <item name="android:textColor">#191414</item>
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -421,7 +435,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">10dp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">#F4F6F9</item>
+        <item name="android:textColor">#F9F4F4</item>
         <item name="android:textSize">15sp</item>
     </style>
     <style name="AbRule">
@@ -430,7 +444,7 @@
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:layout_marginEnd">12dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">#2B2F38</item>
+        <item name="android:background">#382B2C</item>
     </style>
     <style name="AbSectionMeta">
         <item name="android:layout_width">wrap_content</item>
@@ -461,6 +475,38 @@
         <item name="android:contentDescription">@null</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
+    <!-- ── About: FEATURES tiles (replace the old team tiles) ── -->
+    <style name="AbFeatureTile">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/ab_tile</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">14dp</item>
+    </style>
+    <style name="AbFeatureIcon">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:alpha">0.92</item>
+    </style>
+    <style name="AbFeatureTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#F9F4F4</item>
+        <item name="android:textSize">12.5sp</item>
+    </style>
+    <style name="AbFeatureLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+        <item name="android:textColor">#8A909C</item>
+        <item name="android:textSize">9.5sp</item>
+    </style>
+    <!-- Legacy team styles are kept so older/translated layouts still inflate. -->
     <style name="AbTeamTextCol">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -472,7 +518,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">#F4F6F9</item>
+        <item name="android:textColor">#F9F4F4</item>
         <item name="android:textSize">13sp</item>
     </style>
     <style name="AbTeamRole">
@@ -481,7 +527,7 @@
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:fontFamily">monospace</item>
         <item name="android:letterSpacing">0.1</item>
-        <item name="android:textColor">#6B7180</item>
+        <item name="android:textColor">#806B6C</item>
         <item name="android:textSize">8.5sp</item>
     </style>
     <style name="AbLineageCard">
@@ -513,7 +559,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">#F4F6F9</item>
+        <item name="android:textColor">#F9F4F4</item>
         <item name="android:textSize">14sp</item>
     </style>
     <style name="AbLineageRole">
@@ -522,7 +568,7 @@
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:fontFamily">monospace</item>
         <item name="android:letterSpacing">0.1</item>
-        <item name="android:textColor">#8A909C</item>
+        <item name="android:textColor">#9C8A8B</item>
         <item name="android:textSize">8.5sp</item>
     </style>
     <style name="AbLineageDesc">
@@ -530,7 +576,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">6dp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
-        <item name="android:textColor">#8A909C</item>
+        <item name="android:textColor">#9C8A8B</item>
         <item name="android:textSize">10.5sp</item>
     </style>
     <!-- ── Phase 10: welcome popup rows/chips ── -->
@@ -540,7 +586,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingStart">14dp</item>
         <item name="android:paddingEnd">14dp</item>
-        <item name="android:textColor">#D2D6DE</item>
+        <item name="android:textColor">#DED2D3</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">1</item>
@@ -561,7 +607,7 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/minecraftia</item>
-        <item name="android:textColor">#E6E9EF</item>
+        <item name="android:textColor">#EFE6E7</item>
         <item name="android:textSize">15sp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:background">@drawable/pw_glyph_well</item>
@@ -576,7 +622,7 @@
     <style name="PwRowTitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#F4F6F9</item>
+        <item name="android:textColor">#F9F4F4</item>
         <item name="android:textSize">14.5sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:includeFontPadding">false</item>
@@ -585,7 +631,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">3dp</item>
-        <item name="android:textColor">#9AA0AC</item>
+        <item name="android:textColor">#AC9A9B</item>
         <item name="android:textSize">12.5sp</item>
         <item name="android:lineSpacingExtra">2dp</item>
     </style>
@@ -597,7 +643,7 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">13dp</item>
         <item name="android:paddingEnd">13dp</item>
-        <item name="android:textColor">#C9CED8</item>
+        <item name="android:textColor">#D8C9CA</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:includeFontPadding">false</item>
@@ -623,7 +669,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/minecraftia</item>
-        <item name="android:textColor">#F4F6F9</item>
+        <item name="android:textColor">#F9F4F4</item>
         <item name="android:textSize">12sp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:maxLines">1</item>
@@ -633,7 +679,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">3dp</item>
         <item name="android:letterSpacing">0.14</item>
-        <item name="android:textColor">#6B7180</item>
+        <item name="android:textColor">#806B6C</item>
         <item name="android:textSize">8sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:includeFontPadding">false</item>
@@ -644,7 +690,7 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingStart">14dp</item>
         <item name="android:paddingEnd">14dp</item>
-        <item name="android:textColor">#8A909C</item>
+        <item name="android:textColor">#9C8A8B</item>
         <item name="android:textSize">11.5sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:includeFontPadding">false</item>
@@ -665,7 +711,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:letterSpacing">0.18</item>
-        <item name="android:textColor">#6B7180</item>
+        <item name="android:textColor">#806B6C</item>
         <item name="android:textSize">9.5sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:includeFontPadding">false</item>
@@ -694,13 +740,13 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textColor">#8A909C</item>
+        <item name="android:textColor">#9C8A8B</item>
         <item name="android:textSize">12sp</item>
     </style>
     <style name="MdKvValue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#F4F6F9</item>
+        <item name="android:textColor">#F9F4F4</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">1</item>
@@ -719,7 +765,7 @@
         <item name="android:paddingStart">14dp</item>
         <item name="android:paddingEnd">14dp</item>
         <item name="android:drawableEnd">@drawable/ic_chevron_right</item>
-        <item name="android:textColor">#E6E9EF</item>
+        <item name="android:textColor">#EFE6E7</item>
         <item name="android:textSize">12.5sp</item>
         <item name="android:background">@drawable/md_link</item>
         <item name="android:clickable">true</item>
@@ -733,7 +779,7 @@
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">12dp</item>
         <item name="android:fontFamily">@font/minecraftia</item>
-        <item name="android:textColor">#8A909C</item>
+        <item name="android:textColor">#9C8A8B</item>
         <item name="android:textSize">8.5sp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:background">@drawable/md_tab_off</item>

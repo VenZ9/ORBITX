@@ -15,7 +15,7 @@
         android:layout_height="20dp"
         android:layout_marginEnd="12dp"
         android:contentDescription="@null"
-        app:tint="#B9B6CE" />
+        app:tint="#CEB6B6" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -27,7 +27,7 @@
             android:id="@+id/editor_menu_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#F2F2F4"
+            android:textColor="#F4F2F2"
             android:textSize="12.5sp"
             android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:textColor="#807D96"
+            android:textColor="#967D7D"
             android:textSize="8.5sp" />
     </LinearLayout>
 </LinearLayout>

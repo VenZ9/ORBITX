@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/global_back"
                 android:src="@drawable/ic_chevron_left"
-                app:tint="#EAECEF" />
+                app:tint="#EFEAEA" />
         </FrameLayout>
 
         <LinearLayout
@@ -82,7 +82,7 @@
                 android:letterSpacing="0.06"
                 android:paddingHorizontal="10dp"
                 android:text="0 WORLDS"
-                android:textColor="#C6CAD3"
+                android:textColor="#D3C6C7"
                 android:textSize="8sp"
                 android:textStyle="bold" />
 
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="DP"
-                    android:textColor="#E6E8EE"
+                    android:textColor="#EEE6E6"
                     android:textSize="9sp"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -120,7 +120,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_cs_refresh"
-                    app:tint="#E6E8EE" />
+                    app:tint="#EEE6E6" />
             </FrameLayout>
 
             <TextView
@@ -135,7 +135,7 @@
                 android:letterSpacing="0.08"
                 android:paddingHorizontal="14dp"
                 android:text="IMPORT"
-                android:textColor="#14151A"
+                android:textColor="#1A1414"
                 android:textSize="9.5sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -177,7 +177,7 @@
                     android:id="@+id/world_storage_used"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#F0F1F5"
+                    android:textColor="#F5F0F0"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     android:text="—" />
@@ -212,7 +212,7 @@
                     android:id="@+id/world_storage_free"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#9AA0AE"
+                    android:textColor="#AE9A9B"
                     android:textSize="8.5sp"
                     android:text="" />
                 <TextView
@@ -220,7 +220,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:textColor="#5C6070"
+                    android:textColor="#705C5C"
                     android:textSize="8.5sp"
                     android:text="" />
             </LinearLayout>
@@ -249,8 +249,8 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingHorizontal="12dp"
-                android:textColor="#F0F1F5"
-                android:textColorHint="#5C6070"
+                android:textColor="#F5F0F0"
+                android:textColorHint="#705C5C"
                 android:textSize="10.5sp" />
 
             <LinearLayout
@@ -267,7 +267,7 @@
                     android:gravity="center"
                     android:letterSpacing="0.05"
                     android:text="RECENT"
-                    android:textColor="#C6CAD3"
+                    android:textColor="#D3C6C7"
                     android:textSize="7.5sp"
                     android:textStyle="bold" />
                 <TextView
@@ -280,7 +280,7 @@
                     android:gravity="center"
                     android:letterSpacing="0.05"
                     android:text="NAME"
-                    android:textColor="#C6CAD3"
+                    android:textColor="#D3C6C7"
                     android:textSize="7.5sp"
                     android:textStyle="bold" />
                 <TextView
@@ -293,7 +293,7 @@
                     android:gravity="center"
                     android:letterSpacing="0.05"
                     android:text="SIZE"
-                    android:textColor="#C6CAD3"
+                    android:textColor="#D3C6C7"
                     android:textSize="7.5sp"
                     android:textStyle="bold" />
                 <TextView
@@ -306,7 +306,7 @@
                     android:gravity="center"
                     android:letterSpacing="0.05"
                     android:text="VERSION"
-                    android:textColor="#C6CAD3"
+                    android:textColor="#D3C6C7"
                     android:textSize="7.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -370,7 +370,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="✦"
-                    android:textColor="#9AA0AE"
+                    android:textColor="#AE9A9B"
                     android:textSize="20sp" />
             </FrameLayout>
             <TextView

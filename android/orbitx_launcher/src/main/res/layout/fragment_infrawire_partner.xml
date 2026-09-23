@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#0B0B0E">
+    android:background="#0E0B0B">
 
     <!-- ═══ Top bar ═══ -->
     <LinearLayout
@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingHorizontal="14dp"
-        android:background="#111116">
+        android:background="#161111">
 
         <ImageView
             android:id="@+id/infrawire_back_button"
@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:text="@string/infrawire_partners_title"
-            android:textColor="#F0F0F3"
+            android:textColor="#F3F0F0"
             android:textSize="17sp"
             android:textStyle="bold"
             android:letterSpacing="0.08" />
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/infrawire_badge_live"
-            android:textColor="#DADDE5"
+            android:textColor="#E5DADB"
             android:textSize="9sp"
             android:textStyle="bold"
             android:letterSpacing="0.12"
@@ -95,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/infrawire_badge_partner"
-                        android:textColor="#DADDE5"
+                        android:textColor="#E5DADB"
                         android:textSize="9sp"
                         android:textStyle="bold"
                         android:letterSpacing="0.1"
@@ -108,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/infrawire_tagline"
-                    android:textColor="#DADDE5"
+                    android:textColor="#E5DADB"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp" />
@@ -157,7 +157,7 @@
                         android:layout_weight="1.25"
                         android:gravity="center"
                         android:text="@string/infrawire_deploy_vps"
-                        android:textColor="#0E0E11"
+                        android:textColor="#110E0E"
                         android:textSize="13.5sp"
                         android:textStyle="bold"
                         android:letterSpacing="0.05"
@@ -173,7 +173,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/infrawire_learn_more"
-                        android:textColor="#DADDE5"
+                        android:textColor="#E5DADB"
                         android:textSize="13.5sp"
                         android:textStyle="bold"
                         android:background="@drawable/bg_infrawire_button_ghost"
@@ -208,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/infrawire_plans_title"
-                    android:textColor="#F0F0F3"
+                    android:textColor="#F3F0F0"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.08" />
@@ -219,7 +219,7 @@
                     android:layout_height="34dp"
                     android:gravity="center"
                     android:text="@string/infrawire_view_plans"
-                    android:textColor="#DADDE5"
+                    android:textColor="#E5DADB"
                     android:textSize="11.5sp"
                     android:textStyle="bold"
                     android:paddingHorizontal="16dp"
@@ -265,7 +265,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/infrawire_promo_title"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -284,7 +284,7 @@
                     android:layout_height="36dp"
                     android:gravity="center"
                     android:text="@string/infrawire_promo_button"
-                    android:textColor="#DADDE5"
+                    android:textColor="#E5DADB"
                     android:textSize="11.5sp"
                     android:textStyle="bold"
                     android:paddingHorizontal="14dp"

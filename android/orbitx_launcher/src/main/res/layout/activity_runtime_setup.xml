@@ -57,7 +57,7 @@
                         android:paddingEnd="10dp"
                         android:paddingBottom="3dp"
                         android:text="JAVA RUNTIME ENGINE"
-                        android:textColor="#94A3B8"
+                        android:textColor="#B89496"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -68,7 +68,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Java for Minecraft"
-                    android:textColor="#F8FAFC"
+                    android:textColor="#FCF8F8"
                     android:textSize="25sp" />
 
                 <TextView
@@ -78,7 +78,7 @@
                     android:layout_marginTop="6dp"
                     android:lineSpacingExtra="3dp"
                     android:text="Minecraft requires Java to run on your device. Choose which versions to install — Java 17 and 21 are recommended for modern Minecraft."
-                    android:textColor="#94A3B8"
+                    android:textColor="#B89496"
                     android:textSize="13sp" />
 
                 <TextView
@@ -146,7 +146,7 @@
                                 android:fontFamily="sans-serif-medium"
                                 android:gravity="center"
                                 android:text="0%"
-                                android:textColor="#F8FAFC"
+                                android:textColor="#FCF8F8"
                                 android:textSize="15sp" />
                         </FrameLayout>
 
@@ -165,7 +165,7 @@
                                 android:maxLines="1"
                                 android:ellipsize="end"
                                 android:text="@string/rs_step_starting"
-                                android:textColor="#F8FAFC"
+                                android:textColor="#FCF8F8"
                                 android:textSize="15sp" />
 
                             <TextView
@@ -176,7 +176,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/rs_stats_starting"
-                                android:textColor="#94A3B8"
+                                android:textColor="#B89496"
                                 android:textSize="12sp" />
 
                             <LinearLayout
@@ -195,7 +195,7 @@
                                     android:paddingEnd="10dp"
                                     android:paddingBottom="3dp"
                                     android:text="0 MB"
-                                    android:textColor="#E2E8F0"
+                                    android:textColor="#F0E2E3"
                                     android:textSize="11sp" />
 
                                 <TextView
@@ -209,7 +209,7 @@
                                     android:paddingEnd="10dp"
                                     android:paddingBottom="3dp"
                                     android:text="— MB/s"
-                                    android:textColor="#E2E8F0"
+                                    android:textColor="#F0E2E3"
                                     android:textSize="11sp" />
 
                                 <TextView
@@ -223,7 +223,7 @@
                                     android:paddingEnd="10dp"
                                     android:paddingBottom="3dp"
                                     android:text="—"
-                                    android:textColor="#E2E8F0"
+                                    android:textColor="#F0E2E3"
                                     android:textSize="11sp" />
                             </LinearLayout>
                         </LinearLayout>
@@ -255,7 +255,7 @@
                             android:paddingStart="18dp"
                             android:paddingEnd="18dp"
                             android:text="@string/rw_finish_anyway"
-                            android:textColor="#E2E8F0"
+                            android:textColor="#F0E2E3"
                             android:textSize="13sp" />
 
                         <TextView
@@ -269,7 +269,7 @@
                             android:paddingStart="22dp"
                             android:paddingEnd="22dp"
                             android:text="@string/rs_done_cta"
-                            android:textColor="#090A0E"
+                            android:textColor="#0E0909"
                             android:textSize="13.5sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -319,7 +319,7 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="@string/rs_skip"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="14sp" />
 
             <TextView
@@ -334,7 +334,7 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"
                 android:text="Install Selected"
-                android:textColor="#090A0E"
+                android:textColor="#0E0909"
                 android:textSize="14.5sp" />
         </LinearLayout>
     </LinearLayout>

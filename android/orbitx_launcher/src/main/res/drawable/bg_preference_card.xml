@@ -24,11 +24,11 @@
                     <corners android:radius="22dp" />
                     <gradient
                         android:angle="315"
-                        android:startColor="#1A202C"
-                        android:endColor="#0F131B" />
+                        android:startColor="#2C1A1B"
+                        android:endColor="#1B0F10" />
                     <stroke
                         android:width="1dp"
-                        android:color="#26303E" />
+                        android:color="#3E2628" />
                 </shape>
             </item>
         </selector>

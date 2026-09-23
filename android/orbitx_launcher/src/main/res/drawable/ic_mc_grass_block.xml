@@ -15,7 +15,7 @@
         android:pathData="M3.4,8.2 L12,12.9 L12,21 L3.4,16.3 Z" />
     <!-- right dirt face (slightly brighter for light direction) -->
     <path
-        android:fillColor="#F2F2F2FF"
+        android:fillColor="#F2FEF3F3"
         android:pathData="M20.6,8.2 L12,12.9 L12,21 L20.6,16.3 Z" />
     <!-- grass top -->
     <path
@@ -24,25 +24,25 @@
 
     <!-- face separation edges -->
     <path
-        android:strokeColor="#0E0B16"
+        android:strokeColor="#160B0C"
         android:strokeWidth="0.9"
         android:pathData="M12,12.9 L12,21 M12,12.9 L3.4,8.2 M12,12.9 L20.6,8.2" />
     <!-- top rim edge -->
     <path
-        android:strokeColor="#0E0B16"
+        android:strokeColor="#160B0C"
         android:strokeWidth="0.8"
         android:pathData="M4.1,7.6 L12,11.9 L19.9,7.6 L12,3.5 Z" />
 
     <!-- grass blade notches hanging over the rim (left face) -->
     <path
-        android:fillColor="#0E0B16"
+        android:fillColor="#160B0C"
         android:pathData="M5.2,8.4 l1.1,0.6 l0,0.9 l-1.1,-0.6 Z M8.1,9.9 l1.1,0.6 l0,0.9 l-1.1,-0.6 Z M6.6,9.1 l0.8,0.45 l0,0.7 l-0.8,-0.45 Z" />
     <!-- grass blade notches hanging over the rim (right face) -->
     <path
-        android:fillColor="#0E0B16"
+        android:fillColor="#160B0C"
         android:pathData="M17.7,9.0 l-1.1,0.6 l0,0.9 l1.1,-0.6 Z M14.8,10.4 l-1.1,0.6 l0,0.9 l1.1,-0.6 Z M16.3,9.6 l-0.8,0.45 l0,0.7 l0.8,-0.45 Z" />
     <!-- dirt speckles -->
     <path
-        android:fillColor="#0E0B16"
+        android:fillColor="#160B0C"
         android:pathData="M6.2,13.2 m0.7,0 a0.7,0.7 0 1,0 -1.4,0 a0.7,0.7 0 1,0 1.4,0 M9.4,15.4 m0.6,0 a0.6,0.6 0 1,0 -1.2,0 a0.6,0.6 0 1,0 1.2,0 M15.1,13.6 m0.7,0 a0.7,0.7 0 1,0 -1.4,0 a0.7,0.7 0 1,0 1.4,0 M17.3,15.8 m0.55,0 a0.55,0.55 0 1,0 -1.1,0 a0.55,0.55 0 1,0 1.1,0 M7.6,16.9 m0.5,0 a0.5,0.5 0 1,0 -1.0,0 a0.5,0.5 0 1,0 1.0,0" />
 </vector>

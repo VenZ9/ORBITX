@@ -30,7 +30,7 @@
         android:fontFamily="@font/minecraftia"
         android:includeFontPadding="false"
         android:maxLines="1"
-        android:textColor="#F4F6F9"
+        android:textColor="#F9F4F4"
         android:textSize="12sp"
         tools:text="1.21.11" />
 
@@ -47,7 +47,7 @@
         android:paddingEnd="7dp"
         android:paddingBottom="3dp"
         android:text="LATEST"
-        android:textColor="#141519"
+        android:textColor="#191414"
         android:textSize="8sp"
         android:textStyle="bold"
         android:visibility="gone"
@@ -65,7 +65,7 @@
         android:paddingTop="3dp"
         android:paddingEnd="7dp"
         android:paddingBottom="3dp"
-        android:textColor="#9AA0AC"
+        android:textColor="#AC9A9B"
         android:textSize="8.5sp"
         android:textStyle="bold"
         tools:text="RELEASE" />

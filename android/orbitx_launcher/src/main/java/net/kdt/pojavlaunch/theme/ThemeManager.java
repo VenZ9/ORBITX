@@ -14,18 +14,27 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.File;
 
+/**
+ * ORBITX theme manager.
+ *
+ * <p><b>OrbitX Red is the launcher's default theme.</b> The red preset is the
+ * out-of-the-box look (dark surfaces + the #FF3B30 / #B12820 red family), not
+ * an optional accent. The remaining presets stay available in Settings, and
+ * anything unrecognised falls back to the red default.
+ */
 public class ThemeManager {
 
     private static final String KEY_THEME    = "launcher_theme";
     public  static final String KEY_GRADIENT = "enable_bg_gradient";
 
+    /** Preset 0 IS the OrbitX Red default — do not reorder. */
     public static final Preset[] PRESETS = {
-        new Preset("Default (ORBITX)",  R.style.AppTheme,            R.style.AppTheme_Gradient),
-        new Preset("Midnight Blue",     R.style.AppTheme_MidnightBlue, R.style.AppTheme_MidnightBlue_Gradient),
-        new Preset("Forest Green",      R.style.AppTheme_ForestGreen,  R.style.AppTheme_ForestGreen_Gradient),
-        new Preset("Crimson",           R.style.AppTheme_Crimson,      R.style.AppTheme_Crimson_Gradient),
-        new Preset("Amethyst",          R.style.AppTheme_Amethyst,     R.style.AppTheme_Amethyst_Gradient),
-        new Preset("Arctic",            R.style.AppTheme_Arctic,       R.style.AppTheme_Arctic_Gradient),
+        new Preset("OrbitX Red (default)", R.style.AppTheme,                    R.style.AppTheme_Gradient),
+        new Preset("Midnight Blue",        R.style.AppTheme_MidnightBlue,       R.style.AppTheme_MidnightBlue_Gradient),
+        new Preset("Forest Green",         R.style.AppTheme_ForestGreen,        R.style.AppTheme_ForestGreen_Gradient),
+        new Preset("Crimson",              R.style.AppTheme_Crimson,            R.style.AppTheme_Crimson_Gradient),
+        new Preset("Amethyst",             R.style.AppTheme_Amethyst,           R.style.AppTheme_Amethyst_Gradient),
+        new Preset("Arctic",               R.style.AppTheme_Arctic,             R.style.AppTheme_Arctic_Gradient),
     };
 
     public static void applyPreset(@NonNull Preset preset) {
@@ -34,6 +43,7 @@ public class ThemeManager {
             .apply();
     }
 
+    /** OrbitX Red — the launcher's default identity. */
     public static void resetToDefault() {
         applyPreset(PRESETS[0]);
     }
@@ -56,12 +66,31 @@ public class ThemeManager {
 
     /**
      * Call in Activity.onCreate() BEFORE setContentView().
-     * Returns the flat or gradient style depending on the gradient toggle.
+     *
+     * <p>Returns the red default unless the player has explicitly chosen a
+     * different preset — a stored value that is no longer one of our styles
+     * (or no value at all) resolves to OrbitX Red.
      */
     @StyleRes
     public static int getSavedTheme() {
         boolean gradient = LauncherPreferences.DEFAULT_PREF.getBoolean(KEY_GRADIENT, false);
+        int stored = 0;
+        try {
+            stored = LauncherPreferences.DEFAULT_PREF.getInt(KEY_THEME, 0);
+        } catch (Throwable ignored) { }
+
+        if (isKnownPreset(stored)) return stored;
+
+        // Unknown / first run → OrbitX Red.
         return gradient ? R.style.AppTheme_Gradient : R.style.AppTheme;
+    }
+
+    private static boolean isKnownPreset(int styleRes) {
+        if (styleRes == 0) return false;
+        for (Preset p : PRESETS) {
+            if (p.styleRes == styleRes || p.gradientStyleRes == styleRes) return true;
+        }
+        return false;
     }
 
     /**
@@ -88,7 +117,8 @@ public class ThemeManager {
         if (dominant == null) return false;
 
         float[] hsl = dominant.getHsl();
-        float[] presetHues = { 20f, 210f, 120f, 0f, 280f, 185f };
+        // Hue anchors follow PRESETS order — index 0 is the red OrbitX default.
+        float[] presetHues = { 0f, 210f, 120f, 355f, 280f, 185f };
         Preset best = PRESETS[0];
         float bestDist = Float.MAX_VALUE;
         for (int i = 0; i < PRESETS.length; i++) {

@@ -7,9 +7,9 @@
 
     <!-- Main Button -->
     <color name="minebutton_color">#FF3B30</color>
-    <color name="cu_bg_app">#0B0B0E</color>
-    <color name="cu_bg_status_bar">#0B0B0E</color>
-    <color name="cu_bg_bottom_bar">#0B0B0E</color>
+    <color name="cu_bg_app">#0E0B0B</color>
+    <color name="cu_bg_status_bar">#0E0B0B</color>
+    <color name="cu_bg_bottom_bar">#0E0B0B</color>
     <color name="cu_divider">#1AFFFFFF</color>
 
     <!-- BACKGROUND SYSTEM (DARK THEME) -->
@@ -27,13 +27,13 @@
     <color name="secondary_text">#B8B8B8</color>
 
     <!-- ── Midnight Blue preset ───────────────────────────────────────── -->
-    <color name="mb_bg_app">#0D1B2A</color>
-    <color name="mb_bg_bottom_bar">#1B2A3B</color>
-    <color name="mb_bg_status_bar">#0A1522</color>
-    <color name="mb_divider">#1E3A5F</color>
+    <color name="mb_bg_app">#2A0D0F</color>
+    <color name="mb_bg_bottom_bar">#3B1B1D</color>
+    <color name="mb_bg_status_bar">#220A0C</color>
+    <color name="mb_divider">#5F1E22</color>
     <color name="mb_accent">#FF3B30</color>
-    <color name="mb_text_primary">#E8EFF5</color>
-    <color name="mb_text_secondary">#8BAABF</color>
+    <color name="mb_text_primary">#F5E8E9</color>
+    <color name="mb_text_secondary">#BF8B8E</color>
 
     <!-- ── Forest Green preset ───────────────────────────────────────── -->
     <color name="fg_bg_app">#0F1F0F</color>
@@ -54,78 +54,119 @@
     <color name="cr_text_secondary">#CCA0A0</color>
 
     <!-- ── Amethyst preset ───────────────────────────────────────────── -->
-    <color name="am_bg_app">#13091A</color>
-    <color name="am_bg_bottom_bar">#15161B</color>
-    <color name="am_bg_status_bar">#0F0714</color>
-    <color name="am_divider">#303139</color>
+    <color name="am_bg_app">#1A090A</color>
+    <color name="am_bg_bottom_bar">#1B1515</color>
+    <color name="am_bg_status_bar">#140708</color>
+    <color name="am_divider">#393030</color>
     <color name="am_accent">#D0D0D0</color>
     <color name="am_text_primary">#F2F2F2</color>
     <color name="am_text_secondary">#A0A0A0</color>
 
     <!-- ── Arctic preset ─────────────────────────────────────────────── -->
-    <color name="ar_bg_app">#0E1A20</color>
-    <color name="ar_bg_bottom_bar">#162530</color>
-    <color name="ar_bg_status_bar">#0B1418</color>
-    <color name="ar_divider">#1E3A47</color>
+    <color name="ar_bg_app">#200E0F</color>
+    <color name="ar_bg_bottom_bar">#301618</color>
+    <color name="ar_bg_status_bar">#180B0C</color>
+    <color name="ar_divider">#471E21</color>
     <color name="ar_accent">#D0D0D0</color>
     <color name="ar_text_primary">#E0F7FA</color>
     <color name="ar_text_secondary">#80C8D4</color>
 
-    <!-- ── ORBITX Premium Theme (Dark Gaming Theme) ── -->
-    <!-- Base backgrounds -->
-    <color name="bg_primary">#0B0B0E</color>
-    <color name="bg_launcher_dark">#0B0B0E</color>
-    <color name="bg_sidebar">#121212</color>
-    <color name="bg_header">#1E1E1E</color>
-    <color name="bg_bottom_bar">#222222</color>
-    <color name="bg_card">#1C1C1C</color>
-    <color name="bg_card_dark">#2C2C2C</color>
-    <color name="bg_elevated">#242424</color>
-    <color name="bg_client_features">#111217</color>
-    <color name="bg_client_features_card">#1B1C22</color>
+    <!-- ══════════════════════════════════════════════════════════════════
+         ORBITX DESIGN SYSTEM — canonical palette
 
-    <!-- Accent colors (Neon Green + Purple) -->
-    <color name="accent_primary">#FFFFFF</color>
-    <color name="accent_light">#B9BBC4</color>
-    <color name="accent_purple">#D0D0D0</color>
-    <color name="accent_purple_client">#22C9CB</color>
-    <color name="accent_purple_deep">#888888</color>
-    <color name="accent_bg_subtle">#1A1C2C</color>
-    <color name="accent_border">#FFFFFF</color>
+         Intent: a launcher for someone holding a mid-range phone in one
+         hand, at night, wanting to be in-game in one tap. It should feel
+         like an instrument panel, not a storefront.
+
+         Colour world: obsidian night, ember signal, graphite steel.
+         ONE accent. Red means "this is live / this is the action" — never
+         decoration, never a second hue competing for attention.
+         Depth is borders + surface shifts, not drop shadows.
+         ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- — Surfaces, ascending. Each step is a few points of lightness. — -->
+    <color name="ox_void">#08070A</color>
+    <color name="ox_obsidian">#0E0B0B</color>
+    <color name="ox_surface">#141010</color>
+    <color name="ox_surface_raised">#1A1515</color>
+    <color name="ox_surface_overlay">#221B1B</color>
+    <color name="ox_hairline">#2A2323</color>
+    <color name="ox_hairline_strong">#3A2E2E</color>
+
+    <!-- — Ember: the single accent. — -->
+    <color name="ox_ember">#FF3B30</color>
+    <color name="ox_ember_deep">#C62828</color>
+    <color name="ox_ember_bright">#FF6B6B</color>
+    <color name="ox_ember_soft">#33FF3B30</color>
+    <color name="ox_ember_glow">#40FF3B30</color>
+    <color name="ox_on_ember">#FFFFFF</color>
+
+    <!-- — Text, four levels. — -->
+    <color name="ox_text_primary">#F5F5F5</color>
+    <color name="ox_text_secondary">#AF9C9D</color>
+    <color name="ox_text_tertiary">#8A7979</color>
+    <color name="ox_text_muted">#6B5C5C</color>
+
+    <!-- — Status. Semantic only; never used for identity. — -->
+    <color name="ox_ok">#22C55E</color>
+    <color name="ox_warning">#FFB020</color>
+    <color name="ox_danger">#FF4444</color>
+
+    <!-- Base backgrounds (warmed: red undertone, never neutral grey) -->
+    <color name="bg_primary">#0E0B0B</color>
+    <color name="bg_launcher_dark">#0E0B0B</color>
+    <color name="bg_sidebar">#121010</color>
+    <color name="bg_header">#1A1515</color>
+    <color name="bg_bottom_bar">#141010</color>
+    <color name="bg_card">#141010</color>
+    <color name="bg_card_dark">#221B1B</color>
+    <color name="bg_elevated">#1A1515</color>
+    <color name="bg_client_features">#171111</color>
+    <color name="bg_client_features_card">#221B1B</color>
+
+    <!-- Accent — ember. Legacy names kept so every existing reference
+         resolves to the one brand hue instead of a second one. -->
+    <color name="accent_primary">#FF3B30</color>
+    <color name="accent_light">#FF6B6B</color>
+    <color name="accent_purple">#FF3B30</color>
+    <color name="accent_purple_client">#FF6B6B</color>
+    <color name="accent_purple_deep">#C62828</color>
+    <color name="accent_bg_subtle">#2C1A1A</color>
+    <color name="accent_border">#FF3B30</color>
 
     <!-- Legacy/Alias colors (kept for back-compat) -->
-    <color name="accent_green">#FFFFFF</color>
-    <color name="accent_green_light">#B9BBC4</color>
-    <color name="accent_green_bg">#1A1C2C</color>
-    <color name="accent_green_border">#FFFFFF</color>
+    <color name="accent_green">#FF3B30</color>
+    <color name="accent_green_light">#FF6B6B</color>
+    <color name="accent_green_bg">#2C1A1A</color>
+    <color name="accent_green_border">#FF3B30</color>
 
     <!-- Text -->
     <color name="text_primary_white">#FFFFFF</color>
     <color name="text_primary_light">#FFFFFF</color>
     <color name="text_primary">#FFFFFFFF</color>
-    <color name="text_secondary_light">#9CA3AF</color>
-    <color name="text_secondary_dim">#6B7280</color>
+    <color name="text_secondary_light">#AF9C9D</color>
+    <color name="text_secondary_dim">#806B6C</color>
     <color name="text_secondary">#8FFFFFFF</color>
 
     <!-- Dividers / Borders -->
-    <color name="border_default">#2A2A2A</color>
-    <color name="border_hover">#FFFFFF</color>
-    <color name="divider_color">#333333</color>
+    <color name="border_default">#2A2323</color>
+    <color name="border_hover">#3A2E2E</color>
+    <color name="divider_color">#2A2323</color>
 
-    <!-- PLAY button -->
-    <color name="play_btn_bg">#FFFFFF</color>
-    <color name="play_btn_text">#0D0D0D</color>
+    <!-- PLAY button: the one high-contrast surface in the app. -->
+    <color name="play_btn_bg">#FF3B30</color>
+    <color name="play_btn_text">#FFFFFF</color>
 
     <!-- Settings UI Colors -->
-    <color name="settings_bg">#080A0F</color>
-    <color name="card_bg">#0D1410</color>
-    <color name="card_bg_pressed">#162018</color>
-    <color name="neon_green">#62D99B</color>
-    <color name="neon_green_dim">#3F62D99B</color>
-    <color name="stroke_neon">#3F62D99B</color>
+    <color name="settings_bg">#0E0B0B</color>
+    <color name="card_bg">#141010</color>
+    <color name="card_bg_pressed">#1E1717</color>
+    <color name="neon_green">#FF3B30</color>
+    <color name="neon_green_dim">#3FFF3B30</color>
+    <color name="stroke_neon">#3FFF3B30</color>
     <color name="like_active">#FF4444</color>
     <color name="installed_color">#22C55E</color>
 
-    <color name="bg_nav_item_active">#AAFFFFFF</color>
-    <color name="premium_cyan">#D0D0D0</color>
+    <color name="bg_nav_item_active">#26FF3B30</color>
+    <color name="premium_cyan">#FF3B30</color>
 </resources>

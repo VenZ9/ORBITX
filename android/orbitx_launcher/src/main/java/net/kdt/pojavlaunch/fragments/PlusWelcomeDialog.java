@@ -59,19 +59,15 @@ public final class PlusWelcomeDialog extends DialogFragment {
         } catch (Throwable ignored) { }
     }
 
-    /** Show once, only on Home, only when no tutorial overlay is up. */
+    /**
+     * ORBITX ships with no first-run onboarding — the launcher opens straight
+     * into the Home stage, with no welcome popup and no guided tour.
+     *
+     * <p>This entry point is deliberately inert. It is kept (and still called
+     * from Home) so existing call sites remain valid without a wider refactor.
+     */
     public static boolean maybeShow(@NonNull FragmentActivity activity) {
-        if (activity.isFinishing()) return false;
-        if (wasShown(activity)) return false;
-        try {
-            if (activity.getSupportFragmentManager().findFragmentByTag(TAG) != null) return false;
-        } catch (Throwable ignored) { return false; }
-        try {
-            new PlusWelcomeDialog().show(activity.getSupportFragmentManager(), TAG);
-            return true;
-        } catch (Throwable ignored) {
-            return false;
-        }
+        return false;
     }
 
     @NonNull
@@ -159,15 +155,5 @@ public final class PlusWelcomeDialog extends DialogFragment {
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        releaseTutorial();
-    }
-
-    /** The tutorial starts as soon as this popup is out of the way. */
-    private void releaseTutorial() {
-        FragmentActivity activity = getActivity();
-        if (activity == null || activity.isFinishing()) return;
-        try {
-            net.kdt.pojavlaunch.tutorial.HomeTutorial.maybeStart(activity);
-        } catch (Throwable ignored) { }
     }
 }

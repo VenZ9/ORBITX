@@ -68,7 +68,7 @@
                 android:id="@+id/tv_update_changelog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#EDEDF2"
+                android:textColor="#F2EDED"
                 android:textSize="13sp"
                 android:lineSpacingExtra="3dp"
                 android:text="New features / changes" />

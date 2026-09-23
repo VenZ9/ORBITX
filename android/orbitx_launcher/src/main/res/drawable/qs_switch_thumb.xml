@@ -5,7 +5,7 @@
             <item android:bottom="2dp" android:left="2dp" android:right="2dp" android:top="2dp">
                 <shape android:shape="oval">
                     <size android:width="16dp" android:height="16dp" />
-                    <solid android:color="#141519" />
+                    <solid android:color="#191414" />
                 </shape>
             </item>
         </layer-list>
@@ -15,7 +15,7 @@
             <item android:bottom="2dp" android:left="2dp" android:right="2dp" android:top="2dp">
                 <shape android:shape="oval">
                     <size android:width="16dp" android:height="16dp" />
-                    <solid android:color="#8A909C" />
+                    <solid android:color="#9C8A8B" />
                 </shape>
             </item>
         </layer-list>

@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_settings_performance"
-                app:tint="#C9CED8" />
+                app:tint="#D8C9CA" />
         </FrameLayout>
 
         <LinearLayout
@@ -43,14 +43,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Memory telemetry"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="13sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PSS-accurate, refreshed every second"
-                android:textColor="#7F8593"
+                android:textColor="#937F80"
                 android:textSize="10.5sp" />
         </LinearLayout>
 
@@ -62,7 +62,7 @@
             android:gravity="center"
             android:paddingHorizontal="6dp"
             android:text="● LIVE"
-            android:textColor="#C9CED8"
+            android:textColor="#D8C9CA"
             android:textSize="8.5sp" />
     </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.1"
                 android:text="LAUNCHER"
-                android:textColor="#6B7180"
+                android:textColor="#806B6C"
                 android:textSize="8.5sp" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="monospace"
                 android:text="—"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="17sp" />
         </LinearLayout>
         <LinearLayout
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.1"
                 android:text="GAME HEAP"
-                android:textColor="#6B7180"
+                android:textColor="#806B6C"
                 android:textSize="8.5sp" />
 
             <TextView
@@ -124,7 +124,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="monospace"
                 android:text="—"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="17sp" />
         </LinearLayout>
         <LinearLayout
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.1"
                 android:text="SYSTEM FREE"
-                android:textColor="#6B7180"
+                android:textColor="#806B6C"
                 android:textSize="8.5sp" />
 
             <TextView
@@ -152,7 +152,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="monospace"
                 android:text="—"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="17sp" />
         </LinearLayout>
     </LinearLayout>
@@ -210,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Thermals"
-                android:textColor="#9AA0AC"
+                android:textColor="#AC9A9B"
                 android:textSize="11sp" />
 
             <TextView
@@ -240,7 +240,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Frame pacing"
-                android:textColor="#9AA0AC"
+                android:textColor="#AC9A9B"
                 android:textSize="11sp" />
 
             <TextView
@@ -270,7 +270,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="GPU load"
-                android:textColor="#9AA0AC"
+                android:textColor="#AC9A9B"
                 android:textSize="11sp" />
 
             <TextView

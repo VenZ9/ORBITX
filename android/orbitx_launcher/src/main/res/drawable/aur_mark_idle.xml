@@ -2,6 +2,6 @@
 <!-- OrbitX Client graphite mark: idle (unchecked). -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
     <corners android:radius="11dp" />
-    <solid android:color="#1D2026" />
-    <stroke android:width="1dp" android:color="#333741" />
+    <solid android:color="#261D1E" />
+    <stroke android:width="1dp" android:color="#413334" />
 </shape>

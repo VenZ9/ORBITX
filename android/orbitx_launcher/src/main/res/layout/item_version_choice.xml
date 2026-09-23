@@ -15,7 +15,7 @@
         android:layout_gravity="start|center_vertical"
         android:layout_marginStart="16dp"
         android:fontFamily="sans-serif-medium"
-        android:textColor="#E7EAEF"
+        android:textColor="#EFE7E8"
         android:textSize="14sp" />
 
     <ImageView
@@ -26,6 +26,6 @@
         android:layout_marginEnd="16dp"
         android:contentDescription="Selected"
         android:src="@drawable/ic_check"
-        app:tint="#141519"
+        app:tint="#191414"
         android:visibility="invisible" />
 </FrameLayout>

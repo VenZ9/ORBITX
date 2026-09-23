@@ -37,7 +37,7 @@
                 android:layout_height="16dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_chevron_left"
-                app:tint="#EAECEF"
+                app:tint="#EFEAEA"
                 android:contentDescription="@null" />
         </FrameLayout>
 
@@ -104,7 +104,7 @@
             android:paddingHorizontal="18dp"
             android:text="@string/global_save"
             android:textAllCaps="true"
-            android:textColor="#14151A"
+            android:textColor="#1A1414"
             android:textSize="11sp"
             android:textStyle="bold"
             android:letterSpacing="0.08"
@@ -136,7 +136,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="11dp"
                     android:background="@drawable/pe4_chip_green"
-                    android:textColor="#14151A"
+                    android:textColor="#1A1414"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     tools:text="1.21" />
@@ -183,7 +183,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#1AD4D8E0" />
+        android:background="#1AE0D4D5" />
 
     <!-- ── ACTIVE SECTION ───────────────────────────────────────────── -->
     <androidx.core.widget.NestedScrollView
@@ -245,7 +245,7 @@
                         android:maxLines="1"
                         android:paddingHorizontal="14dp"
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#5C6070"
+                        android:textColorHint="#705C5C"
                         android:textSize="13.5sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -277,7 +277,7 @@
                         android:maxLines="1"
                         android:paddingHorizontal="14dp"
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#5C6070"
+                        android:textColorHint="#705C5C"
                         android:textSize="13.5sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -296,7 +296,7 @@
                     android:layout_height="92dp"
                     android:layout_marginTop="6dp"
                     app:cardCornerRadius="14dp"
-                    app:cardBackgroundColor="#0D0F12"
+                    app:cardBackgroundColor="#120D0D"
                     app:cardElevation="0dp">
 
                     <ImageView
@@ -318,7 +318,7 @@
                         android:paddingHorizontal="12dp"
                         android:text="@string/change_background"
                         android:textAllCaps="true"
-                        android:textColor="#F0F1F5"
+                        android:textColor="#F5F0F0"
                         android:textSize="8.5sp"
                         android:textStyle="bold"
                         android:background="@drawable/pe4_btn_ghost" />
@@ -343,7 +343,7 @@
                         android:id="@+id/vprof_ram_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#F2F3F6"
+                        android:textColor="#F6F2F2"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         tools:text="4096 MB" />
@@ -379,14 +379,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/cs_ram_global_hint"
-                        android:textColor="#6B7280"
+                        android:textColor="#806B6C"
                         android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/vprof_ram_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#6B7280"
+                        android:textColor="#806B6C"
                         android:textSize="11sp"
                         tools:text="Device: 12 GB" />
                 </LinearLayout>
@@ -443,7 +443,7 @@
                             android:fontFamily="monospace"
                             android:gravity="center"
                             android:text="GL"
-                            android:textColor="#E6E9EF"
+                            android:textColor="#EFE6E7"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -462,7 +462,7 @@
                                 android:fontFamily="sans-serif-medium"
                                 android:maxLines="1"
                                 android:text="Default renderer"
-                                android:textColor="#F4F6F9"
+                                android:textColor="#F9F4F4"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -474,7 +474,7 @@
                                 android:fontFamily="monospace"
                                 android:maxLines="1"
                                 android:text="auto"
-                                android:textColor="#8A909C"
+                                android:textColor="#9C8A8B"
                                 android:textSize="10.5sp" />
                         </LinearLayout>
 
@@ -488,7 +488,7 @@
                             android:letterSpacing="0.08"
                             android:paddingHorizontal="11dp"
                             android:text="CHANGE"
-                            android:textColor="#C9CED8"
+                            android:textColor="#D8C9CA"
                             android:textSize="9.5sp" />
                     </LinearLayout>
                 </FrameLayout>
@@ -517,7 +517,7 @@
                         style="@style/Pe4IconAction"
                         android:contentDescription="@string/cs_section_mods"
                         android:src="@drawable/ic_add"
-                        app:tint="#B9BEC9" />
+                        app:tint="#C9B9BA" />
                 </LinearLayout>
 
                 <TextView style="@style/Pe5Desc" android:text="Tap + to add a mod (.jar). Use each card&#8217;s switch to turn a mod on or off." />
@@ -539,7 +539,7 @@
                     android:gravity="center"
                     android:padding="20dp"
                     android:text="@string/manage_mods_empty"
-                    android:textColor="#6B7280"
+                    android:textColor="#806B6C"
                     android:textSize="12sp"
                     android:visibility="gone" />
             </LinearLayout>
@@ -568,13 +568,13 @@
                         android:layout_marginEnd="8dp"
                         android:contentDescription="@string/cs_section_rpacks"
                         android:src="@drawable/ic_add"
-                        app:tint="#B9BEC9" />
+                        app:tint="#C9B9BA" />
                     <ImageButton
                         android:id="@+id/vprof_editor_resource_packs_folder"
                         style="@style/Pe4IconAction"
                         android:contentDescription="@string/cs_section_rpacks"
                         android:src="@drawable/ic_folder"
-                        app:tint="#C6CAD3" />
+                        app:tint="#D3C6C7" />
                 </LinearLayout>
 
                 <TextView style="@style/Pe5Desc" android:text="Add texture packs with + or open the folder to manage them." />
@@ -596,7 +596,7 @@
                     android:gravity="center"
                     android:padding="20dp"
                     android:text="No resource packs installed."
-                    android:textColor="#6B7280"
+                    android:textColor="#806B6C"
                     android:textSize="12sp"
                     android:visibility="gone" />
             </LinearLayout>
@@ -625,13 +625,13 @@
                         android:layout_marginEnd="8dp"
                         android:contentDescription="@string/cs_section_shaders"
                         android:src="@drawable/ic_add"
-                        app:tint="#B9BEC9" />
+                        app:tint="#C9B9BA" />
                     <ImageButton
                         android:id="@+id/vprof_editor_shader_packs_folder"
                         style="@style/Pe4IconAction"
                         android:contentDescription="@string/cs_section_shaders"
                         android:src="@drawable/ic_folder"
-                        app:tint="#C6CAD3" />
+                        app:tint="#D3C6C7" />
                 </LinearLayout>
 
                 <TextView style="@style/Pe5Desc" android:text="Shader packs make the game look beautiful." />
@@ -653,7 +653,7 @@
                     android:gravity="center"
                     android:padding="20dp"
                     android:text="No shader packs installed."
-                    android:textColor="#6B7280"
+                    android:textColor="#806B6C"
                     android:textSize="12sp"
                     android:visibility="gone" />
             </LinearLayout>
@@ -762,7 +762,7 @@
                             android:fontFamily="monospace"
                             android:gravity="center"
                             android:text="J"
-                            android:textColor="#E6E9EF"
+                            android:textColor="#EFE6E7"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -781,7 +781,7 @@
                                 android:fontFamily="sans-serif-medium"
                                 android:maxLines="1"
                                 android:text="Default runtime"
-                                android:textColor="#F4F6F9"
+                                android:textColor="#F9F4F4"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -793,7 +793,7 @@
                                 android:fontFamily="monospace"
                                 android:maxLines="1"
                                 android:text="auto-pick per version"
-                                android:textColor="#8A909C"
+                                android:textColor="#9C8A8B"
                                 android:textSize="10.5sp" />
                         </LinearLayout>
 
@@ -807,7 +807,7 @@
                             android:letterSpacing="0.08"
                             android:paddingHorizontal="11dp"
                             android:text="CHANGE"
-                            android:textColor="#C9CED8"
+                            android:textColor="#D8C9CA"
                             android:textSize="9.5sp" />
                     </LinearLayout>
                 </FrameLayout>
@@ -837,7 +837,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="This profile keeps exactly one latest launch session."
-                    android:textColor="#8D93A1"
+                    android:textColor="#A18D8E"
                     android:textSize="10.5sp" />
 
                 <LinearLayout
@@ -854,7 +854,7 @@
                         android:background="@drawable/pe4_btn_save"
                         android:minHeight="0dp"
                         android:text="View Full Console"
-                        android:textColor="#14151A"
+                        android:textColor="#1A1414"
                         android:textSize="10sp"
                         android:textStyle="bold" />
 
@@ -867,7 +867,7 @@
                         android:background="@drawable/pe4_btn_ghost"
                         android:minHeight="0dp"
                         android:text="Share File"
-                        android:textColor="#F0F1F5"
+                        android:textColor="#F5F0F0"
                         android:textSize="10sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -905,7 +905,7 @@
                         android:maxLines="1"
                         android:paddingHorizontal="14dp"
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#5C6070"
+                        android:textColorHint="#705C5C"
                         android:textSize="13.5sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -925,7 +925,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="#0D1118"
+        android:background="#180D0E"
         android:paddingHorizontal="14dp"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
@@ -939,7 +939,7 @@
             android:layout_marginEnd="10dp"
             android:text="@string/cs_cancel"
             android:textAllCaps="true"
-            android:textColor="#B9BEC9"
+            android:textColor="#C9B9BA"
             android:textSize="11.5sp"
             android:textStyle="bold"
             android:letterSpacing="0.08"

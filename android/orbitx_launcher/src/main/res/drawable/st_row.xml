@@ -2,14 +2,14 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <layer-list>
-            <item><shape android:shape="rectangle"><solid android:color="#181A20" /></shape></item>
-            <item android:height="1dp" android:gravity="bottom"><shape android:shape="rectangle"><solid android:color="#22252D" /></shape></item>
+            <item><shape android:shape="rectangle"><solid android:color="#201818" /></shape></item>
+            <item android:height="1dp" android:gravity="bottom"><shape android:shape="rectangle"><solid android:color="#2D2223" /></shape></item>
         </layer-list>
     </item>
     <item>
         <layer-list>
             <item><shape android:shape="rectangle"><solid android:color="#00000000" /></shape></item>
-            <item android:height="1dp" android:gravity="bottom"><shape android:shape="rectangle"><solid android:color="#1C1F26" /></shape></item>
+            <item android:height="1dp" android:gravity="bottom"><shape android:shape="rectangle"><solid android:color="#261C1D" /></shape></item>
         </layer-list>
     </item>
 </selector>

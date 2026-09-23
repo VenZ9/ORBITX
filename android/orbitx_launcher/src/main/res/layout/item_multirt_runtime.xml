@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:contentDescription="@null"
             android:src="@drawable/ic_setting_java_runtime"
-            android:tint="#E2E8F0" />
+            android:tint="#F0E2E3" />
     </FrameLayout>
 
     <LinearLayout
@@ -45,7 +45,7 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:text="Java 17"
-            android:textColor="#F8FAFC"
+            android:textColor="#FCF8F8"
             android:textSize="15.5sp" />
 
         <TextView
@@ -56,7 +56,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="17.0.9 (Internal)"
-            android:textColor="#94A3B8"
+            android:textColor="#B89496"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -73,7 +73,7 @@
         android:stateListAnimator="@null"
         android:text="@string/multirt_config_setdefault"
         android:textAllCaps="false"
-        android:textColor="#E2E8F0"
+        android:textColor="#F0E2E3"
         android:textSize="12.5sp" />
 
     <androidx.appcompat.widget.AppCompatImageButton

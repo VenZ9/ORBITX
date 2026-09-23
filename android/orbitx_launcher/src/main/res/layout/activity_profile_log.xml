@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#050608">
+    android:background="#080505">
 
     <LinearLayout
         android:id="@+id/profile_log_toolbar"
@@ -27,7 +27,7 @@
         <TextView android:id="@+id/profile_log_upload" android:layout_width="104dp" android:layout_height="36dp" android:layout_marginStart="6dp" android:background="@drawable/bg_skin_slot_active" android:clickable="true" android:focusable="true" android:gravity="center" android:minHeight="0dp" android:stateListAnimator="@null" android:text="MCLO.GS" android:textColor="#FAFAFA" android:textSize="8sp" android:textStyle="bold" />
     </LinearLayout>
 
-    <View android:id="@+id/profile_log_divider" android:layout_width="0dp" android:layout_height="1dp" android:background="#292A31" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/profile_log_toolbar" />
+    <View android:id="@+id/profile_log_divider" android:layout_width="0dp" android:layout_height="1dp" android:background="#312929" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/profile_log_toolbar" />
 
     <FrameLayout
         android:id="@+id/profile_log_console"

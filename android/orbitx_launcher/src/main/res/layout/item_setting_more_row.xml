@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="Show more options"
-        android:textColor="#C9CED8"
+        android:textColor="#D8C9CA"
         android:textSize="13.5sp" />
 
     <ImageView
@@ -28,5 +28,5 @@
         android:layout_marginStart="8dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_chevron_down"
-        app:tint="#C9CED8" />
+        app:tint="#D8C9CA" />
 </LinearLayout>

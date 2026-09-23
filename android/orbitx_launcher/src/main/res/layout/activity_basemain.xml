@@ -45,7 +45,7 @@
 					android:layout_marginTop="16dp"
 					android:letterSpacing="0.22"
 					android:text="ORBITX"
-					android:textColor="#B9BBC4"
+					android:textColor="#C4B9B9"
 					android:textSize="10sp"
 					android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="6dp"
 					android:text="@string/cs_stage_title"
-					android:textColor="#F2F2F6"
+					android:textColor="#F6F2F2"
 					android:textSize="17sp"
 					android:textStyle="bold" />
 
@@ -63,7 +63,7 @@
 					android:layout_height="28dp"
 					android:layout_marginTop="14dp"
 					android:indeterminate="true"
-					android:indeterminateTint="#B9BBC4" />
+					android:indeterminateTint="#C4B9B9" />
 
 				<TextView
 					android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
 			android:paddingTop="4dp"
 			android:paddingBottom="4dp"
 			android:text="-- FPS"
-			android:textColor="#F0F0F3"
+			android:textColor="#F3F0F0"
 			android:textSize="11sp"
 			android:textStyle="bold"
 			android:visibility="gone" />
@@ -189,7 +189,7 @@
 			android:paddingTop="4dp"
 			android:paddingBottom="4dp"
 			android:text="RAM —"
-			android:textColor="#F0F0F3"
+			android:textColor="#F3F0F0"
 			android:textSize="11sp"
 			android:textStyle="bold"
 			android:visibility="gone" />

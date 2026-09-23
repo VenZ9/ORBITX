@@ -4,7 +4,7 @@
         <shape android:shape="rectangle">
             <size android:height="4dp" />
             <corners android:radius="2dp" />
-            <solid android:color="#2B2F38" />
+            <solid android:color="#382B2C" />
         </shape>
     </item>
     <item android:id="@android:id/secondaryProgress" android:gravity="center_vertical">
@@ -12,7 +12,7 @@
             <shape android:shape="rectangle">
                 <size android:height="4dp" />
                 <corners android:radius="2dp" />
-                <solid android:color="#3B4049" />
+                <solid android:color="#493B3C" />
             </shape>
         </clip>
     </item>
@@ -21,7 +21,7 @@
             <shape android:shape="rectangle">
                 <size android:height="4dp" />
                 <corners android:radius="2dp" />
-                <gradient android:angle="0" android:startColor="#8A909C" android:endColor="#E6E9EF" />
+                <gradient android:angle="0" android:startColor="#9C8A8B" android:endColor="#EFE6E7" />
             </shape>
         </clip>
     </item>

@@ -91,7 +91,7 @@
         <item name="android:padding">9dp</item>
         <item name="android:layout_marginEnd">12dp</item>
         <item name="android:background">@drawable/pe4_icon_well</item>
-        <item name="android:tint">#E6E8EE</item>
+        <item name="android:tint">#EEE6E6</item>
     </style>
 
     <style name="Pe4Title">
@@ -105,7 +105,7 @@
     <style name="Pe4Desc">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#8D93A1</item>
+        <item name="android:textColor">#A18D8E</item>
         <item name="android:textSize">11.5sp</item>
         <item name="android:lineSpacingExtra">2dp</item>
         <item name="android:layout_marginBottom">10dp</item>
@@ -116,7 +116,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">#A8ADBB</item>
+        <item name="android:textColor">#BBA8A9</item>
         <item name="android:textSize">10.5sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.08</item>
@@ -129,7 +129,7 @@
         <item name="android:background">@drawable/pe4_input</item>
         <item name="android:paddingHorizontal">14dp</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textColorHint">#5C6070</item>
+        <item name="android:textColorHint">#705C5C</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -142,7 +142,7 @@
         <item name="android:minWidth">0dp</item>
         <item name="android:paddingHorizontal">18dp</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">#F0F1F5</item>
+        <item name="android:textColor">#F5F0F0</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.06</item>
@@ -154,7 +154,7 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_marginTop">6dp</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">#F0F1F5</item>
+        <item name="android:textColor">#F5F0F0</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.08</item>
@@ -236,7 +236,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">#8D93A1</item>
+        <item name="android:textColor">#A18D8E</item>
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.1</item>

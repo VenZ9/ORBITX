@@ -130,7 +130,7 @@
                     android:includeFontPadding="false"
                     android:letterSpacing="0.08"
                     android:text="@string/log_view_label_log_output"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="12sp" />
 
                 <TextView
@@ -143,7 +143,7 @@
                     android:fontFamily="monospace"
                     android:includeFontPadding="false"
                     android:singleLine="true"
-                    android:textColor="#8A909C"
+                    android:textColor="#9C8A8B"
                     android:textSize="9.5sp" />
 
                 <ImageButton
@@ -181,7 +181,7 @@
                         android:layout_height="13dp"
                         android:contentDescription="@null"
                         android:src="@drawable/ic_cs_search"
-                        app:tint="#6B7280" />
+                        app:tint="#806B6C" />
 
                     <EditText
                         android:id="@+id/log_search_input"
@@ -309,7 +309,7 @@
                     android:id="@+id/log_cli_overlay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#F40A0C10"
+                    android:background="#F4100A0A"
                     android:visibility="gone">
 
                     <LinearLayout
@@ -366,7 +366,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginTop="7dp"
-                            android:background="#1C2029" />
+                            android:background="#291C1D" />
 
                         <TextView
                             android:id="@+id/log_cli_command"
@@ -374,7 +374,7 @@
                             android:layout_height="30dp"
                             android:fontFamily="monospace"
                             android:gravity="center_vertical"
-                            android:textColor="#D7D8DE"
+                            android:textColor="#DED7D7"
                             android:textSize="10sp" />
 
                         <com.kdt.CsBlockLogoView
@@ -405,7 +405,7 @@
                             android:layout_marginTop="3dp"
                             android:gravity="center"
                             android:letterSpacing="0.14"
-                            android:text="PLUS  •  CRAFT STUDIO"
+                            android:text="ORBITX  •  ANDROID"
                             android:textColor="#777984"
                             android:textSize="8sp"
                             android:textStyle="bold"
@@ -420,7 +420,7 @@
                             android:fontFamily="monospace"
                             android:gravity="center_vertical"
                             android:lineSpacingExtra="5dp"
-                            android:textColor="#C7C9D0"
+                            android:textColor="#D0C7C7"
                             android:textSize="9.5sp" />
 
                         <ProgressBar

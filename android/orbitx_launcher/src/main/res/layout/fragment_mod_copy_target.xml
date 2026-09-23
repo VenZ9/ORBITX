@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#0E0E11"
+    android:background="#110E0E"
     android:fitsSystemWindows="true">
 
     <!-- Header -->
@@ -27,7 +27,7 @@
             android:layout_height="44dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back"
-            android:tint="#E8E8EE"
+            android:tint="#EEE8E8"
             android:contentDescription="@string/back" />
 
         <LinearLayout
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="#8D93A1"
+                android:textColor="#A18D8E"
                 android:textSize="11.5sp"
                 android:maxLines="1"
                 android:ellipsize="middle"
@@ -63,7 +63,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#1E1E24" />
+        android:background="#241E1E" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/copy_target_recycler"

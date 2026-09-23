@@ -27,7 +27,6 @@ import net.kdt.pojavlaunch.R;
 public final class CsClientPromoDialog extends DialogFragment {
 
     public static final String TAG = "CS_CLIENT_PROMO_DIALOG";
-    private static final String YOUTUBE_URL = "https://youtube.com/@craft-studio-official?si=WmZNedIAnp4QcToO";
 
     public static void show(@NonNull FragmentActivity activity) {
         new CsClientPromoDialog().show(activity.getSupportFragmentManager(), TAG);
@@ -67,13 +66,11 @@ public final class CsClientPromoDialog extends DialogFragment {
                     .start();
         }
 
-        View btnYoutube = view.findViewById(R.id.btn_cs_promo_youtube);
-        if (btnYoutube != null) {
-            btnYoutube.setOnClickListener(v -> {
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_URL)));
-                } catch (Throwable ignored) {}
-            });
+        // Community links were removed app-wide, so the promo's call to action
+        // simply dismisses the card instead of opening an external channel.
+        View btnCta = view.findViewById(R.id.btn_cs_promo_youtube);
+        if (btnCta != null) {
+            btnCta.setOnClickListener(v -> dismiss());
         }
 
         View btnClose = view.findViewById(R.id.btn_cs_promo_close);

@@ -23,7 +23,7 @@
             android:layout_height="22dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_copy"
-            android:tint="#B9C0CC" />
+            android:tint="#CCB9BA" />
     </FrameLayout>
 
     <LinearLayout
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:textColor="#8D93A1"
+            android:textColor="#A18D8E"
             android:textSize="11.5sp"
             android:maxLines="2"
             android:ellipsize="end"

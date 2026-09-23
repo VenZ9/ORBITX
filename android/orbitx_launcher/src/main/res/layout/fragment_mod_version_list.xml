@@ -67,7 +67,7 @@
                     android:fontFamily="@font/minecraftia"
                     android:includeFontPadding="false"
                     android:text="@string/forge_dl_select_version"
-                    android:textColor="#F0F0F3"
+                    android:textColor="#F3F0F0"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -87,7 +87,7 @@
                     android:layout_marginTop="10dp"
                     android:indeterminate="true"
                     android:indeterminateTint="#FFFFFF"
-                    android:progressBackgroundTint="#23232B"
+                    android:progressBackgroundTint="#2B2323"
                     android:visibility="gone" />
             </LinearLayout>
 
@@ -178,7 +178,7 @@
                         android:stateListAnimator="@null"
                         android:text="@string/global_retry"
                         android:textAllCaps="true"
-                        android:textColor="#0E0E11"
+                        android:textColor="#110E0E"
                         android:textSize="12.5sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -227,7 +227,7 @@
                         android:fontFamily="@font/minecraftia"
                         android:includeFontPadding="false"
                         android:text="@string/loader_installer_ready_title"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="15.5sp"
                         android:textStyle="bold" />
 
@@ -291,7 +291,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
                             android:text="@string/loader_installer_summary_title"
-                            android:textColor="#F0F0F3"
+                            android:textColor="#F3F0F0"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -312,7 +312,7 @@
                             android:background="@drawable/bg_mp_version_badge"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="7dp"
-                            android:textColor="#0E0E11"
+                            android:textColor="#110E0E"
                             android:textSize="12sp"
                             android:textStyle="bold"
                             tools:text="Forge 47.2.0" />
@@ -334,7 +334,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="What happens next"
-                            android:textColor="#F0F0F3"
+                            android:textColor="#F3F0F0"
                             android:textSize="12.5sp"
                             android:textStyle="bold" />
 
@@ -400,7 +400,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tip"
-                                android:textColor="#F0F0F3"
+                                android:textColor="#F3F0F0"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
@@ -421,7 +421,7 @@
                 android:id="@+id/internal_step2_cta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#F2141419"
+                android:background="#F2191414"
                 android:elevation="12dp"
                 android:paddingHorizontal="12dp"
                 android:paddingTop="10dp"
@@ -439,7 +439,7 @@
                     android:stateListAnimator="@null"
                     android:text="@string/loader_installer_start"
                     android:textAllCaps="true"
-                    android:textColor="#0E0E11"
+                    android:textColor="#110E0E"
                     android:textSize="13.5sp"
                     android:textStyle="bold" />
             </FrameLayout>

@@ -11,7 +11,7 @@
     android:id="@+id/sg_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0B0B0E"
+    android:background="#0E0B0B"
     android:clickable="true"
     android:focusable="true">
 
@@ -70,7 +70,7 @@
             android:layout_marginTop="6dp"
             android:fontFamily="sans-serif-light"
             android:text="@string/sg_opening_game"
-            android:textColor="#F2F2F5"
+            android:textColor="#F5F2F2"
             android:textSize="27sp" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:maxWidth="280dp"
-            android:textColor="#F0F0F3"
+            android:textColor="#F3F0F0"
             android:textSize="15sp"
             tools:text="Survival World" />
 
@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:indeterminate="true"
-        android:indeterminateTint="#B9BBC4"
+        android:indeterminateTint="#C4B9B9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sg_column" />
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:textColor="#F2F2F5"
+            android:textColor="#F5F2F2"
             android:textSize="26sp"
             tools:text="42%" />
 

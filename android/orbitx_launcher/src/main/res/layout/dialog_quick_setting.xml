@@ -43,7 +43,7 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="R"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="DISPLAY"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="9.5sp" />
 
             <View
@@ -62,7 +62,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="#2B2F38" />
+                android:background="#382B2C" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +88,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/mcl_setting_title_resolution_scaler"
-                    android:textColor="#EEF0F4"
+                    android:textColor="#F4EEEE"
                     android:textSize="13sp" />
 
                 <TextView
@@ -100,7 +100,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="10.5sp"
                     tools:text="100%" />
             </LinearLayout>
@@ -135,7 +135,7 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="G"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -146,7 +146,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="MOTION"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="9.5sp" />
 
             <View
@@ -154,7 +154,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="#2B2F38" />
+                android:background="#382B2C" />
         </LinearLayout>
 
         <Switch
@@ -169,7 +169,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/preference_enable_gyro_title"
-            android:textColor="#EEF0F4"
+            android:textColor="#F4EEEE"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />
@@ -186,7 +186,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/preference_gyro_invert_x_axis"
-            android:textColor="#EEF0F4"
+            android:textColor="#F4EEEE"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track"
@@ -204,7 +204,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/preference_gyro_invert_y_axis"
-            android:textColor="#EEF0F4"
+            android:textColor="#F4EEEE"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track"
@@ -234,7 +234,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/preference_gyro_sensitivity_title"
-                    android:textColor="#EEF0F4"
+                    android:textColor="#F4EEEE"
                     android:textSize="13sp" />
 
                 <TextView
@@ -246,7 +246,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="10.5sp"
                     tools:text="100%" />
             </LinearLayout>
@@ -282,7 +282,7 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="M"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -293,7 +293,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="POINTER"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="9.5sp" />
 
             <View
@@ -301,7 +301,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="#2B2F38" />
+                android:background="#382B2C" />
         </LinearLayout>
 
         <LinearLayout
@@ -327,7 +327,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/mcl_setting_title_mousespeed"
-                    android:textColor="#EEF0F4"
+                    android:textColor="#F4EEEE"
                     android:textSize="13sp" />
 
                 <TextView
@@ -339,7 +339,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="10.5sp"
                     tools:text="100%" />
             </LinearLayout>
@@ -372,7 +372,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/mcl_setting_title_grab_mouse"
-            android:textColor="#EEF0F4"
+            android:textColor="#F4EEEE"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />
@@ -393,7 +393,7 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="T"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -404,7 +404,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="TOUCH"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="9.5sp" />
 
             <View
@@ -412,7 +412,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="#2B2F38" />
+                android:background="#382B2C" />
         </LinearLayout>
 
         <Switch
@@ -427,7 +427,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/mcl_disable_gestures"
-            android:textColor="#EEF0F4"
+            android:textColor="#F4EEEE"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />
@@ -456,7 +456,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/mcl_setting_title_longpresstrigger"
-                    android:textColor="#EEF0F4"
+                    android:textColor="#F4EEEE"
                     android:textSize="13sp" />
 
                 <TextView
@@ -468,7 +468,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F4F6F9"
+                    android:textColor="#F9F4F4"
                     android:textSize="10.5sp"
                     tools:text="270 ms" />
             </LinearLayout>
@@ -504,7 +504,7 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="O"
-                android:textColor="#C9CED8"
+                android:textColor="#D8C9CA"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -515,7 +515,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="OVERLAY"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="9.5sp" />
 
             <View
@@ -523,7 +523,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="#2B2F38" />
+                android:background="#382B2C" />
         </LinearLayout>
 
         <TextView
@@ -533,7 +533,7 @@
             android:paddingHorizontal="2dp"
             android:paddingBottom="6dp"
             android:text="@string/cs_osd_caption"
-            android:textColor="#9AA0AC"
+            android:textColor="#AC9A9B"
             android:textSize="11sp" />
 
         <Switch
@@ -548,7 +548,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/cs_osd_show_memory"
-            android:textColor="#EEF0F4"
+            android:textColor="#F4EEEE"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />

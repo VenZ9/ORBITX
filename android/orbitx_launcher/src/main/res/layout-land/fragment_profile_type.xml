@@ -8,7 +8,7 @@
     android:id="@+id/setup_hub_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0B0B0E"
+    android:background="#0E0B0B"
     android:clipChildren="true"
     android:clipToPadding="true"
     android:orientation="horizontal"
@@ -42,7 +42,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="sans-serif-light"
             android:text="@string/pt_title"
-            android:textColor="#F2F2F5"
+            android:textColor="#F5F2F2"
             android:textSize="30sp" />
 
         <TextView
@@ -58,7 +58,7 @@
             android:layout_width="34dp"
             android:layout_height="2dp"
             android:layout_marginTop="16dp"
-            android:background="#3A3A46" />
+            android:background="#463A3A" />
     </LinearLayout>
 
     <!-- ── Card grid: 4 columns × 2 rows ── -->
@@ -111,7 +111,7 @@
                         android:layout_marginTop="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/pt_bta_name"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="13sp" />
 
                     <TextView
@@ -171,7 +171,7 @@
                         android:layout_marginTop="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/pt_jar_import_name"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="13sp" />
 
                     <TextView
@@ -239,7 +239,7 @@
                         android:layout_marginTop="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/pt_fabric_name"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="13sp" />
 
                     <TextView
@@ -299,7 +299,7 @@
                         android:layout_marginTop="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/pt_quilt_name"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="13sp" />
 
                     <TextView
@@ -367,7 +367,7 @@
                         android:layout_marginTop="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/pt_forge_name"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="13sp" />
 
                     <TextView
@@ -427,7 +427,7 @@
                         android:layout_marginTop="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/pt_neoforge_name"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="13sp" />
 
                     <TextView
@@ -482,7 +482,7 @@
                         android:layout_width="21dp"
                         android:layout_height="21dp"
                         android:src="@drawable/ic_modpack_profile"
-                        android:tint="#0E0E11" />
+                        android:tint="#110E0E" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -490,7 +490,7 @@
                         android:layout_marginTop="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/pt_modpack_name"
-                        android:textColor="#0E0E11"
+                        android:textColor="#110E0E"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -553,7 +553,7 @@
                         android:maxLines="2"
                         android:ellipsize="end"
                         android:text="@string/pt_vanilla_name"
-                        android:textColor="#F0F0F3"
+                        android:textColor="#F3F0F0"
                         android:textSize="12sp" />
 
                     <TextView

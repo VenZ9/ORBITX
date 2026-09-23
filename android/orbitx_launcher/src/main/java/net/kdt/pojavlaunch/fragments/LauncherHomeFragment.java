@@ -204,28 +204,18 @@ public class LauncherHomeFragment extends Fragment implements DragTutorialHost {
 
         mAccountChip.setOnClickListener(v -> switchAccount());
 
-        // ── Brand cluster (top-left, Phase 8): YouTube red / Discord blurple.
-        //    Slides in from the left while the account chip lands on the right;
-        //    the pills pop one after another (anime stagger). ──
+        // ── Brand mark (top-left): the OrbitX identity card only. The
+        //    community pills (YouTube / Discord) were removed along with the
+        //    rest of the launcher's outbound links. ──
         View brand = view.findViewById(R.id.lh_brand_cluster);
-        View yt = view.findViewById(R.id.lh_btn_youtube);
-        View dc = view.findViewById(R.id.lh_btn_discord);
-        if (yt != null) yt.setOnClickListener(v -> {
-            net.kdt.pojavlaunch.Anime.pop(v);
-            v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
-            net.kdt.pojavlaunch.CsLinks.open(v.getContext(), net.kdt.pojavlaunch.CsLinks.YOUTUBE);
-        });
-        if (dc != null) dc.setOnClickListener(v -> {
-            net.kdt.pojavlaunch.Anime.pop(v);
-            v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
-            net.kdt.pojavlaunch.CsLinks.open(v.getContext(), net.kdt.pojavlaunch.CsLinks.DISCORD);
-        });
         if (brand != null) {
             net.kdt.pojavlaunch.Anime.in(brand, net.kdt.pojavlaunch.Anime.Fx.FADE_RIGHT, 80, 620, net.kdt.pojavlaunch.Anime.OUT_EXPO);
-            net.kdt.pojavlaunch.Anime.in(yt, net.kdt.pojavlaunch.Anime.Fx.POP, 420, 520, net.kdt.pojavlaunch.Anime.OUT_BACK);
-            net.kdt.pojavlaunch.Anime.in(dc, net.kdt.pojavlaunch.Anime.Fx.POP, 500, 520, net.kdt.pojavlaunch.Anime.OUT_BACK);
             net.kdt.pojavlaunch.Anime.in(mAccountChip, net.kdt.pojavlaunch.Anime.Fx.FADE_LEFT, 80, 620, net.kdt.pojavlaunch.Anime.OUT_EXPO);
         }
+
+        // ── OrbitX product strip: the launcher's own quick tools, directly on
+        //    the Home stage (browse content, manage content, back up instance). ──
+        bindProductStrip(view);
 
         // One pass of elastic press feedback for everything on the stage.
         UiMotion.attachTouchFeedback(view.findViewById(R.id.lh_content));
@@ -272,15 +262,9 @@ public class LauncherHomeFragment extends Fragment implements DragTutorialHost {
         // Expose the drag-tutorial host before the tutorial may start.
         DragTutorialHost.Registry.register(this);
 
-        // First-launch chain: runtime installer → PLUS thank-you popup → Home
-        // tutorial. The popup gates the tour (shown exactly once); once it has
-        // been seen the tutorial auto-starts here as before.
-        // Deferred one frame so every target view is measured first.
-        view.post(() -> {
-            if (!isAdded() || getActivity() == null) return;
-            if (PlusWelcomeDialog.maybeShow(getActivity())) return;
-            HomeTutorial.maybeStart(getActivity());
-        });
+        // First-run onboarding is deliberately disabled: ORBITX opens straight
+        // into the launcher — no thank-you popup, no guided tour. The tutorial
+        // engine stays compiled in, but nothing auto-starts it any more.
     }
 
     /**
@@ -873,17 +857,8 @@ public class LauncherHomeFragment extends Fragment implements DragTutorialHost {
         if (mPlayer != null) mPlayer.onResume();
         startPoseDriver();
         registerDlListeners();
-        // Covers returning to Home later + activity recreation: the manager
-        // itself dedupes (completed flag + already-showing guard). The Plus
-        // popup also re-checks itself — once seen it never returns here.
-        final View root = getView();
-        if (root != null) {
-            root.post(() -> {
-                if (!isAdded() || getActivity() == null) return;
-                if (PlusWelcomeDialog.maybeShow(getActivity())) return;
-                HomeTutorial.maybeStart(getActivity());
-            });
-        }
+        // No first-run popup or tour to re-check: onboarding stays off on every
+        // resume and across activity recreation.
     }
 
     @Override
@@ -1802,6 +1777,93 @@ public class LauncherHomeFragment extends Fragment implements DragTutorialHost {
             if (p.javaDir.contains("17")) return "Java 17";
         }
         return null;
+    }
+
+    /**
+     * OrbitX product strip — the launcher's own quick tools row on Home.
+     *
+     * <p>Wired here rather than in a shared menu layout so the Home stage owns
+     * its entry points: browse Modrinth content for THIS instance, review what
+     * is already installed, or export the instance to a backup archive. Every
+     * lookup is null-guarded so a layout variant without the strip cannot crash
+     * Home.
+     */
+    private void bindProductStrip(@NonNull View root) {
+        View browser = root.findViewById(R.id.lh_prod_browser);
+        View manage = root.findViewById(R.id.lh_prod_manage);
+        View backup = root.findViewById(R.id.lh_prod_backup);
+
+        if (browser != null) browser.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+            Bundle args = new Bundle();
+            if (mPrimaryKey != null) args.putString(ManageModsFragment.BUNDLE_PROFILE_KEY, mPrimaryKey);
+            navigateTo(ModsSearchFragment.class, ModsSearchFragment.TAG, args);
+        });
+        if (manage != null) manage.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+            if (getActivity() instanceof androidx.fragment.app.FragmentActivity) {
+                ResourceBrowserDialog.show((androidx.fragment.app.FragmentActivity) getActivity());
+            }
+        });
+        if (backup != null) backup.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+            startInstanceBackup();
+        });
+    }
+
+    /**
+     * Exports the selected instance to a single .zip archive.
+     *
+     * <p>The archive lands in {@code orbitx_backups/} beside the instance root
+     * and holds the whole instance folder minus caches and previous backups, so
+     * a player can keep, move or re-import it without root access. Runs off the
+     * UI thread; the result is reported back on the main thread.
+     */
+    private void startInstanceBackup() {
+        final android.content.Context ctx = getContext();
+        if (ctx == null) return;
+        MinecraftProfile profile = null;
+        try {
+            LauncherProfiles.load();
+            if (mPrimaryKey != null) {
+                profile = LauncherProfiles.mainProfileJson.profiles.get(mPrimaryKey);
+            }
+        } catch (Throwable ignored) { }
+        if (profile == null) {
+            android.widget.Toast.makeText(ctx, "Select an instance first", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final MinecraftProfile p = profile;
+        android.widget.Toast.makeText(ctx, "Exporting " + p.name + "\u2026",
+                android.widget.Toast.LENGTH_SHORT).show();
+
+        net.kdt.pojavlaunch.PojavApplication.sExecutorService.execute(() -> {
+            File out = null;
+            Throwable err = null;
+            try {
+                File gameDir = Tools.getGameDirPath(p);
+                File root = gameDir.getParentFile();
+                if (root == null) root = ctx.getExternalFilesDir(null);
+                File dir = new File(root, "orbitx_backups");
+                out = net.kdt.pojavlaunch.tools.InstanceBackup.export(gameDir, dir, p.name);
+            } catch (Throwable t) {
+                err = t;
+            }
+            final File f = out;
+            final Throwable e = err;
+            Tools.MAIN_HANDLER.post(() -> {
+                android.content.Context c = getContext();
+                if (c == null) return;
+                if (e != null || f == null) {
+                    android.widget.Toast.makeText(c, "Backup failed", android.widget.Toast.LENGTH_SHORT).show();
+                } else {
+                    long mb = Math.max(1L, f.length() / (1024L * 1024L));
+                    android.widget.Toast.makeText(c,
+                            "Saved " + f.getName() + "  \u00b7  " + mb + " MB",
+                            android.widget.Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 
     private static int countMods(MinecraftProfile p) {

@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="monospace"
                 android:text="J"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="17sp"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -56,7 +56,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="SELECT"
-                android:textColor="#8A909C"
+                android:textColor="#9C8A8B"
                 android:textSize="9.5sp" />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_marginTop="1dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Java runtime"
-                android:textColor="#F4F6F9"
+                android:textColor="#F9F4F4"
                 android:textSize="17sp" />
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Which JVM launches this profile"
-                android:textColor="#9AA0AC"
+                android:textColor="#AC9A9B"
                 android:textSize="11.5sp" />
         </LinearLayout>
 
@@ -89,14 +89,14 @@
             android:text="ESC"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.08"
-            android:textColor="#C9CED8"
+            android:textColor="#D8C9CA"
             android:textSize="10sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#2B2F38" />
+        android:background="#382B2C" />
 
     <!-- rows -->
     <ScrollView
