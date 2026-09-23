@@ -21,9 +21,7 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Horizontal instance library for the Launcher Home carousel.
@@ -46,8 +44,6 @@ public class InstanceLibraryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final List<MinecraftProfile> mProfiles;
     private final Listener mListener;
     private OnStartDragListener mDragStartListener;
-    /** Transient tutorial demo keys: rendered like real cards, never persisted. */
-    private final Set<String> mDemoKeys = new HashSet<>();
 
     public interface Listener {
         void onPromote(String profileKey, MinecraftProfile profile);
@@ -157,23 +153,6 @@ public class InstanceLibraryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         final String fKey = key;
         final MinecraftProfile fProfile = profile;
-        final boolean isDemo = mDemoKeys.contains(key);
-        // Demo cards are visual/practice objects: long-press→drag stays alive
-        // (it never touches persistence), every other action is inert so a
-        // demo key can never leak into promote/play/edit/shortcut paths.
-        if (isDemo) {
-            holder.root.setOnClickListener(v -> { /* inert demo card */ });
-            holder.play.setOnClickListener(v -> { /* inert demo card */ });
-            holder.more.setOnClickListener(v -> { /* inert demo card */ });
-            // Long-press still starts a REAL drag (visual-only; filtered from persistence).
-            holder.root.setOnLongClickListener(v -> {
-                if (mDragStartListener == null) return false;
-                v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                mDragStartListener.onStartDrag(holder);
-                return true;
-            });
-            return;
-        }
         holder.root.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
             mListener.onPromote(fKey, fProfile);
@@ -233,63 +212,12 @@ public class InstanceLibraryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public List<String> getOrderedProfileKeys() {
-        // Demo keys are filtered out: persistence can never observe them.
-        if (mDemoKeys.isEmpty()) return new ArrayList<>(mProfileKeys);
-        List<String> out = new ArrayList<>(mProfileKeys.size());
-        for (String key : mProfileKeys) {
-            if (!mDemoKeys.contains(key)) out.add(key);
-        }
-        return out;
+        return new ArrayList<>(mProfileKeys);
     }
 
     public void dispatchOrderChanged() {
-        List<String> ordered = getOrderedProfileKeys();
-        // With only demo cards present there is nothing real to persist —
-        // swallow the event instead of writing an empty order to storage.
-        if (ordered.isEmpty() && !mDemoKeys.isEmpty()) return;
-        mListener.onOrderChanged(ordered);
+        mListener.onOrderChanged(getOrderedProfileKeys());
     }
-
-    // ── Transient tutorial demo items (in-memory only) ─────────────────────
-
-    /** Inserts a demo card rendered by the real binder. No-op if already present. */
-    public void insertDemoItem(@NonNull String key, @NonNull MinecraftProfile profile, int position) {
-        if (mDemoKeys.contains(key)) return;
-        position = Math.max(0, Math.min(position, mProfileKeys.size()));
-        mProfileKeys.add(position, key);
-        mProfiles.add(position, profile);
-        mDemoKeys.add(key);
-        notifyItemInserted(position);
-    }
-
-    /** Removes every demo card (real data untouched). */
-    public void removeDemoItems() {
-        if (mDemoKeys.isEmpty()) return;
-        for (int i = mProfileKeys.size() - 1; i >= 0; i--) {
-            if (mDemoKeys.contains(mProfileKeys.get(i))) {
-                mProfileKeys.remove(i);
-                mProfiles.remove(i);
-                notifyItemRemoved(i);
-            }
-        }
-        mDemoKeys.clear();
-    }
-
-    /** Removes one specific demo card. */
-    public void removeDemoItem(@NonNull String key) {
-        int idx = mProfileKeys.indexOf(key);
-        if (idx < 0 || !mDemoKeys.contains(key)) return;
-        mProfileKeys.remove(idx);
-        mProfiles.remove(idx);
-        mDemoKeys.remove(key);
-        notifyItemRemoved(idx);
-    }
-
-    public boolean isDemoKey(@NonNull String key) { return mDemoKeys.contains(key); }
-    public boolean hasDemoItems() { return !mDemoKeys.isEmpty(); }
-    public int indexOfKey(@NonNull String key) { return mProfileKeys.indexOf(key); }
-    /** Count of REAL profiles (demo items excluded). */
-    public int getRealCount() { return mProfileKeys.size() - mDemoKeys.size(); }
 
     // ── View holders ────────────────────────────────────────────────────────
 
