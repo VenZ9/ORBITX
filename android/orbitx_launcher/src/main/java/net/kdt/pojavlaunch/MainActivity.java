@@ -58,6 +58,7 @@ import net.kdt.pojavlaunch.customcontrols.ControlJoystickData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.customcontrols.EditorExitable;
+import net.kdt.pojavlaunch.customcontrols.handleview.DrawerPullButton;
 import net.kdt.pojavlaunch.customcontrols.keyboard.LwjglCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.customcontrols.mouse.GyroControl;
@@ -389,7 +390,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         } catch (Throwable th) {
             Tools.showError(this, th);
         }
-        mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
+        applyDrawerPullVisibility();
         mControlLayout.toggleControlVisible();
     }
 
@@ -414,6 +415,24 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     private static final int ORBITX_OVERLAY_HIDDEN = -1;
 
     public static final String PREF_LAUNCH_OVERLAY_OPACITY = "orbitx_launch_overlay_opacity";
+
+    /**
+     * Single source of truth for the floating in-game settings handle's visibility.
+     *
+     * <p>The handle is hidden when the control layout already exposes a menu button, when
+     * the boot overlay has taken over the screen, or when the player has switched it off
+     * with "Hide in-game settings handle". Routing every call site through here means the
+     * preference cannot be silently overridden by a later VISIBLE assignment — which is
+     * exactly what used to happen: the setting existed in the UI but three separate
+     * {@code setVisibility(View.VISIBLE)} calls re-showed the handle regardless, so
+     * turning it on appeared to do nothing.
+     */
+    private void applyDrawerPullVisibility() {
+        if (mDrawerPullButton == null) return;
+        boolean hiddenByUser = DrawerPullButton.isHiddenByPreference(this);
+        boolean replacedByMenuButton = mControlLayout != null && mControlLayout.hasMenuButton();
+        mDrawerPullButton.setVisibility((hiddenByUser || replacedByMenuButton) ? View.GONE : View.VISIBLE);
+    }
 
     private void applyLaunchOverlayOpacity() {
         if (mBootLog == null) return;
@@ -1144,7 +1163,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         mControlLayout.setModifiable(true);
         navDrawer.setAdapter(ingameControlsEditorArrayAdapter);
         navDrawer.setOnItemClickListener(ingameControlsEditorListener);
-        mDrawerPullButton.setVisibility(View.VISIBLE);
+        applyDrawerPullVisibility();
         isInEditor = true;
         setDrawerKicker("CONTROL EDITOR");
     }
@@ -1307,7 +1326,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     minecraftProfile.controlFile == null
                             ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
                             : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
-            mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
+            applyDrawerPullVisibility();
         } catch (IOException e) {
             Tools.showError(this,e);
         }

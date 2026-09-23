@@ -45,7 +45,7 @@ public class PojavApplication extends Application {
 			5, TimeUnit.SECONDS,
 			new LinkedBlockingQueue<>(),
 			r -> {
-				Thread t = new Thread(r, "CSL-Worker");
+				Thread t = new Thread(r, "ORX-Worker");
 				t.setDaemon(true);
 				return t;
 			});

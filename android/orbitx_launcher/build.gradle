@@ -245,41 +245,119 @@ dependencies {
 }
 
 
-// ── APK slimming: drop emulator-only assets ────────────────────────────────
-// The LWJGL native bundles and the JRE tarballs ship one copy per ABI inside assets/.
-// abiFilters only trims lib/, so the asset copies are removed from the merged asset
-// folder here. Build with -PkeepX86=true to keep them.
-def csKeepX86 = (project.findProperty("keepX86") ?: "false").toBoolean()
-def csDroppedAssetDirs = ["x86", "x86_64"] as Set
-def csDroppedAssetFiles = ["bin-x86.tar.xz", "bin-x86_64.tar.xz"] as Set
+// ══ LWJGL natives: fetched from the SAME Maven version as the bundled jars ══
+// assets/components/lwjgl3/<ver>/lwjgl.jar (the Java classes the game loads) must
+// have its native counterpart in assets/components/lwjgl-<ver>-natives/<abi>/.
+// Shipping one without the other is exactly what crashed the game on device: a
+// liblwjgl.so built from a different LWJGL revision does not export the JNI entry
+// point the Java side binds, and the game dies with UnsatisfiedLinkError the
+// moment the renderer comes up.
+//
+// The native libraries are ~20 MB of ARM binaries, so they are not committed.
+// They are pulled from Maven Central here, at build time, using the version
+// directories this module actually ships. The version cannot drift, because it is
+// read from the shipped jars rather than written down a second time — and each
+// downloaded liblwjgl.so is checked for the symbol its own lwjgl.jar binds,
+// failing the build rather than the game.
+//
+// Build with -PofflineLwjgl=true to skip the fetch when the .so files are already
+// in place (e.g. a warm CI cache).
+def lwjglAssetsComponents = file('src/main/assets/components')
+// ABI directory -> Maven natives classifier
+def lwjglAbiClassifiers = ['arm64-v8a': 'linux-arm64', 'armeabi-v7a': 'linux-arm32']
+// The JNI entry point ThreadLocalUtil binds, per LWJGL major line.
+def lwjglSymbolFor = { String ver -> ver.startsWith('3.4') ? 'setupEnvData' : 'nsetupEnvData' }
+def lwjglModulesFor = { String ver ->
+    def mods = ['lwjgl', 'lwjgl-opengl', 'lwjgl-stb', 'lwjgl-tinyfd',
+                'lwjgl-vma', 'lwjgl-nanovg', 'lwjgl-freetype', 'lwjgl-shaderc']
+    // 3.4.x additionally ships liblwjgl_spng.so for its STB/PNG path.
+    if (ver.startsWith('3.4')) mods.add('lwjgl-spng')
+    mods
+}
 
-tasks.configureEach { task ->
-    if (csKeepX86) return
-    if (!(task.name ==~ /^merge[A-Za-z0-9]*Assets$/)) return
-    task.doLast {
-        def roots = []
-        try {
-            def out = task.outputDir
-            if (out != null) roots << out.get().asFile
-        } catch (Throwable ignored) { }
-        if (roots.isEmpty()) roots.addAll(task.outputs.files.files)
+tasks.register('fetchLwjglNatives') {
+    description = 'Fetch the LWJGL native libraries matching the shipped lwjgl3/<ver> jars.'
+    group = 'orbitx'
+    outputs.upToDateWhen { false }
 
-        long freed = 0
-        def victims = []
-        roots.findAll { it != null && it.isDirectory() }.each { root ->
-            root.traverse(type: groovy.io.FileType.ANY) { f ->
-                if (f.isDirectory() && csDroppedAssetDirs.contains(f.name)) victims << f
-                else if (f.isFile() && csDroppedAssetFiles.contains(f.name)) victims << f
+    doLast {
+        // The versions come from what this module actually ships — never a
+        // hand-written list that could disagree with the classpath.
+        def lwjgl3Root = new File(lwjglAssetsComponents, 'lwjgl3')
+        def versions = (lwjgl3Root.listFiles() ?: [] as File[])
+                .findAll { it.isDirectory() && new File(it, 'lwjgl.jar').isFile() }
+                .collect { it.name }
+                .sort()
+        if (versions.isEmpty()) {
+            throw new GradleException("No lwjgl3/<version>/lwjgl.jar found under ${lwjgl3Root}")
+        }
+        logger.lifecycle("LWJGL versions shipped by this module: ${versions.join(', ')}")
+
+        boolean offline = (project.findProperty('offlineLwjgl') ?: 'false').toBoolean()
+        def tmpDir = new File(buildDir, 'lwjgl-natives-download')
+        tmpDir.mkdirs()
+
+        def failures = []
+        versions.each { ver ->
+            def symbol = lwjglSymbolFor(ver)
+            lwjglAbiClassifiers.each { abi, classifier ->
+                def targetDir = new File(lwjglAssetsComponents, "lwjgl-${ver}-natives/${abi}")
+                def probe = new File(targetDir, 'liblwjgl.so')
+                if (probe.isFile() && probe.length() > 0 && new String(probe.bytes, 'ISO-8859-1').contains(symbol)) {
+                    logger.lifecycle("  lwjgl-${ver}/${abi} already present and verified")
+                    return
+                }
+                if (offline) {
+                    failures << "lwjgl-${ver}/${abi} missing and offlineLwjgl=true"
+                    return
+                }
+                targetDir.mkdirs()
+                lwjglModulesFor(ver).each { mod ->
+                    def jarName = "${mod}-${ver}-natives-${classifier}.jar"
+                    def jarFile = new File(tmpDir, jarName)
+                    if (!jarFile.isFile() || jarFile.length() == 0) {
+                        def url = "https://repo1.maven.org/maven2/org/lwjgl/${mod}/${ver}/${jarName}"
+                        try {
+                            ant.get(src: url, dest: jarFile, retries: 3, ignoreerrors: false)
+                        } catch (Exception e) {
+                            throw new GradleException("Could not download ${url}: ${e.message}", e)
+                        }
+                    }
+                    // A natives jar holds the .so files somewhere under the archive root.
+                    // Flatten them into the ABI directory so the launcher's asset path stays
+                    // a simple lwjgl-<ver>-natives/<abi>/<lib>.so.
+                    copy {
+                        from zipTree(jarFile)
+                        include '**/*.so'
+                        eachFile { fcd -> fcd.path = fcd.name }
+                        includeEmptyDirs = false
+                        into targetDir
+                    }
+                }
+                // Verify what we just placed, not just that a file exists.
+                def required = lwjglModulesFor(ver).collectMany { mod ->
+                    def jarFile = new File(tmpDir, "${mod}-${ver}-natives-${classifier}.jar")
+                    zipTree(jarFile).matching { include '**/*.so' }.files.collect { it.name }
+                }
+                required.each { so ->
+                    def f = new File(targetDir, so)
+                    if (!f.isFile() || f.length() == 0) failures << "lwjgl-${ver}/${abi} missing ${so}"
+                }
+                if (probe.isFile() && !new String(probe.bytes, 'ISO-8859-1').contains(symbol)) {
+                    failures << "lwjgl-${ver}/${abi} liblwjgl.so does not export ${symbol} (wrong LWJGL revision)"
+                }
+                logger.lifecycle("  fetched lwjgl-${ver}/${abi} (${required.size()} libraries, ${symbol} present)")
             }
         }
-        victims.each { f ->
-            if (!f.exists()) return
-            if (f.isDirectory()) { freed += f.directorySize(); f.deleteDir() }
-            else { freed += f.length(); f.delete() }
+        if (!failures.isEmpty()) {
+            throw new GradleException("LWJGL natives are unusable; the game would crash with " +
+                    "UnsatisfiedLinkError:\n  - " + failures.join('\n  - '))
         }
+    }
+}
 
-        if (freed > 0) {
-            logger.lifecycle("APK slimming: removed ${(freed / 1048576) as long} MB of x86/x86_64 assets")
-        }
+tasks.configureEach { t ->
+    if ((t.name.startsWith('merge') && t.name.endsWith('Assets')) || t.name.startsWith('preBuild')) {
+        t.dependsOn('fetchLwjglNatives')
     }
 }

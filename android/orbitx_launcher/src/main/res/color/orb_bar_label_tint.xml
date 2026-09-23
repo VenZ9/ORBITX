@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT — command bar label tint.
+
+     The bar labels sit under their glyphs and follow the same state ladder as
+     the glyph itself, one step brighter so an 8.5sp tracked-out word still
+     reads on a low-DPI panel. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:color="@color/ox_ember_bright" />
+    <item android:state_pressed="true" android:color="@color/ox_ember" />
+    <item android:color="@color/ox_text_secondary" />
+</selector>

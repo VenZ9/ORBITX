@@ -117,7 +117,23 @@
     <item name="orb_line_tight" format="float" type="dimen">1.15</item>
 
     <!-- ══ 4. STRUCTURE — the fixed furniture of the shell ═════════════════ -->
-    <!-- The navigation rail. 72dp = a 44dp target with the gutters it needs. -->
+    <!-- The command bar. ORBIT puts its whole navigation model in ONE band
+         pinned to the bottom edge, where a thumb already rests, instead of a
+         left-hand icon column. The band is the only chrome: there is no top
+         bar, no drawer and no floating gear, so the content pane owns every
+         other pixel. -->
+    <dimen name="orb_bar_row_height">52dp</dimen>
+    <dimen name="orb_bar_height">@dimen/orb_bar_row_height</dimen>
+    <dimen name="orb_bar_glyph">19dp</dimen>
+    <dimen name="orb_bar_item_pad">14dp</dimen>
+    <dimen name="orb_bar_brand_tile">36dp</dimen>
+    <dimen name="orb_bar_brand_glyph">20dp</dimen>
+
+    <!-- Content top inset. There is no top bar, so the pane must still clear
+         the system status bar on its own. -->
+    <dimen name="orb_top_inset">28dp</dimen>
+
+    <!-- Legacy rail metrics (kept so older references still resolve). -->
     <dimen name="orb_rail_width">72dp</dimen>
     <dimen name="orb_rail_item_w">56dp</dimen>
     <dimen name="orb_rail_item_h">52dp</dimen>

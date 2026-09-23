@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- ═══════════════════════════════════════════════════════════════════════
-     CS GAME LOG — TERMINAL v3 (Phase 8, Graphite)
+     ORBITX GAME LOG — TERMINAL v3 (Phase 8, Graphite)
 
      Structure changed from a stacked toolbar card to a RAIL + BODY console:
 
@@ -377,11 +377,18 @@
                             android:textColor="#DED7D7"
                             android:textSize="10sp" />
 
-                        <com.kdt.CsBlockLogoView
+                        <!-- The ORBITX ring mark. This slot used to host a vector
+                             rendering of the previous product's two-letter mark,
+                             which is what leaked "CS" into the game log. It is
+                             now the launcher's own ring logo. -->
+                        <ImageView
                             android:id="@+id/log_cli_ascii"
                             android:layout_width="match_parent"
                             android:layout_height="76dp"
-                            android:layout_marginTop="6dp" />
+                            android:layout_marginTop="6dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/orbitx_mark" />
 
                         <TextView
                             android:id="@+id/log_cli_brand"

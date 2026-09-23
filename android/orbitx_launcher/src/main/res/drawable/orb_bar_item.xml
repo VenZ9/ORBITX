@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT — a destination in the bottom command bar.
+
+  The bar is not a row of buttons; it is a row of POSITIONS, one of which is
+  current. Selection is carried by a RULE, not by a box: the active item grows
+  a 2dp ember rule along its top edge — the boundary between the content pane
+  and the bar — so "you are here" reads as a line pointing up into the page you
+  are on.
+
+  This is deliberately the opposite decision from a left icon rail, where the
+  active item becomes a filled capsule. Here nothing is ever filled, so the bar
+  stays flat and the rule alone does the work. Shape and position carry the
+  state as well as hue, which survives a washed-out panel and reads for
+  colour-blind users.
+
+  REST     nothing drawn — the bar is flat colour plus hairlines.
+  PRESSED  a flat ember wash, no lift, no shadow.
+  SELECTED ember rule on the top edge + a faint raised fill behind the label.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <layer-list>
+            <!-- Top-edge rule: the selection signature. -->
+            <item android:gravity="top" android:height="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/ox_ember" />
+                </shape>
+            </item>
+            <!-- Faint raised fill so the active label sits on its own field. -->
+            <item android:top="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/ox_surface_raised" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ox_ember_soft" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</selector>

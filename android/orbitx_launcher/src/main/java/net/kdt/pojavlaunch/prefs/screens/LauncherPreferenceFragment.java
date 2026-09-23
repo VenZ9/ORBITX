@@ -703,7 +703,7 @@ public class LauncherPreferenceFragment extends Fragment {
                         "Download server", "Where game files are downloaded from", "default")
                         .setDropdownOptions(new String[]{"Default", "Mirror (China)"}, new String[]{"default", "china"}));
                 items.add(new SettingItem("game_log_display_mode", SettingItem.TYPE_DROPDOWN,
-                        "Game launch logs", "Animated Smart replaces startup spam with CS intro; Full Raw shows all lines", "animated_smart")
+                        "Game launch logs", "Animated Smart replaces startup spam with the ORBITX intro; Full Raw shows all lines", "animated_smart")
                         .setDropdownOptions(new String[]{"Animated Smart Logs (Default)", "Full Raw Logs"},
                                 new String[]{"animated_smart", "full_raw"}));
                 items.add(new SettingItem("orbitx_record_format", SettingItem.TYPE_DROPDOWN,

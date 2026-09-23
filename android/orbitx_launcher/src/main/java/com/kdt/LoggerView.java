@@ -45,7 +45,7 @@ public class LoggerView extends ConstraintLayout {
     private View mLiveDot;
     private View mCliOverlay;
     private TextView mCliCommand;
-    private CsBlockLogoView mCliAscii;
+    private android.widget.ImageView mCliAscii;
     private TextView mCliBrand;
     private TextView mCliStatus;
     private TextView mCliProgressText;
@@ -473,7 +473,6 @@ public class LoggerView extends ConstraintLayout {
                     }
                     case 1: { // logo reveal + brand tracking
                         if (mCliAscii != null) {
-                            mCliAscii.startReveal();
                             mCliAscii.animate().alpha(1f).translationY(0f).setDuration(340)
                                     .setInterpolator(new android.view.animation.DecelerateInterpolator(1.8f))
                                     .withLayer().start();

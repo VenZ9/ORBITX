@@ -103,8 +103,62 @@ public class AsyncAssetManager {
             ProgressLayout.clearProgress(ProgressLayout.EXTRACT_COMPONENTS);
         });
     }
-    // Piggybacks off of the java modules extracting later to use their version files for update checks
-    // This is indeed prone to breaking.
+    /**
+     * The .so files every LWJGL natives directory must contain for the game to reach its
+     * first frame. liblwjgl.so is the one that matters most: its ThreadLocalUtil JNI
+     * entry points (nsetupEnvData / setupEnvData) are what the game binds against, and a
+     * build whose liblwjgl.so was compiled from a different LWJGL revision than the
+     * lwjgl.jar on the classpath fails with UnsatisfiedLinkError the moment the renderer
+     * comes up. Treat a directory missing any of these as unusable.
+     */
+    private static final String[] LWJGL_NATIVE_REQUIRED = {
+            "liblwjgl.so", "liblwjgl_opengl.so", "liblwjgl_stb.so",
+            "liblwjgl_tinyfd.so", "liblwjgl_vma.so", "liblwjgl_nanovg.so",
+            "libfreetype.so", "libshaderc.so"
+    };
+
+    /**
+     * Synchronously (re-)extract the LWJGL natives for this device's ABI.
+     *
+     * <p>Used by the launch path as a self-heal when the natives directory is found to be
+     * empty or incomplete: without it the only recourse was to tell the user to restart and
+     * hope, while the game kept dying with UnsatisfiedLinkError on the first renderer bind.
+     *
+     * @return the ABI directory the natives were written to, or null when nothing could be
+     *         extracted for this device (unsupported architecture, or no bundled payload)
+     */
+    public static File extractLwjglNativesNow(Context ctx) throws IOException {
+        unpackLwjglNatives(ctx);
+        String sArch = archAsStringAndroid(getDeviceArchitecture());
+        for (String lwjglVer : new String[]{"3.3.3", "3.4.1"}) {
+            File dir = new File(Tools.DIR_DATA, "lwjgl-" + lwjglVer + "-natives/" + sArch);
+            if (nativesAreComplete(dir)) return dir;
+        }
+        return null;
+    }
+
+    /**
+     * Extract the LWJGL native libraries into the location the launcher hands to the JVM
+     * through LD_LIBRARY_PATH (Tools.lwjglNativesDir).
+     *
+     * <p>The payload lives under assets/components/lwjgl-&lt;ver&gt;-natives/&lt;abi&gt;/ and is versioned
+     * against the lwjgl3/&lt;ver&gt; directory that ships the matching lwjgl.jar, so the natives and
+     * the Java classes can never drift apart.
+     *
+     * <p>The original implementation had two defects that let a broken natives directory ship
+     * and still look healthy:
+     * <ol>
+     *   <li>It read from {@code components/lwjgl-<ver>-natives/<abi>} &mdash; a path that does not
+     *       exist in the APK. {@link AssetManager#list} throws on a missing directory, the
+     *       whole component job was aborted, and because the caller's failure handler only
+     *       logs, the launcher still started with an empty natives directory.</li>
+     *   <li>The version file was written even when extraction had failed, so every later
+     *       launch compared equal, skipped re-extraction, and the directory stayed empty.</li>
+     * </ol>
+     * <p>Both are fixed here: extraction comes from the real asset path, the version file is
+     * published only after a verified extraction, and the freshness check re-verifies the
+     * actual .so files on disk instead of trusting the version file alone.
+     */
     private static void unpackLwjglNatives(Context ctx) throws IOException {
         AssetManager am = ctx.getAssets();
         String rootDir = Tools.DIR_DATA;
@@ -112,49 +166,83 @@ public class AsyncAssetManager {
 
         String[] lwjglVersions = {"3.3.3", "3.4.1"};
         for (String lwjglVer : lwjglVersions) {
+            String assetRoot = "components/lwjgl-" + lwjglVer + "-natives/" + sArch;
+            String rootEntry = assetRoot + "/liblwjgl.so";
+
+            // The natives payload for this ABI may legitimately be absent (e.g. an unsupported
+            // architecture). Skip cleanly rather than aborting the whole extraction job.
+            try {
+                am.open(rootEntry).close();
+            } catch (IOException missing) {
+                Log.w("UnpackLwjgl", "No bundled LWJGL " + lwjglVer + " natives for " + sArch + ", skipping");
+                continue;
+            }
+
+            File nativesTargetDir = new File(rootDir, "lwjgl-" + lwjglVer + "-natives/" + sArch);
             File versionFile = new File(Tools.DIR_GAME_HOME + String.format("/lwjgl3/%s/version", lwjglVer));
-            String pathToLwjglNatives = String.format("lwjgl-%s-natives/", lwjglVer) + sArch;
+
+            String bundledVersion = null;
+            try (InputStream is = am.open("components/lwjgl3/" + lwjglVer + "/version")) {
+                bundledVersion = Tools.read(is);
+            } catch (IOException ignored) {
+                // The version marker itself is optional; completeness of the .so set is the real check.
+            }
 
             boolean shouldUpdate = true;
-            try (InputStream is = am.open("components/lwjgl3/" + lwjglVer + "/version")) {
-                if (versionFile.exists()) {
-                    try (FileInputStream fis = new FileInputStream(versionFile)) {
-                        String release1 = Tools.read(is);
-                        String release2 = Tools.read(fis);
-                        if (release1.equals(release2))
-                            shouldUpdate = false;
-                    }
+            if (nativesAreComplete(nativesTargetDir) && versionFile.exists() && bundledVersion != null) {
+                try (FileInputStream fis = new FileInputStream(versionFile)) {
+                    if (bundledVersion.equals(Tools.read(fis))) shouldUpdate = false;
+                } catch (IOException ignored) {
                 }
             }
 
-            // Validate that the target natives directory actually contains the expected .so files.
-            // Without this check, a stale/corrupt folder from a previous run would be silently used.
             if (!shouldUpdate) {
-                File nativesTargetDir = new File(rootDir, pathToLwjglNatives);
-                File sentinelFile = new File(nativesTargetDir, "liblwjgl.so");
-                if (!nativesTargetDir.isDirectory() || !sentinelFile.exists() || sentinelFile.length() == 0) {
-                    Log.w("UnpackLwjgl", lwjglVer + " natives directory is missing or corrupt, forcing re-extraction...");
-                    shouldUpdate = true;
-                }
+                Log.i("UnpackLwjgl", lwjglVer + " is up-to-date with the launcher, continuing...");
+                continue;
             }
 
-            if (shouldUpdate) {
-                Log.i("UnpackLwjgl", lwjglVer + " was installed manually, or does not exist, unpacking new...");
-                String[] fileList = am.list("components/" + pathToLwjglNatives);
-                for (String fileName : fileList) {
-                    Tools.copyAssetFile(ctx, "components/" + pathToLwjglNatives + "/" + fileName, rootDir + "/" + pathToLwjglNatives, true);
-                }
-                // After extraction, update the version file so future checks are faster
-                try (InputStream is = am.open("components/lwjgl3/" + lwjglVer + "/version")) {
-                    String versionContent = Tools.read(is);
-                    FileUtils.writeStringToFile(versionFile, versionContent, "UTF-8");
+            Log.i("UnpackLwjgl", lwjglVer + " natives are missing or out of date, re-extracting...");
+            // Clear leftovers first: a partially-extracted directory from an earlier launch must
+            // not be merged with, or the stale .so files would survive the next launch too.
+            try {
+                FileUtils.deleteDirectory(nativesTargetDir);
+            } catch (IOException ignored) {
+            }
+
+            String[] fileList = am.list(assetRoot);
+            if (fileList == null || fileList.length == 0) {
+                throw new IOException("Bundled LWJGL " + lwjglVer + " natives for " + sArch + " are empty");
+            }
+            for (String fileName : fileList) {
+                Tools.copyAssetFile(ctx, assetRoot + "/" + fileName, nativesTargetDir.getAbsolutePath(), true);
+            }
+
+            // Only publish the version file once the directory has been verified, so a failed
+            // or partial extraction can never be recorded as a good one.
+            if (!nativesAreComplete(nativesTargetDir)) {
+                throw new IOException("LWJGL " + lwjglVer + " natives incomplete after extraction: " + nativesTargetDir);
+            }
+            if (bundledVersion != null) {
+                try {
+                    FileUtils.writeStringToFile(versionFile, bundledVersion, "UTF-8");
                 } catch (IOException e) {
                     Log.w("UnpackLwjgl", "Failed to write version file for " + lwjglVer, e);
                 }
-            } else {
-                Log.i("UnpackLwjgl", lwjglVer + " is up-to-date with the launcher, continuing...");
             }
+            Log.i("UnpackLwjgl", lwjglVer + " natives extracted and verified for " + sArch);
         }
+    }
+
+    /**
+     * @return whether every required LWJGL native is present and non-empty in the directory
+     */
+    private static boolean nativesAreComplete(File nativesDir) {
+        if (nativesDir == null || !nativesDir.isDirectory()) return false;
+        for (String name : LWJGL_NATIVE_REQUIRED) {
+            File f = new File(nativesDir, name);
+            if (!f.isFile() || f.length() == 0) return false;
+        }
+        return true;
     }
 
     private static void unpackComponent(Context ctx, String component, boolean privateDirectory) throws IOException {

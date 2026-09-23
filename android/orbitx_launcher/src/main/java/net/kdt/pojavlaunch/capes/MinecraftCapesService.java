@@ -28,7 +28,7 @@ public class MinecraftCapesService {
     private static final String TAG = "MinecraftCapesService";
 
     public static final String DEFAULT_GALLERY_ENDPOINT = "https://api.minecraftcapes.net/gallery";
-    public static final String USER_AGENT = "CS-Launcher-Plus/3.1 (Android; Minecraft Java Edition)";
+    public static final String USER_AGENT = "OrX/3.2 (Android; Minecraft Java Edition)";
 
     private static final int TIMEOUT_CONNECT_MS = 8000;
     private static final int TIMEOUT_READ_MS = 12000;

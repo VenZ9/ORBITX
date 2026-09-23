@@ -98,9 +98,9 @@ public class ProfileIconCache {
 
         String cacheKey = (key != null ? key : "bg") + "_bg";
 
-        // One-time compatibility alias for profiles created by an earlier build.
-        // previous build. Render them with the original animated background
-        // without changing the profile-card layout or dimensions.
+        // One-time compatibility alias for profiles created by an earlier build:
+        // render them with the original animated background, without changing the
+        // profile-card layout or dimensions.
         if ("cs_client_artwork".equals(background)
                 || ProfileGifSupport.LEGACY_REMOTE_DEFAULT_BG_URL.equals(background)) {
             background = ProfileGifSupport.DEFAULT_PROFILE_BG_URL;

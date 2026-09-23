@@ -86,11 +86,14 @@ public final class ProfileGifSupport {
         return value != null && value.startsWith(BUNDLED_PREFIX);
     }
 
-    /** True for every spelling of "the launcher default" (bundled, legacy remote, CS alias). */
+    /** True for every spelling of "the launcher default" (bundled, legacy remote, legacy alias). */
     public static boolean isDefaultBackground(@Nullable String value) {
         return value == null
                 || DEFAULT_PROFILE_BG_URL.equals(value)
                 || LEGACY_REMOTE_DEFAULT_BG_URL.equals(value)
+                // Historic persisted key. It is a stored data value on profiles
+                // created by an earlier build, so it must keep resolving as
+                // "the default background" or those profiles would lose it.
                 || "cs_client_artwork".equals(value);
     }
 

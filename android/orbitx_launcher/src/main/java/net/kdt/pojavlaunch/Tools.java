@@ -1329,15 +1329,58 @@ public final class Tools {
         sLwjglVersion = iLwjglVersion >= 341 ? "3.4.1" : "3.3.3";
         lwjglNativesDir = String.format("%s/lwjgl-%s-natives/%s", Tools.DIR_DATA, sLwjglVersion, archAsStringAndroid(getDeviceArchitecture()));
         // Validate that the resolved native library directory actually contains the
-        // essential .so files. If it doesn't, throw a clear error so the user knows
-        // to restart the launcher (which triggers AsyncAssetManager re-extraction).
+        // essential .so files, and repair it in place when it does not.
+        //
+        // This is the last line of defence for the renderer: a natives directory that is
+        // empty or half-extracted leaves LD_LIBRARY_PATH pointing at nothing, and the game
+        // dies with UnsatisfiedLinkError the moment it binds an LWJGL native. It happened
+        // silently before because the version-file cache could record a good extraction
+        // while the directory was in fact empty. Rather than telling the user to restart
+        // and hope, re-extract synchronously (we do have an application Context here) and
+        // fall back to the old clear message only if that genuinely fails.
         File lwjglNativesFile = new File(lwjglNativesDir);
-        if (!lwjglNativesFile.isDirectory() || !new File(lwjglNativesFile, "liblwjgl.so").exists()) {
-            Logger.appendToLog("CRITICAL: LWJGL native library directory " + lwjglNativesDir
-                    + " is missing or incomplete. Restart the launcher to trigger re-extraction.");
-            // We can't recover here (no Context to re-extract), but at least log clearly.
+        if (!isLwjglNativesComplete(lwjglNativesFile)) {
+            Logger.appendToLog("WARN: LWJGL native library directory " + lwjglNativesDir
+                    + " is missing or incomplete. Re-extracting from the APK...");
+            try {
+                AsyncAssetManager.extractLwjglNativesNow(PojavApplication.getInstance());
+            } catch (Throwable t) {
+                Logger.appendToLog("WARN: Re-extraction failed: " + t);
+            }
+            // A profile can legitimately request an older LWJGL revision than the one the
+            // APK just refreshed, so re-resolve the directory before judging the result.
+            lwjglNativesDir = String.format("%s/lwjgl-%s-natives/%s", Tools.DIR_DATA, sLwjglVersion, archAsStringAndroid(getDeviceArchitecture()));
+            lwjglNativesFile = new File(lwjglNativesDir);
+            if (!isLwjglNativesComplete(lwjglNativesFile)) {
+                Logger.appendToLog("CRITICAL: LWJGL native library directory " + lwjglNativesDir
+                        + " is still missing or incomplete after re-extraction.");
+            } else {
+                Logger.appendToLog("LWJGL natives restored at " + lwjglNativesDir);
+            }
         }
         return libDir.toArray(new String[0]);
+    }
+
+    /**
+     * The .so files an LWJGL natives directory must contain before it is safe to hand to the
+     * JVM. Mirrors AsyncAssetManager's payload manifest.
+     */
+    private static final String[] LWJGL_NATIVE_REQUIRED = {
+            "liblwjgl.so", "liblwjgl_opengl.so", "liblwjgl_stb.so",
+            "liblwjgl_tinyfd.so", "liblwjgl_vma.so", "liblwjgl_nanovg.so",
+            "libfreetype.so", "libshaderc.so"
+    };
+
+    /**
+     * @return whether every required LWJGL native is present and non-empty in the directory
+     */
+    private static boolean isLwjglNativesComplete(File nativesDir) {
+        if (nativesDir == null || !nativesDir.isDirectory()) return false;
+        for (String name : LWJGL_NATIVE_REQUIRED) {
+            File f = new File(nativesDir, name);
+            if (!f.isFile() || f.length() == 0) return false;
+        }
+        return true;
     }
 
     public static JMinecraftVersionList.Version getVersionInfo(String versionName) {

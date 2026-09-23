@@ -81,6 +81,20 @@ public class ScreenRecorder {
         }
 
         try {
+            // Android 14+ (API 34) contract: the mediaProjection foreground service must
+            // ALREADY be running when the projection is handed out. The original order here
+            // obtained the projection first and started the service afterwards, which produced
+            // a projection that was invalid the moment it was created — createVirtualDisplay()
+            // then threw, the catch below swallowed it, and every attempt failed with a bare
+            // "recording failed" toast. Start the service first, then give it a beat to reach
+            // startForeground() before asking for the projection.
+            RecorderService.start(mContext);
+            try {
+                Thread.sleep(400L);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+
             MediaProjectionManager manager =
                     (MediaProjectionManager) mContext.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
             if (manager == null) {
@@ -92,10 +106,6 @@ public class ScreenRecorder {
                 notifyError(messageResOnError);
                 return false;
             }
-
-            // The projection must have a foreground service of type mediaProjection
-            // alive before the first frame, otherwise Android 14+ kills it instantly.
-            RecorderService.start(mContext);
 
             Point size = resolveScreenSize();
             DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
@@ -113,10 +123,18 @@ public class ScreenRecorder {
 
             mRecorder = new MediaRecorder();
             mRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
-            mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            // Audio is best-effort. MP4 and WebM both want an audio track declared up
+            // front, so a denied microphone permission used to fail prepare() and take the
+            // whole capture down with it. Degrade to a silent clip instead of no clip.
+            boolean withAudio = hasAudioPermission();
+            if (withAudio) {
+                mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            }
             mRecorder.setOutputFormat(format.outputFormat);
             mRecorder.setVideoEncoder(format.videoEncoder);
-            mRecorder.setAudioEncoder(format.audioEncoder);
+            if (withAudio) {
+                mRecorder.setAudioEncoder(format.audioEncoder);
+            }
             mRecorder.setVideoSize(encWidth, encHeight);
             mRecorder.setVideoFrameRate(30);
             mRecorder.setVideoEncodingBitRate(videoBitrateFor(encWidth, encHeight));
@@ -149,6 +167,17 @@ public class ScreenRecorder {
             Log.w(TAG, "recording failed to start", e);
             teardown();
             notifyError(messageResOnError);
+            return false;
+        }
+    }
+
+    /** @return whether the microphone may be used, so audio capture stays best-effort. */
+    private boolean hasAudioPermission() {
+        try {
+            return androidx.core.content.ContextCompat.checkSelfPermission(mContext,
+                    android.Manifest.permission.RECORD_AUDIO)
+                    == android.content.pm.PackageManager.PERMISSION_GRANTED;
+        } catch (Throwable t) {
             return false;
         }
     }

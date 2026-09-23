@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT — the command bar container.
+
+  A flat obsidian band with a single hairline along its TOP edge — the seam
+  between the page and the bar. No gradient, no inner sheen, no elevation: the
+  bar is the floor of the page, not a card floating over it. That one decision
+  is what stops the shell reading as a stack of widgets.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ox_obsidian" />
+        </shape>
+    </item>
+    <item android:gravity="top" android:height="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ox_hairline_strong" />
+        </shape>
+    </item>
+</layer-list>
