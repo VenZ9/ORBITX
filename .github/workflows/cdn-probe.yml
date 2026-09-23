@@ -4,14 +4,14 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe our CDN (exit 1 if unreachable)
+      - name: Probe relay reachability (exit 1 if unreachable)
         run: |
-          CODE=$(curl -sS -o /tmp/a -w "%{http_code}" -L "https://static.teamily.ai/files/ae31b43c-219a-4abe-aa0e-ad224972caba/build.gradle" || echo "000")
+          CODE=$(curl -sS -o /tmp/a -w "%{http_code}" -L "https://litter.catbox.moe/zvhn1g.gz" || echo "000")
           SIZE=$(wc -c < /tmp/a 2>/dev/null || echo 0)
-          echo "artifact-cdn http=$CODE size=$SIZE"
-          if [ "$CODE" = "200" ] && [ "$SIZE" -gt 100 ]; then
-            echo "RESULT=PASS cdn reachable"
+          echo "relay http=$CODE size=$SIZE"
+          if [ "$CODE" = "200" ] && [ "$SIZE" -gt 10000 ]; then
+            echo "RESULT=PASS relay reachable"
             exit 0
           fi
-          echo "RESULT=FAIL cdn not reachable"
+          echo "RESULT=FAIL relay not reachable"
           exit 1
