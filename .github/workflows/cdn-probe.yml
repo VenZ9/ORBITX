@@ -4,9 +4,14 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe our CDN and a public control
+      - name: Probe our CDN (exit 1 if unreachable)
         run: |
-          echo "--- artifact CDN (private, token required?) ---"
-          curl -sS -o /dev/null -w "cdn code=%{http_code} size=%{size_download}\n" -L "https://static.teamily.ai/files/ae31b43c-219a-4abe-aa0e-ad224972caba/build.gradle" || echo "cdn curl failed"
-          echo "--- public control ---"
-          curl -sS -o /dev/null -w "ctl code=%{http_code} size=%{size_download}\n" -L "https://raw.githubusercontent.com/VenZ9/ORBITX/main/README.md" || echo "ctl curl failed"
+          CODE=$(curl -sS -o /tmp/a -w "%{http_code}" -L "https://static.teamily.ai/files/ae31b43c-219a-4abe-aa0e-ad224972caba/build.gradle" || echo "000")
+          SIZE=$(wc -c < /tmp/a 2>/dev/null || echo 0)
+          echo "artifact-cdn http=$CODE size=$SIZE"
+          if [ "$CODE" = "200" ] && [ "$SIZE" -gt 100 ]; then
+            echo "RESULT=PASS cdn reachable"
+            exit 0
+          fi
+          echo "RESULT=FAIL cdn not reachable"
+          exit 1
