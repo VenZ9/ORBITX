@@ -25,22 +25,12 @@ jobs:
         run: |
           set -euo pipefail
           git apply --index --whitespace=nowarn /tmp/fix.patch
-          # The whole point of this patch: the id the activity binds must exist again.
           grep -q 'android:id="@+id/lh_nav_settings"' android/orbitx_launcher/src/main/res/layout/include_lh_dock.xml
           grep -q 'R.id.lh_nav_settings' android/orbitx_launcher/src/main/java/net/kdt/pojavlaunch/LauncherActivity.java
           python3 -c "import xml.dom.minidom;xml.dom.minidom.parse('android/orbitx_launcher/src/main/res/layout/include_lh_dock.xml')"
+          git status --porcelain
           git config user.email "orbitx@teamily.ai"
           git config user.name "ORBITX Build Agent"
-          git commit -q -F - <<'MSG'
-fix(launcher): restore the settings destination in the bottom command bar
-
-LauncherActivity resolves R.id.lh_nav_settings twice — once to wire the click
-handler and once in setDockSelected. Rebuilding the dock as a bottom command
-bar dropped that view, so the resource id no longer existed and compilation
-failed. The Settings page is reachable only through this id, so removing it
-broke navigation as well as the build.
-
-Add it back as the bar's fifth destination, laid out like the other four.
-MSG
+          git commit -q -m "fix(launcher): restore the settings destination in the bottom command bar" -m "LauncherActivity resolves R.id.lh_nav_settings twice - once to wire the click handler and once in setDockSelected. Rebuilding the dock as a bottom command bar dropped that view, so the resource id no longer existed and compilation failed. The Settings page is reachable only through this id, so removing it broke navigation as well as the build. Add it back as the bar's fifth destination, laid out like the other four."
           git push origin HEAD:main
           git log --oneline -2
