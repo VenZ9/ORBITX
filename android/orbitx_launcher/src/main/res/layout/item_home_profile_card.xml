@@ -1,267 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ORBIT — one instance in the library.
+  ORBIT DESKTOP — instance TABLE ROW, full-width variant
+  (item_home_profile_card)
 
-  Read top-left to bottom-right as a data row, not a poster:
+  THE STRUCTURAL CHANGE
 
-    ▌│[icon]  NAME                      (identity, largest type on the card)
-    ▌│        VERSION · MODS · RAM       (mono, the figures you compare)
-    ▌│        ─────────────────────────
-    ▌│        SHORTCUT  REORDER  BROWSE  ▶ LAUNCH
+  This was a poster card: a full-bleed artwork background with a legibility
+  scrim, a floating version badge, a favourite star, an icon, then a name, a
+  version line, a mod count and a RAM figure stacked in prose — and four
+  separate circular action buttons below. It is now one dense 56dp TABLE ROW
+  with aligned columns:
 
-  The ember spine down the left edge is the ORBIT signature: a card you have
-  selected carries a lit edge, an unselected one carries a dark edge. It is a
-  single View with no logic, so selection state stays owned by the fragment.
+      [icon]  Fabulously Optimized     Fabric 1.21    128    2 GB   > : :
 
-  Every id the adapter binds is preserved; the GIF banner, scrim and version
-  badge layers stay in place above the content.
+  - the artwork becomes a 36dp framed icon; the scrim and the badge are retired
+    (kept as ids, zero size) because a row does not need legibility insurance
+  - name / version / mods / RAM become four aligned fields, the last three in
+    monospace so the columns line up down the table
+  - the four circular buttons become a single trailing action group
+
+  Ids preserved: card_profile_root, img_profile_background,
+  img_profile_background_scrim, tv_version_badge, btn_profile_favorite,
+  img_profile_icon, tv_profile_name, tv_profile_version, tv_profile_mod_count,
+  tv_profile_ram, btn_profile_shortcut, btn_profile_drag, btn_profile_browse,
+  btn_profile_play.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_profile_root"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/orb_space_1"
-    android:layout_marginVertical="@dimen/orb_space_1"
-    android:background="@drawable/bg_profile_card"
-    android:stateListAnimator="@animator/card_press_anim"
-    android:clipChildren="true"
-    android:clipToOutline="true"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_height="@dimen/od_row_h_tall"
+    android:background="@drawable/od_row_bg"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/od_space_3"
+    android:paddingEnd="@dimen/od_space_1">
 
-    <!-- Custom banner / animated GIF, drawn under the content. -->
+    <!-- retired layers: the artwork and its scrim. Kept so the adapter's
+         crossfade and scrim lookups still resolve; never drawn. -->
     <ImageView
         android:id="@+id/img_profile_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         android:visibility="gone" />
 
     <View
         android:id="@+id/img_profile_background_scrim"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_profile_card_scrim"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         android:visibility="gone" />
 
-    <!-- Signature ember spine. Static: selection is a fragment concern. -->
-    <View
-        android:layout_width="3dp"
-        android:layout_height="match_parent"
-        android:background="@color/ox_ember" />
-
-    <!-- Version badge, pinned top-right. -->
-    <TextView
-        android:id="@+id/tv_version_badge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="@dimen/orb_space_3"
-        android:layout_marginEnd="@dimen/orb_space_4"
-        android:background="@drawable/bg_cs_version_badge"
-        android:fontFamily="monospace"
-        android:gravity="center"
-        android:letterSpacing="0.06"
-        android:maxLines="1"
-        android:maxWidth="82dp"
-        android:minWidth="54dp"
-        android:paddingHorizontal="@dimen/orb_space_2"
-        android:paddingVertical="3dp"
-        android:textColor="@color/ox_ember_bright"
-        android:textSize="@dimen/orb_text_label_xs"
-        android:visibility="gone" />
-
-    <!-- Favourite toggle — independent of launch selection. -->
-    <ImageButton
-        android:id="@+id/btn_profile_favorite"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="92dp"
-        android:background="@drawable/bg_browse_button"
-        android:contentDescription="Favorite instance"
-        android:padding="7dp"
-        android:src="@drawable/ic_csp_star_outline"
-        android:tint="@color/ox_text_tertiary" />
+    <!-- == INSTANCE field == icon + name -->
+    <ImageView
+        android:id="@+id/img_profile_icon"
+        android:layout_width="@dimen/od_thumb_lg"
+        android:layout_height="@dimen/od_thumb_lg"
+        android:background="@drawable/od_bitmap_frame"
+        android:contentDescription="@null"
+        android:padding="1dp"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/orb_space_3"
-        android:paddingEnd="@dimen/orb_space_3">
+        android:layout_marginStart="@dimen/od_space_3"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <!-- Identity: icon, name, figures. End padding reserves the corner
-             where the version badge and favourite float. -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_profile_name"
+            style="@style/OdText.TitleS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/orb_space_4"
-            android:paddingBottom="@dimen/orb_space_3">
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/od_text_body"
+            tools:text="Fabulously Optimized" />
 
-            <ImageView
-                android:id="@+id/img_profile_icon"
-                android:layout_width="46dp"
-                android:layout_height="46dp"
-                android:layout_marginEnd="@dimen/orb_space_3"
-                android:background="@drawable/bg_profile_icon_rounded"
-                android:padding="4dp"
-                android:scaleType="fitCenter" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_profile_name"
-                    style="@style/OrbitText.TitleS"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:paddingEnd="124dp" />
-
-                <!-- The figures row: quiet mono, one ember value for mods. -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_profile_version"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:fontFamily="monospace"
-                        android:letterSpacing="0.04"
-                        android:maxLines="1"
-                        android:textColor="@color/ox_text_secondary"
-                        android:textSize="@dimen/orb_text_mono_s" />
-
-                    <TextView
-                        android:id="@+id/tv_profile_mod_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/orb_space_2"
-                        android:ellipsize="end"
-                        android:fontFamily="monospace"
-                        android:letterSpacing="0.04"
-                        android:maxLines="1"
-                        android:textColor="@color/ox_ember_bright"
-                        android:textSize="@dimen/orb_text_mono_s" />
-
-                    <TextView
-                        android:id="@+id/tv_profile_ram"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/orb_space_2"
-                        android:ellipsize="end"
-                        android:fontFamily="monospace"
-                        android:letterSpacing="0.04"
-                        android:maxLines="1"
-                        android:textColor="@color/ox_text_tertiary"
-                        android:textSize="@dimen/orb_text_mono_s" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Hairline IS the separator between the data block and the actions. -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/ox_hairline" />
-
-        <!-- Action row: three quiet icon targets, then the one filled launch. -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_version_badge"
+            style="@style/OdText.MonoS"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/orb_space_2"
-            android:paddingBottom="@dimen/orb_space_3">
-
-            <FrameLayout
-                android:id="@+id/btn_profile_shortcut"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_marginEnd="@dimen/orb_space_1"
-                android:background="@drawable/bg_browse_button"
-                android:clickable="true"
-                android:contentDescription="@string/shortcut_add_title"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_press_anim">
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_shortcut_add"
-                    android:tint="@color/ox_text_tertiary" />
-            </FrameLayout>
-
-            <!-- Only this view can start a reorder drag. -->
-            <FrameLayout
-                android:id="@+id/btn_profile_drag"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_marginEnd="@dimen/orb_space_1"
-                android:background="@drawable/bg_browse_button"
-                android:clickable="true"
-                android:contentDescription="Hold and drag to reorder instance"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_press_anim">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_profile_drag_handle"
-                    android:tint="@color/ox_text_tertiary" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/btn_profile_browse"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:background="@drawable/bg_browse_button"
-                android:clickable="true"
-                android:focusable="true"
-                android:stateListAnimator="@animator/card_press_anim">
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Browse content"
-                    android:src="@drawable/ic_profile_download"
-                    android:tint="@color/ox_text_tertiary" />
-            </FrameLayout>
-
-            <!-- Launch — the only filled control on the card. -->
-            <net.kdt.pojavlaunch.ui.PremiumPlayButtonView
-                android:id="@+id/btn_profile_play"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="@dimen/orb_space_2"
-                android:layout_weight="1"
-                android:contentDescription="@string/cs_world_play">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_play_arrow"
-                    android:tint="@color/ox_on_ember" />
-            </net.kdt.pojavlaunch.ui.PremiumPlayButtonView>
-        </LinearLayout>
+            android:layout_marginTop="2dp"
+            android:background="@drawable/od_keycap"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:textColor="@color/od_text_muted"
+            tools:text="FABRIC" />
     </LinearLayout>
 
-</FrameLayout>
+    <!-- == VERSION field — right-aligned mono column == -->
+    <TextView
+        android:id="@+id/tv_profile_version"
+        style="@style/OdText.MonoS"
+        android:layout_width="@dimen/od_col_meta"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        tools:text="1.21.4" />
+
+    <!-- == MODS field == -->
+    <TextView
+        android:id="@+id/tv_profile_mod_count"
+        style="@style/OdText.MonoS"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        tools:text="128" />
+
+    <!-- == RAM field — the one figure that matters most, so it is ember == -->
+    <TextView
+        android:id="@+id/tv_profile_ram"
+        style="@style/OdText.Ember"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        tools:text="2048" />
+
+    <!-- == ACTION GROUP == -->
+    <ImageButton
+        android:id="@+id/btn_profile_favorite"
+        style="@style/OdButton.Icon"
+        android:contentDescription="@string/orbitx_cd_favourite"
+        android:src="@drawable/ic_csp_star_outline"
+        app:tint="@color/od_text_muted" />
+
+    <ImageButton
+        android:id="@+id/btn_profile_browse"
+        style="@style/OdButton.Icon"
+        android:contentDescription="@string/orbitx_cd_browse"
+        android:src="@drawable/ic_folder_managed"
+        app:tint="@color/od_text_muted" />
+
+    <ImageButton
+        android:id="@+id/btn_profile_shortcut"
+        style="@style/OdButton.Icon"
+        android:contentDescription="@string/orbitx_cd_shortcut"
+        android:src="@drawable/ic_add"
+        app:tint="@color/od_text_muted" />
+
+    <ImageButton
+        android:id="@+id/btn_profile_drag"
+        style="@style/OdButton.Icon"
+        android:contentDescription="@string/orbitx_cd_reorder"
+        android:src="@drawable/ic_more_vert"
+        app:tint="@color/od_text_muted" />
+
+    <!-- the primary action of the row, and the only filled object in it -->
+    <FrameLayout
+        android:id="@+id/btn_profile_play"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="@dimen/od_space_1"
+        android:background="@drawable/od_btn_primary"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/orbitx_cd_launch"
+            android:src="@drawable/ic_play_arrow"
+            app:tint="@color/od_on_accent" />
+    </FrameLayout>
+</LinearLayout>

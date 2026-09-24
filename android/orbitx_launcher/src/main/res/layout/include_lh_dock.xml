@@ -1,70 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ══════════════════════════════════════════════════════════════════════════════
-  ORBIT — the command bar (shared by every launcher page)
-  ══════════════════════════════════════════════════════════════════════════════
+  ORBIT DESKTOP — the command bar  (replaces the bottom icon band)
 
-  This is the whole navigation model. ORBIT does NOT use a left-hand icon rail,
-  a top header bar, a drawer, or a floating gear button. Instead every
-  destination lives in ONE flat band pinned to the bottom edge — the strip of
-  screen a thumb already rests on when the phone is held one-handed.
+  THE STRUCTURAL CHANGE
 
-  WHY THE BOTTOM BAND
+  The band it replaces sat on the BOTTOM edge and stacked a glyph over a label
+  inside five equal columns — the home-screen idiom every phone launcher uses.
+  That is why the app kept reading as a re-skin no matter what colour it was.
 
-  A left rail is a desktop pattern: it costs ~72dp of width on every screen
-  (a sixth of a 360dp portrait viewport) to hold five small glyphs, and it puts
-  the targets in the hardest-to-reach corner. A bottom band is reachable, costs
-  height rather than width (the axis that matters for a game launcher showing a
-  list of instances), and lets the content pane own the full top of the page —
-  which is what lets a title run edge to edge.
+  This is a desktop MENU BAR. It is pinned to the TOP edge and is built from two
+  tiers, which is how every Windows application is organised:
 
-  HOW STATE IS SHOWN — a rule, not a box
+     +----------------------------------------------------------+
+     | ORBITX                              v3.2.0        [gear]  |  title strip
+     +----------------------------------------------------------+
+     | HOME  |  CURSOR  |  CONTROLS  |  ABOUT  |  SETTINGS        |  menu strip
+     +----------------------------------------------------------+
 
-  The active destination grows a 2dp ember rule along its TOP edge: the seam
-  between the page above and the bar below. Selection therefore reads as a line
-  pointing up into the screen you are on. Nothing is ever filled as a capsule,
-  so the bar stays flat and exactly one thing on it is coloured.
+  Tier 1 is the TITLE STRIP: the product identity on the leading edge, and the
+  build/utility cluster on the trailing edge — the same furniture as a window's
+  own title bar. 30dp.
 
-  LEGACY IDS
+  Tier 2 is the MENU STRIP: every destination as ONE HORIZONTAL UNIT — a glyph
+  sitting BESIDE its label, reading left to right like File / Edit / View. 42dp.
 
-  lh_dock and lh_nav_home / _cursor / _controls / _about are unchanged, so
-  LauncherActivity's binding and its setSelected()-driven selection logic keeps
-  working untouched. account_spinner and setting_button are retained as
-  zero-size logic hosts (see below); they render nothing.
-  ══════════════════════════════════════════════════════════════════════════════
+  The two tiers are told apart by a 1dp rule; the whole bar is closed by a second
+  rule where it meets the workspace. Nothing floats, nothing is a capsule.
+
+  HOW THE ACTIVE DESTINATION READS
+
+  A 2dp ember rule along the BOTTOM edge of the active item — the seam pointing
+  down into the panel you are looking at — plus a raised fill. Nothing else on
+  the bar is ever coloured, so the eye lands on the current location instantly.
+
+  Children carry android:duplicateParentState="true" so the parent's
+  setSelected() drives the glyph and label colour selectors. That is what
+  LauncherActivity already calls, so no Java changes are needed.
+
+  LEGACY IDS: lh_dock, lh_nav_home/_cursor/_controls/_about/_settings and every
+  *_glyph id are unchanged, as are the account_spinner and setting_button
+  zero-size logic hosts.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lh_dock"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/orb_bar_height"
-    android:background="@drawable/orb_bar_surface"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingStart="@dimen/orb_space_1"
-    android:paddingEnd="@dimen/orb_space_1">
+    android:layout_height="wrap_content"
+    android:background="@drawable/od_commandbar"
+    android:orientation="vertical">
 
-    <!-- ── Product tile ────────────────────────────────────────────────────
-         The app mark, sitting in the corner where a launcher would normally
-         put a hamburger. It anchors the bar's identity and doubles as the host
-         for the account spinner, which lives here as a zero-size ghost so
-         mcAccountSpinner (and the account chip on Home) keeps resolving
-         R.id.account_spinner exactly as before. -->
-    <FrameLayout
-        android:layout_width="@dimen/orb_bar_brand_tile"
-        android:layout_height="@dimen/orb_bar_brand_tile"
-        android:layout_marginStart="@dimen/orb_space_1"
-        android:background="@drawable/orb_bar_item"
-        android:clickable="true"
-        android:focusable="true">
+    <!-- ============ TIER 1 . TITLE STRIP ============ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_space_3"
+        android:paddingEnd="@dimen/od_space_1">
 
+        <!-- identity: the mark and the wordmark, exactly as a window titles
+             itself. This is also the host for the account spinner ghost. -->
         <ImageView
-            android:layout_width="@dimen/orb_bar_brand_glyph"
-            android:layout_height="@dimen/orb_bar_brand_glyph"
-            android:layout_gravity="center"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/orbitx_mark" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false"
+            android:letterSpacing="0.16"
+            android:text="ORBITX"
+            android:textColor="@color/od_text"
+            android:textSize="@dimen/od_text_body_s" />
+
+        <!-- one always-visible live marker: the client is running. -->
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:background="@drawable/od_live_dot" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- build identity, mono, right-aligned: a desktop client always shows
+             which build you are running. -->
+        <TextView
+            style="@style/OdText.MonoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.06"
+            android:text="ORBITX"
+            android:textColor="@color/od_text_faint" />
+
+        <!-- Legacy logic host: settings icon swap target. Zero size, gone. -->
+        <ImageButton
+            android:id="@+id/setting_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="Settings"
+            android:src="@drawable/ic_menu_settings"
+            android:visibility="gone" />
+
+        <!-- Legacy logic host: account dialog host. Zero size, gone. -->
         <com.kdt.mcgui.mcAccountSpinner
             android:id="@+id/account_spinner"
             android:layout_width="0dp"
@@ -73,194 +117,183 @@
             android:popupBackground="@drawable/bg_account_popup"
             android:popupElevation="10dp"
             android:visibility="gone" />
-    </FrameLayout>
+    </LinearLayout>
 
-    <!-- Seam between the identity field and the destinations. -->
+    <!-- hairline between the title strip and the menu strip -->
     <View
-        android:layout_width="1dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="@dimen/orb_space_2"
-        android:background="@color/ox_hairline" />
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/od_rule" />
 
-    <!-- ── Destination: Home ───────────────────────────────────────────────
-         Each destination is a column — glyph over a tracked-out uppercase
-         label — sharing the band evenly via layout_weight. -->
+    <!-- ============ TIER 2 . MENU STRIP ============ -->
     <LinearLayout
-        android:id="@+id/lh_nav_home"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/orb_bar_item"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/lh_nav_home_glyph"
-            android:layout_width="@dimen/orb_bar_glyph"
-            android:layout_height="@dimen/orb_bar_glyph"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_menu_home"
-            app:tint="@color/orb_rail_icon_tint" />
+        <!-- --- HOME --- -->
+        <LinearLayout
+            android:id="@+id/lh_nav_home"
+            style="@style/OdChrome.MenuItem"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/orb_space_1"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="@dimen/orb_text_label_tracking"
-            android:text="HOME"
-            android:textColor="@color/orb_bar_label_tint"
-            android:textSize="@dimen/orb_text_label_xs" />
+            <ImageView
+                android:id="@+id/lh_nav_home_glyph"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_menu_home"
+                app:tint="@color/od_menuitem_glyph" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.06"
+                android:maxLines="1"
+                android:text="HOME"
+                android:textColor="@color/od_menuitem_text"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <!-- --- CURSOR --- -->
+        <LinearLayout
+            android:id="@+id/lh_nav_cursor"
+            style="@style/OdChrome.MenuItem"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/lh_nav_cursor_glyph"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_mouse_pointer"
+                app:tint="@color/od_menuitem_glyph" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.06"
+                android:maxLines="1"
+                android:text="CURSOR"
+                android:textColor="@color/od_menuitem_text"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <!-- --- CONTROLS --- -->
+        <LinearLayout
+            android:id="@+id/lh_nav_controls"
+            style="@style/OdChrome.MenuItem"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/lh_nav_controls_glyph"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_menu_custom_controls"
+                app:tint="@color/od_menuitem_glyph" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.06"
+                android:maxLines="1"
+                android:text="CONTROLS"
+                android:textColor="@color/od_menuitem_text"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <!-- --- ABOUT --- -->
+        <LinearLayout
+            android:id="@+id/lh_nav_about"
+            style="@style/OdChrome.MenuItem"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/lh_nav_about_glyph"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_info"
+                app:tint="@color/od_menuitem_glyph" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.06"
+                android:maxLines="1"
+                android:text="ABOUT"
+                android:textColor="@color/od_menuitem_text"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <!-- --- SETTINGS ---
+             Kept in the menu strip, where a desktop application always puts
+             preferences. The id must stay lh_nav_settings: LauncherActivity
+             resolves it for both the click handler and the selected-state
+             refresh. -->
+        <LinearLayout
+            android:id="@+id/lh_nav_settings"
+            style="@style/OdChrome.MenuItem"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/lh_nav_settings_glyph"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_menu_settings"
+                app:tint="@color/od_menuitem_glyph" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.06"
+                android:maxLines="1"
+                android:text="SETTINGS"
+                android:textColor="@color/od_menuitem_text"
+                android:textSize="9sp" />
+        </LinearLayout>
     </LinearLayout>
-
-    <!-- ── Destination: Cursor ──────────────────────────────────────────── -->
-    <LinearLayout
-        android:id="@+id/lh_nav_cursor"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/orb_bar_item"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/lh_nav_cursor_glyph"
-            android:layout_width="@dimen/orb_bar_glyph"
-            android:layout_height="@dimen/orb_bar_glyph"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_mouse_pointer"
-            app:tint="@color/orb_rail_icon_tint" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/orb_space_1"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="@dimen/orb_text_label_tracking"
-            android:text="CURSOR"
-            android:textColor="@color/orb_bar_label_tint"
-            android:textSize="@dimen/orb_text_label_xs" />
-    </LinearLayout>
-
-    <!-- ── Destination: Controls ────────────────────────────────────────── -->
-    <LinearLayout
-        android:id="@+id/lh_nav_controls"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/orb_bar_item"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/lh_nav_controls_glyph"
-            android:layout_width="@dimen/orb_bar_glyph"
-            android:layout_height="@dimen/orb_bar_glyph"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_menu_custom_controls"
-            app:tint="@color/orb_rail_icon_tint" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/orb_space_1"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="@dimen/orb_text_label_tracking"
-            android:text="CONTROLS"
-            android:textColor="@color/orb_bar_label_tint"
-            android:textSize="@dimen/orb_text_label_xs" />
-    </LinearLayout>
-
-    <!-- ── Destination: About ───────────────────────────────────────────── -->
-    <LinearLayout
-        android:id="@+id/lh_nav_about"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/orb_bar_item"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/lh_nav_about_glyph"
-            android:layout_width="@dimen/orb_bar_glyph"
-            android:layout_height="@dimen/orb_bar_glyph"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_info"
-            app:tint="@color/orb_rail_icon_tint" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/orb_space_1"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="@dimen/orb_text_label_tracking"
-            android:text="ABOUT"
-            android:textColor="@color/orb_bar_label_tint"
-            android:textSize="@dimen/orb_text_label_xs" />
-    </LinearLayout>
-
-    <!-- ── Legacy logic host ───────────────────────────────────────────────
-         mSettingsButton swaps this icon's drawable on fragment changes and
-         wires its click to the legacy settings handler. Settings is reached
-         from the Home screen, so the button itself is not part of the bar; it
-         is kept at zero size and gone so that Java keeps working. -->
-    <!-- ── Destination: Settings ────────────────────────────────────────────
-         Fifth and last destination. Settings is a page like any other in this
-         model, reached from the same band as Home or About — it is not a
-         detached gear parked in a screen corner and it is not a guest on the
-         Home list. Keeping it in the band is what makes the bar a complete
-         navigational surface rather than a shortcut strip.
-         The id must stay lh_nav_settings: LauncherActivity resolves it both for
-         the click handler and for the selected-state refresh. -->
-    <LinearLayout
-        android:id="@+id/lh_nav_settings"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/orb_bar_item"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/lh_nav_settings_glyph"
-            android:layout_width="@dimen/orb_bar_glyph"
-            android:layout_height="@dimen/orb_bar_glyph"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_menu_settings"
-            app:tint="@color/orb_rail_icon_tint" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/orb_space_1"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="@dimen/orb_text_label_tracking"
-            android:text="SETTINGS"
-            android:textColor="@color/orb_bar_label_tint"
-            android:textSize="@dimen/orb_text_label_xs" />
-    </LinearLayout>
-
-    <!-- ── Legacy logic host ────────────────────────────────────────────────
-         mSettingsButton swaps this icon's drawable on fragment changes and
-         wires its click to the legacy settings handler. The real Settings
-         destination now lives in the band above, so this is kept only as a
-         zero-size host so the existing Java keeps resolving it. -->
-    <ImageButton
-        android:id="@+id/setting_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="Settings"
-        android:src="@drawable/ic_menu_settings"
-        android:visibility="gone" />
 </LinearLayout>

@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════
-     Phase 10 · SIMPLE SETTINGS
-     One centred column, phone-style: big title, one search pill, then
-     grouped cards of tall rows. No rail, no badges, no stats, no stars.
-     Every id the fragment binds is preserved (rail / badge / icon are
-     kept in the tree but GONE).
-     ═══════════════════════════════════════════════════════════════════ -->
+<!--
+  ============================================================================
+  SETTINGS — the preference panel   (was: a centred phone list of cards)
+  ============================================================================
+
+  THE STRUCTURAL CHANGE
+
+  The page it replaces was a mobile settings screen: one centred column with a
+  big 22sp title, a 44dp rounded search pill on its own full-width row, then a
+  stack of rounded group cards holding tall 62dp rows — and, when something was
+  edited, a floating rounded SAVE bar hovering above the bottom of the screen.
+
+  Every one of those choices is a phone choice. It is now a DOCUMENT PANE:
+
+      +----------------------------------------------------------+
+      | <- | SETTINGS  .  N options          [ search well ]      |  toolbar 46dp
+      +----------------------------------------------------------+
+      | GENERAL                                                  |  group label
+      | [i] Language                      English            >   |  48dp row
+      | -------------------------------------------------------- |  hairline
+      | [i] Download source               Default            >   |
+      +----------------------------------------------------------+
+      | * 2 unsaved changes                      [ APPLY ]      |  footer apply
+      +----------------------------------------------------------+
+
+  Concretely:
+    - the search field moved INTO the toolbar, where a desktop application puts
+      it — it is no longer a 44dp pill on a row of its own
+    - rows are 48dp and FLUSH, separated by hairlines, instead of 62dp rows
+      inside a rounded card with 16dp exterior gutters
+    - group headings are uppercase tracked labels over the rows, not card titles
+    - the apply bar is a FOOTER STRIP flush to the panel edge with a top rule,
+      not a floating rounded pill with margins and elevation
+    - the recycler's horizontal padding is gone, so rows run the full pane width
+      the way a table does
+
+  Every id the fragment binds is preserved: settings_header_bar, settings_back_
+  button, settings_title, settings_subtitle, settings_header_icon,
+  settings_live_badge, settings_search_pill, settings_search_input,
+  settings_recycler_view, unsaved_changes_bar, save_status_text,
+  btn_save_settings, plus the legacy rail ids (kept at zero size, still gone, so
+  the Phase-9 rail code path keeps resolving).
+  ============================================================================
+-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ss_page">
+    android:background="@drawable/od_pane">
 
     <!-- legacy rail (Phase 9) — kept for id compatibility, never shown -->
     <ScrollView
@@ -39,82 +77,117 @@
         android:layout_height="0dp"
         android:visibility="gone" />
 
-    <!-- ── the column ─────────────────────────────────────────────── -->
+    <!-- -- the pane column -- -->
     <LinearLayout
         android:id="@+id/settings_column"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
-        <!-- title bar -->
+        <!-- == TOOLBAR == back . title . subtitle . inline search well -->
         <LinearLayout
             android:id="@+id/settings_header_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/od_pane_header_h"
+            android:background="@drawable/od_pane_header"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="6dp">
+            android:paddingStart="@dimen/od_space_1"
+            android:paddingEnd="@dimen/od_space_2">
 
             <FrameLayout
                 android:id="@+id/settings_back_button"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:background="@drawable/ss_back_btn"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/od_icon_button"
                 android:clickable="true"
                 android:focusable="true">
 
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_arrow_back_white"
-                    app:tint="#F9F4F4" />
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/od_text_dim" />
             </FrameLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_weight="1"
+                android:layout_marginStart="@dimen/od_space_2"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/settings_title"
+                    style="@style/OdText.TitleS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:fontFamily="sans-serif-medium"
-                    android:includeFontPadding="false"
+                    android:letterSpacing="0.1"
                     android:maxLines="1"
-                    android:text="Settings"
-                    android:textColor="#F9F4F4"
-                    android:textSize="22sp" />
+                    android:text="SETTINGS"
+                    android:textSize="@dimen/od_text_body"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/settings_subtitle"
+                    style="@style/OdText.MonoS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
                     android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="#9C8A8B"
-                    android:textSize="12.5sp" />
+                    android:maxLines="1" />
             </LinearLayout>
 
-            <!-- kept for compatibility, hidden in the simple design -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- the search field, inline in the toolbar where a desktop client
+                 keeps it. The id stays settings_search_pill even though the
+                 shape is no longer a pill — findViewById does not care. -->
+            <LinearLayout
+                android:id="@+id/settings_search_pill"
+                android:layout_width="170dp"
+                android:layout_height="30dp"
+                android:background="@drawable/od_search_well"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/od_space_2">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/od_text_faint" />
+
+                <EditText
+                    android:id="@+id/settings_search_input"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/orbitx_cd_search_settings"
+                    android:imeOptions="actionSearch"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/od_text"
+                    android:textColorHint="@color/od_text_faint"
+                    android:textSize="@dimen/od_text_body_s" />
+            </LinearLayout>
+
             <ImageView
                 android:id="@+id/settings_header_icon"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_menu_settings"
-                android:visibility="gone"
-                app:tint="#D8C9CA" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/settings_live_badge"
@@ -123,45 +196,7 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <!-- one search pill, full width -->
-        <LinearLayout
-            android:id="@+id/settings_search_pill"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/ss_search"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="14dp"
-            android:paddingEnd="12dp">
-
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_cs_search"
-                app:tint="#9C8A8B" />
-
-            <EditText
-                android:id="@+id/settings_search_input"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="Search settings"
-                android:imeOptions="actionSearch"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="#F9F4F4"
-                android:textColorHint="#5C6068"
-                android:textSize="14sp" />
-        </LinearLayout>
-
+        <!-- == the option rows == full pane width, flush, hairline-separated -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/settings_recycler_view"
             android:layout_width="match_parent"
@@ -169,64 +204,49 @@
             android:layout_weight="1"
             android:clipToPadding="false"
             android:overScrollMode="never"
-            android:paddingStart="16dp"
-            android:paddingTop="6dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="96dp"
+            android:paddingTop="@dimen/od_space_2"
+            android:paddingBottom="@dimen/od_space_6"
             android:scrollbars="none" />
     </LinearLayout>
 
-    <!-- floating SAVE bar -->
+    <!-- == APPLY BAR == a footer strip flush to the pane edge, not a floating
+         rounded pill. Hidden until something is actually unsaved. -->
     <LinearLayout
         android:id="@+id/unsaved_changes_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="14dp"
+        android:layout_height="@dimen/od_panel_footer_h"
+        android:layout_gravity="bottom"
+        android:background="@drawable/od_statusstrip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_space_2"
         android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/ss_save_bar"
-            android:elevation="14dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="8dp">
+        <View
+            android:layout_width="@dimen/od_status_dot"
+            android:layout_height="@dimen/od_status_dot"
+            android:background="@drawable/od_live_dot" />
 
-            <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@drawable/ss_dot_ok" />
+        <TextView
+            android:id="@+id/save_status_text"
+            style="@style/OdText.MonoS"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Unsaved changes"
+            tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/save_status_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="Unsaved changes"
-                android:textColor="#EFE6E7"
-                android:textSize="13.5sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_save_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@drawable/ss_btn_primary"
-                android:fontFamily="sans-serif-medium"
-                android:letterSpacing="0.04"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:paddingHorizontal="22dp"
-                android:stateListAnimator="@null"
-                android:text="Save"
-                android:textAllCaps="false"
-                android:textColor="#191414"
-                android:textSize="14sp" />
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save_settings"
+            style="@style/OdButton.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:minHeight="0dp"
+            android:text="Apply"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 </FrameLayout>

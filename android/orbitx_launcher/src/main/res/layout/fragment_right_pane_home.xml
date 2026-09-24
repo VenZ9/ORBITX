@@ -1,165 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ORBIT — the instance library (home).
+  ============================================================================
+  RIGHT PANE HOME — the instance table   (was: a stack of floating cards)
+  ============================================================================
 
-  Structure: one header band, then a full-bleed list of instance cards, then a
-  two-object action bar pinned to the bottom. There is deliberately no floating
-  circular FAB: a lone circle on a dark field is the single most copied gesture
-  in Android launchers, so ORBIT uses a labelled pill instead — it says what it
-  does and gives a 56dp target.
+  A desktop table pane: a column-header strip, a hairline, then flush rows.
+  There is no wallpaper layer, no big "Profiles" banner and no per-card
+  elevation — the wall of floating rounded cards is the single most copied
+  idiom in this category, and it is what the redesign exists to remove.
 
-  The wallpaper layer stays wired to `right_pane_wallpaper` and every action id
-  is unchanged, so the fragment's binding keeps working: restyle, not re-wire.
+  Ids preserved for RightPaneHomeFragment: rv_home_profiles (RecyclerView),
+  fab_create_profile (View), btn_refresh_profiles (View), home_header,
+  home_kicker, home_title, home_count, right_pane_wallpaper (ImageView).
+  ============================================================================
 -->
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orb_page">
+    android:background="@drawable/od_pane"
+    android:orientation="vertical">
 
-    <!-- Custom wallpaper — invisible by default, loaded dynamically -->
+    <!-- custom wallpaper layer (kept, hidden — the pane is a document now) -->
     <ImageView
         android:id="@+id/right_pane_wallpaper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:visibility="gone"
-        android:contentDescription="@null" />
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="gone" />
 
-    <!-- ── Header band ────────────────────────────────────────────────────
-         Orientation over inventory: the kicker labels the page, the title
-         states what the list is, the count is a live figure. -->
+    <!-- == pane toolbar: title on the leading edge, actions on the trailing == -->
     <LinearLayout
         android:id="@+id/home_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/orb_gutter"
-        android:paddingEnd="@dimen/orb_gutter"
-        android:paddingTop="@dimen/orb_space_5"
-        android:paddingBottom="@dimen/orb_space_3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/od_pane_header_h"
+        android:background="@drawable/od_pane_header"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter">
 
         <TextView
             android:id="@+id/home_kicker"
-            style="@style/OrbitText.Section"
+            style="@style/OdText.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Library" />
+            android:text="Instances" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/orb_space_1"
-            android:gravity="bottom"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/home_title"
-                style="@style/OrbitText.Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Instances" />
-
-            <TextView
-                android:id="@+id/home_count"
-                style="@style/OrbitText.Ember"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:text="" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/home_title"
+            style="@style/OdText.TitleS"
+            android:layout_width="1dp"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/orb_space_3"
-            android:background="@color/ox_hairline" />
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/home_count"
+            style="@style/OdText.MonoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:background="@drawable/od_keycap"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            tools:text="4" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/btn_refresh_profiles"
+            style="@style/OdButton.Icon"
+            android:contentDescription="@string/orbitx_cd_refresh"
+            android:src="@drawable/ic_cs_refresh"
+            app:tint="@color/od_text_dim" />
+
+        <ImageView
+            android:id="@+id/fab_create_profile"
+            style="@style/OdButton.Icon"
+            android:contentDescription="@string/orbitx_cd_new_instance"
+            android:src="@drawable/ic_add"
+            app:tint="@color/od_accent_bright" />
     </LinearLayout>
 
-    <!-- ── The list ─────────────────────────────────────────────────────── -->
+    <!-- == column header — this pane is a table and says so == -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_space_2">
+
+        <TextView
+            style="@style/OdText.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Instance" />
+
+        <TextView
+            style="@style/OdText.Label"
+            android:layout_width="@dimen/od_col_meta"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Version" />
+
+        <TextView
+            style="@style/OdText.Label"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Mods" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/od_rule_strong" />
+
+    <!-- == the rows == flush, hairline-separated, full-bleed hit area -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home_profiles"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:paddingStart="@dimen/orb_gutter_tight"
-        android:paddingEnd="@dimen/orb_gutter_tight"
-        android:paddingTop="@dimen/orb_space_1"
-        android:paddingBottom="96dp"
-        app:layout_constraintTop_toBottomOf="@id/home_header"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <!-- ── Action bar ─────────────────────────────────────────────────────
-         Primary action: a labelled pill. Repeated-action refresh: a square
-         ghost. Two objects, one hierarchy. -->
-    <FrameLayout
-        android:id="@+id/fab_create_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:layout_marginBottom="@dimen/orb_space_5"
-        android:background="@drawable/pe4_btn_save"
-        android:clickable="true"
-        android:focusable="true"
-        android:elevation="6dp"
-        android:minWidth="172dp"
-        android:paddingStart="@dimen/orb_space_4"
-        android:paddingEnd="@dimen/orb_space_5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_add"
-                android:tint="@color/ox_on_ember" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/orb_space_2"
-                android:fontFamily="sans-serif-medium"
-                android:letterSpacing="@dimen/orb_text_label_tracking"
-                android:text="New instance"
-                android:textAllCaps="true"
-                android:textColor="@color/ox_on_ember"
-                android:textSize="@dimen/orb_text_label" />
-        </LinearLayout>
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/btn_refresh_profiles"
-        android:layout_width="@dimen/orb_touch_min"
-        android:layout_height="@dimen/orb_touch_min"
-        android:layout_marginBottom="@dimen/orb_space_5"
-        android:layout_marginEnd="@dimen/orb_gutter"
-        android:background="@drawable/st_btn_ghost"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:contentDescription="Refresh instances"
-            android:src="@drawable/ic_redo"
-            android:tint="@color/ox_text_secondary" />
-    </FrameLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:paddingBottom="@dimen/od_space_4"
+        android:scrollbars="none" />
+</LinearLayout>
