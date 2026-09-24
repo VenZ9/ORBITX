@@ -190,43 +190,137 @@
          ══════════════════════════════════════════════════════════════════════ -->
 
     <!-- — Window frame — -->
-    <color name="od_window">#0A0808</color>
-    <color name="od_window_edge">#241E1E</color>
-    <color name="od_commandbar">#121010</color>
-    <color name="od_commandbar_edge">#2A2323</color>
-    <color name="od_statusstrip">#100D0D</color>
+    <color name="od_window">#0A0A0B</color>
+    <color name="od_window_edge">#1E1E20</color>
+    <color name="od_commandbar">#0E0E10</color>
+    <color name="od_commandbar_edge">#242426</color>
+    <color name="od_statusstrip">#0C0C0E</color>
 
     <!-- — Panes, ascending — -->
-    <color name="od_pane">#131010</color>
-    <color name="od_pane_raised">#1A1616</color>
-    <color name="od_pane_selected">#221A1A</color>
-    <color name="od_well">#0C0A0A</color>
-    <color name="od_well_edge">#332B2B</color>
+    <color name="od_pane">#101012</color>
+    <color name="od_pane_raised">#17171A</color>
+    <color name="od_pane_selected">#1F1F23</color>
+    <color name="od_well">#0B0B0D</color>
+    <color name="od_well_edge">#2C2C2E</color>
 
     <!-- — Rules and splitters. These carry the structure. — -->
-    <color name="od_rule">#241E1E</color>
-    <color name="od_rule_strong">#332B2B</color>
-    <color name="od_splitter">#2A2323</color>
+    <color name="od_rule">#1E1E20</color>
+    <color name="od_rule_strong">#2C2C2E</color>
+    <color name="od_splitter">#242426</color>
 
-    <!-- — Ember: state only. — -->
+    <!-- — Amber: state only. — -->
+    <color name="od_accent">#FF9500</color>
+    <color name="od_accent_bright">#FFB01F</color>
+    <color name="od_accent_dim">#8A5200</color>
+    <color name="od_accent_wash">#22FF9500</color>
+    <color name="od_on_accent">#14100A</color>
+
+    <!-- Ember: the ORBITX brand red, retained as a complete alternative accent.
+         Everything on screen reads od_accent, so swapping these five values for
+         the ember set is the whole of a brand re-skin.
     <color name="od_accent">#FF3B30</color>
     <color name="od_accent_bright">#FF6B6B</color>
     <color name="od_accent_dim">#8C2A24</color>
     <color name="od_accent_wash">#1FFF3B30</color>
     <color name="od_on_accent">#FFFFFF</color>
+    -->
 
     <!-- — Type, four levels — -->
-    <color name="od_text">#F2EEEE</color>
-    <color name="od_text_dim">#C0B2B2</color>
-    <color name="od_text_muted">#8B7C7C</color>
-    <color name="od_text_faint">#5E5454</color>
+    <color name="od_text">#FFFFFF</color>
+    <color name="od_text_dim">#C7C7CC</color>
+    <color name="od_text_muted">#8E8E93</color>
+    <color name="od_text_faint">#5A5A5F</color>
 
     <!-- — Semantic status: live / warn / error. Never identity. — -->
-    <color name="od_live">#3FBF6A</color>
-    <color name="od_warn">#E0A030</color>
-    <color name="od_error">#FF4444</color>
+    <color name="od_live">#34C759</color>
+    <color name="od_warn">#FFCC00</color>
+    <color name="od_error">#FF3B30</color>
 
     <!-- — Scrims — -->
     <color name="od_scrim">#B3070505</color>
     <color name="od_scrim_soft">#6E070505</color>
+
+    <!-- ==================================================================
+         GLASS — the card layer
+         ==================================================================
+         The screenshots this pass is built to are made of CARDS: a block of
+         content sits on a surface a shade lighter than the window, with a
+         hairline rim, and a second block nests INSIDE it on a surface a shade
+         lighter again. That is a three-step ladder, and it is distinct from the
+         pane/splitter structure the window is built from — panes divide the
+         screen, cards group the content inside a pane.
+
+         Alpha is used rather than a flat fill so the artwork behind a card
+         still reads faintly through it. That is what makes a launcher feel
+         like it is sitting ON the game instead of replacing it.
+    -->
+    <color name="od_glass_card">#E6121214</color>
+    <color name="od_glass_card_alt">#F00F0F11</color>
+    <color name="od_glass_edge">#2C2C2E</color>
+    <color name="od_glass_edge_soft">#1F1F22</color>
+
+    <!-- An inner row: the block nested inside a card. One step lighter than the
+         card it sits in, with the mid-grey rim the samples use. -->
+    <color name="od_inner_row">#171719</color>
+    <color name="od_inner_row_edge">#3A3A3C</color>
+    <color name="od_inner_row_pressed">#242428</color>
+
+    <!-- ==================================================================
+         THE PRIMARY ACTION GRADIENT
+         ==================================================================
+         The one warm ramp in the app. It runs across the launch control only,
+         so a filled amber-to-gold bar on screen always means "this starts the
+         game" and can never be confused with selection. -->
+    <color name="od_grad_cta_start">#FF9500</color>
+    <color name="od_grad_cta_mid">#FFB01F</color>
+    <color name="od_grad_cta_end">#FFD600</color>
+    <color name="od_grad_cta_start_pressed">#E88600</color>
+    <color name="od_grad_cta_end_pressed">#E8C200</color>
+
+    <!-- The hero card's accent edge: a single amber rule along the top of the
+         card that carries the primary action. It ties the card to the button
+         inside it without filling the whole surface. -->
+    <color name="od_card_accent_edge">#FF9500</color>
+
+    <!-- ==================================================================
+         SEMANTIC PILLS AND BADGES
+         ==================================================================
+         The samples label runtime facts (loader, Java, RAM) with small bordered
+         capsules in distinct hues. Each hue means one thing, so a pill is read
+         by colour before its text is read at all. -->
+    <color name="od_pill_neutral_text">#C7C7CC</color>
+    <color name="od_pill_neutral_edge">#3A3A3C</color>
+    <color name="od_pill_neutral_wash">#12FFFFFF</color>
+
+    <color name="od_pill_blue">#007AFF</color>
+    <color name="od_pill_blue_wash">#1A007AFF</color>
+
+    <color name="od_pill_gold">#FFCC00</color>
+    <color name="od_pill_gold_wash">#1AFFCC00</color>
+
+    <color name="od_pill_green">#34C759</color>
+    <color name="od_pill_green_wash">#1A34C759</color>
+
+    <color name="od_pill_accent">#FF9500</color>
+    <color name="od_pill_accent_wash">#1AFF9500</color>
+
+    <!-- A count / occupancy readout on a server row. Mono, so figures line up. -->
+    <color name="od_count_idle">#8E8E93</color>
+    <color name="od_count_busy">#34C759</color>
+    <color name="od_count_full">#FF9500</color>
+
+    <!-- ==================================================================
+         TAB STRIP
+         ==================================================================
+         The segmented control from the second screenshot: a recessed track
+         holding tabs, the active one carrying an accent rule beneath it. -->
+    <color name="od_tab_track">#0B0B0D</color>
+    <color name="od_tab_track_edge">#242426</color>
+    <color name="od_tab_active">#FF9500</color>
+
+    <!-- The diegetic upload slot: a dashed drop target. -->
+    <color name="od_slot_dash">#4A4A4E</color>
+    <color name="od_slot_fill">#0E0E10</color>
+    <color name="od_infobox">#151517</color>
+    <color name="od_infobox_edge">#242426</color>
 </resources>
