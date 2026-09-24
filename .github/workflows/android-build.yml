@@ -4,7 +4,10 @@ name: Build Android APK
 # web/tooling project), so every Gradle step runs with working-directory: android.
 on:
   push:
-    branches: [main]
+    # main is the published gate. arena/** are the sandbox working branches:
+    # a push there builds the same verified APK and refreshes the rolling
+    # debug release so a tester can flash it without a merge.
+    branches: [main, 'arena/**']
     paths:
       - 'android/**'
       - '.github/workflows/android-build.yml'
