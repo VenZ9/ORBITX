@@ -33,6 +33,16 @@ GATES (see the two functions at the bottom)
   gate 1  per file  : parses; loses no id; every reference it INTRODUCES resolves
   gate 2  whole tree: no id changes the element type Java casts it to; every
                       resource reference in every layout resolves
+
+A NOTE ON WHAT "PARSES" MEANS HERE
+
+  It means AAPT2 accepts it, and AAPT2 is stricter than it looks: a double hyphen
+  inside an XML comment is a hard failure of mergeDebugResources, not a warning.
+  gate 1 therefore parses each file AS IS, comments included, and it checks every
+  XML resource under res/ rather than only the layouts — a values/ file that will
+  not parse stops the build just as hard as a broken layout does. An earlier
+  version of this gate stripped comments first and so reported PASS on a tree
+  whose od_design.xml could not be merged; do not reintroduce that shortcut.
 """
 import os
 import re
@@ -46,7 +56,7 @@ RES = os.environ.get("OD_RES") or os.path.normpath(
 REPO = os.environ.get("OD_REPO") or os.path.normpath(os.path.join(HERE, ".."))
 LAYOUT = os.path.join(RES, "layout")
 
-# ── dp: the phone scale -> the od_ grid / od_ furniture ──────────────────────
+# -- dp: the phone scale -> the od_ grid / od_ furniture ----------------------
 #  Chosen so the rendered size moves at most 2dp, which is why the sweep cannot
 #  reflow a layout. Values above 60 stay literal so no hero dimension collapses.
 DP = {
@@ -70,7 +80,7 @@ DP = {
 }
 BIG = {65: "65dp"}
 
-# ── sp: the ad-hoc scale -> the od_ six ──────────────────────────────────────
+# -- sp: the ad-hoc scale -> the od_ six --------------------------------------
 SP = {"5": "od_text_label", "6": "od_text_label", "6.5": "od_text_label",
       "6.8": "od_text_label", "7": "od_text_label", "7.5": "od_text_label",
       "8": "od_text_label", "8.5": "od_text_label", "9": "od_text_label",
@@ -83,7 +93,7 @@ SP = {"5": "od_text_label", "6": "od_text_label", "6.5": "od_text_label",
       "18": "od_text_title_l", "19": "od_text_title_l", "20": "od_text_title_l",
       "21": "od_text_title_l", "22": "od_text_title_l"}
 
-# ── text colours: the ad-hoc palette -> the five text roles ──────────────────
+# -- text colours: the ad-hoc palette -> the five text roles ------------------
 #   near-white emphasis -> od_text       mid grey       -> od_text_dim
 #   caption / meta      -> od_text_muted footnote/hint -> od_text_faint
 #   the ember family    -> od_accent_bright
@@ -118,7 +128,7 @@ for _h in ("1a1414 191414 171212 170e0e 110e0e 0e0b0b 0e0909 151518 141010 "
            "0d0d0d 100909 07130b 000000").split():
     COLOR[_h] = "od_on_accent"
 
-# ── surfaces: rounded / glass cards and phone page grounds -> od_ planes ─────
+# -- surfaces: rounded / glass cards and phone page grounds -> od_ planes -----
 RAISED = ("bg_cs_glass_card bg_cs_glass_card_sm bg_skin_slot_preview "
           "bg_skinv2_card bg_skinv2_preview bg_au_card bg_au_card_muted "
           "bg_au_card_fail bg_au_group bg_au_plate bg_preference_card "
@@ -191,7 +201,7 @@ for _n in ("bg_runtime_setup_page bg_cs_page_bg bg_au_page bg_cursorx_stage "
     SURFACE[_n] = "od_window_bg"
 SURFACE["bg_au_section"] = "od_pane_header"
 
-# ── text styles, applied ONLY where the token names a TextView role ──────────
+# -- text styles, applied ONLY where the token names a TextView role ----------
 STYLE = {"AbSectionTitle": "OdText.TitleS", "AbSectionMeta": "OdText.MonoS",
          "AbFeatureTitle": "OdText.TitleS", "AbFeatureLine": "OdText.BodyS",
          "Pe5Title": "OdText.TitleS", "Pe5Label": "OdText.Label",
@@ -310,9 +320,9 @@ def targets():
             and "od_" not in open(os.path.join(LAYOUT, n), encoding="utf-8").read()]
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # GATES
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 SKIP_DIRS = {"values", "layout", "menu", "xml", "anim", "animator",
              "transition", "raw", "font", "navigation", "interpolator"}
 PREFIX = ("Widget.", "TextAppearance.", "Theme.", "ThemeOverlay.", "Base.",
@@ -349,31 +359,41 @@ def resource_index():
 
 
 def parse_gateway(path):
-    """Parse a layout the way the Android build does.
+    """Parse an XML resource the way AAPT2 does.
 
-    AAPT tolerates a double hyphen inside an XML comment — plenty of comment art
-    in this tree uses dashes — so an XML-spec-strict parser rejects files that
-    compile perfectly well. What actually matters is that the *elements* are
-    well formed, so the comments are stripped before parsing and a real
-    structural error (an unclosed tag, a stray attribute) still fails.
+    AAPT2 is strict about one thing that is easy to get wrong in comment art:
+    `The string "--" is not permitted within comments` is a hard failure of
+    mergeDebugResources, not a warning — the build stops. So this parses the
+    file as-is, comments and all, which is exactly what AAPT2 does. Runs of
+    hyphens in a diagram must be '=' (or split) instead.
     """
     import xml.etree.ElementTree as ET
-    with open(path, encoding="utf-8") as fh:
-        src = fh.read()
-    return ET.fromstring(re.sub(r"<!--.*?-->", "", src, flags=re.S))
+    return ET.parse(path)
+
+
+def all_res_xml():
+    """Every XML resource, not just the layouts. A broken values/ file fails the
+    build exactly as hard as a broken layout, so it gets the same check."""
+    out = []
+    for root, _d, files in os.walk(RES):
+        for f in files:
+            if f.endswith(".xml"):
+                out.append(os.path.join(root, f))
+    return sorted(out)
 
 
 def gate_per_file(names, snap, backup):
     draw, colours, styles, dimens = resource_index()
     pool = {"drawable": draw, "color": colours, "style": styles, "dimen": dimens}
     fails, idloss, unres = [], [], []
-    # Every layout, not only the swept set: a file the sweep skipped is exactly
-    # where a structural break would otherwise go unnoticed.
-    for name in [n for n in sorted(os.listdir(LAYOUT)) if n.endswith(".xml")]:
+    # Every XML resource in res/, not only the swept layouts: a file the sweep
+    # never touched is exactly where a structural break would go unnoticed, and
+    # values/*.xml failing stops the build just as hard as a layout failing.
+    for path in all_res_xml():
         try:
-            parse_gateway(os.path.join(LAYOUT, name))
+            parse_gateway(path)
         except Exception as e:
-            fails.append((name, str(e)))
+            fails.append((os.path.relpath(path, RES), str(e)))
     for name in names:
         path = os.path.join(LAYOUT, name)
         if not os.path.isfile(path):
