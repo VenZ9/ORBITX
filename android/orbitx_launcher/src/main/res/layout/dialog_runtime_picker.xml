@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Java Runtime Manager"
-                android:textColor="#FCF8F8"
+                android:textColor="@color/od_text"
                 android:textSize="20sp" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:text="Installed Java runtimes and custom JRE imports"
-                android:textColor="#B89496"
+                android:textColor="@color/od_accent_bright"
                 android:textSize="12.5sp" />
         </LinearLayout>
 
@@ -49,10 +49,10 @@
             android:id="@+id/rt_dialog_close"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:background="@drawable/rt_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:gravity="center"
             android:text="✕"
-            android:textColor="#E1CBCC"
+            android:textColor="@color/od_text_dim"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -78,12 +78,12 @@
             android:id="@+id/rt_dialog_edit"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
-            android:background="@drawable/rt_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:gravity="center"
             android:paddingStart="18dp"
             android:paddingEnd="18dp"
             android:text="@string/multirt_delete_runtime"
-            android:textColor="#E1CBCC"
+            android:textColor="@color/od_text_dim"
             android:textSize="13sp" />
 
         <TextView
@@ -91,13 +91,13 @@
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:layout_marginStart="10dp"
-            android:background="@drawable/rt_btn_primary"
+            android:background="@drawable/od_btn_primary"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:text="Add from File"
-            android:textColor="#0E0909"
+            android:textColor="@color/od_on_accent"
             android:textSize="13.5sp" />
     </LinearLayout>
 </LinearLayout>

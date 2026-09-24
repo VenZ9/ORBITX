@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/bg_skinv2_card"
+    android:background="@drawable/od_pane_raised"
     android:padding="10dp"
     android:layout_margin="5dp"
     android:clickable="true"
@@ -23,12 +23,12 @@
             android:id="@+id/cape_card_badge"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
-            android:background="@drawable/st_key_cap"
+            android:background="@drawable/od_keycap"
             android:fontFamily="monospace"
             android:gravity="center"
             android:paddingHorizontal="6dp"
             android:text="OFFICIAL"
-            android:textColor="#C8C8C8"
+            android:textColor="@color/od_text_dim"
             android:textSize="8sp"
             android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:paddingHorizontal="6dp"
             android:text="EQUIPPED"
-            android:textColor="#170E0E"
+            android:textColor="@color/od_on_accent"
             android:textSize="8sp"
             android:textStyle="bold"
             android:visibility="gone" />
@@ -69,7 +69,7 @@
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:text="Minecon 2011"
-        android:textColor="#F9F4F4"
+        android:textColor="@color/od_text"
         android:textSize="12sp" />
 
     <TextView
@@ -80,7 +80,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Official • Mojang"
-        android:textColor="#937F80"
+        android:textColor="@color/od_text_muted"
         android:textSize="9.5sp" />
 
     <!-- Quick Action Row -->
@@ -96,11 +96,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/st_btn_primary"
+            android:background="@drawable/od_btn_primary"
             android:gravity="center"
             android:letterSpacing="0.06"
             android:text="EQUIP"
-            android:textColor="#0E0B0B"
+            android:textColor="@color/od_on_accent"
             android:textSize="9sp"
             android:textStyle="bold" />
 
@@ -109,7 +109,7 @@
             android:layout_width="28dp"
             android:layout_height="match_parent"
             android:layout_marginStart="6dp"
-            android:background="@drawable/st_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:contentDescription="Save to collection">
 
             <ImageView
@@ -118,7 +118,7 @@
                 android:layout_height="13dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_download"
-                app:tint="#C8C8C8" />
+                app:tint="@color/od_text_dim" />
         </FrameLayout>
     </LinearLayout>
 

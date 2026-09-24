@@ -41,7 +41,7 @@
                 android:contentDescription="@string/global_back"
                 android:padding="9dp"
                 android:src="@drawable/ic_chevron_left"
-                app:tint="#DED2D3" />
+                app:tint="@color/od_text" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -57,7 +57,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.18"
                     android:text="STOREFRONT"
-                    android:textColor="#9C8A8B"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="9sp" />
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="Download Mods"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="19sp" />
             </LinearLayout>
 
@@ -115,7 +115,7 @@
                 android:layout_height="15dp"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_cs_search"
-                app:tint="#9C8A8B" />
+                app:tint="@color/od_text_muted" />
 
             <EditText
                 android:id="@+id/search_mod_edittext"
@@ -129,7 +129,7 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textColorHint="#604F50"
                 android:textSize="13.5sp" />
 
@@ -141,7 +141,7 @@
                 android:contentDescription="@null"
                 android:padding="8dp"
                 android:src="@drawable/ic_mr_sort"
-                app:tint="#EFE6E7" />
+                app:tint="@color/od_text" />
         </LinearLayout>
     </LinearLayout>
 
@@ -151,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:indeterminate="true"
-        android:indeterminateTint="#D8C9CA"
+        android:indeterminateTint="@color/od_text_dim"
         android:progressBackgroundTint="#261C1D"
         android:visibility="gone" />
 
@@ -177,7 +177,7 @@
         android:paddingHorizontal="24dp"
         android:paddingVertical="18dp"
         android:text="No results found."
-        android:textColor="#806B6C"
+        android:textColor="@color/od_text_muted"
         android:textSize="12sp"
         android:visibility="gone" />
 </LinearLayout>

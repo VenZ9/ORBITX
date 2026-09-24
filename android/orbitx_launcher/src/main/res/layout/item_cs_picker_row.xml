@@ -23,7 +23,7 @@
         android:fontFamily="monospace"
         android:gravity="center"
         android:text="17"
-        android:textColor="#EFE6E7"
+        android:textColor="@color/od_text"
         android:textSize="12sp"
         android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:text="Java 17"
-            android:textColor="#F9F4F4"
+            android:textColor="@color/od_text"
             android:textSize="14sp" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:fontFamily="monospace"
             android:maxLines="2"
             android:text="jre-17 · aarch64"
-            android:textColor="#9C8A8B"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp" />
     </LinearLayout>
 
@@ -69,7 +69,7 @@
         android:text="DEFAULT"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.08"
-        android:textColor="#D8C9CA"
+        android:textColor="@color/od_text_dim"
         android:textSize="8.5sp"
         android:visibility="gone" />
 

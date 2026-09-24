@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:background="@drawable/bg_infrawire_plan_card"
+    android:background="@drawable/od_pane_raised"
     android:padding="14dp"
     android:layout_marginBottom="10dp"
     android:clickable="true"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mini"
-            android:textColor="#F3F0F0"
+            android:textColor="@color/od_text"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$4.83/month"
-            android:textColor="#D0D0D0"
+            android:textColor="@color/od_text_dim"
             android:textSize="11.5sp"
             android:textStyle="bold"
             android:layout_marginTop="2dp" />
@@ -47,17 +47,17 @@
 
         <TextView
             android:id="@+id/tv_plan_cpu"
-            style="@style/OrbitXChip"
+            style="@style/OdButton.Chip"
             android:text="1 vCore" />
 
         <TextView
             android:id="@+id/tv_plan_ram"
-            style="@style/OrbitXChip"
+            style="@style/OdButton.Chip"
             android:text="2 GB" />
 
         <TextView
             android:id="@+id/tv_plan_disk"
-            style="@style/OrbitXChip"
+            style="@style/OdButton.Chip"
             android:layout_marginEnd="0dp"
             android:text="10 GB NVMe" />
     </LinearLayout>

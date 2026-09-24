@@ -23,7 +23,7 @@
 			android:id="@+id/launch_stage_backdrop"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="@drawable/bg_runtime_setup_page">
+			android:background="@drawable/od_window_bg">
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -45,7 +45,7 @@
 					android:layout_marginTop="16dp"
 					android:letterSpacing="0.22"
 					android:text="ORBITX"
-					android:textColor="#C4B9B9"
+					android:textColor="@color/od_text_dim"
 					android:textSize="10sp"
 					android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="6dp"
 					android:text="@string/cs_stage_title"
-					android:textColor="#F6F2F2"
+					android:textColor="@color/od_text"
 					android:textSize="17sp"
 					android:textStyle="bold" />
 
@@ -63,14 +63,14 @@
 					android:layout_height="28dp"
 					android:layout_marginTop="14dp"
 					android:indeterminate="true"
-					android:indeterminateTint="#C4B9B9" />
+					android:indeterminateTint="@color/od_text_dim" />
 
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="12dp"
 					android:text="@string/cs_stage_sub"
-					android:textColor="#8E8E9A"
+					android:textColor="@color/od_text_dim"
 					android:textSize="11.5sp" />
 			</LinearLayout>
 		</net.kdt.pojavlaunch.launch.LaunchStageView>
@@ -168,7 +168,7 @@
 			android:paddingTop="4dp"
 			android:paddingBottom="4dp"
 			android:text="-- FPS"
-			android:textColor="#F3F0F0"
+			android:textColor="@color/od_text"
 			android:textSize="11sp"
 			android:textStyle="bold"
 			android:visibility="gone" />
@@ -189,7 +189,7 @@
 			android:paddingTop="4dp"
 			android:paddingBottom="4dp"
 			android:text="RAM —"
-			android:textColor="#F3F0F0"
+			android:textColor="@color/od_text"
 			android:textSize="11sp"
 			android:textStyle="bold"
 			android:visibility="gone" />

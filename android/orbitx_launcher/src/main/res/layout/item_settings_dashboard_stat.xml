@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
     android:layout_weight="1"
-    android:background="@drawable/st_stat_tile"
+    android:background="@drawable/od_pane_raised"
     android:orientation="vertical"
     android:paddingHorizontal="12dp"
     android:paddingVertical="10dp">
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
-        android:textColor="#F9F4F4"
+        android:textColor="@color/od_text"
         android:textSize="16sp" />
 
     <TextView
@@ -24,6 +24,6 @@
         android:layout_marginTop="2dp"
         android:letterSpacing="0.1"
         android:textAllCaps="true"
-        android:textColor="#806B6C"
+        android:textColor="@color/od_text_muted"
         android:textSize="8.5sp" />
 </LinearLayout>

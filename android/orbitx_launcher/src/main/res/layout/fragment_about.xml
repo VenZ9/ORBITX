@@ -16,14 +16,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/au9_page"
+    android:background="@drawable/od_window_bg"
     android:orientation="vertical">
 
     <!-- status bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/au9_statusbar"
+        android:background="@drawable/od_commandbar"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp">
@@ -32,7 +32,7 @@
             android:id="@+id/about_back_button"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:background="@drawable/au9_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:letterSpacing="0.06"
@@ -56,7 +56,7 @@
             android:id="@+id/about_version_chip"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:background="@drawable/au9_keycap"
+            android:background="@drawable/od_keycap"
             android:fontFamily="monospace"
             android:gravity="center"
             android:paddingHorizontal="10dp"
@@ -185,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text="—"
-                    android:textColor="#FF6B6B"
+                    android:textColor="@color/od_accent_bright"
                     android:textSize="9.5sp" />
             </LinearLayout>
 
@@ -248,9 +248,9 @@
                 <!-- 01 FEATURES — what OrbitX ships (no people, no credits) -->
                 <LinearLayout style="@style/AbSectionHead">
                     <TextView style="@style/AbIndex" android:text="01" />
-                    <TextView android:id="@+id/about_credits_heading" style="@style/AbSectionTitle" android:text="Features" />
+                    <TextView android:id="@+id/about_credits_heading" style="@style/OdText.TitleS" android:text="Features" />
                     <View style="@style/AbRule" />
-                    <TextView style="@style/AbSectionMeta" android:text="IN THIS BUILD" />
+                    <TextView style="@style/OdText.MonoS" android:text="IN THIS BUILD" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -261,14 +261,14 @@
 
                     <LinearLayout style="@style/AbFeatureTile" android:layout_marginEnd="5dp">
                         <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_browser_resources" />
-                        <TextView style="@style/AbFeatureTitle" android:text="Modrinth browser" />
-                        <TextView style="@style/AbFeatureLine" android:text="Search and install mods, resource packs and shaders in-app." />
+                        <TextView style="@style/OdText.TitleS" android:text="Modrinth browser" />
+                        <TextView style="@style/OdText.BodyS" android:text="Search and install mods, resource packs and shaders in-app." />
                     </LinearLayout>
 
                     <LinearLayout style="@style/AbFeatureTile" android:layout_marginStart="5dp">
                         <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_folder" />
-                        <TextView style="@style/AbFeatureTitle" android:text="Instance backup" />
-                        <TextView style="@style/AbFeatureLine" android:text="Export a whole instance to a single archive and restore it later." />
+                        <TextView style="@style/OdText.TitleS" android:text="Instance backup" />
+                        <TextView style="@style/OdText.BodyS" android:text="Export a whole instance to a single archive and restore it later." />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -281,14 +281,14 @@
 
                     <LinearLayout style="@style/AbFeatureTile" android:layout_marginEnd="5dp">
                         <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_menu_settings" />
-                        <TextView style="@style/AbFeatureTitle" android:text="Bundled renderers" />
-                        <TextView style="@style/AbFeatureLine" android:text="MobileGlues and LTW ship inside the app — nothing to download." />
+                        <TextView style="@style/OdText.TitleS" android:text="Bundled renderers" />
+                        <TextView style="@style/OdText.BodyS" android:text="MobileGlues and LTW ship inside the app — nothing to download." />
                     </LinearLayout>
 
                     <LinearLayout style="@style/AbFeatureTile" android:layout_marginStart="5dp">
                         <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_info" />
-                        <TextView style="@style/AbFeatureTitle" android:text="In-game recorder" />
-                        <TextView style="@style/AbFeatureLine" android:text="Record with no overlay on screen; export to MP4, WebM or GIF." />
+                        <TextView style="@style/OdText.TitleS" android:text="In-game recorder" />
+                        <TextView style="@style/OdText.BodyS" android:text="Record with no overlay on screen; export to MP4, WebM or GIF." />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -301,23 +301,23 @@
 
                     <LinearLayout style="@style/AbFeatureTile" android:layout_marginEnd="5dp">
                         <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_profile_player" />
-                        <TextView style="@style/AbFeatureTitle" android:text="Three logins" />
-                        <TextView style="@style/AbFeatureLine" android:text="Microsoft, ely.by or fully offline with a local profile." />
+                        <TextView style="@style/OdText.TitleS" android:text="Three logins" />
+                        <TextView style="@style/OdText.BodyS" android:text="Microsoft, ely.by or fully offline with a local profile." />
                     </LinearLayout>
 
                     <LinearLayout style="@style/AbFeatureTile" android:layout_marginStart="5dp">
                         <ImageView style="@style/AbFeatureIcon" android:src="@drawable/ic_manage_skin" />
-                        <TextView style="@style/AbFeatureTitle" android:text="Low-end first" />
-                        <TextView style="@style/AbFeatureLine" android:text="Corner boot console and light surfaces tuned for weaker phones." />
+                        <TextView style="@style/OdText.TitleS" android:text="Low-end first" />
+                        <TextView style="@style/OdText.BodyS" android:text="Corner boot console and light surfaces tuned for weaker phones." />
                     </LinearLayout>
                 </LinearLayout>
 
                 <!-- 02 LEGAL -->
                 <LinearLayout style="@style/AbSectionHead">
                     <TextView style="@style/AbIndex" android:text="02" />
-                    <TextView android:id="@+id/about_legal_heading" style="@style/AbSectionTitle" android:text="@string/cs_about_legal_heading" />
+                    <TextView android:id="@+id/about_legal_heading" style="@style/OdText.TitleS" android:text="@string/cs_about_legal_heading" />
                     <View style="@style/AbRule" />
-                    <TextView style="@style/AbSectionMeta" android:text="GPL-3.0" />
+                    <TextView style="@style/OdText.MonoS" android:text="GPL-3.0" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -6,11 +6,11 @@
        side_dialog_scrollview · side_dialog_start_button · side_dialog_end_button -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/_280sdp"
+    android:layout_width="280dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:layout_marginVertical="@dimen/padding_heavy"
-    android:background="@drawable/background_control_editor"
+    android:background="@drawable/od_panel"
     android:orientation="vertical">
 
     <TextView

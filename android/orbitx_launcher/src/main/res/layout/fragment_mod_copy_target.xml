@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#110E0E"
+    android:background="@color/od_on_accent"
     android:fitsSystemWindows="true">
 
     <!-- Header -->
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mod_copy_title"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:maxLines="1"
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="#A18D8E"
+                android:textColor="@color/od_text_muted"
                 android:textSize="11.5sp"
                 android:maxLines="1"
                 android:ellipsize="middle"
@@ -83,7 +83,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/mod_copy_no_targets"
-        android:textColor="#6C6C78"
+        android:textColor="@color/od_text_muted"
         android:textSize="13sp"
         android:visibility="gone" />
 

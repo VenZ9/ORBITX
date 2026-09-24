@@ -14,7 +14,7 @@
     android:id="@+id/hub_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_au_page"
+    android:background="@drawable/od_window_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -33,7 +33,7 @@
             android:id="@+id/hub_back"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:background="@drawable/pe4_back_btn"
+            android:background="@drawable/od_icon_button"
             android:clickable="true"
             android:contentDescription="@string/global_back"
             android:focusable="true">
@@ -77,7 +77,7 @@
             android:id="@+id/hub_add"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
-            android:background="@drawable/mvs_btn_primary"
+            android:background="@drawable/od_btn_primary"
             android:clickable="true"
             android:drawablePadding="6dp"
             android:focusable="true"
@@ -87,7 +87,7 @@
             android:paddingStart="13dp"
             android:paddingEnd="16dp"
             android:text="@string/hub_add"
-            android:textColor="#191414"
+            android:textColor="@color/od_on_accent"
             android:textSize="12sp"
             android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_add_dark" />
@@ -127,7 +127,7 @@
             android:id="@+id/hub_refresh"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            android:background="@drawable/bg_au_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"

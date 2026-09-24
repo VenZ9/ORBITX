@@ -27,7 +27,7 @@
             android:id="@+id/editor_menu_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#F4F2F2"
+            android:textColor="@color/od_text"
             android:textSize="12.5sp"
             android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:textColor="#967D7D"
+            android:textColor="@color/od_text_muted"
             android:textSize="8.5sp" />
     </LinearLayout>
 </LinearLayout>

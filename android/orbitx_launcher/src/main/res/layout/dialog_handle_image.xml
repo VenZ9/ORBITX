@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:letterSpacing="0.14"
         android:text="SETTINGS BUTTON IMAGE"
-        android:textColor="#F4F2F2"
+        android:textColor="@color/od_text"
         android:textSize="12.5sp"
         android:textStyle="bold" />
     <TextView
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="Icon shown on the floating settings handle"
-        android:textColor="#937B7B"
+        android:textColor="@color/od_text_muted"
         android:textSize="8.5sp" />
 
     <FrameLayout
@@ -35,7 +35,7 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_menu_settings"
-            app:tint="#F3F0F0"
+            app:tint="@color/od_text"
             android:contentDescription="@null" />
     </FrameLayout>
 
@@ -53,17 +53,17 @@
             android:clickable="true" android:focusable="true"
             android:gravity="center"
             android:text="RESET DEFAULT"
-            android:textColor="#E3DADA" android:textSize="10sp" android:textStyle="bold" />
+            android:textColor="@color/od_text" android:textSize="10sp" android:textStyle="bold" />
         <TextView
             android:id="@+id/dhi_pick"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_settings_chip_active"
+            android:background="@drawable/od_chip"
             android:clickable="true" android:focusable="true"
             android:gravity="center"
             android:text="PICK IMAGE"
-            android:textColor="#110E0E" android:textSize="10sp" android:textStyle="bold" />
+            android:textColor="@color/od_on_accent" android:textSize="10sp" android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

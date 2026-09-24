@@ -10,7 +10,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/au9_page"
+    android:background="@drawable/od_window_bg"
     android:baselineAligned="false"
     android:orientation="horizontal">
 
@@ -18,7 +18,7 @@
     <LinearLayout
         android:layout_width="230dp"
         android:layout_height="match_parent"
-        android:background="@drawable/au9_brand_col"
+        android:background="@drawable/od_well"
         android:orientation="vertical"
         android:paddingHorizontal="18dp"
         android:paddingTop="18dp"
@@ -27,7 +27,7 @@
         <FrameLayout
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:background="@drawable/au9_icon_well">
+            android:background="@drawable/od_well">
 
             <ImageView
                 android:layout_width="24dp"
@@ -44,7 +44,7 @@
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.18"
             android:text="FREE  ·  ELY.BY"
-            android:textColor="#9C8A8B"
+            android:textColor="@color/od_text_muted"
             android:textSize="9sp" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-medium"
             android:text="Sign in"
-            android:textColor="#F9F4F4"
+            android:textColor="@color/od_text"
             android:textSize="22sp" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_marginTop="6dp"
             android:lineSpacingMultiplier="1.2"
             android:text="A free account with your own skin and cape, accepted on ely-enabled servers."
-            android:textColor="#9C8A8B"
+            android:textColor="@color/od_text_muted"
             android:textSize="11sp" />
 
         <LinearLayout
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:text="NO ACCOUNT YET?"
-            android:textColor="#5C6068"
+            android:textColor="@color/od_text_muted"
             android:textSize="9sp" />
 
         <TextView
@@ -94,12 +94,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="6dp"
-            android:background="@drawable/au9_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:letterSpacing="0.06"
             android:text="CREATE FREE ACCOUNT  ↗"
-            android:textColor="#EFE6E7"
+            android:textColor="@color/od_text"
             android:textSize="11sp" />
     </LinearLayout>
 
@@ -123,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/au9_terminal"
+                android:background="@drawable/od_well"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -139,7 +139,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:letterSpacing="0.16"
                         android:text="CREDENTIALS"
-                        android:textColor="#9C8A8B"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="9.5sp" />
 
                     <View
@@ -153,12 +153,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginStart="12dp"
-                        android:background="@drawable/au9_keycap"
+                        android:background="@drawable/od_keycap"
                         android:fontFamily="monospace"
                         android:gravity="center"
                         android:paddingHorizontal="7dp"
                         android:text="TLS"
-                        android:textColor="#9C8A8B"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="8.5sp" />
                 </LinearLayout>
 
@@ -169,7 +169,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="6dp"
-                    android:background="@drawable/au9_input"
+                    android:background="@drawable/od_well"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingStart="12dp"
@@ -180,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="monospace"
                         android:text="@"
-                        android:textColor="#5C6068"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="14sp" />
 
                     <EditText
@@ -195,7 +195,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:textColor="#F9F4F4"
+                        android:textColor="@color/od_text"
                         android:textColorHint="#604F50"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -207,7 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="6dp"
-                    android:background="@drawable/au9_input"
+                    android:background="@drawable/od_well"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingStart="12dp"
@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="monospace"
                         android:text="*"
-                        android:textColor="#5C6068"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="14sp" />
 
                     <EditText
@@ -233,7 +233,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textColor="#F9F4F4"
+                        android:textColor="@color/od_text"
                         android:textColorHint="#604F50"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -244,7 +244,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="monospace"
                     android:text="// 2FA enabled? append :code to your password (e.g. secret:123456)"
-                    android:textColor="#5C6068"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="9.5sp" />
 
                 <TextView
@@ -252,12 +252,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/au9_btn_primary"
+                    android:background="@drawable/od_btn_primary"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:letterSpacing="0.1"
                     android:text="LOGIN"
-                    android:textColor="#191414"
+                    android:textColor="@color/od_on_accent"
                     android:textSize="13sp" />
             </LinearLayout>
         </FrameLayout>

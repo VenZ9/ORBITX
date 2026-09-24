@@ -24,7 +24,7 @@
             android:layout_marginBottom="2dp"
             android:paddingHorizontal="2dp"
             android:text="Changes apply instantly and are saved for the launcher too."
-            android:textColor="#5C6068"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp" />
 
         <!-- ── DISPLAY ── -->
@@ -39,11 +39,11 @@
             <TextView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:background="@drawable/qs_section_glyph"
+                android:background="@drawable/od_well"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="R"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="DISPLAY"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp" />
 
             <View
@@ -68,7 +68,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:orientation="vertical"
             android:paddingStart="14dp"
             android:paddingEnd="12dp"
@@ -88,7 +88,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/mcl_setting_title_resolution_scaler"
-                    android:textColor="#F4EEEE"
+                    android:textColor="@color/od_text"
                     android:textSize="13sp" />
 
                 <TextView
@@ -100,7 +100,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     tools:text="100%" />
             </LinearLayout>
@@ -131,11 +131,11 @@
             <TextView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:background="@drawable/qs_section_glyph"
+                android:background="@drawable/od_well"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="G"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -146,7 +146,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="MOTION"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp" />
 
             <View
@@ -161,7 +161,7 @@
             android:id="@+id/checkboxGyro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:fontFamily="sans-serif-medium"
             android:minHeight="48dp"
             android:paddingStart="14dp"
@@ -169,7 +169,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/preference_enable_gyro_title"
-            android:textColor="#F4EEEE"
+            android:textColor="@color/od_text"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />
@@ -178,7 +178,7 @@
             android:id="@+id/checkboxGyroX"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:fontFamily="sans-serif-medium"
             android:minHeight="48dp"
             android:paddingStart="14dp"
@@ -186,7 +186,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/preference_gyro_invert_x_axis"
-            android:textColor="#F4EEEE"
+            android:textColor="@color/od_text"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track"
@@ -196,7 +196,7 @@
             android:id="@+id/checkboxGyroY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:fontFamily="sans-serif-medium"
             android:minHeight="48dp"
             android:paddingStart="14dp"
@@ -204,7 +204,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/preference_gyro_invert_y_axis"
-            android:textColor="#F4EEEE"
+            android:textColor="@color/od_text"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track"
@@ -214,7 +214,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:orientation="vertical"
             android:paddingStart="14dp"
             android:paddingEnd="12dp"
@@ -234,7 +234,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/preference_gyro_sensitivity_title"
-                    android:textColor="#F4EEEE"
+                    android:textColor="@color/od_text"
                     android:textSize="13sp" />
 
                 <TextView
@@ -246,7 +246,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     tools:text="100%" />
             </LinearLayout>
@@ -278,11 +278,11 @@
             <TextView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:background="@drawable/qs_section_glyph"
+                android:background="@drawable/od_well"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="M"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -293,7 +293,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="POINTER"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp" />
 
             <View
@@ -307,7 +307,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:orientation="vertical"
             android:paddingStart="14dp"
             android:paddingEnd="12dp"
@@ -327,7 +327,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/mcl_setting_title_mousespeed"
-                    android:textColor="#F4EEEE"
+                    android:textColor="@color/od_text"
                     android:textSize="13sp" />
 
                 <TextView
@@ -339,7 +339,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     tools:text="100%" />
             </LinearLayout>
@@ -364,7 +364,7 @@
             android:id="@+id/always_grab_mouse_side_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:fontFamily="sans-serif-medium"
             android:minHeight="48dp"
             android:paddingStart="14dp"
@@ -372,7 +372,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/mcl_setting_title_grab_mouse"
-            android:textColor="#F4EEEE"
+            android:textColor="@color/od_text"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />
@@ -389,11 +389,11 @@
             <TextView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:background="@drawable/qs_section_glyph"
+                android:background="@drawable/od_well"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="T"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -404,7 +404,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="TOUCH"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp" />
 
             <View
@@ -419,7 +419,7 @@
             android:id="@+id/checkboxGesture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:fontFamily="sans-serif-medium"
             android:minHeight="48dp"
             android:paddingStart="14dp"
@@ -427,7 +427,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/mcl_disable_gestures"
-            android:textColor="#F4EEEE"
+            android:textColor="@color/od_text"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />
@@ -436,7 +436,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:orientation="vertical"
             android:paddingStart="14dp"
             android:paddingEnd="12dp"
@@ -456,7 +456,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/mcl_setting_title_longpresstrigger"
-                    android:textColor="#F4EEEE"
+                    android:textColor="@color/od_text"
                     android:textSize="13sp" />
 
                 <TextView
@@ -468,7 +468,7 @@
                     android:gravity="center"
                     android:minWidth="52dp"
                     android:paddingHorizontal="8dp"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     tools:text="270 ms" />
             </LinearLayout>
@@ -500,11 +500,11 @@
             <TextView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:background="@drawable/qs_section_glyph"
+                android:background="@drawable/od_well"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="O"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -515,7 +515,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="OVERLAY"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp" />
 
             <View
@@ -533,14 +533,14 @@
             android:paddingHorizontal="2dp"
             android:paddingBottom="6dp"
             android:text="@string/cs_osd_caption"
-            android:textColor="#AC9A9B"
+            android:textColor="@color/od_text_muted"
             android:textSize="11sp" />
 
         <Switch
             android:id="@+id/osd_show_memory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/qs_row"
+            android:background="@drawable/od_row"
             android:fontFamily="sans-serif-medium"
             android:minHeight="48dp"
             android:paddingStart="14dp"
@@ -548,7 +548,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/cs_osd_show_memory"
-            android:textColor="#F4EEEE"
+            android:textColor="@color/od_text"
             android:textSize="13sp"
             android:thumb="@drawable/qs_switch_thumb"
             android:track="@drawable/qs_switch_track" />
@@ -560,6 +560,6 @@
             android:layout_marginTop="6dp"
             android:paddingHorizontal="2dp"
             android:text="@string/cs_osd_hint"
-            android:textColor="#5C6068"
+            android:textColor="@color/od_text_muted"
             android:textSize="10sp" />
 </LinearLayout>

@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.14"
                     android:text="@string/loader_installer_eyebrow"
-                    android:textColor="#7C7C88"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="8.8sp"
                     android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
                     android:fontFamily="@font/minecraftia"
                     android:includeFontPadding="false"
                     android:text="@string/forge_dl_select_version"
-                    android:textColor="#F3F0F0"
+                    android:textColor="@color/od_text"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="@string/loader_installer_sub"
-                    android:textColor="#9C9CA8"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="11sp" />
 
                 <ProgressBar
@@ -86,7 +86,7 @@
                     android:layout_height="4dp"
                     android:layout_marginTop="10dp"
                     android:indeterminate="true"
-                    android:indeterminateTint="#FFFFFF"
+                    android:indeterminateTint="@color/od_text"
                     android:progressBackgroundTint="#2B2323"
                     android:visibility="gone" />
             </LinearLayout>
@@ -147,7 +147,7 @@
                             android:layout_gravity="center"
                             android:contentDescription="@null"
                             android:src="@drawable/ic_download_trend"
-                            app:tint="#E5A0A6" />
+                            app:tint="@color/od_accent_bright" />
                     </FrameLayout>
 
                     <TextView
@@ -156,7 +156,7 @@
                         android:layout_marginTop="12dp"
                         android:gravity="center"
                         android:text="@string/modloader_dl_failed_to_load_list"
-                        android:textColor="#E5A0A6"
+                        android:textColor="@color/od_accent_bright"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -166,7 +166,7 @@
                         android:layout_marginTop="4dp"
                         android:gravity="center"
                         android:text="Please check your connection and try again."
-                        android:textColor="#9C9CA8"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="10.5sp" />
 
                     <Button
@@ -178,7 +178,7 @@
                         android:stateListAnimator="@null"
                         android:text="@string/global_retry"
                         android:textAllCaps="true"
-                        android:textColor="#110E0E"
+                        android:textColor="@color/od_on_accent"
                         android:textSize="12.5sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -212,7 +212,7 @@
                     android:contentDescription="@string/global_back"
                     android:padding="10dp"
                     android:src="@drawable/ic_arrow_back_white"
-                    app:tint="#FFFFFF" />
+                    app:tint="@color/od_text" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -227,7 +227,7 @@
                         android:fontFamily="@font/minecraftia"
                         android:includeFontPadding="false"
                         android:text="@string/loader_installer_ready_title"
-                        android:textColor="#F3F0F0"
+                        android:textColor="@color/od_text"
                         android:textSize="15.5sp"
                         android:textStyle="bold" />
 
@@ -236,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1dp"
                         android:text="Review the selected loader before install"
-                        android:textColor="#9C9CA8"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="9.8sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -283,7 +283,7 @@
                                 android:layout_gravity="center"
                                 android:contentDescription="@null"
                                 android:src="@drawable/ic_download_trend"
-                                app:tint="#FFFFFF" />
+                                app:tint="@color/od_text" />
                         </FrameLayout>
 
                         <TextView
@@ -291,7 +291,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
                             android:text="@string/loader_installer_summary_title"
-                            android:textColor="#F3F0F0"
+                            android:textColor="@color/od_text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -301,7 +301,7 @@
                             android:layout_marginTop="4dp"
                             android:gravity="center"
                             android:text="@string/loader_installer_summary_sub"
-                            android:textColor="#9C9CA8"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="11sp" />
 
                         <TextView
@@ -312,7 +312,7 @@
                             android:background="@drawable/bg_mp_version_badge"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="7dp"
-                            android:textColor="#110E0E"
+                            android:textColor="@color/od_on_accent"
                             android:textSize="12sp"
                             android:textStyle="bold"
                             tools:text="Forge 47.2.0" />
@@ -334,7 +334,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="What happens next"
-                            android:textColor="#F3F0F0"
+                            android:textColor="@color/od_text"
                             android:textSize="12.5sp"
                             android:textStyle="bold" />
 
@@ -343,7 +343,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="• Required installer files will be downloaded automatically"
-                            android:textColor="#9C9CA8"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="10.8sp" />
 
                         <TextView
@@ -351,7 +351,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="• Version-specific data will be prepared for your selected game version"
-                            android:textColor="#9C9CA8"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="10.8sp" />
 
                         <TextView
@@ -359,7 +359,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="• Installation may take a moment depending on network speed"
-                            android:textColor="#9C9CA8"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="10.8sp" />
                     </LinearLayout>
 
@@ -386,7 +386,7 @@
                                 android:layout_gravity="center"
                                 android:contentDescription="@null"
                                 android:src="@drawable/ic_download_trend"
-                                app:tint="#9C9CA8" />
+                                app:tint="@color/od_text_muted" />
                         </FrameLayout>
 
                         <LinearLayout
@@ -400,7 +400,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tip"
-                                android:textColor="#F3F0F0"
+                                android:textColor="@color/od_text"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
@@ -409,7 +409,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:text="If this loader supports multiple branches, choose the one matching your Minecraft version exactly."
-                                android:textColor="#9C9CA8"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="10.5sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -439,7 +439,7 @@
                     android:stateListAnimator="@null"
                     android:text="@string/loader_installer_start"
                     android:textAllCaps="true"
-                    android:textColor="#110E0E"
+                    android:textColor="@color/od_on_accent"
                     android:textSize="13.5sp"
                     android:textStyle="bold" />
             </FrameLayout>

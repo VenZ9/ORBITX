@@ -12,7 +12,7 @@
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/bg_s4_card"
+        android:background="@drawable/od_pane_raised"
         android:orientation="vertical"
         android:padding="22dp"
         android:elevation="14dp"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="UPDATE"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.05" />
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New version available"
-            android:textColor="#D0D0D0"
+            android:textColor="@color/od_text_dim"
             android:textSize="13.5sp"
             android:textStyle="bold"
             android:layout_marginBottom="12dp" />
@@ -68,7 +68,7 @@
                 android:id="@+id/tv_update_changelog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#F2EDED"
+                android:textColor="@color/od_text"
                 android:textSize="13sp"
                 android:lineSpacingExtra="3dp"
                 android:text="New features / changes" />
@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Downloading update... 0%"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="12.5sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="6dp" />
@@ -101,7 +101,7 @@
                 android:layout_height="8dp"
                 android:max="100"
                 android:progress="0"
-                android:progressDrawable="@drawable/bg_s4_accent_bar" />
+                android:progressDrawable="@drawable/od_live_dot" />
 
         </LinearLayout>
 
@@ -119,11 +119,11 @@
                 android:layout_height="42dp"
                 android:layout_weight="1"
                 android:text="Later"
-                android:textColor="#D0D0D0"
+                android:textColor="@color/od_text_dim"
                 android:textSize="13.5sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:background="@drawable/bg_settings_row"
+                android:background="@drawable/od_row"
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true" />
@@ -134,11 +134,11 @@
                 android:layout_height="42dp"
                 android:layout_weight="1"
                 android:text="UPDATE"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="13.5sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:background="@drawable/bg_settings_btn"
+                android:background="@drawable/od_icon_button"
                 android:clickable="true"
                 android:focusable="true" />
 

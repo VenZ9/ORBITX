@@ -17,7 +17,7 @@
     android:id="@+id/vs_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/vs_sheet"
+    android:background="@drawable/od_panel"
     android:orientation="vertical"
     android:paddingStart="16dp"
     android:paddingTop="14dp"
@@ -35,12 +35,12 @@
             android:id="@+id/vs_glyph"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:background="@drawable/pw_glyph_well"
+            android:background="@drawable/od_well"
             android:fontFamily="@font/minecraftia"
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="MC"
-            android:textColor="#EFE6E7"
+            android:textColor="@color/od_text"
             android:textSize="11sp"
             tools:ignore="HardcodedText" />
 
@@ -58,7 +58,7 @@
                 android:fontFamily="@font/minecraftia"
                 android:includeFontPadding="false"
                 android:text="SELECT VERSION"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="14sp"
                 tools:ignore="HardcodedText" />
 
@@ -70,7 +70,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.12"
                 android:text="MOJANG MANIFEST  ·  LOADING"
-                android:textColor="#806B6C"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
@@ -85,7 +85,7 @@
             android:focusable="true"
             android:gravity="center"
             android:text="✕"
-            android:textColor="#D8C9CA"
+            android:textColor="@color/od_text_dim"
             android:textSize="13sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
@@ -119,7 +119,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/vs_search"
+        android:background="@drawable/od_search_well"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="12dp"
@@ -131,7 +131,7 @@
             android:fontFamily="@font/minecraftia"
             android:includeFontPadding="false"
             android:text=">"
-            android:textColor="#9C8A8B"
+            android:textColor="@color/od_text_muted"
             android:textSize="11sp"
             tools:ignore="HardcodedText" />
 
@@ -147,8 +147,8 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:maxLines="1"
-            android:textColor="#F9F4F4"
-            android:textColorHint="#5C6068"
+            android:textColor="@color/od_text"
+            android:textColorHint="@color/od_text_muted"
             android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
@@ -160,7 +160,7 @@
             android:includeFontPadding="false"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
-            android:textColor="#9C8A8B"
+            android:textColor="@color/od_text_muted"
             android:textSize="9sp"
             tools:text="128" />
     </LinearLayout>
@@ -193,7 +193,7 @@
             android:includeFontPadding="false"
             android:lineSpacingExtra="6dp"
             android:text="NOTHING HERE"
-            android:textColor="#5C6068"
+            android:textColor="@color/od_text_muted"
             android:textSize="11sp"
             android:visibility="gone"
             tools:ignore="HardcodedText" />
@@ -207,7 +207,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="Tap a version to use it  ·  the latest release is pinned on top"
-        android:textColor="#5C6068"
+        android:textColor="@color/od_text_muted"
         android:textSize="10sp"
         tools:ignore="HardcodedText" />
 </LinearLayout>

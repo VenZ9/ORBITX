@@ -18,7 +18,7 @@
         <FrameLayout
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/st_icon_well">
+            android:background="@drawable/od_well">
 
             <ImageView
                 android:layout_width="15dp"
@@ -26,7 +26,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_settings_experimental"
-                app:tint="#D8C9CA" />
+                app:tint="@color/od_text_dim" />
         </FrameLayout>
 
         <LinearLayout
@@ -41,14 +41,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Accent palette"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="13sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tap a swatch — the launcher restarts with it"
-                android:textColor="#937F80"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10.5sp" />
         </LinearLayout>
     </LinearLayout>

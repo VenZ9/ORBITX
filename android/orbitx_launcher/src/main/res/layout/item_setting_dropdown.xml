@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ss_row"
+    android:background="@drawable/od_row"
     android:clickable="true"
     android:focusable="true"
     android:gravity="center_vertical"
@@ -22,7 +22,7 @@
         android:layout_marginEnd="14dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_menu_settings"
-        app:tint="#AC9A9B" />
+        app:tint="@color/od_text_muted" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#F9F4F4"
+            android:textColor="@color/od_text"
             android:textSize="15.5sp" />
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textColor="#9C8A8B"
+            android:textColor="@color/od_text_muted"
             android:textSize="12.5sp" />
     </LinearLayout>
 
@@ -72,7 +72,7 @@
         android:minHeight="32dp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        android:textColor="#EFE6E7"
+        android:textColor="@color/od_text"
         android:textSize="13sp" />
 
     <ImageView
@@ -82,5 +82,5 @@
         android:layout_marginStart="4dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_chevron_down"
-        app:tint="#5C6068" />
+        app:tint="@color/od_text_muted" />
 </LinearLayout>

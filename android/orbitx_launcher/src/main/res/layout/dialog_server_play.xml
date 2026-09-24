@@ -14,7 +14,7 @@
         android:id="@+id/spd_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_dialog_plantmc"
+        android:background="@drawable/od_panel"
         android:orientation="vertical">
 
         <!-- Artwork head (built-in server only) -->
@@ -55,7 +55,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="PlantMC"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/od_text"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="play.plantmc.fun:25627"
-            android:textColor="#A38B8D"
+            android:textColor="@color/od_text_dim"
             android:textSize="11sp" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
             android:text="Play now, or just save it to your list?"
-            android:textColor="#E4D7D8"
+            android:textColor="@color/od_text"
             android:textSize="13sp" />
 
         <LinearLayout
@@ -95,7 +95,7 @@
                 android:background="@drawable/bg_dialog_ghost_btn"
                 android:gravity="center"
                 android:text="SAVE"
-                android:textColor="#F0E7E8"
+                android:textColor="@color/od_text"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -109,7 +109,7 @@
                 android:elevation="2dp"
                 android:gravity="center"
                 android:text="PLAY"
-                android:textColor="#07130B"
+                android:textColor="@color/od_on_accent"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>

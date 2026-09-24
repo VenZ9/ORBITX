@@ -9,7 +9,7 @@
     android:id="@+id/pk_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/pk_card"
+    android:background="@drawable/od_pane_raised"
     android:orientation="vertical"
     android:paddingBottom="12dp">
 
@@ -28,7 +28,7 @@
             android:id="@+id/pk_glyph_well"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:background="@drawable/pk_glyph_well">
+            android:background="@drawable/od_well">
 
             <TextView
                 android:id="@+id/pk_glyph"
@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="monospace"
                 android:text="J"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="17sp"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -56,7 +56,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.16"
                 android:text="SELECT"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp" />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_marginTop="1dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Java runtime"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="17sp" />
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Which JVM launches this profile"
-                android:textColor="#AC9A9B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="11.5sp" />
         </LinearLayout>
 
@@ -89,7 +89,7 @@
             android:text="ESC"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.08"
-            android:textColor="#D8C9CA"
+            android:textColor="@color/od_text_dim"
             android:textSize="10sp" />
     </LinearLayout>
 
@@ -125,6 +125,6 @@
         android:paddingHorizontal="18dp"
         android:paddingTop="6dp"
         android:text="Tap a row to select — the choice applies when you save the profile."
-        android:textColor="#5C6068"
+        android:textColor="@color/od_text_muted"
         android:textSize="10.5sp" />
 </LinearLayout>

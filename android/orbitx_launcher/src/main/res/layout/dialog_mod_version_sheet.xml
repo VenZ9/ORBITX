@@ -23,7 +23,7 @@
     android:id="@+id/mvs_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mvs_card"
+    android:background="@drawable/od_pane_raised"
     android:baselineAligned="false"
     android:orientation="horizontal">
 
@@ -52,7 +52,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.16"
                 android:text="FILTERS"
-                android:textColor="#5C6068"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8sp"
                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -76,7 +76,7 @@
                     android:includeFontPadding="false"
                     android:paddingHorizontal="11dp"
                     android:text="✓  Fits my profile"
-                    android:textColor="#191414"
+                    android:textColor="@color/od_on_accent"
                     android:textSize="10sp"
                     tools:ignore="HardcodedText" />
 
@@ -93,7 +93,7 @@
                     android:includeFontPadding="false"
                     android:paddingHorizontal="11dp"
                     android:text="All files"
-                    android:textColor="#D8C9CA"
+                    android:textColor="@color/od_text_dim"
                     android:textSize="10sp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
@@ -107,7 +107,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.16"
                 android:text="MINECRAFT"
-                android:textColor="#5C6068"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8sp"
                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -128,7 +128,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.16"
                 android:text="LOADER"
-                android:textColor="#5C6068"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8sp"
                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:includeFontPadding="false"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp"
                 tools:text="12 files · 4 fit" />
 
@@ -167,7 +167,7 @@
                 android:letterSpacing="0.06"
                 android:padding="4dp"
                 android:text="Reset filters"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="9.5sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
@@ -195,7 +195,7 @@
             <View
                 android:layout_width="3dp"
                 android:layout_height="28dp"
-                android:background="@drawable/csc_accent_bar" />
+                android:background="@drawable/od_live_dot" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -211,7 +211,7 @@
                     android:includeFontPadding="false"
                     android:letterSpacing="0.14"
                     android:text="CHOOSE A FILE TO INSTALL"
-                    android:textColor="#9C8A8B"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="8.5sp"
                     tools:ignore="HardcodedText,SmallSp" />
 
@@ -224,7 +224,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="15sp"
                     tools:text="Sodium" />
             </LinearLayout>
@@ -239,7 +239,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.04"
                 android:paddingHorizontal="10dp"
-                android:textColor="#191414"
+                android:textColor="@color/od_on_accent"
                 android:textSize="9sp"
                 tools:text="MC 1.21.1 · Fabric" />
 
@@ -254,7 +254,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="×"
-                android:textColor="#C7B9BA"
+                android:textColor="@color/od_text"
                 android:textSize="17sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
@@ -309,7 +309,7 @@
                     android:includeFontPadding="false"
                     android:letterSpacing="0.14"
                     android:text="SELECTED"
-                    android:textColor="#5C6068"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="7.5sp"
                     tools:ignore="HardcodedText,SmallSp" />
 
@@ -321,7 +321,7 @@
                     android:ellipsize="middle"
                     android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="11sp"
                     tools:text="sodium-fabric-0.6.0+mc1.21.1.jar" />
 
@@ -333,7 +333,7 @@
                     android:ellipsize="end"
                     android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:textColor="#9C8A8B"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="9sp"
                     tools:text="1.21.1  ·  Fabric, Quilt" />
             </LinearLayout>
@@ -343,7 +343,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:layout_marginStart="12dp"
-                android:background="@drawable/mvs_btn_primary"
+                android:background="@drawable/od_btn_primary"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="sans-serif-medium"
@@ -352,7 +352,7 @@
                 android:letterSpacing="0.08"
                 android:paddingHorizontal="18dp"
                 android:text="USE THIS FILE"
-                android:textColor="#191414"
+                android:textColor="@color/od_on_accent"
                 android:textSize="10.5sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>

@@ -67,7 +67,7 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="monospace"
                 android:text="SRC"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="8sp" />
         </LinearLayout>
 
@@ -87,7 +87,7 @@
                 android:contentDescription="@null"
                 android:padding="7dp"
                 android:src="@drawable/ic_menu_share"
-                app:tint="#EFE6E7" />
+                app:tint="@color/od_text" />
 
             <ImageButton
                 android:id="@+id/btn_like"
@@ -98,7 +98,7 @@
                 android:contentDescription="@null"
                 android:padding="7dp"
                 android:src="@drawable/ic_heart_outline"
-                app:tint="#EFE6E7" />
+                app:tint="@color/od_text" />
         </LinearLayout>
 
         <!-- docked icon frame (bottom-left, overlaps the body) -->
@@ -148,7 +148,7 @@
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="1"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="13.5sp"
                 tools:text="Fabulously Optimized" />
 
@@ -159,7 +159,7 @@
                 android:ellipsize="end"
                 android:fontFamily="monospace"
                 android:maxLines="1"
-                android:textColor="#937F80"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp"
                 tools:text="by robotkoer  ·  1.21" />
         </LinearLayout>
@@ -172,7 +172,7 @@
             android:ellipsize="end"
             android:lineSpacingMultiplier="1.12"
             android:maxLines="2"
-            android:textColor="#AC9A9B"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp"
             tools:text="A simple, performance-focused modpack." />
 
@@ -207,7 +207,7 @@
                 android:fontFamily="monospace"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 app:drawableStartCompat="@drawable/ic_sf_dl"
                 tools:text="4.2M" />
@@ -220,7 +220,7 @@
                 android:drawablePadding="4dp"
                 android:fontFamily="monospace"
                 android:gravity="center_vertical"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 android:visibility="gone"
                 app:drawableStartCompat="@drawable/ic_sf_heart"
@@ -238,7 +238,7 @@
                 android:minWidth="76dp"
                 android:paddingHorizontal="12dp"
                 android:text="INSTALL"
-                android:textColor="#191414"
+                android:textColor="@color/od_on_accent"
                 android:textSize="9.5sp" />
 
             <LinearLayout
@@ -265,7 +265,7 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.06"
-                    android:textColor="#DED2D3"
+                    android:textColor="@color/od_text"
                     android:textSize="9sp"
                     tools:text="INSTALLED" />
             </LinearLayout>

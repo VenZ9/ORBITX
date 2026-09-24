@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Announcement"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/od_text"
             android:textSize="18sp"
             android:textStyle="bold"
             android:maxLines="1"
@@ -35,12 +35,12 @@
             android:layout_width="wrap_content"
             android:layout_height="38dp"
             android:text="CLOSE"
-            android:textColor="#F2EDED"
+            android:textColor="@color/od_text"
             android:textSize="13sp"
             android:textStyle="bold"
             android:gravity="center"
             android:paddingHorizontal="18dp"
-            android:background="@drawable/bg_settings_btn"
+            android:background="@drawable/od_icon_button"
             android:clickable="true"
             android:focusable="true" />
     </LinearLayout>
@@ -62,7 +62,7 @@
             android:id="@+id/tv_ann_page_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/od_text"
             android:textSize="15sp"
             android:lineSpacingExtra="4dp"
             android:textIsSelectable="true" />

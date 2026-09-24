@@ -20,7 +20,7 @@
     android:id="@+id/skin_overview_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_au_page">
+    android:background="@drawable/od_window_bg">
 
     <!-- ── header ── -->
     <LinearLayout
@@ -41,7 +41,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_marginStart="-4dp"
-            android:background="@drawable/bg_au_row"
+            android:background="@drawable/od_row"
             android:clickable="true"
             android:focusable="true">
 
@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/skin_overview_active"
-            style="@style/AuChip"
+            style="@style/OdButton.Chip"
             android:text="NO ACTIVE SKIN" />
     </LinearLayout>
 
@@ -116,7 +116,7 @@
                 android:id="@+id/skin_overview_hero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_au_card"
+                android:background="@drawable/od_pane_raised"
                 android:orientation="vertical"
                 android:padding="14dp">
 
@@ -130,7 +130,7 @@
                         android:id="@+id/skin_overview_hero_stage"
                         android:layout_width="124dp"
                         android:layout_height="164dp"
-                        android:background="@drawable/bg_au_plate"
+                        android:background="@drawable/od_pane_raised"
                         android:clipToOutline="true">
 
                         <net.kdt.pojavlaunch.skins.SkinSlotPreviewView
@@ -140,19 +140,19 @@
 
                         <TextView
                             android:id="@+id/skin_overview_hero_badge"
-                            style="@style/AuChip"
+                            style="@style/OdButton.Chip"
                             android:layout_gravity="top|start"
                             android:layout_margin="7dp"
-                            android:background="@drawable/bg_au_chip_neutral"
+                            android:background="@drawable/od_chip"
                             android:text="PREVIEW"
                             android:textColor="@color/au_text_mid" />
 
                         <TextView
                             android:id="@+id/skin_overview_hero_model"
-                            style="@style/AuChip"
+                            style="@style/OdButton.Chip"
                             android:layout_gravity="top|end"
                             android:layout_margin="7dp"
-                            android:background="@drawable/bg_au_chip_neutral"
+                            android:background="@drawable/od_chip"
                             android:text="CLASSIC"
                             android:textColor="@color/au_text_mid"
                             android:visibility="gone" />
@@ -189,7 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:background="@drawable/bg_au_chip_ok"
+                            android:background="@drawable/od_chip"
                             android:includeFontPadding="false"
                             android:paddingStart="10dp"
                             android:paddingTop="5dp"
@@ -233,7 +233,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/AuSectionLabel"
+                    style="@style/OdText.Label"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="0dp"
                     android:layout_marginBottom="0dp"
@@ -271,14 +271,14 @@
                     android:id="@+id/skin_overview_loading_a"
                     android:layout_width="match_parent"
                     android:layout_height="82dp"
-                    android:background="@drawable/bg_au_card_muted" />
+                    android:background="@drawable/od_pane_raised" />
 
                 <View
                     android:id="@+id/skin_overview_loading_b"
                     android:layout_width="match_parent"
                     android:layout_height="82dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/bg_au_card_muted" />
+                    android:background="@drawable/od_pane_raised" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -301,7 +301,7 @@
                 <FrameLayout
                     android:layout_width="62dp"
                     android:layout_height="62dp"
-                    android:background="@drawable/bg_au_well">
+                    android:background="@drawable/od_well">
 
                     <ImageView
                         android:layout_width="26dp"
@@ -345,7 +345,7 @@
                 android:id="@+id/skin_overview_error"
                 style="@style/AuCard"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/bg_au_card_fail"
+                android:background="@drawable/od_pane_raised"
                 android:gravity="center"
                 android:padding="22dp"
                 android:visibility="gone">

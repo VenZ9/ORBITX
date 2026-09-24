@@ -97,7 +97,7 @@
                     android:includeFontPadding="false"
                     android:letterSpacing="0.14"
                     android:maxLines="1"
-                    android:textColor="#D8C9CA"
+                    android:textColor="@color/od_text_dim"
                     android:textSize="9.5sp"
                     android:textStyle="bold"
                     tools:text="SODIUM" />
@@ -147,7 +147,7 @@
                         android:shadowColor="#CC000000"
                         android:shadowDy="1"
                         android:shadowRadius="6"
-                        android:textColor="#F9F4F4"
+                        android:textColor="@color/od_text"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         tools:text="Sodium" />
@@ -163,7 +163,7 @@
                         android:shadowColor="#CC000000"
                         android:shadowDy="1"
                         android:shadowRadius="4"
-                        android:textColor="#D8C9CA"
+                        android:textColor="@color/od_text_dim"
                         android:textSize="11sp"
                         android:visibility="gone"
                         tools:text="by jellysquid3"
@@ -183,7 +183,7 @@
                         android:paddingTop="5dp"
                         android:paddingEnd="8dp"
                         android:paddingBottom="3dp"
-                        android:textColor="#EFE6E7"
+                        android:textColor="@color/od_text"
                         android:textSize="9sp"
                         tools:text="mc1.21-0.6.0" />
                 </LinearLayout>
@@ -267,7 +267,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:letterSpacing="0.06"
-                android:textColor="#191414"
+                android:textColor="@color/od_on_accent"
                 android:textSize="13.5sp"
                 android:textStyle="bold"
                 tools:text="INSTALL MOD" />
@@ -335,7 +335,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="4dp"
-                        android:textColor="#D8C9CA"
+                        android:textColor="@color/od_text_dim"
                         android:textSize="13sp"
                         tools:text="Sodium is a modern rendering engine for Minecraft which greatly improves frame rates and reduces stuttering." />
                 </LinearLayout>
@@ -459,7 +459,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="3dp"
-                        android:textColor="#D8C9CA"
+                        android:textColor="@color/od_text_dim"
                         android:textSize="12.5sp"
                         tools:text="Requires 1 mod · 1 optional" />
                 </LinearLayout>
@@ -478,7 +478,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="monospace"
                         android:lineSpacingExtra="3dp"
-                        android:textColor="#AC9A9B"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="11.5sp"
                         tools:text="- fixed things" />
                 </LinearLayout>

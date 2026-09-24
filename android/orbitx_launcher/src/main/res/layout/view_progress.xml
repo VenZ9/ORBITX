@@ -36,12 +36,12 @@
             android:id="@+id/progress_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/bg_deck_icon_tile"
+            android:background="@drawable/od_well"
             android:clipToOutline="true"
             android:padding="11dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_download"
-            android:tint="#FFFFFF"
+            android:tint="@color/od_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UseAppTint" />
@@ -57,7 +57,7 @@
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.01"
             android:maxLines="1"
-            android:textColor="#F3F0F0"
+            android:textColor="@color/od_text"
             android:textSize="13.5sp"
             app:layout_constraintStart_toEndOf="@id/progress_icon"
             app:layout_constraintEnd_toStartOf="@id/progress_percentage_text"
@@ -72,7 +72,7 @@
             android:layout_marginTop="3dp"
             android:background="@drawable/bg_runtime_chip_recommended"
             android:text="@string/download_console_paused"
-            android:textColor="#D8C79A"
+            android:textColor="@color/od_warn"
             android:textSize="8.5sp"
             android:textStyle="bold"
             android:visibility="gone"
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:letterSpacing="-0.02"
-            android:textColor="#F5F2F2"
+            android:textColor="@color/od_text"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -102,7 +102,7 @@
             android:layout_marginEnd="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#9C9CA8"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp"
             app:layout_constraintStart_toStartOf="@id/progress_status_text"
             app:layout_constraintEnd_toStartOf="@id/progress_percentage_text"
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.02"
-                android:textColor="#E5DADB"
+                android:textColor="@color/od_text"
                 android:textSize="10sp"
                 android:visibility="gone"
                 tools:text="2.5 MB/s"
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:letterSpacing="0.02"
-                android:textColor="#7C7C88"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10sp"
                 android:visibility="gone"
                 tools:text="• 1m 20s remaining"
@@ -184,7 +184,7 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:src="@drawable/ic_pause"
-                    android:tint="#E5DADB" />
+                    android:tint="@color/od_text" />
 
                 <TextView
                     android:id="@+id/progress_btn_pause_text"
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="@string/download_console_pause"
-                    android:textColor="#E5DADB"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -211,14 +211,14 @@
                     android:layout_width="13dp"
                     android:layout_height="13dp"
                     android:src="@drawable/ic_stop"
-                    android:tint="#E5DADB" />
+                    android:tint="@color/od_text" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="@string/download_console_stop"
-                    android:textColor="#E5DADB"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -237,14 +237,14 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@drawable/ic_chevron_down"
-                    android:tint="#E5DADB" />
+                    android:tint="@color/od_text" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="@string/download_console_hide"
-                    android:textColor="#E5DADB"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -273,7 +273,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:src="@drawable/ic_download_trend"
-            android:tint="#FFFFFF" />
+            android:tint="@color/od_text" />
 
         <TextView
             android:id="@+id/console_pill_percent"
@@ -281,7 +281,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:fontFamily="sans-serif-medium"
-            android:textColor="#F3F0F0"
+            android:textColor="@color/od_text"
             android:textSize="12sp"
             android:textStyle="bold"
             tools:text="42%" />
@@ -291,7 +291,7 @@
             android:layout_height="13dp"
             android:layout_marginStart="7dp"
             android:src="@drawable/ic_chevron_up"
-            android:tint="#7C7C88" />
+            android:tint="@color/od_text_muted" />
     </LinearLayout>
 
     <!-- ═══════════════════════════════════════ -->

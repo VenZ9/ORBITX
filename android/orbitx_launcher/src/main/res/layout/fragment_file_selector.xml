@@ -20,7 +20,7 @@
         android:id="@+id/file_selector_select_folder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_16sdp"
+        android:layout_marginVertical="@dimen/od_space_4"
         android:layout_marginStart="@dimen/padding_medium"
         android:text="@string/folder_fragment_select"
 
@@ -34,7 +34,7 @@
         android:id="@+id/file_selector_create_folder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_16sdp"
+        android:layout_marginVertical="@dimen/od_space_4"
         android:layout_marginEnd="@dimen/padding_medium"
 
         android:text="@string/folder_fragment_create"

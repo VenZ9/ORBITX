@@ -52,7 +52,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:includeFontPadding="false"
                 android:maxLines="1"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="13sp" />
 
             <TextView
@@ -65,7 +65,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.10"
                 android:paddingHorizontal="7dp"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="7sp"
                 tools:ignore="SmallSp" />
         </LinearLayout>
@@ -80,7 +80,7 @@
             android:includeFontPadding="false"
             android:letterSpacing="0.04"
             android:maxLines="1"
-            android:textColor="#9C8A8B"
+            android:textColor="@color/od_text_muted"
             android:textSize="8.5sp" />
     </LinearLayout>
 
@@ -94,7 +94,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="✓"
-        android:textColor="#191414"
+        android:textColor="@color/od_on_accent"
         android:textSize="12sp"
         android:visibility="gone"
         tools:ignore="HardcodedText" />
@@ -108,5 +108,5 @@
         android:contentDescription="@null"
         android:padding="10dp"
         android:src="@drawable/ic_menu_delete_forever"
-        android:tint="#6B717D" />
+        android:tint="@color/od_text_muted" />
 </LinearLayout>

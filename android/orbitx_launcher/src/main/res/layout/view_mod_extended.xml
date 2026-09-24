@@ -19,7 +19,7 @@
         android:id="@+id/mod_extended_version_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/_30sdp"
+        android:minHeight="@dimen/od_commandbar_brand"
         android:layout_marginVertical="@dimen/padding_moderate"
         app:layout_constraintTop_toBottomOf="@+id/mod_extended_error_textview"
         />

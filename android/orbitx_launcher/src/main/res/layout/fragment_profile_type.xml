@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E0B0B"
+    android:background="@color/od_on_accent"
     android:fillViewport="true"
     android:overScrollMode="never">
 
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.22"
                 android:text="@string/pt_eyebrow"
-                android:textColor="#7C7C88"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
                 android:layout_marginTop="7dp"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/pt_title"
-                android:textColor="#F5F2F2"
+                android:textColor="@color/od_text"
                 android:textSize="27sp" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_marginTop="6dp"
                 android:lineSpacingExtra="2dp"
                 android:text="@string/pt_subtitle"
-                android:textColor="#9C9CA8"
+                android:textColor="@color/od_text_muted"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -70,7 +70,7 @@
                 android:layout_marginStart="22dp"
                 android:letterSpacing="0.12"
                 android:text="@string/pt_section_vanilla"
-                android:textColor="#7C7C88"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                 android:layout_marginStart="22dp"
                 android:letterSpacing="0.12"
                 android:text="@string/pt_section_loaders"
-                android:textColor="#7C7C88"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                         android:id="@+id/modded_profile_fabric"
                         android:layout_width="148dp"
                         android:layout_height="134dp"
-                        android:background="@drawable/bg_profile_type_card"
+                        android:background="@drawable/od_pane_raised"
                         android:clickable="true"
                         android:focusable="true"
                         android:stateListAnimator="@animator/card_press_anim">
@@ -145,7 +145,7 @@
                             <FrameLayout
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:background="@drawable/bg_deck_icon_tile">
+                                android:background="@drawable/od_well">
 
                                 <ImageView
                                     android:layout_width="23dp"
@@ -160,7 +160,7 @@
                                 android:layout_marginTop="12dp"
                                 android:fontFamily="sans-serif-medium"
                                 android:text="@string/pt_fabric_name"
-                                android:textColor="#F3F0F0"
+                                android:textColor="@color/od_text"
                                 android:textSize="13.5sp" />
 
                             <TextView
@@ -170,7 +170,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_fabric_desc"
-                                android:textColor="#7C7C88"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -189,7 +189,7 @@
                         android:layout_width="148dp"
                         android:layout_height="134dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/bg_profile_type_card"
+                        android:background="@drawable/od_pane_raised"
                         android:clickable="true"
                         android:focusable="true"
                         android:stateListAnimator="@animator/card_press_anim">
@@ -203,7 +203,7 @@
                             <FrameLayout
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:background="@drawable/bg_deck_icon_tile">
+                                android:background="@drawable/od_well">
 
                                 <ImageView
                                     android:layout_width="23dp"
@@ -218,7 +218,7 @@
                                 android:layout_marginTop="12dp"
                                 android:fontFamily="sans-serif-medium"
                                 android:text="@string/pt_quilt_name"
-                                android:textColor="#F3F0F0"
+                                android:textColor="@color/od_text"
                                 android:textSize="13.5sp" />
 
                             <TextView
@@ -228,7 +228,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_quilt_desc"
-                                android:textColor="#7C7C88"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -247,7 +247,7 @@
                         android:layout_width="148dp"
                         android:layout_height="134dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/bg_profile_type_card"
+                        android:background="@drawable/od_pane_raised"
                         android:clickable="true"
                         android:focusable="true"
                         android:stateListAnimator="@animator/card_press_anim">
@@ -261,7 +261,7 @@
                             <FrameLayout
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:background="@drawable/bg_deck_icon_tile">
+                                android:background="@drawable/od_well">
 
                                 <ImageView
                                     android:layout_width="23dp"
@@ -276,7 +276,7 @@
                                 android:layout_marginTop="12dp"
                                 android:fontFamily="sans-serif-medium"
                                 android:text="@string/pt_forge_name"
-                                android:textColor="#F3F0F0"
+                                android:textColor="@color/od_text"
                                 android:textSize="13.5sp" />
 
                             <TextView
@@ -286,7 +286,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_forge_desc"
-                                android:textColor="#7C7C88"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -305,7 +305,7 @@
                         android:layout_width="148dp"
                         android:layout_height="134dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/bg_profile_type_card"
+                        android:background="@drawable/od_pane_raised"
                         android:clickable="true"
                         android:focusable="true"
                         android:stateListAnimator="@animator/card_press_anim">
@@ -319,7 +319,7 @@
                             <FrameLayout
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:background="@drawable/bg_deck_icon_tile">
+                                android:background="@drawable/od_well">
 
                                 <ImageView
                                     android:layout_width="23dp"
@@ -334,7 +334,7 @@
                                 android:layout_marginTop="12dp"
                                 android:fontFamily="sans-serif-medium"
                                 android:text="@string/pt_neoforge_name"
-                                android:textColor="#F3F0F0"
+                                android:textColor="@color/od_text"
                                 android:textSize="13.5sp" />
 
                             <TextView
@@ -344,7 +344,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_neoforge_desc"
-                                android:textColor="#7C7C88"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -375,7 +375,7 @@
                 android:layout_marginStart="22dp"
                 android:letterSpacing="0.12"
                 android:text="@string/pt_section_more"
-                android:textColor="#7C7C88"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -399,7 +399,7 @@
                         android:id="@+id/modded_profile_modpack"
                         android:layout_width="168dp"
                         android:layout_height="134dp"
-                        android:background="@drawable/bg_profile_card_cta"
+                        android:background="@drawable/od_pane_raised"
                         android:clickable="true"
                         android:focusable="true"
                         android:stateListAnimator="@animator/card_press_anim">
@@ -414,7 +414,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:src="@drawable/ic_modpack_profile"
-                                android:tint="#110E0E" />
+                                android:tint="@color/od_on_accent" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -422,7 +422,7 @@
                                 android:layout_marginTop="12dp"
                                 android:fontFamily="sans-serif-medium"
                                 android:text="@string/pt_modpack_name"
-                                android:textColor="#110E0E"
+                                android:textColor="@color/od_on_accent"
                                 android:textSize="13.5sp"
                                 android:textStyle="bold" />
 
@@ -433,7 +433,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_modpack_desc"
-                                android:textColor="#3C3C46"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -452,7 +452,7 @@
                         android:layout_width="154dp"
                         android:layout_height="134dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/bg_profile_type_card"
+                        android:background="@drawable/od_pane_raised"
                         android:clickable="true"
                         android:focusable="true"
                         android:stateListAnimator="@animator/card_press_anim">
@@ -466,7 +466,7 @@
                             <FrameLayout
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:background="@drawable/bg_deck_icon_tile">
+                                android:background="@drawable/od_well">
 
                                 <ImageView
                                     android:layout_width="23dp"
@@ -483,7 +483,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_vanilla_name"
-                                android:textColor="#F3F0F0"
+                                android:textColor="@color/od_text"
                                 android:textSize="12.5sp" />
 
                             <TextView
@@ -493,7 +493,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_vanilla_desc"
-                                android:textColor="#7C7C88"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -514,7 +514,7 @@
                         android:layout_width="154dp"
                         android:layout_height="134dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/bg_profile_type_card"
+                        android:background="@drawable/od_pane_raised"
                         android:clickable="true"
                         android:focusable="true"
                         android:stateListAnimator="@animator/card_press_anim">
@@ -528,7 +528,7 @@
                             <FrameLayout
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:background="@drawable/bg_deck_icon_tile">
+                                android:background="@drawable/od_well">
 
                                 <ImageView
                                     android:layout_width="23dp"
@@ -545,7 +545,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_jar_import_name"
-                                android:textColor="#F3F0F0"
+                                android:textColor="@color/od_text"
                                 android:textSize="12.5sp" />
 
                             <TextView
@@ -555,7 +555,7 @@
                                 android:maxLines="2"
                                 android:ellipsize="end"
                                 android:text="@string/pt_jar_import_desc"
-                                android:textColor="#7C7C88"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 

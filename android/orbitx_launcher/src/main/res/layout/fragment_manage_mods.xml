@@ -10,14 +10,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/pe4_page_bg">
+    android:background="@drawable/od_window_bg">
 
     <!-- ── COMMAND BAR ──────────────────────────────────────────────── -->
     <LinearLayout
         android:id="@+id/manage_mods_header"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@drawable/pe5_topbar"
+        android:background="@drawable/od_commandbar"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp">
@@ -26,7 +26,7 @@
             android:id="@+id/manage_mods_back"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/pe4_back_btn"
+            android:background="@drawable/od_icon_button"
             android:contentDescription="@string/global_back"
             android:padding="10dp"
             android:src="@drawable/ic_chevron_left"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.2"
                 android:text="PROFILE"
-                android:textColor="#7C828E"
+                android:textColor="@color/od_text_muted"
                 android:textSize="7.5sp"
                 android:textStyle="bold" />
 
@@ -69,7 +69,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/mcl_button_manage_mods"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="14.5sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -79,11 +79,11 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/pe4_btn_save"
+            android:background="@drawable/od_btn_primary"
             android:contentDescription="@string/global_add"
             android:padding="9dp"
             android:src="@drawable/ic_add"
-            app:tint="#1A1414" />
+            app:tint="@color/od_on_accent" />
     </LinearLayout>
 
     <!-- ── MOD LIST (cascade entrance) ─────────────────────────────── -->
@@ -121,7 +121,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_folder"
-                app:tint="#7C828E" />
+                app:tint="@color/od_text_muted" />
         </FrameLayout>
 
         <TextView
@@ -130,7 +130,7 @@
             android:layout_marginTop="14dp"
             android:gravity="center"
             android:text="@string/manage_mods_empty"
-            android:textColor="#AE9A9B"
+            android:textColor="@color/od_text_muted"
             android:textSize="12.5sp"
             android:textStyle="bold" />
 
@@ -140,7 +140,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="Tap the + button to browse and install mods."
-            android:textColor="#705C5C"
+            android:textColor="@color/od_text_faint"
             android:textSize="10.5sp" />
     </LinearLayout>
 

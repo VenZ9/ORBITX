@@ -76,7 +76,7 @@
                             android:background="@drawable/bg_featured_chip"
                             android:gravity="center"
                             android:paddingHorizontal="9dp"
-                            android:textColor="#C9F7D6"
+                            android:textColor="@color/od_live"
                             android:textSize="8.5sp"
                             android:textStyle="bold"
                             android:visibility="gone"
@@ -91,7 +91,7 @@
                             android:background="@drawable/bg_featured_chip"
                             android:gravity="center"
                             android:paddingHorizontal="9dp"
-                            android:textColor="#F2EDED"
+                            android:textColor="@color/od_text"
                             android:textSize="8.5sp"
                             tools:text="83 ms" />
                     </LinearLayout>
@@ -129,7 +129,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="1"
                                 android:text="PlantMC"
-                                android:textColor="#FFFFFF"
+                                android:textColor="@color/od_text"
                                 android:textSize="16.5sp"
                                 android:textStyle="bold" />
 
@@ -140,7 +140,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="1"
                                 android:text="play.plantmc.fun:25627"
-                                android:textColor="#AF9395"
+                                android:textColor="@color/od_text_dim"
                                 android:textSize="9.5sp" />
                         </LinearLayout>
 
@@ -152,7 +152,7 @@
                             android:background="@drawable/bg_featured_chip"
                             android:gravity="center"
                             android:paddingHorizontal="9dp"
-                            android:textColor="#F2EDED"
+                            android:textColor="@color/od_text"
                             android:textSize="8.5sp"
                             android:visibility="gone"
                             tools:text="Paper 1.21.1"
@@ -165,14 +165,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/bg_featured_motd"
+                        android:background="@drawable/od_pane_raised"
                         android:ellipsize="end"
                         android:lineSpacingExtra="2dp"
                         android:maxLines="2"
                         android:minHeight="40dp"
                         android:paddingHorizontal="11dp"
                         android:paddingVertical="8dp"
-                        android:textColor="#F0E7E8"
+                        android:textColor="@color/od_text"
                         android:textSize="11.5sp"
                         tools:text="⚡ PLAY.PLANTMC.FUN ⚡" />
 
@@ -192,7 +192,7 @@
                             android:gravity="center"
                             android:letterSpacing="0.05"
                             android:text="PLAY"
-                            android:textColor="#07130B"
+                            android:textColor="@color/od_on_accent"
                             android:textSize="12.5sp"
                             android:textStyle="bold" />
 

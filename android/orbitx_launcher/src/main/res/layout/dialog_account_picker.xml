@@ -25,7 +25,7 @@
         <View
             android:layout_width="3dp"
             android:layout_height="26dp"
-            android:background="@drawable/csc_accent_bar" />
+            android:background="@drawable/od_live_dot" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -41,7 +41,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.16"
                 android:text="ACCOUNTS"
-                android:textColor="#9C8A8B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8sp"
                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -53,7 +53,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:includeFontPadding="false"
                 android:text="Who is playing?"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="15sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
@@ -70,7 +70,7 @@
             android:letterSpacing="0.06"
             android:paddingHorizontal="9dp"
             android:text="0"
-            android:textColor="#D8C9CA"
+            android:textColor="@color/od_text_dim"
             android:textSize="8.5sp"
             tools:ignore="HardcodedText" />
 
@@ -84,7 +84,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="✕"
-            android:textColor="#D8C9CA"
+            android:textColor="@color/od_text_dim"
             android:textSize="12sp"
             tools:ignore="HardcodedText" />
     </LinearLayout>
@@ -119,7 +119,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="Tap an account to sign in  ·  bin icon removes it"
-        android:textColor="#5C6068"
+        android:textColor="@color/od_text_muted"
         android:textSize="8.5sp"
         tools:ignore="HardcodedText" />
 </LinearLayout>

@@ -6,7 +6,7 @@
     android:layout_width="188dp"
     android:layout_height="48dp"
     android:layout_marginHorizontal="4dp"
-    android:background="@drawable/bg_lh_create_card"
+    android:background="@drawable/od_pane_raised"
     android:clipToOutline="true"
     android:clickable="true"
     android:focusable="true">
@@ -22,7 +22,7 @@
             android:layout_width="17dp"
             android:layout_height="17dp"
             android:src="@drawable/ic_add"
-            app:tint="#FF9E9E"
+            app:tint="@color/od_accent_bright"
             android:contentDescription="@null" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="New Instance"
-            android:textColor="#FF9E9E"
+            android:textColor="@color/od_accent_bright"
             android:textSize="12sp"
             android:textStyle="bold"
             android:letterSpacing="0.04"

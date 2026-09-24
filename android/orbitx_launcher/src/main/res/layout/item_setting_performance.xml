@@ -20,7 +20,7 @@
         <FrameLayout
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/st_icon_well">
+            android:background="@drawable/od_well">
 
             <ImageView
                 android:layout_width="15dp"
@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_settings_performance"
-                app:tint="#D8C9CA" />
+                app:tint="@color/od_text_dim" />
         </FrameLayout>
 
         <LinearLayout
@@ -43,26 +43,26 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Memory telemetry"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="13sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PSS-accurate, refreshed every second"
-                android:textColor="#937F80"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10.5sp" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="18dp"
-            android:background="@drawable/st_key_cap"
+            android:background="@drawable/od_keycap"
             android:fontFamily="monospace"
             android:gravity="center"
             android:paddingHorizontal="6dp"
             android:text="● LIVE"
-            android:textColor="#D8C9CA"
+            android:textColor="@color/od_text_dim"
             android:textSize="8.5sp" />
     </LinearLayout>
 
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/st_stat_tile"
+            android:background="@drawable/od_pane_raised"
             android:orientation="vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="10dp">
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.1"
                 android:text="LAUNCHER"
-                android:textColor="#806B6C"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8.5sp" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="monospace"
                 android:text="—"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="17sp" />
         </LinearLayout>
         <LinearLayout
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/st_stat_tile"
+            android:background="@drawable/od_pane_raised"
             android:orientation="vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="10dp">
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.1"
                 android:text="GAME HEAP"
-                android:textColor="#806B6C"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8.5sp" />
 
             <TextView
@@ -124,7 +124,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="monospace"
                 android:text="—"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="17sp" />
         </LinearLayout>
         <LinearLayout
@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/st_stat_tile"
+            android:background="@drawable/od_pane_raised"
             android:orientation="vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="10dp">
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.1"
                 android:text="SYSTEM FREE"
-                android:textColor="#806B6C"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8.5sp" />
 
             <TextView
@@ -152,7 +152,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="monospace"
                 android:text="—"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="17sp" />
         </LinearLayout>
     </LinearLayout>
@@ -186,7 +186,7 @@
         android:layout_marginTop="12dp"
         android:letterSpacing="0.14"
         android:text="ENGINE METRICS"
-        android:textColor="#5C6068"
+        android:textColor="@color/od_text_muted"
         android:textSize="8.5sp" />
 
     <LinearLayout
@@ -199,7 +199,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/st_stat_tile"
+            android:background="@drawable/od_pane_raised"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="12dp"
@@ -210,18 +210,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Thermals"
-                android:textColor="#AC9A9B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="11sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
-                android:background="@drawable/st_key_cap"
+                android:background="@drawable/od_keycap"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:paddingHorizontal="5dp"
                 android:text="SOON"
-                android:textColor="#5C6068"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8sp" />
         </LinearLayout>
         <LinearLayout
@@ -229,7 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/st_stat_tile"
+            android:background="@drawable/od_pane_raised"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="12dp"
@@ -240,18 +240,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Frame pacing"
-                android:textColor="#AC9A9B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="11sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
-                android:background="@drawable/st_key_cap"
+                android:background="@drawable/od_keycap"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:paddingHorizontal="5dp"
                 android:text="SOON"
-                android:textColor="#5C6068"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8sp" />
         </LinearLayout>
         <LinearLayout
@@ -259,7 +259,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/st_stat_tile"
+            android:background="@drawable/od_pane_raised"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="12dp"
@@ -270,18 +270,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="GPU load"
-                android:textColor="#AC9A9B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="11sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
-                android:background="@drawable/st_key_cap"
+                android:background="@drawable/od_keycap"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:paddingHorizontal="5dp"
                 android:text="SOON"
-                android:textColor="#5C6068"
+                android:textColor="@color/od_text_muted"
                 android:textSize="8sp" />
         </LinearLayout>
     </LinearLayout>

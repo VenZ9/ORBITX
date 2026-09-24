@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBgApp">
+    android:background="@drawable/od_window_bg">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/od_text"
             android:text="@string/controller_remapper_exit_part1" />
 
         <ImageView
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/od_text"
             android:text="@string/controller_remapper_exit_part2" />
 
     </LinearLayout>
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/controller_remapper_operating_mode"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/od_text" />
 
         <Spinner
             android:id="@+id/gamepad_remapper_mode_spinner"

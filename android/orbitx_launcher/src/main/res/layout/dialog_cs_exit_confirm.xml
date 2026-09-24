@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="←"
-                android:textColor="#F5F0F0"
+                android:textColor="@color/od_text"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -39,14 +39,14 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.2"
                 android:text="CONTROL EDITOR"
-                android:textColor="#7C828E"
+                android:textColor="@color/od_text_muted"
                 android:textSize="7.5sp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/customctrl_editor_exit_title"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -58,7 +58,7 @@
         android:layout_marginTop="10dp"
         android:lineSpacingExtra="2dp"
         android:text="@string/customctrl_editor_exit_msg"
-        android:textColor="#A18D8E"
+        android:textColor="@color/od_text_muted"
         android:textSize="10.5sp" />
 
     <LinearLayout
@@ -72,14 +72,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/pe4_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:letterSpacing="0.08"
             android:text="@string/global_no"
             android:textAllCaps="true"
-            android:textColor="#AE9A9B"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp"
             android:textStyle="bold" />
 
@@ -89,14 +89,14 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:background="@drawable/pe4_btn_save"
+            android:background="@drawable/od_btn_primary"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:letterSpacing="0.08"
             android:text="@string/global_yes"
             android:textAllCaps="true"
-            android:textColor="#1A1414"
+            android:textColor="@color/od_on_accent"
             android:textSize="10.5sp"
             android:textStyle="bold" />
     </LinearLayout>

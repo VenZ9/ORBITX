@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_au_chip_neutral"
+            android:background="@drawable/od_chip"
             android:elevation="6dp"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -101,7 +101,7 @@
             <FrameLayout
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:background="@drawable/bg_au_well">
+                android:background="@drawable/od_well">
 
                 <ImageView
                     android:layout_width="19dp"
@@ -144,7 +144,7 @@
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:layout_marginEnd="-8dp"
-                android:background="@drawable/bg_au_row"
+                android:background="@drawable/od_row"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -169,7 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_au_group"
+            android:background="@drawable/od_pane_raised"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingStart="12dp"
@@ -217,7 +217,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_au_section"
+                    android:background="@drawable/od_pane_header"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:paddingTop="11dp"
@@ -225,7 +225,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/AuSectionLabel"
+                        style="@style/OdText.Label"
                         android:text="ADD TO CANVAS" />
 
                     <LinearLayout
@@ -347,7 +347,7 @@
                         </LinearLayout>
 
                         <TextView
-                            style="@style/AuChip"
+                            style="@style/OdButton.Chip"
                             android:text="ADD" />
                     </LinearLayout>
                 </LinearLayout>
@@ -357,7 +357,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:background="@drawable/bg_au_section"
+                    android:background="@drawable/od_pane_header"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:paddingTop="11dp"
@@ -365,7 +365,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/AuSectionLabel"
+                        style="@style/OdText.Label"
                         android:text="CHANGES" />
 
                     <LinearLayout
@@ -429,7 +429,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:background="@drawable/bg_au_section"
+                    android:background="@drawable/od_pane_header"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:paddingTop="11dp"
@@ -437,7 +437,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/AuSectionLabel"
+                        style="@style/OdText.Label"
                         android:text="LAYOUT FILE" />
 
                     <LinearLayout
@@ -449,7 +449,7 @@
                             android:src="@drawable/ic_ctrl_load" />
 
                         <TextView
-                            style="@style/AuEditorRowTitle"
+                            style="@style/OdText.TitleS"
                             android:text="Import from JSON" />
 
                         <ImageView
@@ -466,7 +466,7 @@
                             android:src="@drawable/ic_ctrl_save" />
 
                         <TextView
-                            style="@style/AuEditorRowTitle"
+                            style="@style/OdText.TitleS"
                             android:text="Save layout" />
 
                         <ImageView
@@ -483,7 +483,7 @@
                             android:src="@drawable/ic_ctrl_default" />
 
                         <TextView
-                            style="@style/AuEditorRowTitle"
+                            style="@style/OdText.TitleS"
                             android:text="Default layout at launch" />
 
                         <ImageView
@@ -500,7 +500,7 @@
                             android:src="@drawable/ic_ctrl_export" />
 
                         <TextView
-                            style="@style/AuEditorRowTitle"
+                            style="@style/OdText.TitleS"
                             android:text="Share layout" />
 
                         <ImageView
@@ -514,7 +514,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
-                    android:background="@drawable/bg_au_section"
+                    android:background="@drawable/od_pane_header"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:paddingTop="11dp"
@@ -522,7 +522,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/AuSectionLabel"
+                        style="@style/OdText.Label"
                         android:text="SETTINGS BUTTON" />
 
                     <LinearLayout
@@ -534,7 +534,7 @@
                             android:src="@drawable/ic_upload" />
 
                         <TextView
-                            style="@style/AuEditorRowTitle"
+                            style="@style/OdText.TitleS"
                             android:text="Button image" />
 
                         <ImageView
@@ -551,7 +551,7 @@
                             android:src="@drawable/ic_setting_buttonscale" />
 
                         <TextView
-                            style="@style/AuEditorRowTitle"
+                            style="@style/OdText.TitleS"
                             android:text="Button size" />
 
                         <ImageView
@@ -563,7 +563,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/bg_au_group"
+                        android:background="@drawable/od_pane_raised"
                         android:lineSpacingExtra="2dp"
                         android:padding="12dp"
                         android:text="Press and hold the wrench on the canvas to move it anywhere. A short tap opens this menu."

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/bg_glass_card_premium"
+    android:background="@drawable/od_pane_raised"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingHorizontal="14dp"
@@ -63,7 +63,7 @@
         android:paddingHorizontal="7dp"
         android:paddingVertical="2dp"
         android:text="@string/shortcut_orphaned"
-        android:textColor="#FF6B6B"
+        android:textColor="@color/od_accent_bright"
         android:textSize="9sp"
         android:visibility="gone" />
 
@@ -74,6 +74,6 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/shortcut_remove"
         android:src="@drawable/ic_menu_delete_forever"
-        android:tint="#FF6B6B" />
+        android:tint="@color/od_accent_bright" />
 
 </LinearLayout>

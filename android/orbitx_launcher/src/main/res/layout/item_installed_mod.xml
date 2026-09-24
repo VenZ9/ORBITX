@@ -47,7 +47,7 @@
             android:id="@+id/installed_mod_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/od_text"
             android:textStyle="bold"
             android:textSize="13.5sp"
             android:maxLines="1"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:textColor="#A18D8E"
+            android:textColor="@color/od_text_muted"
             android:textSize="11sp"
             android:maxLines="1"
             android:ellipsize="end"
@@ -76,7 +76,7 @@
             android:textStyle="bold"
             android:letterSpacing="0.06"
             android:textAllCaps="true"
-            android:textColor="#DED2D3"
+            android:textColor="@color/od_text"
             app:drawableStartCompat="@drawable/pe4_dot_on"
             tools:text="Enabled" />
     </LinearLayout>
@@ -126,6 +126,6 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_menu_delete_forever"
         android:padding="9dp"
-        app:tint="#FF8A8A"
+        app:tint="@color/od_accent_bright"
         android:contentDescription="@string/delete" />
 </LinearLayout>

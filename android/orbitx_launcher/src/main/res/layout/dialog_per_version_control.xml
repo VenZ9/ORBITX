@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_dialog_premium">
+    android:background="@drawable/od_panel">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,11 +12,11 @@
         app:layout_optimizationLevel="standard|dimensions|chains">
 
         <EditText
-        android:background="@drawable/bg_input_premium"
+        android:background="@drawable/od_well"
         android:paddingHorizontal="14dp"
         android:paddingVertical="10dp"
-        android:textColor="#F3F0F0"
-        android:textColorHint="#7C7C88"
+        android:textColor="@color/od_text"
+        android:textColorHint="@color/od_text_muted"
             android:id="@+id/pvc_jvmArgs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -31,11 +31,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-        android:background="@drawable/bg_input_premium"
+        android:background="@drawable/od_well"
         android:paddingHorizontal="14dp"
         android:paddingVertical="10dp"
-        android:textColor="#F3F0F0"
-        android:textColorHint="#7C7C88"
+        android:textColor="@color/od_text"
+        android:textColorHint="@color/od_text_muted"
             android:id="@+id/pvc_customDir"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

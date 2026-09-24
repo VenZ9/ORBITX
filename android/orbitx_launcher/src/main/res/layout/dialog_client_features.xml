@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Client Engine &amp; Features"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/od_text"
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.01" />
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
                     android:text="MODRINTH ATOMIC ENGINE"
-                    android:textColor="#B58E91"
+                    android:textColor="@color/od_accent_bright"
                     android:textSize="9sp"
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.04" />
@@ -82,7 +82,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="10dp"
                 android:text="PLUS"
-                android:textColor="#00C8E0"
+                android:textColor="@color/od_live"
                 android:textSize="9sp"
                 android:fontFamily="sans-serif-medium" />
         </LinearLayout>
@@ -140,7 +140,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:text="OPTIX CLIENT ACTIVE"
-                                android:textColor="#00C8E0"
+                                android:textColor="@color/od_live"
                                 android:textSize="13sp"
                                 android:fontFamily="sans-serif-medium"
                                 android:letterSpacing="0.05" />
@@ -156,7 +156,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="✓ FPS Optimizations Enabled"
-                                android:textColor="#B58E91"
+                                android:textColor="@color/od_accent_bright"
                                 android:textSize="11sp"
                                 android:layout_marginBottom="3dp" />
 
@@ -164,7 +164,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="✓ Visual Enhancements Active"
-                                android:textColor="#B58E91"
+                                android:textColor="@color/od_accent_bright"
                                 android:textSize="11sp"
                                 android:layout_marginBottom="3dp" />
 
@@ -172,7 +172,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="✓ Client Features Loaded"
-                                android:textColor="#B58E91"
+                                android:textColor="@color/od_accent_bright"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -182,7 +182,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Select a version below to install or update the feature:"
-                    android:textColor="#B58E91"
+                    android:textColor="@color/od_accent_bright"
                     android:textSize="11sp"
                     android:layout_marginBottom="10dp" />
 
@@ -233,7 +233,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_check"
                         android:scaleType="fitCenter"
-                        app:tint="#10B981"
+                        app:tint="@color/od_live"
                         android:visibility="gone"
                         android:contentDescription="Success" />
                 </FrameLayout>
@@ -244,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Installing Client Features..."
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/od_text"
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.01"
@@ -255,7 +255,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Preparing Profile..."
-                    android:textColor="#B58E91"
+                    android:textColor="@color/od_accent_bright"
                     android:textSize="12sp"
                     android:layout_marginBottom="18dp" />
 

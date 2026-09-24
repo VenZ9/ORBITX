@@ -20,10 +20,10 @@
             android:id="@+id/cape_btn_back"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:background="@drawable/st_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:contentDescription="Back to Skin Manager"
             android:src="@drawable/ic_arrow_back_white"
-            app:tint="#C8C8C8" />
+            app:tint="@color/od_text_dim" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Minecraft Cape Gallery"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Equipped: None"
-                android:textColor="#947C7E"
+                android:textColor="@color/od_text_muted"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -57,11 +57,11 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_marginEnd="6dp"
-            android:background="@drawable/st_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:letterSpacing="0.04"
             android:paddingHorizontal="10dp"
             android:text="+ IMPORT PNG"
-            android:textColor="#5BD097"
+            android:textColor="@color/od_live"
             android:textSize="10.5sp"
             android:textStyle="bold" />
 
@@ -70,11 +70,11 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_marginEnd="6dp"
-            android:background="@drawable/st_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:letterSpacing="0.04"
             android:paddingHorizontal="10dp"
             android:text="OPTIFINE"
-            android:textColor="#F13F4B"
+            android:textColor="@color/od_accent_bright"
             android:textSize="10.5sp"
             android:textStyle="bold" />
 
@@ -82,11 +82,11 @@
             android:id="@+id/cape_btn_unequip_top"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            android:background="@drawable/st_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:letterSpacing="0.04"
             android:paddingHorizontal="10dp"
             android:text="REMOVE"
-            android:textColor="#E05B5B"
+            android:textColor="@color/od_accent_bright"
             android:textSize="10.5sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -111,7 +111,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:background="@drawable/bg_skinv2_card"
+                android:background="@drawable/od_pane_raised"
                 android:padding="3dp">
 
                 <TextView
@@ -123,7 +123,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="14dp"
                     android:text="Official &amp; OptiFine"
-                    android:textColor="#170E0E"
+                    android:textColor="@color/od_on_accent"
                     android:textSize="11sp"
                     android:textStyle="bold" />
 
@@ -136,7 +136,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="14dp"
                     android:text="Online Gallery"
-                    android:textColor="#A0888A"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="11sp" />
 
                 <TextView
@@ -148,7 +148,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="14dp"
                     android:text="My Collection"
-                    android:textColor="#A0888A"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="11sp" />
             </LinearLayout>
 
@@ -159,7 +159,7 @@
                 android:layout_height="36dp"
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_skinv2_card">
+                android:background="@drawable/od_pane_raised">
 
                 <EditText
                     android:id="@+id/cape_et_search"
@@ -170,8 +170,8 @@
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:paddingHorizontal="12dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#755A5C"
+                    android:textColor="@color/od_text"
+                    android:textColorHint="@color/od_text_faint"
                     android:textSize="12sp" />
 
                 <ImageButton
@@ -183,7 +183,7 @@
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_close"
                     android:visibility="gone"
-                    app:tint="#937F80" />
+                    app:tint="@color/od_text_muted" />
             </FrameLayout>
 
             <Button
@@ -191,9 +191,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/st_btn_ghost"
+                android:background="@drawable/od_btn_ghost"
                 android:text="SEARCH"
-                android:textColor="#C8C8C8"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10.5sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -221,7 +221,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="ALL"
-                    android:textColor="#170E0E"
+                    android:textColor="@color/od_on_accent"
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
@@ -230,12 +230,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:layout_marginStart="6dp"
-                    android:background="@drawable/st_key_cap"
+                    android:background="@drawable/od_keycap"
                     android:fontFamily="monospace"
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="MINECON"
-                    android:textColor="#A0888A"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="10sp" />
 
                 <TextView
@@ -243,12 +243,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:layout_marginStart="6dp"
-                    android:background="@drawable/st_key_cap"
+                    android:background="@drawable/od_keycap"
                     android:fontFamily="monospace"
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="OFFICIAL"
-                    android:textColor="#A0888A"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="10sp" />
 
                 <TextView
@@ -256,12 +256,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:layout_marginStart="6dp"
-                    android:background="@drawable/st_key_cap"
+                    android:background="@drawable/od_keycap"
                     android:fontFamily="monospace"
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="ANIMATED"
-                    android:textColor="#A0888A"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="10sp" />
 
                 <TextView
@@ -269,12 +269,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:layout_marginStart="6dp"
-                    android:background="@drawable/st_key_cap"
+                    android:background="@drawable/od_keycap"
                     android:fontFamily="monospace"
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="TOP RATED"
-                    android:textColor="#A0888A"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="10sp" />
             </LinearLayout>
         </HorizontalScrollView>
@@ -302,7 +302,7 @@
                 android:layout_height="44dp"
                 android:layout_gravity="center"
                 android:indeterminate="true"
-                android:indeterminateTint="#C8C8C8"
+                android:indeterminateTint="@color/od_text_dim"
                 android:visibility="gone" />
 
             <!-- Empty State -->
@@ -328,7 +328,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="No capes found"
-                    android:textColor="#C8C8C8"
+                    android:textColor="@color/od_text_dim"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -338,7 +338,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Try another search query or check your connection"
-                    android:textColor="#866C6E"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="11sp" />
             </LinearLayout>
         </FrameLayout>
@@ -357,9 +357,9 @@
                 android:id="@+id/cape_btn_prev_page"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:background="@drawable/st_btn_ghost"
+                android:background="@drawable/od_btn_ghost"
                 android:text="&lt; PREV"
-                android:textColor="#C8C8C8"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp" />
 
             <TextView
@@ -369,16 +369,16 @@
                 android:layout_marginHorizontal="16dp"
                 android:fontFamily="monospace"
                 android:text="PAGE 1"
-                android:textColor="#A0888A"
+                android:textColor="@color/od_text_muted"
                 android:textSize="11sp" />
 
             <Button
                 android:id="@+id/cape_btn_next_page"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:background="@drawable/st_btn_ghost"
+                android:background="@drawable/od_btn_ghost"
                 android:text="NEXT &gt;"
-                android:textColor="#C8C8C8"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>

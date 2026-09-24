@@ -41,7 +41,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="14dp"
-            android:background="@drawable/vp_hero_card"
+            android:background="@drawable/od_pane_raised"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingStart="6dp"
@@ -56,7 +56,7 @@
                 android:background="@drawable/vp_round_btn"
                 android:contentDescription="@string/global_back"
                 android:src="@drawable/ic_arrow_back_white"
-                app:tint="#EFE6E7" />
+                app:tint="@color/od_text" />
 
             <FrameLayout
                 android:layout_width="46dp"
@@ -89,7 +89,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     tools:text="Sodium" />
@@ -109,7 +109,7 @@
                         android:includeFontPadding="false"
                         android:maxLines="1"
                         android:maxWidth="160dp"
-                        android:textColor="#AC9A9B"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="11sp"
                         tools:text="by jellysquid3" />
 
@@ -125,7 +125,7 @@
                         android:paddingTop="2dp"
                         android:paddingEnd="7dp"
                         android:paddingBottom="2dp"
-                        android:textColor="#D8C9CA"
+                        android:textColor="@color/od_text_dim"
                         android:textSize="8.5sp"
                         android:textStyle="bold"
                         tools:text="MODRINTH" />
@@ -149,7 +149,7 @@
                     android:paddingTop="6dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="4dp"
-                    android:textColor="#EFE6E7"
+                    android:textColor="@color/od_text"
                     android:textSize="10sp"
                     android:visibility="gone"
                     tools:text="42 BUILDS"
@@ -161,7 +161,7 @@
                     android:layout_height="22dp"
                     android:layout_gravity="center"
                     android:indeterminate="true"
-                    android:indeterminateTint="#D8C9CA"
+                    android:indeterminateTint="@color/od_text_dim"
                     android:visibility="gone" />
             </FrameLayout>
         </LinearLayout>
@@ -190,34 +190,34 @@
                     android:includeFontPadding="false"
                     android:letterSpacing="0.16"
                     android:text="CHANNEL"
-                    android:textColor="#5C6068"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="9sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/vp_filter_all"
-                    style="@style/VpFilterChip"
-                    android:background="@drawable/vp_chip_on"
+                    style="@style/OdButton.Chip"
+                    android:background="@drawable/od_chip"
                     android:text="All"
-                    android:textColor="#191414"
+                    android:textColor="@color/od_on_accent"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/vp_filter_release"
-                    style="@style/VpFilterChip"
+                    style="@style/OdButton.Chip"
                     android:text="Release"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/vp_filter_beta"
-                    style="@style/VpFilterChip"
+                    style="@style/OdButton.Chip"
                     android:text="Beta"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/vp_filter_alpha"
-                    style="@style/VpFilterChip"
+                    style="@style/OdButton.Chip"
                     android:text="Alpha"
                     tools:ignore="HardcodedText" />
 
@@ -228,7 +228,7 @@
                     android:layout_marginStart="6dp"
                     android:includeFontPadding="false"
                     android:text="newest first  ·  tap a build to open it"
-                    android:textColor="#5C6068"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="10sp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
@@ -269,10 +269,10 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
-                android:background="@drawable/vp_error_card"
+                android:background="@drawable/od_pane_raised"
                 android:gravity="center"
                 android:padding="18dp"
-                android:textColor="#E8A0A6"
+                android:textColor="@color/od_accent_bright"
                 android:textSize="13sp"
                 android:visibility="gone" />
 
@@ -298,7 +298,7 @@
                     android:background="@drawable/vp_round_btn"
                     android:contentDescription="Previous page"
                     android:src="@drawable/ic_chevron_left"
-                    app:tint="#EFE6E7"
+                    app:tint="@color/od_text"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -311,7 +311,7 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:minWidth="80dp"
-                    android:textColor="#EFE6E7"
+                    android:textColor="@color/od_text"
                     android:textSize="10sp"
                     tools:text="PAGE 1 / 4" />
 
@@ -322,7 +322,7 @@
                     android:background="@drawable/vp_round_btn"
                     android:contentDescription="Next page"
                     android:src="@drawable/ic_chevron_right"
-                    app:tint="#EFE6E7"
+                    app:tint="@color/od_text"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
         </FrameLayout>

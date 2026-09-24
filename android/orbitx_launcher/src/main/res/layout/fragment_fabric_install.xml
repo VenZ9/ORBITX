@@ -79,7 +79,7 @@
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.2"
                             android:text="LOADER SETUP"
-                            android:textColor="#7C7C88"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="9.5sp"
                             android:textStyle="bold" />
 
@@ -90,7 +90,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif-light"
                             android:text="Fabric Installer"
-                            android:textColor="#F5F2F2"
+                            android:textColor="@color/od_text"
                             android:textSize="24sp" />
 
                         <TextView
@@ -98,7 +98,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:text="Select your Minecraft version"
-                            android:textColor="#9C9CA8"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -118,7 +118,7 @@
                     android:layout_weight="1"
                     android:letterSpacing="0.12"
                     android:text="MINECRAFT VERSIONS"
-                    android:textColor="#7C7C88"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
 
@@ -173,7 +173,7 @@
                     android:layout_height="36dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_arrow_back"
-                    app:tint="#F3F0F0" />
+                    app:tint="@color/od_text" />
 
                 <TextView
                     android:id="@+id/fabric_step2_title"
@@ -182,7 +182,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:text="Select Loader"
-                    android:textColor="#F3F0F0"
+                    android:textColor="@color/od_text"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -190,11 +190,11 @@
                     android:id="@+id/fabric_installer_label_loader_ver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_settings_chip"
+                    android:background="@drawable/od_chip"
                     android:paddingHorizontal="11dp"
                     android:paddingVertical="4dp"
                     android:text="--"
-                    android:textColor="#E5DADB"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -208,7 +208,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
                 android:text="FABRIC LOADERS"
-                android:textColor="#7C7C88"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.12" />
@@ -258,8 +258,8 @@
                             android:layout_height="56dp"
                             android:text="INSTALL FABRIC"
                             android:textAllCaps="true"
-                            android:background="@drawable/bg_install_button_primary"
-                            android:textColor="#0E0B0B"
+                            android:background="@drawable/od_btn_primary"
+                            android:textColor="@color/od_on_accent"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:letterSpacing="0.08"
@@ -270,7 +270,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_gravity="center"
-                            android:indeterminateTint="#0E0B0B"
+                            android:indeterminateTint="@color/od_on_accent"
                             android:visibility="gone" />
                     </FrameLayout>
 
@@ -288,7 +288,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Installation failed"
-                            android:textColor="#E5A0A6"
+                            android:textColor="@color/od_accent_bright"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="8dp" />
@@ -300,7 +300,7 @@
                             android:minWidth="140dp"
                             android:text="@string/global_retry"
                             android:background="@drawable/bg_fabric_retry_button"
-                            android:textColor="#F3F0F0"
+                            android:textColor="@color/od_text"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:stateListAnimator="@null" />
@@ -358,7 +358,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Installing Fabric..."
-                android:textColor="#F3F0F0"
+                android:textColor="@color/od_text"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -368,7 +368,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Downloading loader metadata"
-                android:textColor="#9C9CA8"
+                android:textColor="@color/od_text_muted"
                 android:textSize="14sp"
                 android:layout_marginBottom="24dp" />
 
@@ -418,14 +418,14 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_check"
-                    app:tint="#0E0B0B" />
+                    app:tint="@color/od_on_accent" />
             </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Installation Complete!"
-                android:textColor="#F3F0F0"
+                android:textColor="@color/od_text"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -435,7 +435,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fabric has been installed successfully."
-                android:textColor="#9C9CA8"
+                android:textColor="@color/od_text_muted"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:layout_marginBottom="32dp" />
@@ -445,8 +445,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="DONE"
-                android:background="@drawable/bg_install_button_primary"
-                android:textColor="#0E0B0B"
+                android:background="@drawable/od_btn_primary"
+                android:textColor="@color/od_on_accent"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.08"

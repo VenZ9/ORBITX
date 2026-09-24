@@ -14,8 +14,8 @@
     <!-- Mod icon -->
     <ImageView
         android:id="@+id/mod_thumbnail_imageview"
-        android:layout_width="@dimen/_65sdp"
-        android:layout_height="@dimen/_65sdp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_launcher_foreground" />
@@ -23,8 +23,8 @@
     <!-- Source badge (Modrinth/CurseForge icon) -->
     <ImageView
         android:id="@+id/mod_source_imageview"
-        android:layout_width="@dimen/_18sdp"
-        android:layout_height="@dimen/_18sdp"
+        android:layout_width="@dimen/od_space_4"
+        android:layout_height="@dimen/od_space_4"
         android:layout_marginTop="@dimen/padding_medium"
         android:layout_marginEnd="@dimen/padding_medium"
         android:scaleType="fitCenter"

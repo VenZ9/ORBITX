@@ -6,4 +6,6 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:textAlignment="inherit"
-    android:gravity="center"/>
+    android:gravity="center"
+    android:textColor="@color/od_text"
+    android:textSize="@dimen/od_text_body_s" />

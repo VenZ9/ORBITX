@@ -86,7 +86,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_chevron_left"
-                    android:tint="#DED2D3"
+                    android:tint="@color/od_text"
                     tools:ignore="UseAppTint" />
             </FrameLayout>
 
@@ -110,7 +110,7 @@
                     android:includeFontPadding="false"
                     android:letterSpacing="0.14"
                     android:text="RESOURCE DETAIL"
-                    android:textColor="#7A808C"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="8sp"
                     tools:ignore="HardcodedText,SmallSp" />
 
@@ -123,7 +123,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:textColor="#F9F4F4"
+                    android:textColor="@color/od_text"
                     android:textSize="14sp"
                     tools:text="Sodium" />
             </LinearLayout>
@@ -139,7 +139,7 @@
                 android:letterSpacing="0.08"
                 android:paddingHorizontal="10dp"
                 android:text="MOD"
-                android:textColor="#D8C9CA"
+                android:textColor="@color/od_text_dim"
                 android:textSize="8sp"
                 tools:ignore="HardcodedText,SmallSp" />
         </LinearLayout>
@@ -238,7 +238,7 @@
                                 android:letterSpacing="0.06"
                                 android:paddingHorizontal="8dp"
                                 android:text="1 / 1"
-                                android:textColor="#EFE6E7"
+                                android:textColor="@color/od_text"
                                 android:textSize="8sp"
                                 android:visibility="gone"
                                 tools:ignore="HardcodedText,SmallSp" />
@@ -292,7 +292,7 @@
                                 android:includeFontPadding="false"
                                 android:letterSpacing="-0.01"
                                 android:maxLines="2"
-                                android:textColor="#F9F4F4"
+                                android:textColor="@color/od_text"
                                 android:textSize="17sp"
                                 tools:text="Sodium" />
 
@@ -305,7 +305,7 @@
                                 android:fontFamily="sans-serif"
                                 android:includeFontPadding="false"
                                 android:maxLines="1"
-                                android:textColor="#9C8A8B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="10.5sp"
                                 tools:text="by jellysquid3" />
 
@@ -334,7 +334,7 @@
                                         android:fontFamily="sans-serif-medium"
                                         android:includeFontPadding="false"
                                         android:text="—"
-                                        android:textColor="#F9F4F4"
+                                        android:textColor="@color/od_text"
                                         android:textSize="13.5sp"
                                         tools:ignore="HardcodedText" />
 
@@ -346,7 +346,7 @@
                                         android:includeFontPadding="false"
                                         android:letterSpacing="0.1"
                                         android:text="DOWNLOADS"
-                                        android:textColor="#6B717D"
+                                        android:textColor="@color/od_text_muted"
                                         android:textSize="6.5sp"
                                         tools:ignore="HardcodedText,SmallSp" />
                                 </LinearLayout>
@@ -368,7 +368,7 @@
                                         android:fontFamily="sans-serif-medium"
                                         android:includeFontPadding="false"
                                         android:text="—"
-                                        android:textColor="#F9F4F4"
+                                        android:textColor="@color/od_text"
                                         android:textSize="13.5sp"
                                         tools:ignore="HardcodedText" />
 
@@ -380,7 +380,7 @@
                                         android:includeFontPadding="false"
                                         android:letterSpacing="0.1"
                                         android:text="FILES"
-                                        android:textColor="#6B717D"
+                                        android:textColor="@color/od_text_muted"
                                         android:textSize="6.5sp"
                                         tools:ignore="HardcodedText,SmallSp" />
                                 </LinearLayout>
@@ -403,7 +403,7 @@
                                         android:includeFontPadding="false"
                                         android:maxLines="1"
                                         android:text="—"
-                                        android:textColor="#F9F4F4"
+                                        android:textColor="@color/od_text"
                                         android:textSize="11.5sp"
                                         tools:ignore="HardcodedText" />
 
@@ -415,7 +415,7 @@
                                         android:includeFontPadding="false"
                                         android:letterSpacing="0.1"
                                         android:text="UPDATED"
-                                        android:textColor="#6B717D"
+                                        android:textColor="@color/od_text_muted"
                                         android:textSize="6.5sp"
                                         tools:ignore="HardcodedText,SmallSp" />
                                 </LinearLayout>
@@ -465,7 +465,7 @@
                         android:maxLines="1"
                         android:paddingHorizontal="12dp"
                         android:text="INSTALL"
-                        android:textColor="#191414"
+                        android:textColor="@color/od_on_accent"
                         android:textSize="12sp"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
@@ -519,7 +519,7 @@
                                 android:includeFontPadding="false"
                                 android:letterSpacing="0.14"
                                 android:text="CHOOSE A FILE"
-                                android:textColor="#9C8A8B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="8sp"
                                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -530,7 +530,7 @@
                                 android:fontFamily="sans-serif"
                                 android:includeFontPadding="false"
                                 android:text="for"
-                                android:textColor="#5C6068"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="9sp"
                                 tools:ignore="HardcodedText" />
 
@@ -545,7 +545,7 @@
                                 android:letterSpacing="0.04"
                                 android:paddingHorizontal="10dp"
                                 android:text="Detecting…"
-                                android:textColor="#D8C9CA"
+                                android:textColor="@color/od_text_dim"
                                 android:textSize="9sp"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
@@ -575,7 +575,7 @@
                                 android:gravity="center"
                                 android:includeFontPadding="false"
                                 android:text="✓"
-                                android:textColor="#191414"
+                                android:textColor="@color/od_on_accent"
                                 android:textSize="13sp"
                                 tools:ignore="HardcodedText" />
 
@@ -595,7 +595,7 @@
                                     android:includeFontPadding="false"
                                     android:maxLines="1"
                                     android:text="Loading versions…"
-                                    android:textColor="#F9F4F4"
+                                    android:textColor="@color/od_text"
                                     android:textSize="12.5sp"
                                     tools:ignore="HardcodedText" />
 
@@ -609,7 +609,7 @@
                                     android:includeFontPadding="false"
                                     android:maxLines="1"
                                     android:text="Finding the best match for your profile"
-                                    android:textColor="#9C8A8B"
+                                    android:textColor="@color/od_text_muted"
                                     android:textSize="9.5sp"
                                     tools:ignore="HardcodedText" />
                             </LinearLayout>
@@ -626,7 +626,7 @@
                                 android:letterSpacing="0.08"
                                 android:paddingHorizontal="8dp"
                                 android:text="…"
-                                android:textColor="#DED2D3"
+                                android:textColor="@color/od_text"
                                 android:textSize="7sp"
                                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -644,7 +644,7 @@
                                 android:letterSpacing="0.08"
                                 android:paddingHorizontal="12dp"
                                 android:text="CHANGE  ›"
-                                android:textColor="#DED2D3"
+                                android:textColor="@color/od_text"
                                 android:textSize="9sp"
                                 tools:ignore="HardcodedText" />
                         </LinearLayout>
@@ -658,7 +658,7 @@
                             android:fontFamily="sans-serif"
                             android:includeFontPadding="false"
                             android:text="Quick pick"
-                            android:textColor="#5C6068"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="9sp"
                             android:visibility="gone"
                             tools:ignore="HardcodedText" />
@@ -689,7 +689,7 @@
                             android:fontFamily="sans-serif"
                             android:paddingHorizontal="11dp"
                             android:paddingVertical="8dp"
-                            android:textColor="#E8C989"
+                            android:textColor="@color/od_warn"
                             android:textSize="9.5sp"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -725,7 +725,7 @@
                                 android:includeFontPadding="false"
                                 android:letterSpacing="0.14"
                                 android:text="ABOUT"
-                                android:textColor="#9C8A8B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="8sp"
                                 tools:ignore="HardcodedText,SmallSp" />
                         </LinearLayout>
@@ -737,7 +737,7 @@
                             android:layout_marginTop="8dp"
                             android:fontFamily="sans-serif"
                             android:lineSpacingExtra="3dp"
-                            android:textColor="#D8C9CA"
+                            android:textColor="@color/od_text_dim"
                             android:textSize="11sp"
                             tools:text="A Minecraft mod designed to improve frame rates." />
                     </LinearLayout>
@@ -775,7 +775,7 @@
                                 android:includeFontPadding="false"
                                 android:letterSpacing="0.14"
                                 android:text="GALLERY"
-                                android:textColor="#9C8A8B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="8sp"
                                 tools:ignore="HardcodedText,SmallSp" />
                         </LinearLayout>
@@ -828,7 +828,7 @@
                                 android:includeFontPadding="false"
                                 android:letterSpacing="0.14"
                                 android:text="AVAILABLE FILES"
-                                android:textColor="#9C8A8B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="8sp"
                                 tools:ignore="HardcodedText,SmallSp" />
 
@@ -842,7 +842,7 @@
                                 android:includeFontPadding="false"
                                 android:paddingHorizontal="8dp"
                                 android:text="—"
-                                android:textColor="#D8C9CA"
+                                android:textColor="@color/od_text_dim"
                                 android:textSize="8sp"
                                 tools:ignore="HardcodedText,SmallSp" />
                         </LinearLayout>
@@ -887,7 +887,7 @@
                                 android:includeFontPadding="false"
                                 android:letterSpacing="0.14"
                                 android:text="DEPENDENCIES"
-                                android:textColor="#9C8A8B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="8sp"
                                 tools:ignore="HardcodedText,SmallSp" />
                         </LinearLayout>
@@ -933,7 +933,7 @@
                                 android:includeFontPadding="false"
                                 android:letterSpacing="0.14"
                                 android:text="LINKS"
-                                android:textColor="#9C8A8B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="8sp"
                                 tools:ignore="HardcodedText,SmallSp" />
                         </LinearLayout>

@@ -11,7 +11,7 @@
     android:id="@+id/sg_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E0B0B"
+    android:background="@color/od_on_accent"
     android:clickable="true"
     android:focusable="true">
 
@@ -42,7 +42,7 @@
             android:id="@+id/sg_mark_tile"
             android:layout_width="78dp"
             android:layout_height="78dp"
-            android:background="@drawable/bg_deck_icon_tile">
+            android:background="@drawable/od_well">
 
             <ImageView
                 android:id="@+id/sg_mark_icon"
@@ -59,7 +59,7 @@
             android:layout_marginTop="22dp"
             android:letterSpacing="0.24"
             android:text="@string/sg_boot_eyebrow"
-            android:textColor="#7C7C88"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp"
             android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
             android:layout_marginTop="6dp"
             android:fontFamily="sans-serif-light"
             android:text="@string/sg_opening_game"
-            android:textColor="#F5F2F2"
+            android:textColor="@color/od_text"
             android:textSize="27sp" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:maxWidth="280dp"
-            android:textColor="#F3F0F0"
+            android:textColor="@color/od_text"
             android:textSize="15sp"
             tools:text="Survival World" />
 
@@ -91,10 +91,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
-            android:background="@drawable/bg_settings_chip"
+            android:background="@drawable/od_chip"
             android:paddingHorizontal="12dp"
             android:paddingVertical="5dp"
-            android:textColor="#9C9CA8"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp"
             android:visibility="gone"
             tools:text="1.21.1 • Fabric"
@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:indeterminate="true"
-        android:indeterminateTint="#C4B9B9"
+        android:indeterminateTint="@color/od_text_dim"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sg_column" />
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:textColor="#F5F2F2"
+            android:textColor="@color/od_text"
             android:textSize="26sp"
             tools:text="42%" />
 
@@ -152,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:textColor="#9C9CA8"
+            android:textColor="@color/od_text_muted"
             android:textSize="11.5sp"
             tools:text="Verifying game files…" />
     </LinearLayout>

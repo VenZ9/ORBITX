@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:letterSpacing="0.14"
         android:text="@string/browse_filter_eyebrow"
-        android:textColor="#9C9CA8"
+        android:textColor="@color/od_text_muted"
         android:textSize="10sp"
         android:textStyle="bold" />
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="@string/browse_filter_title"
-        android:textColor="#F3F0F0"
+        android:textColor="@color/od_text"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
         android:layout_marginTop="18dp"
         android:letterSpacing="0.08"
         android:text="@string/profiles_profile_version"
-        android:textColor="#7C7C88"
+        android:textColor="@color/od_text_muted"
         android:textSize="11sp"
         android:textStyle="bold" />
 
@@ -58,8 +58,8 @@
             android:gravity="center_vertical"
             android:hint="@string/version_select_hint"
             android:paddingHorizontal="14dp"
-            android:textColor="#F3F0F0"
-            android:textColorHint="#7C7C88"
+            android:textColor="@color/od_text"
+            android:textColorHint="@color/od_text_muted"
             android:textSize="13sp" />
 
         <Button
@@ -72,7 +72,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/global_select"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/od_text"
             android:textSize="12.5sp" />
     </LinearLayout>
 
@@ -84,7 +84,7 @@
         android:layout_marginTop="14dp"
         android:letterSpacing="0.08"
         android:text="@string/browse_filter_loader_label"
-        android:textColor="#7C7C88"
+        android:textColor="@color/od_text_muted"
         android:textSize="11sp"
         android:textStyle="bold" />
 
@@ -111,7 +111,7 @@
             android:paddingHorizontal="18dp"
             android:text="@string/browse_filter_clear"
             android:textAllCaps="false"
-            android:textColor="#9C9CA8"
+            android:textColor="@color/od_text_muted"
             android:textSize="13sp" />
 
         <Space
@@ -127,7 +127,7 @@
             android:background="@drawable/bg_install_cta_white"
             android:text="@string/generic_apply"
             android:textAllCaps="true"
-            android:textColor="#110E0E"
+            android:textColor="@color/od_on_accent"
             android:textSize="13.5sp"
             android:textStyle="bold" />
     </LinearLayout>

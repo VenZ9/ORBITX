@@ -14,7 +14,7 @@
         android:layout_marginBottom="6dp"
         android:letterSpacing="0.14"
         android:text="CREATE"
-        android:textColor="#AE9A9B"
+        android:textColor="@color/od_text_muted"
         android:textSize="9sp"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/bg_cursorx_style"
+        android:background="@drawable/od_window_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="14dp"
@@ -53,7 +53,7 @@
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
-            android:textColor="#F2F2F2"
+            android:textColor="@color/od_text"
             android:textSize="12.5sp" />
 
         <ImageView
@@ -61,6 +61,6 @@
             android:layout_width="13dp"
             android:layout_height="13dp"
             android:src="@drawable/ic_chevron_right"
-            android:tint="#7C828E" />
+            android:tint="@color/od_text_muted" />
     </LinearLayout>
 </LinearLayout>

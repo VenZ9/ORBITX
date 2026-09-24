@@ -31,10 +31,10 @@
                 android:id="@+id/shortcut_back"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:background="@drawable/st_btn_ghost"
+                android:background="@drawable/od_btn_ghost"
                 android:contentDescription="@string/global_back"
                 android:src="@drawable/ic_arrow_back_white"
-                app:tint="#C8C8C8" />
+                app:tint="@color/od_text_dim" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="1-Tap Shortcut Creator"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/od_text"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -60,7 +60,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="Pin instant launch shortcut to Home Screen"
-                    android:textColor="#947C7E"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="11.5sp" />
             </LinearLayout>
 
@@ -68,10 +68,10 @@
                 android:id="@+id/shortcut_manage"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:background="@drawable/st_btn_ghost"
+                android:background="@drawable/od_btn_ghost"
                 android:contentDescription="@string/shortcut_manage_title"
                 android:src="@drawable/ic_shortcut_manage"
-                app:tint="#5BD097" />
+                app:tint="@color/od_live" />
         </LinearLayout>
 
         <!-- ── Unsupported Launcher Warning Banner ────────────────── -->
@@ -84,7 +84,7 @@
             android:fontFamily="sans-serif-medium"
             android:padding="12dp"
             android:text="@string/shortcut_pin_unsupported"
-            android:textColor="#D8C79A"
+            android:textColor="@color/od_warn"
             android:textSize="11.5sp"
             android:visibility="gone" />
 
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_skinv2_card"
+            android:background="@drawable/od_pane_raised"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="18dp">
@@ -102,7 +102,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/st_key_cap"
+                android:background="@drawable/od_keycap"
                 android:elevation="6dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
@@ -125,7 +125,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="Vanilla 1.21"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/od_text"
                     android:textSize="10.5sp" />
             </LinearLayout>
 
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text="HOME SCREEN PREVIEW"
-                    android:textColor="#5BD097"
+                    android:textColor="@color/od_live"
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
@@ -152,14 +152,14 @@
                     android:layout_marginTop="4dp"
                     android:lineSpacingExtra="2dp"
                     android:text="Your launcher or home screen will render this exact icon with high-DPI scaling and dynamic badge."
-                    android:textColor="#A0888A"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="11.5sp" />
             </LinearLayout>
         </LinearLayout>
 
         <!-- ── Section: Shortcut Action Destination ───────────────── -->
         <TextView
-            style="@style/ShortcutSectionHeader"
+            style="@style/OdText.Label"
             android:layout_marginTop="18dp"
             android:text="1. CHOOSE ACTION DESTINATION" />
 
@@ -177,7 +177,7 @@
 
         <!-- ── Section: Shortcut Display Label ────────────────────── -->
         <TextView
-            style="@style/ShortcutSectionHeader"
+            style="@style/OdText.Label"
             android:layout_marginTop="16dp"
             android:text="2. SHORTCUT DISPLAY NAME" />
 
@@ -188,10 +188,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             app:boxBackgroundColor="#1B1011"
-            app:boxStrokeColor="#5BD097"
+            app:boxStrokeColor="@color/od_live"
             app:counterEnabled="true"
             app:counterMaxLength="25"
-            app:hintTextColor="#5BD097"
+            app:hintTextColor="@color/od_live"
             android:hint="Home Tile Label">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -201,13 +201,13 @@
                 android:fontFamily="sans-serif-medium"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- ── Section: Icon Source Artwork ───────────────────────── -->
         <TextView
-            style="@style/ShortcutSectionHeader"
+            style="@style/OdText.Label"
             android:layout_marginTop="16dp"
             android:text="3. ICON ARTWORK SOURCE" />
 
@@ -227,7 +227,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="Profile"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="10.5sp"
                 app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
@@ -242,7 +242,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="Skin Face"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="10.5sp"
                 app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
@@ -257,7 +257,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="Loader"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="10.5sp"
                 app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
@@ -272,7 +272,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="Custom"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="10.5sp"
                 app:backgroundTint="#261818"
                 app:cornerRadius="8dp" />
@@ -280,7 +280,7 @@
 
         <!-- ── Section: Geometric Icon Shape ──────────────────────── -->
         <TextView
-            style="@style/ShortcutSectionHeader"
+            style="@style/OdText.Label"
             android:layout_marginTop="16dp"
             android:text="4. ICON SILHOUETTE SHAPE" />
 
@@ -299,7 +299,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="Squircle"
-                android:textColor="#C8C8C8"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 app:strokeColor="#362222" />
 
@@ -310,7 +310,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="Circle"
-                android:textColor="#C8C8C8"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 app:strokeColor="#362222" />
 
@@ -321,7 +321,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="Rounded"
-                android:textColor="#C8C8C8"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 app:strokeColor="#362222" />
 
@@ -332,14 +332,14 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="Square"
-                android:textColor="#C8C8C8"
+                android:textColor="@color/od_text_dim"
                 android:textSize="10sp"
                 app:strokeColor="#362222" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <!-- ── Section: Advanced Settings & Badging ───────────────── -->
         <TextView
-            style="@style/ShortcutSectionHeader"
+            style="@style/OdText.Label"
             android:layout_marginTop="16dp"
             android:text="5. BEHAVIOR &amp; BADGES" />
 
@@ -347,7 +347,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_skinv2_card"
+            android:background="@drawable/od_pane_raised"
             android:orientation="vertical"
             android:padding="14dp">
 
@@ -358,7 +358,7 @@
                 android:checked="true"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/shortcut_option_adaptive"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="12.5sp" />
 
             <TextView
@@ -379,7 +379,7 @@
                 android:checked="true"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/shortcut_option_badge"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="12.5sp" />
 
             <TextView
@@ -400,7 +400,7 @@
                 android:checked="true"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/shortcut_option_dynamic"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="12.5sp" />
 
             <TextView
@@ -415,10 +415,10 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/st_btn_primary"
+            android:background="@drawable/od_btn_primary"
             android:letterSpacing="0.06"
             android:text="+ PIN SHORTCUT TO HOME SCREEN"
-            android:textColor="#0E0B0B"
+            android:textColor="@color/od_on_accent"
             android:textSize="13sp"
             android:textStyle="bold" />
 

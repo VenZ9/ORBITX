@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="52dp"
     android:layout_marginEnd="8dp"
-    android:background="@drawable/st_tile"
+    android:background="@drawable/od_pane_raised"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingStart="10dp"
@@ -13,7 +13,7 @@
     <FrameLayout
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:background="@drawable/st_icon_well">
+        android:background="@drawable/od_well">
 
         <ImageView
             android:id="@+id/pin_card_glyph"
@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:contentDescription="@null"
             android:src="@drawable/ic_csp_star_filled"
-            app:tint="#EFE6E7" />
+            app:tint="@color/od_text" />
     </FrameLayout>
 
     <LinearLayout
@@ -40,7 +40,7 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:maxWidth="160dp"
-            android:textColor="#F9F4F4"
+            android:textColor="@color/od_text"
             android:textSize="12sp" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:maxLines="1"
-            android:textColor="#806B6C"
+            android:textColor="@color/od_text_muted"
             android:textSize="9sp" />
     </LinearLayout>
 
@@ -62,5 +62,5 @@
         android:contentDescription="@null"
         android:padding="8dp"
         android:src="@drawable/ic_rb_close"
-        app:tint="#806B6C" />
+        app:tint="@color/od_text_muted" />
 </LinearLayout>

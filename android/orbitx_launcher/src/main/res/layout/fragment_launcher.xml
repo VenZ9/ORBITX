@@ -44,7 +44,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
+                android:layout_height="@dimen/od_space_1"
                 android:background="?attr/colorDivider" />
 
             <!-- ── QUICK ACTIONS ── -->
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mcl_section_quick_actions"
                 android:textAllCaps="true"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/od_text_mono"
                 android:textColor="?attr/colorTextSecondary"
                 android:letterSpacing="0.08"
                 android:paddingHorizontal="@dimen/padding_heavy"
@@ -105,7 +105,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
+                android:layout_height="@dimen/od_space_1"
                 android:background="?attr/colorDivider"
                 android:layout_marginTop="@dimen/padding_medium" />
 
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mcl_section_instance_tools"
                 android:textAllCaps="true"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/od_text_mono"
                 android:textColor="?attr/colorTextSecondary"
                 android:letterSpacing="0.08"
                 android:paddingHorizontal="@dimen/padding_heavy"
@@ -152,22 +152,22 @@
     <com.kdt.mcgui.mcVersionSpinner
         android:id="@+id/mc_version_spinner"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_52sdp"
+        android:layout_height="@dimen/od_row_h"
         android:background="@android:color/transparent"
         android:scrollbarThumbVertical="?attr/themeAccent"
         android:drawableEnd="@drawable/spinner_arrow"
         app:drawableEndSize="@dimen/padding_heavy"
         app:drawableStartIntegerScaling="true"
-        app:drawableStartSize="@dimen/_36sdp"
-        app:drawableEndPadding="@dimen/_1sdp"
+        app:drawableStartSize="@dimen/od_thumb_lg"
+        app:drawableEndPadding="@dimen/od_space_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edit_profile_button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/edit_profile_button"
-        android:layout_width="@dimen/_52sdp"
-        android:layout_height="@dimen/_52sdp"
+        android:layout_width="@dimen/od_row_h"
+        android:layout_height="@dimen/od_row_h"
         android:background="?android:attr/selectableItemBackground"
         android:src="@drawable/ic_edit_profile"
         app:layout_constraintBottom_toBottomOf="@+id/mc_version_spinner"

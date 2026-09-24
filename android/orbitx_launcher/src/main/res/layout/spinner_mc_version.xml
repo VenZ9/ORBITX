@@ -7,7 +7,7 @@
     android:scrollbars="vertical"
     android:fadeScrollbars="false"
     android:scrollbarThumbVertical="?attr/themeAccent"
-    android:paddingVertical="@dimen/_14sdp"
+    android:paddingVertical="@dimen/od_gutter"
     android:scrollbarSize="@dimen/padding_medium"
     android:background="?attr/colorBgBottomBar"
     android:divider="@null" />

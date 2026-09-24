@@ -12,7 +12,7 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/bg_s4_card"
+        android:background="@drawable/od_pane_raised"
         android:orientation="vertical"
         android:padding="20dp"
         android:elevation="12dp"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Announcement"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:maxLines="2"
@@ -57,7 +57,7 @@
                 android:id="@+id/tv_ann_page_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="13.5sp"
                 android:lineSpacingExtra="3dp" />
 
@@ -69,11 +69,11 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:text="Got it"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/od_text"
             android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/bg_settings_btn"
+            android:background="@drawable/od_icon_button"
             android:clickable="true"
             android:focusable="true" />
 

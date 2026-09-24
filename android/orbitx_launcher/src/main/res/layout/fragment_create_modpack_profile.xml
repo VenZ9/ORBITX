@@ -9,7 +9,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pe4_page_bg"
+    android:background="@drawable/od_window_bg"
     android:orientation="vertical">
 
     <!-- ── COMMAND BAR ──────────────────────────────────────────────── -->
@@ -17,7 +17,7 @@
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@drawable/pe5_topbar"
+        android:background="@drawable/od_commandbar"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp">
@@ -26,7 +26,7 @@
             android:id="@+id/mp_back_button"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/pe4_back_btn"
+            android:background="@drawable/od_icon_button"
             android:clickable="true"
             android:focusable="true">
             <ImageView
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CREATE PROFILE"
-                android:textColor="#7C828E"
+                android:textColor="@color/od_text_muted"
                 android:textSize="7.5sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.2" />
@@ -58,7 +58,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Modpack Profiles"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="14.5sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -81,10 +81,10 @@
             android:paddingBottom="24dp">
 
             <TextView
-                style="@style/Pe5Title"
+                style="@style/OdText.TitleS"
                 android:text="How do you want to add a modpack?" />
             <TextView
-                style="@style/Pe5Desc"
+                style="@style/OdText.BodyS"
                 android:text="Discover packs online, or install one directly from your device storage." />
 
             <LinearLayout
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg_cursorx_card"
+                android:background="@drawable/od_pane_raised"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center_vertical"
@@ -128,7 +128,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="Browse Modpacks"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/od_text"
                         android:textSize="14.5sp"
                         android:textStyle="bold" />
 
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:text="Search, discover and install curated modpacks from supported sources."
-                        android:textColor="#A18D8E"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="10.5sp"
                         android:lineSpacingExtra="2dp" />
 
@@ -146,12 +146,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_cursorx_chip"
+                        android:background="@drawable/od_chip"
                         android:gravity="center"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="9dp"
                         android:text="DISCOVER  •  INSTALL"
-                        android:textColor="#D3C6C7"
+                        android:textColor="@color/od_text_dim"
                         android:textSize="7.5sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -163,14 +163,14 @@
                     android:layout_marginStart="10dp"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_chevron_right"
-                    app:tint="#7C828E" />
+                    app:tint="@color/od_text_muted" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/button_import_modpack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg_cursorx_card"
+                android:background="@drawable/od_pane_raised"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center_vertical"
@@ -206,7 +206,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="Import Zip or mrpack"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/od_text"
                         android:textSize="14.5sp"
                         android:textStyle="bold" />
 
@@ -216,7 +216,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:text="Install a modpack from device storage using a local .zip or .mrpack file."
-                        android:textColor="#A18D8E"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="10.5sp"
                         android:lineSpacingExtra="2dp" />
 
@@ -224,12 +224,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_cursorx_chip"
+                        android:background="@drawable/od_chip"
                         android:gravity="center"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="9dp"
                         android:text="LOCAL FILE INSTALL"
-                        android:textColor="#D3C6C7"
+                        android:textColor="@color/od_text_dim"
                         android:textSize="7.5sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -241,7 +241,7 @@
                     android:layout_marginStart="10dp"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_chevron_right"
-                    app:tint="#7C828E" />
+                    app:tint="@color/od_text_muted" />
             </LinearLayout>
 
             <!-- Quick tip -->
@@ -262,7 +262,7 @@
                     android:letterSpacing="0.08"
                     android:paddingHorizontal="9dp"
                     android:text="TIP"
-                    android:textColor="#1A1414"
+                    android:textColor="@color/od_on_accent"
                     android:textSize="8sp"
                     android:textStyle="bold" />
 
@@ -272,7 +272,7 @@
                     android:layout_marginStart="11dp"
                     android:layout_weight="1"
                     android:text="Use .mrpack for Modrinth packs and .zip for exported packs from other launchers."
-                    android:textColor="#A18D8E"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="10sp"
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>

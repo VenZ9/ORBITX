@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="● Unsaved Changes"
-                android:textColor="#FFA500"
+                android:textColor="@color/od_warn"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -60,9 +60,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:minWidth="120dp"
-                android:background="@drawable/bg_save_button"
+                android:background="@drawable/od_btn_primary"
                 android:text="SAVE CHANGES"
-                android:textColor="#0D0D0D"
+                android:textColor="@color/od_on_accent"
                 android:textStyle="bold"
                 android:textSize="13sp"
                 android:paddingLeft="20dp"

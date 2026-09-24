@@ -18,7 +18,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_skinv2_page">
+    android:background="@drawable/od_window_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:id="@+id/skin_top_bar"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="@drawable/pe5_topbar"
+            android:background="@drawable/od_commandbar"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingStart="8dp"
@@ -43,7 +43,7 @@
                 android:id="@+id/skin_back_button"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:background="@drawable/pe4_back_btn"
+                android:background="@drawable/od_icon_button"
                 android:contentDescription="Back">
 
                 <ImageView
@@ -68,7 +68,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="Skin Studio"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/od_text"
                     android:textSize="14.5sp"
                     android:textStyle="bold" />
 
@@ -81,7 +81,7 @@
                     android:letterSpacing="0.05"
                     android:maxLines="1"
                     android:text="Slot 1"
-                    android:textColor="#7C828E"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="8.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -96,7 +96,7 @@
                 android:letterSpacing="0.08"
                 android:paddingHorizontal="9dp"
                 android:text="LOCAL SKIN SERVER"
-                android:textColor="#AE9A9B"
+                android:textColor="@color/od_text_muted"
                 android:textSize="7sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -123,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.46"
-                android:background="@drawable/bg_skinv2_preview">
+                android:background="@drawable/od_pane_raised">
 
                 <FrameLayout
                     android:id="@+id/skin_preview_inline_host"
@@ -180,7 +180,7 @@
                             android:letterSpacing="0.06"
                             android:maxLines="1"
                             android:text="FLAT SKIN"
-                            android:textColor="#F4F2F2"
+                            android:textColor="@color/od_text"
                             android:textSize="10sp"
                             android:textStyle="bold" />
 
@@ -191,7 +191,7 @@
                             android:layout_marginTop="2dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:textColor="#8A8D98"
+                            android:textColor="@color/od_text_dim"
                             android:textSize="8.5sp" />
                     </LinearLayout>
 
@@ -220,7 +220,7 @@
                         android:letterSpacing="0.08"
                         android:paddingHorizontal="11dp"
                         android:text="CLOSE"
-                        android:textColor="#E9E9EB"
+                        android:textColor="@color/od_text"
                         android:textSize="8sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -243,7 +243,7 @@
                     android:letterSpacing="0.08"
                     android:paddingHorizontal="9dp"
                     android:text="EMPTY SLOT"
-                    android:textColor="#AE9A9B"
+                    android:textColor="@color/od_text_muted"
                     android:textSize="7sp"
                     android:textStyle="bold" />
 
@@ -261,7 +261,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:layout_marginEnd="6dp"
-                        android:background="@drawable/bg_skinv2_well"
+                        android:background="@drawable/od_well"
                         android:clickable="true"
                         android:contentDescription="Show the flat 2D skin"
                         android:focusable="true"
@@ -269,7 +269,7 @@
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="10dp"
                         android:text="2D"
-                        android:textColor="#D8C9CA"
+                        android:textColor="@color/od_text_dim"
                         android:textSize="9sp"
                         android:textStyle="bold" />
 
@@ -277,7 +277,7 @@
                         android:id="@+id/skin_preview_expand"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:background="@drawable/bg_skinv2_well"
+                        android:background="@drawable/od_well"
                         android:contentDescription="Expand preview">
 
                         <TextView
@@ -285,7 +285,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="⤢"
-                            android:textColor="#D8C9CA"
+                            android:textColor="@color/od_text_dim"
                             android:textSize="13sp"
                             android:textStyle="bold" />
                     </FrameLayout>
@@ -294,7 +294,7 @@
                         android:id="@+id/skin_preview_close_inline"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:background="@drawable/bg_skinv2_well"
+                        android:background="@drawable/od_well"
                         android:contentDescription="Close fullscreen preview"
                         android:visibility="gone">
 
@@ -303,7 +303,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="✕"
-                            android:textColor="#D8C9CA"
+                            android:textColor="@color/od_text_dim"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </FrameLayout>
@@ -325,7 +325,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="No skin in selected slot"
-                        android:textColor="#F5F0F0"
+                        android:textColor="@color/od_text"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -337,7 +337,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="Drag to rotate  •  Pinch to zoom  •  Double-tap to reset"
-                        android:textColor="#7C828E"
+                        android:textColor="@color/od_text_muted"
                         android:textSize="8.5sp" />
                 </LinearLayout>
             </FrameLayout>
@@ -371,7 +371,7 @@
                             android:layout_weight="1"
                             android:letterSpacing="0.16"
                             android:text="YOUR SKINS"
-                            android:textColor="#7C828E"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="7.5sp"
                             android:textStyle="bold" />
 
@@ -384,7 +384,7 @@
                             android:letterSpacing="0.08"
                             android:paddingHorizontal="8dp"
                             android:text="3 SLOTS"
-                            android:textColor="#AE9A9B"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="6.8sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -402,7 +402,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dp"
-                        android:background="@drawable/bg_skinv2_card"
+                        android:background="@drawable/od_pane_raised"
                         android:orientation="vertical"
                         android:paddingHorizontal="13dp"
                         android:paddingTop="12dp"
@@ -413,7 +413,7 @@
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.16"
                             android:text="SKIN FILE"
-                            android:textColor="#7C828E"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="7.5sp"
                             android:textStyle="bold" />
 
@@ -423,7 +423,7 @@
                             android:layout_marginTop="5dp"
                             android:lineSpacingExtra="2dp"
                             android:text="Import a Minecraft skin PNG into the selected slot, or clear it."
-                            android:textColor="#A18D8E"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="9.5sp" />
 
                         <LinearLayout
@@ -437,11 +437,11 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@drawable/pe4_btn_save"
+                                android:background="@drawable/od_btn_primary"
                                 android:gravity="center"
                                 android:letterSpacing="0.1"
                                 android:text="IMPORT SKIN"
-                                android:textColor="#1A1414"
+                                android:textColor="@color/od_on_accent"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
 
@@ -451,11 +451,11 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="8dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/bg_skinv2_danger"
+                                android:background="@drawable/od_btn_primary"
                                 android:gravity="center"
                                 android:letterSpacing="0.1"
                                 android:text="CLEAR SLOT"
-                                android:textColor="#E5A0A6"
+                                android:textColor="@color/od_accent_bright"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -467,7 +467,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="9dp"
-                        android:background="@drawable/bg_skinv2_card"
+                        android:background="@drawable/od_pane_raised"
                         android:orientation="vertical"
                         android:paddingHorizontal="13dp"
                         android:paddingTop="12dp"
@@ -485,7 +485,7 @@
                                 android:layout_weight="1"
                                 android:letterSpacing="0.16"
                                 android:text="CAPE"
-                                android:textColor="#7C828E"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="7.5sp"
                                 android:textStyle="bold" />
 
@@ -494,7 +494,7 @@
                                 android:layout_height="wrap_content"
                                 android:letterSpacing="0.05"
                                 android:text="optional"
-                                android:textColor="#725F60"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="7.5sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -507,7 +507,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:text="No custom cape selected"
-                            android:textColor="#D8C9CA"
+                            android:textColor="@color/od_text_dim"
                             android:textSize="10sp"
                             android:textStyle="bold" />
 
@@ -526,7 +526,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.08"
                                 android:text="BROWSE CAPES"
-                                android:textColor="#1A1414"
+                                android:textColor="@color/od_on_accent"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
 
@@ -540,7 +540,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.08"
                                 android:text="IMPORT PNG"
-                                android:textColor="#D8C9CA"
+                                android:textColor="@color/od_text_dim"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
 
@@ -554,7 +554,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="0.08"
                                 android:text="CLEAR"
-                                android:textColor="#AE9A9B"
+                                android:textColor="@color/od_text_muted"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -566,7 +566,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="9dp"
-                        android:background="@drawable/bg_skinv2_card"
+                        android:background="@drawable/od_pane_raised"
                         android:orientation="vertical"
                         android:paddingHorizontal="13dp"
                         android:paddingTop="12dp"
@@ -577,7 +577,7 @@
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.16"
                             android:text="GRAB A PLAYER SKIN"
-                            android:textColor="#7C828E"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="7.5sp"
                             android:textStyle="bold" />
 
@@ -593,14 +593,14 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:autofillHints="username"
-                                android:background="@drawable/bg_skinv2_input"
+                                android:background="@drawable/od_well"
                                 android:hint="Minecraft username"
                                 android:imeOptions="actionSearch"
                                 android:inputType="text"
                                 android:paddingHorizontal="12dp"
                                 android:singleLine="true"
-                                android:textColor="#F5F0F0"
-                                android:textColorHint="#725F60"
+                                android:textColor="@color/od_text"
+                                android:textColorHint="@color/od_text_muted"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -608,12 +608,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="8dp"
-                                android:background="@drawable/pe4_btn_save"
+                                android:background="@drawable/od_btn_primary"
                                 android:gravity="center"
                                 android:letterSpacing="0.1"
                                 android:paddingHorizontal="16dp"
                                 android:text="FETCH"
-                                android:textColor="#1A1414"
+                                android:textColor="@color/od_on_accent"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -631,11 +631,11 @@
                             android:id="@+id/btn_save_skin_changes"
                             android:layout_width="match_parent"
                             android:layout_height="44dp"
-                            android:background="@drawable/pe4_btn_save"
+                            android:background="@drawable/od_btn_primary"
                             android:gravity="center"
                             android:letterSpacing="0.12"
                             android:text="SET AS ACTIVE SKIN"
-                            android:textColor="#1A1414"
+                            android:textColor="@color/od_on_accent"
                             android:textSize="11.5sp"
                             android:textStyle="bold" />
 
@@ -648,7 +648,7 @@
                             android:gravity="center"
                             android:letterSpacing="0.1"
                             android:text="RESET ALL SLOTS"
-                            android:textColor="#AE9A9B"
+                            android:textColor="@color/od_text_muted"
                             android:textSize="10sp"
                             android:textStyle="bold" />
                     </LinearLayout>

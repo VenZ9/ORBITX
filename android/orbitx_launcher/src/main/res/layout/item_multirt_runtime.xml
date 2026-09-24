@@ -19,7 +19,7 @@
     <FrameLayout
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/rt_well">
+        android:background="@drawable/od_well">
 
         <ImageView
             android:layout_width="22dp"
@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:contentDescription="@null"
             android:src="@drawable/ic_setting_java_runtime"
-            android:tint="#F0E2E3" />
+            android:tint="@color/od_text" />
     </FrameLayout>
 
     <LinearLayout
@@ -45,7 +45,7 @@
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:text="Java 17"
-            android:textColor="#FCF8F8"
+            android:textColor="@color/od_text"
             android:textSize="15.5sp" />
 
         <TextView
@@ -56,7 +56,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="17.0.9 (Internal)"
-            android:textColor="#B89496"
+            android:textColor="@color/od_accent_bright"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/rt_btn_ghost"
+        android:background="@drawable/od_btn_ghost"
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:paddingStart="14dp"
@@ -73,7 +73,7 @@
         android:stateListAnimator="@null"
         android:text="@string/multirt_config_setdefault"
         android:textAllCaps="false"
-        android:textColor="#F0E2E3"
+        android:textColor="@color/od_text"
         android:textSize="12.5sp" />
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -81,7 +81,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/rt_btn_ghost"
+        android:background="@drawable/od_btn_ghost"
         android:contentDescription="@null"
         android:scaleType="centerInside"
         android:src="@drawable/ic_menu_delete_forever"

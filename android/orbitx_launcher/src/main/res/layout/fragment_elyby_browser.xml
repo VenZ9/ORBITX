@@ -7,13 +7,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/au9_page"
+    android:background="@drawable/od_window_bg"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@drawable/au9_statusbar"
+        android:background="@drawable/od_commandbar"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp">
@@ -22,20 +22,20 @@
             android:id="@+id/btn_elyby_browser_back"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:background="@drawable/au9_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:letterSpacing="0.06"
             android:paddingHorizontal="12dp"
             android:text="←  BACK"
-            android:textColor="#EFE6E7"
+            android:textColor="@color/od_text"
             android:textSize="10.5sp" />
 
         <FrameLayout
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="12dp"
-            android:background="@drawable/au9_icon_well">
+            android:background="@drawable/od_well">
 
             <ImageView
                 android:layout_width="16dp"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="ely.by  ·  account &amp; skins"
-                android:textColor="#F9F4F4"
+                android:textColor="@color/od_text"
                 android:textSize="13sp" />
 
             <TextView
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="https://ely.by"
-                android:textColor="#5C6068"
+                android:textColor="@color/od_text_muted"
                 android:textSize="9.5sp" />
         </LinearLayout>
 
@@ -73,13 +73,13 @@
             android:id="@+id/btn_elyby_browser_refresh"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:background="@drawable/au9_btn_ghost"
+            android:background="@drawable/od_btn_ghost"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:letterSpacing="0.06"
             android:paddingHorizontal="12dp"
             android:text="↻  RELOAD"
-            android:textColor="#EFE6E7"
+            android:textColor="@color/od_text"
             android:textSize="10.5sp" />
     </LinearLayout>
 
@@ -92,7 +92,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/au9_webframe"
+            android:background="@drawable/od_well"
             android:clipToOutline="true"
             android:padding="1dp">
 

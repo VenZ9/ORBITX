@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_cs_page_bg"
+    android:background="@drawable/od_window_bg"
     android:orientation="vertical">
 
     <!-- ── HEADER ─────────────────────────────────────────────────── -->
@@ -24,7 +24,7 @@
             android:id="@+id/dpb_back"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:background="@drawable/bg_cs_settings_row"
+            android:background="@drawable/od_row"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center">
@@ -34,7 +34,7 @@
                 android:layout_height="17dp"
                 android:src="@drawable/ic_arrow_back"
                 android:contentDescription="@string/cs_back"
-                app:tint="#FFFFFF" />
+                app:tint="@color/od_text" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cs_datapacks_title"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/od_text"
                 android:textSize="16.5sp"
                 android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="#806B6C"
+                android:textColor="@color/od_text_muted"
                 android:textSize="10.5sp"
                 tools:text="My Survival Base" />
         </LinearLayout>
@@ -69,8 +69,8 @@
             android:layout_height="24dp"
             android:gravity="center"
             android:paddingHorizontal="10dp"
-            android:background="@drawable/bg_cs_chip"
-            android:textColor="#AF9C9D"
+            android:background="@drawable/od_chip"
+            android:textColor="@color/od_text_muted"
             android:textSize="10.5sp"
             android:textStyle="bold"
             android:visibility="gone"
@@ -85,14 +85,14 @@
         android:layout_marginTop="12dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:background="@drawable/bg_cs_input_field"
+        android:background="@drawable/od_well"
         android:paddingHorizontal="13dp">
 
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/ic_cs_search"
-            app:tint="#806B6C" />
+            app:tint="@color/od_text_muted" />
 
         <EditText
             android:id="@+id/dpb_search_input"
@@ -105,8 +105,8 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#806B6C"
+            android:textColor="@color/od_text"
+            android:textColorHint="@color/od_text_muted"
             android:textSize="13.5sp" />
     </LinearLayout>
 
@@ -125,17 +125,17 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView android:id="@+id/dpb_sort_relevance" style="@style/CsSortChip" android:text="@string/cs_dp_sort_relevance" />
-            <TextView android:id="@+id/dpb_sort_popular" style="@style/CsSortChip" android:text="@string/cs_dp_sort_popular" />
-            <TextView android:id="@+id/dpb_sort_new" style="@style/CsSortChip" android:text="@string/cs_dp_sort_new" />
-            <TextView android:id="@+id/dpb_sort_updated" style="@style/CsSortChip" android:text="@string/cs_dp_sort_updated" />
+            <TextView android:id="@+id/dpb_sort_relevance" style="@style/OdButton.Chip" android:text="@string/cs_dp_sort_relevance" />
+            <TextView android:id="@+id/dpb_sort_popular" style="@style/OdButton.Chip" android:text="@string/cs_dp_sort_popular" />
+            <TextView android:id="@+id/dpb_sort_new" style="@style/OdButton.Chip" android:text="@string/cs_dp_sort_new" />
+            <TextView android:id="@+id/dpb_sort_updated" style="@style/OdButton.Chip" android:text="@string/cs_dp_sort_updated" />
 
             <TextView
                 android:id="@+id/dpb_version_chip"
-                style="@style/CsSortChip"
+                style="@style/OdButton.Chip"
                 android:drawablePadding="6dp"
                 android:drawableStart="@drawable/ic_nav_general"
-                android:drawableTint="#AF9C9D"
+                android:drawableTint="@color/od_text_muted"
                 android:text="@string/cs_dp_version_all" />
         </LinearLayout>
     </HorizontalScrollView>
@@ -159,7 +159,7 @@
         android:maxLines="1"
         android:paddingVertical="8dp"
         android:paddingHorizontal="14dp"
-        android:textColor="#806B6C"
+        android:textColor="@color/od_text_muted"
         android:textSize="9.5sp"
         tools:text="Installs into: saves/My Survival Base/datapacks" />
 </LinearLayout>
