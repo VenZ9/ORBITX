@@ -1,15 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-    Download / browse grid.
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================================
+  CONTENT BROWSER — the results pane   (was: a poster grid of banner cards)
+  ============================================================================
 
-    Loading was previously indicated three times at once (a skeleton grid, a
-    floating "Finding the best results…" capsule and a spinner row inside the
-    list itself). The in-list row was also the source of the RecyclerView
-    "Inconsistency detected" crash, so the whole footer row is gone:
+  THE STRUCTURAL CHANGE
 
-      • first page / re-query  → the skeleton grid (it already looks like the
-        cards that are about to arrive, which is the honest loading state)
-      • next page in flight    → the 2dp progress line at the top edge of the
-        page (ModsSearchFragment owns it) and the list simply does not move
+  The results surface was a two-column grid of 246dp-tall cards, each one a
+  112dp artwork banner with a scrim, a docked icon, a source badge, like/share
+  buttons, tag chips and a stats footer. Loading was signalled three separate
+  times at once (a skeleton grid, a floating "SEARCHING" capsule, and a spinner
+  row inside the list).
+
+  A wall of poster cards is a storefront. This is a CLIENT, so the results are
+  now a DENSE LIST of 48dp rows — 4x the results on screen, scannable name by
+  name, with the metadata in mono columns instead of scattered across a card.
+
+  The loading indicators collapse to ONE: the skeleton rows, which already look
+  like the rows that are about to arrive. The floating capsule is gone.
+
+  Ids preserved: download_list (RecyclerView), download_skeleton_grid,
+  download_loading_capsule, download_loading_dots (net.kdt.pojavlaunch.ui.
+  LoadingDots), download_loading_label, download_list_status,
+  download_notif_banner, download_notif_banner_btn.
+
+  Note: the notification opt-in strip keeps its bottom placement and its ids,
+  but is restyled as a docked status bar rather than a floating rounded banner.
+  ============================================================================
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,175 +40,142 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="20dp"
+        android:overScrollMode="never"
+        android:paddingBottom="@dimen/od_space_4"
         android:scrollbars="none" />
 
-    <!-- SKELETON GRID — placeholder cards with the exact anatomy of a real card -->
+    <!-- == SKELETON — rows with the exact anatomy of a real result row, so the
+         placeholder is honest about what is arriving. == -->
     <LinearLayout
         android:id="@+id/download_skeleton_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="5dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="5dp"
         android:visibility="gone">
 
-        <LinearLayout
+        <include
+            layout="@layout/item_browse_skeleton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/od_row_h_tall" />
 
-            <include
-                layout="@layout/item_browse_skeleton"
-                android:layout_width="0dp"
-                android:layout_height="246dp"
-                android:layout_weight="1" />
-
-            <include
-                layout="@layout/item_browse_skeleton"
-                android:layout_width="0dp"
-                android:layout_height="246dp"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
+        <include
+            layout="@layout/item_browse_skeleton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/od_row_h_tall" />
 
-            <include
-                layout="@layout/item_browse_skeleton"
-                android:layout_width="0dp"
-                android:layout_height="246dp"
-                android:layout_weight="1" />
+        <include
+            layout="@layout/item_browse_skeleton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/od_row_h_tall" />
 
-            <include
-                layout="@layout/item_browse_skeleton"
-                android:layout_width="0dp"
-                android:layout_height="246dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+        <include
+            layout="@layout/item_browse_skeleton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/od_row_h_tall" />
     </LinearLayout>
 
-    <!-- SEARCHING CAPSULE — three staggered dots + label, floats over the skeleton -->
+    <!-- == LOADING — a status LINE across the top edge of the results pane, not
+         a floating capsule parked over them. == -->
     <LinearLayout
         android:id="@+id/download_loading_capsule"
-        android:layout_width="wrap_content"
-        android:layout_height="34dp"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="14dp"
-        android:background="@drawable/rd_glass_pill"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_gravity="top"
+        android:background="@drawable/od_statusstrip"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="12dp"
-        android:paddingEnd="14dp"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_gutter"
         android:visibility="gone">
 
         <net.kdt.pojavlaunch.ui.LoadingDots
             android:id="@+id/download_loading_dots"
-            android:layout_width="34dp"
-            android:layout_height="18dp" />
+            android:layout_width="26dp"
+            android:layout_height="14dp" />
 
         <TextView
             android:id="@+id/download_loading_label"
+            style="@style/OdText.MonoS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="sans-serif-medium"
-            android:includeFontPadding="false"
-            android:letterSpacing="0.06"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:letterSpacing="0.1"
             android:text="SEARCHING"
-            android:textColor="#EFE6E7"
-            android:textSize="9sp"
-            tools:ignore="HardcodedText,SmallSp" />
+            android:textColor="@color/od_text_muted"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
+    <!-- == empty / error state == centred, in a well, one line of type == -->
     <TextView
         android:id="@+id/download_list_status"
+        style="@style/OdText.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/bg_mp_skeleton"
-        android:paddingStart="18dp"
-        android:paddingTop="13dp"
-        android:paddingEnd="18dp"
-        android:paddingBottom="13dp"
+        android:background="@drawable/od_well"
+        android:paddingStart="@dimen/od_space_5"
+        android:paddingTop="@dimen/od_space_3"
+        android:paddingEnd="@dimen/od_space_5"
+        android:paddingBottom="@dimen/od_space_3"
         android:text="@string/browse_no_results"
-        android:textColor="#9C9CA8"
-        android:textSize="12.5sp"
-        android:textStyle="bold"
+        android:textColor="@color/od_text_dim"
+        android:textSize="@dimen/od_text_body"
         android:visibility="gone" />
 
-    <!-- ═══ notification opt-in strip (shown only while the permission is denied) ═══ -->
+    <!-- == notification opt-in strip (shown only while the permission is denied) == -->
     <LinearLayout
         android:id="@+id/download_notif_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/od_row_h_tall"
         android:layout_gravity="bottom"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="14dp"
-        android:background="@drawable/bg_notif_banner"
+        android:background="@drawable/od_statusstrip"
         android:baselineAligned="false"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="14dp"
-        android:paddingTop="11dp"
-        android:paddingEnd="11dp"
-        android:paddingBottom="11dp"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_space_2"
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:contentDescription="@null"
             android:src="@drawable/notif_icon"
-            app:tint="#82F3F4" />
+            app:tint="@color/od_accent_bright" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
+            android:layout_marginStart="@dimen/od_space_3"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                style="@style/OdText.TitleS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@string/cs_notif_banner_title"
-                android:textColor="#F7F2F2"
-                android:textSize="11.5sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/od_text_body_s" />
 
             <TextView
+                style="@style/OdText.MonoS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:maxLines="2"
                 android:ellipsize="end"
-                android:text="@string/cs_notif_banner_text"
-                android:textColor="#9DA0AA"
-                android:textSize="9sp" />
+                android:maxLines="1"
+                android:text="@string/cs_notif_banner_text" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/download_notif_banner_btn"
+            style="@style/OdButton.Primary"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/bg_notif_banner_btn"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:letterSpacing="0.08"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
-            android:text="@string/cs_notif_banner_action"
-            android:textColor="#0B1512"
-            android:textSize="9.5sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="@dimen/od_space_3"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:text="@string/cs_notif_banner_action" />
     </LinearLayout>
 </FrameLayout>

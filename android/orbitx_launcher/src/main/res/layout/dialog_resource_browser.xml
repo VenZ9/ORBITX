@@ -1,225 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════
-     BROWSER RESOURCES — premium glass popup (items 3+4).
-     Controller-page design language: master glass card, platinum tabs,
-     hairline strokes, shimmer-free calm layout. Content controller by
-     ResourceBrowserDialog (Modrinth API for the CURRENT profile).
-     ═══════════════════════════════════════════════════════════════════ -->
+<!--
+  ORBIT DESKTOP — RESOURCE BROWSER  (in-launcher content panel)
+
+  Retuned onto the window language so the in-launcher browser matches the rest
+  of the shell: a panel with a title strip (identity + close), a tab strip of
+  brand chips, a search WELL, an optional notification line, and a flush
+  results list in the od_well background.
+
+  Ids preserved for the fragment: cs_rb_subtitle, cs_rb_close, cs_rb_tab_packs,
+  cs_rb_tab_shaders, cs_rb_search_input (EditText), cs_rb_search_clear,
+  cs_rb_search_btn, cs_rb_version_note, cs_rb_list (RecyclerView),
+  cs_rb_loading (ProgressBar), cs_rb_empty.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_glass_dialog"
-    android:orientation="vertical"
-    android:padding="18dp">
+    android:background="@drawable/od_panel"
+    android:orientation="vertical">
 
-    <!-- Header: title + target profile + close -->
+    <!-- == TITLE STRIP == -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/od_panel_title_h"
+        android:background="@drawable/od_panel_titlebar"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_space_1">
 
         <FrameLayout
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="@drawable/bg_s4h_icon_tile">
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:background="@drawable/od_bitmap_frame">
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_gravity="center"
                 android:contentDescription="@null"
-                android:src="@drawable/ic_browser_resources" />
+                android:src="@drawable/ic_browser_resources"
+                app:tint="@color/od_accent_bright" />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="@dimen/od_space_3"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/OdText.TitleS"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Browser Resources"
-                android:textColor="#F7F3F3"
-                android:textSize="15.5sp"
-                android:fontFamily="sans-serif-medium"
-                android:textStyle="bold" />
+                android:ellipsize="end"
+                android:letterSpacing="0.08"
+                android:maxLines="1"
+                android:text="RESOURCES"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/cs_rb_subtitle"
-                android:layout_width="wrap_content"
+                style="@style/OdText.MonoS"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="—"
-                android:textColor="#9A9AA6"
-                android:textSize="10.5sp"
+                android:ellipsize="end"
                 android:maxLines="1"
-                android:ellipsize="end" />
+                android:textColor="@color/od_text_faint"
+                tools:text="Modrinth" />
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/cs_rb_close"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@null"
-            android:padding="6dp"
-            android:src="@drawable/ic_rb_close" />
+            style="@style/OdButton.Icon"
+            android:contentDescription="@string/global_close"
+            android:src="@drawable/ic_mr_close"
+            app:tint="@color/od_text_dim" />
     </LinearLayout>
 
-    <!-- Tabs: Resource Packs | Shader Packs (Mods intentionally absent) -->
+    <!-- == TAB STRIP + SEARCH == -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:orientation="horizontal">
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_gutter">
 
         <TextView
             android:id="@+id/cs_rb_tab_packs"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/bg_cs_tab_pill_active"
-            android:gravity="center"
-            android:letterSpacing="0.06"
-            android:paddingTop="7dp"
-            android:paddingBottom="8dp"
-            android:text="RESOURCE PACKS"
-            android:textColor="#151518"
-            android:textSize="9.5sp"
-            android:textStyle="bold" />
+            style="@style/OdButton.Chip"
+            android:layout_width="wrap_content"
+            android:text="Resource packs"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/cs_rb_tab_shaders"
+            style="@style/OdButton.Chip"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:text="Shaders"
+            tools:ignore="HardcodedText" />
+
+        <Space
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_cs_tab_pill_idle"
-            android:gravity="center"
-            android:letterSpacing="0.06"
-            android:paddingTop="7dp"
-            android:paddingBottom="8dp"
-            android:text="SHADER PACKS"
-            android:textColor="#D0D0D0"
-            android:textSize="9.5sp"
-            android:textStyle="bold" />
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="30dp"
+            android:background="@drawable/od_search_well"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/od_space_2">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_search"
+                app:tint="@color/od_text_faint" />
+
+            <EditText
+                android:id="@+id/cs_rb_search_input"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/browse_search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/od_text"
+                android:textColorHint="@color/od_text_faint"
+                android:textSize="@dimen/od_text_body_s" />
+
+            <ImageView
+                android:id="@+id/cs_rb_search_clear"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/global_clear"
+                android:padding="6dp"
+                android:src="@drawable/ic_mr_close"
+                android:visibility="gone"
+                app:tint="@color/od_text_faint" />
+
+            <ImageButton
+                android:id="@+id/cs_rb_search_btn"
+                android:layout_width="28dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:contentDescription="@string/browse_search_hint"
+                android:padding="6dp"
+                android:src="@drawable/ic_search"
+                app:tint="@color/od_accent_bright" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- Search Bar for in-game Resource Packs & Shaders -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_log_search"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp">
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:src="@drawable/ic_cs_search"
-            app:tint="#8E8E9A" />
-
-        <EditText
-            android:id="@+id/cs_rb_search_input"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="Search resource packs &amp; shaders..."
-            android:imeOptions="actionSearch|flagNoExtractUi"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#806B6C"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/cs_rb_search_clear"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="3dp"
-            android:src="@drawable/ic_log_close"
-            android:visibility="gone"
-            app:tint="#A0A0AA" />
-
-        <ImageButton
-            android:id="@+id/cs_rb_search_btn"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="4dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Search"
-            android:padding="4dp"
-            android:src="@drawable/ic_cs_search"
-            app:tint="#FFFFFF" />
-    </LinearLayout>
-
+    <!-- == optional version / notification line == -->
     <TextView
         android:id="@+id/cs_rb_version_note"
-        android:layout_width="wrap_content"
+        style="@style/OdText.MonoS"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:text="—"
-        android:textColor="#8E8E9A"
-        android:textSize="9.5sp" />
+        android:background="@drawable/od_statusstrip"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingTop="6dp"
+        android:paddingEnd="@dimen/od_gutter"
+        android:paddingBottom="6dp"
+        android:textColor="@color/od_text_muted"
+        android:visibility="gone"
+        tools:text="Filtered for 1.21 - Fabric" />
 
-    <!-- Content area -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/od_rule_strong" />
+
+    <!-- == RESULTS == -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="10dp"
-        android:minHeight="280dp">
+        android:minHeight="200dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cs_rb_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/od_well"
             android:clipToPadding="false"
             android:overScrollMode="never"
-            android:paddingBottom="4dp" />
+            android:scrollbars="none" />
 
         <ProgressBar
             android:id="@+id/cs_rb_loading"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="top"
             android:indeterminate="true"
-            android:indeterminateTint="#C4B9B9" />
+            android:indeterminateTint="@color/od_accent"
+            android:progressBackgroundTint="#00000000"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/cs_rb_empty"
+            style="@style/OdText.Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:padding="24dp"
-            android:text="—"
-            android:textColor="#9A9AA6"
-            android:textSize="11.5sp"
+            android:text="@string/browse_no_results"
+            android:textColor="@color/od_text_muted"
+            android:textSize="@dimen/od_text_body_s"
             android:visibility="gone" />
     </FrameLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:letterSpacing="0.05"
-        android:text="INSTALLED FILES LAND IN THE CURRENT PROFILE'S FOLDER"
-        android:textColor="#6E7078"
-        android:textSize="7.5sp"
-        android:textStyle="bold" />
-
 </LinearLayout>

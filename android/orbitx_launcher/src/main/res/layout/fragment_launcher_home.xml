@@ -1,610 +1,592 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     ORBITX — LAUNCHER HOME "STAGE" v2 (fixes pass)
+<!--
+  ============================================================================
+  LAUNCHER HOME — the list–detail workspace   (was: full-bleed hero stage)
+  ============================================================================
 
-     Full-bleed primary-instance artwork + layered legibility scrim.
-     One intentional composition:
+  THE STRUCTURAL CHANGE
 
-       • left dock (edge-aligned, vertically centered)
-       • account chip (top-right)
-       • 3D player (left half of the central band, never overlapped)
-       • launch cluster (right half): eyebrow → instance → meta → PLAY →
-         CONTINUE pill — all in one visual column, no floating strays
-       • library carousel (bottom, clear of the dock)
+  The screen this replaces was a STAGE: one instance's artwork filled the whole
+  display under a scrim, a 3D skin model bobbed in the middle, a big capsule
+  launched it, and every other instance was demoted to a horizontal carousel of
+  artwork tiles along the bottom.
 
-     Sizes via lh_* dimens (compact + h420dp variants).
-     ═══════════════════════════════════════════════════════════════════════ -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  That is a home screen: it shows you ONE thing beautifully and hides the rest.
+  But this is a client for managing MANY instances, so the carousel was the only
+  place you could see your other profiles — the one place with the least room.
+
+  It is now a WINDOW WORKSPACE, split by a hairline into two panes:
+
+      +---------------------------+------------------------------+
+      | INSTANCES             n   |  [icon] Fabulously Optimized |  inspector
+      | ------------------------- |  [3D skin]  JAVA 17          |
+      | [i] Fabulously Optimized  |             RAM 2048         |
+      |     Fabric  1.21   2 GB   |  ---------------------------- |
+      | ------------------------- |  BROWSE | MANAGE | BACKUP    |  command row
+      | [i] Vanilla               |  ---------------------------- |
+      |     Vanilla 1.21   1 GB   |  [        LAUNCH         ]   |  primary
+      | ------------------------- |                              |
+      +---------------------------+------------------------------+
+
+  The list pane is the primary surface — every instance, all at once, as a
+  scannable table. The inspector pane carries the one instance you selected:
+  its identity, its skin, its runtime figures, its command row, and the launch
+  control. Nothing is hidden behind a carousel any more.
+
+  WHY THE SPLIT AND NOT A FULL-WIDTH LIST
+
+  A launcher's two questions are "which instance?" and "what is it?" — a list
+  answers the first and destroys the second. Keeping both on screen at once is
+  what lets you compare two profiles by eye without navigating anywhere.
+
+  WHAT IS PRESERVED
+
+  Every id `LauncherHomeFragment` resolves: lh_bg_a/b, lh_launch_button,
+  lh_launch_label, lh_launch_specs, lh_spec_java_text, lh_spec_ram_text,
+  lh_hero_name, lh_player, lh_account_chip/head/name/type, lh_empty, lh_library,
+  lh_dl_pill/icon_wrap/title/percent/detail/bar, lh_edit_btn, lh_brand_cluster,
+  lh_content, lh_prod_browser/manage/backup, lh_center_guide, plus every brand
+  and home_* id. Types are unchanged (lh_player stays a GLSurfaceView, lh_dl_bar
+  stays a ProgressBar, lh_library stays a RecyclerView).
+  ============================================================================
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#130708">
+    android:background="@drawable/od_window_bg"
+    android:orientation="vertical">
 
-    <!-- Background artwork (two layers for a crossfade when the primary changes) -->
+    <!-- -- background crossfade pair (driven by the fragment) -- -->
     <ImageView
         android:id="@+id/lh_bg_a"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:alpha="0.55"
-        android:contentDescription="@null"
-        tools:src="@drawable/bg_hero_minecraft" />
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/lh_bg_b"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:alpha="0"
-        android:contentDescription="@null" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_lh_scrim" />
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="gone" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lh_content"
+    <!-- == WORKSPACE HEADER STRIP == a desktop document header: what this pane
+         holds, how many, and the one action that refreshes it. -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/od_pane_header_h"
+        android:background="@drawable/od_pane_header"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/lh_center_guide"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.47" />
-
-        <!-- ═══ BRAND CLUSTER (top-left) ═══
-             The OrbitX identity card: ring mark + wordmark. The old YouTube /
-             Discord community pills were removed with the other outbound links. -->
-        <LinearLayout
+        <View
             android:id="@+id/lh_brand_cluster"
+            android:layout_width="10dp"
+            android:layout_height="@dimen/od_thumb"
+            android:layout_marginEnd="@dimen/od_space_2"
+            android:background="@drawable/od_live_dot" />
+
+        <TextView
+            android:id="@+id/lh_brand_mark"
+            style="@style/OdText.TitleM"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_lh_glass"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.14"
+            android:text="ORBITX" />
+
+        <TextView
+            android:id="@+id/lh_brand_origin"
+            style="@style/OdText.MonoS"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/lh_brand_flag"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/lh_brand_sub"
+            style="@style/OdText.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:text="INSTANCE LIBRARY" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- live count, mono, right-aligned beside the account chip -->
+        <TextView
+            android:id="@+id/lh_spec_java_text"
+            style="@style/OdText.MonoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/od_space_3"
+            tools:text="JAVA 17" />
+
+        <!-- the account chip: avatar, name, auth type — one field of the header -->
+        <LinearLayout
+            android:id="@+id/lh_account_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/od_thumb"
+            android:layout_marginEnd="@dimen/od_space_2"
+            android:background="@drawable/od_well"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:paddingStart="@dimen/od_space_1"
+            android:paddingEnd="@dimen/od_space_3">
 
-            <FrameLayout
-                android:id="@+id/lh_brand_mark"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/bg_lh_brand_mark">
-
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/orbitx_mark" />
-            </FrameLayout>
+            <ImageView
+                android:id="@+id/lh_account_head"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/od_space_2"
                 android:orientation="vertical">
 
-                <!-- Phase 10: full brand on ONE line, "Made in India" + tricolour below -->
                 <TextView
-                    android:id="@+id/lh_brand_name"
+                    android:id="@+id/lh_account_name"
+                    style="@style/OdText.MonoS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:letterSpacing="0.06"
+                    android:ellipsize="end"
                     android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="ORBITX"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText,Deprecated" />
+                    android:textColor="@color/od_text"
+                    tools:text="Player" />
+
+                <TextView
+                    android:id="@+id/lh_account_type"
+                    style="@style/OdText.MonoS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/od_text_faint"
+                    tools:text="OFFLINE" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- == THE WORKSPACE: two panes and the splitter between them == -->
+    <LinearLayout
+        android:id="@+id/lh_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <!-- --------------- LEFT PANE . INSTANCE TABLE --------------- -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.35"
+            android:background="@drawable/od_pane"
+            android:orientation="vertical">
+
+            <!-- column header: this is a TABLE, so it names its columns -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/od_gutter">
+
+                <TextView
+                    style="@style/OdText.Label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Instance" />
+
+                <TextView
+                    style="@style/OdText.Label"
+                    android:layout_width="@dimen/od_col_meta"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Loader" />
+
+                <TextView
+                    style="@style/OdText.Label"
+                    android:layout_width="52dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/od_space_2"
+                    android:gravity="end"
+                    android:text="RAM" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/od_rule_strong" />
+
+            <!-- the instance table itself (InstanceLibraryAdapter) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/lh_center_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lh_library"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingBottom="@dimen/od_space_3"
+                    android:scrollbars="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/lh_empty"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/od_space_4"
+                android:background="@color/od_rule"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- ------------------- THE SPLITTER ------------------- -->
+        <View
+            android:layout_width="@dimen/od_splitter_w"
+            android:layout_height="match_parent"
+            android:background="@drawable/od_splitter" />
+
+        <!-- ------------------- RIGHT PANE . INSPECTOR ------------------- -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/od_pane_raised"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/od_space_3"
+                android:paddingEnd="@dimen/od_space_3">
+
+                <TextView
+                    style="@style/OdText.Label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selected instance" />
+
+                <!-- contextual edit — wired to the existing handler -->
+                <ImageView
+                    android:id="@+id/lh_edit_btn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/od_icon_button"
+                    android:clickable="true"
+                    android:contentDescription="@string/edit_profile"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_edit_profile"
+                    app:tint="@color/od_text_dim" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/od_rule_strong" />
+
+            <!-- identity: the instance name, then its skin render -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/od_space_3"
+                android:paddingTop="@dimen/od_space_3"
+                android:paddingEnd="@dimen/od_space_3"
+                android:paddingBottom="@dimen/od_space_2">
 
                 <LinearLayout
-                    android:id="@+id/lh_brand_origin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/lh_brand_flag"
-                        android:layout_width="15dp"
-                        android:layout_height="10dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_flag_india" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/lh_brand_sub"
+                        android:id="@+id/lh_hero_name"
+                        style="@style/OdText.TitleM"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        tools:text="Fabulously Optimized" />
+
+                    <TextView
+                        android:id="@+id/lh_spec_ram_text"
+                        style="@style/OdText.MonoS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/od_space_1"
+                        tools:text="RAM 2048 MB" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- runtime figures as a tight two-row readout table -->
+                    <LinearLayout
+                        android:id="@+id/lh_launch_specs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/od_space_3"
+                    android:layout_marginEnd="@dimen/od_space_3"
+                    android:background="@color/od_rule" />
+
+                <!-- the live skin render sits in a framed well, like a viewport -->
+                <FrameLayout
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/od_well">
+
+                    <android.opengl.GLSurfaceView
+                        android:id="@+id/lh_player"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- -- command row: browse . manage . backup, three equal verbs -- -->
+            <LinearLayout
+                android:id="@+id/lh_prod_strip"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/od_row_h"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lh_prod_browser"
+                    style="@style/OdRow"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_browser_resources"
+                        app:tint="@color/od_text_dim" />
+
+                    <TextView
+                        style="@style/OdText.Label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:includeFontPadding="false"
-                        android:letterSpacing="0.14"
-                        android:maxLines="1"
-                        android:text="MADE IN INDIA"
-                        android:textColor="#D8C9CA"
-                        android:textSize="7.5sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText,SmallSp" />
+                        android:layout_marginStart="@dimen/od_space_2"
+                        android:text="Browse"
+                        android:textColor="@color/od_text_dim" />
+                </LinearLayout>
+
+                <View style="@style/OdSplitter" />
+
+                <LinearLayout
+                    android:id="@+id/lh_prod_manage"
+                    style="@style/OdRow"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_folder"
+                        app:tint="@color/od_text_dim" />
+
+                    <TextView
+                        style="@style/OdText.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/od_space_2"
+                        android:text="Manage"
+                        android:textColor="@color/od_text_dim" />
+                </LinearLayout>
+
+                <View style="@style/OdSplitter" />
+
+                <LinearLayout
+                    android:id="@+id/lh_prod_backup"
+                    style="@style/OdRow"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_folder_managed"
+                        app:tint="@color/od_text_dim" />
+
+                    <TextView
+                        style="@style/OdText.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/od_space_2"
+                        android:text="Backup"
+                        android:textColor="@color/od_text_dim" />
                 </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/od_rule" />
 
-        <!-- ═══ ACCOUNT CHIP (top-right) ═══ -->
+            <!-- -- the primary action: launch. The only filled object in the pane. -- -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/od_row_h_tall"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/od_space_3"
+                android:paddingEnd="@dimen/od_space_3">
+
+                <net.kdt.pojavlaunch.ui.PremiumPlayButtonView
+                    android:id="@+id/lh_launch_button"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/od_row_h"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/lh_launch_label"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- legacy brand slot (kept so the fragment's brand binding still resolves) -->
+    <TextView
+        android:id="@+id/lh_brand_name"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/lh_brand_sub_legacy"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="gone" />
+
+    <!-- == COMPACT DOWNLOAD STRIP — the same information the old floating pill
+         carried, but as a status row docked above the window's status strip. -->
+    <LinearLayout
+        android:id="@+id/lh_dl_pill"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@drawable/od_statusstrip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_space_3"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:id="@+id/lh_dl_icon_wrap"
+            android:layout_width="22dp"
+            android:layout_height="22dp">
+
+            <ImageView
+                android:id="@+id/lh_dl_icon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_download"
+                app:tint="@color/od_accent_bright" />
+        </FrameLayout>
+
         <LinearLayout
-            android:id="@+id/lh_account_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_lh_glass"
-            android:paddingHorizontal="11dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/lh_account_head"
-                android:layout_width="29dp"
-                android:layout_height="29dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/bg_lh_card_icon"
-                android:padding="2dp"
-                android:src="@drawable/ic_profile_player"
-                app:tint="#FF3B30"
-                android:contentDescription="Account" />
-
-            <TextView
-                android:id="@+id/lh_account_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:maxWidth="110dp"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:text="Player"
-                android:textColor="#FFFFFF"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:includeFontPadding="false" />
-
-            <TextView
-                android:id="@+id/lh_account_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:text="LOCAL"
-                android:textColor="#FFFFFF"
-                android:textSize="8.5sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.06"
-                android:paddingHorizontal="7dp"
-                android:paddingVertical="3dp"
-                android:background="@drawable/bg_hd_badge_purple"
-                android:includeFontPadding="false" />
-
-            <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="4dp"
-                android:src="@drawable/ic_chevron_down"
-                app:tint="#9E9E9E"
-                android:contentDescription="@null" />
-        </LinearLayout>
-
-        <!-- ═══ STAGE (constraint-based so nothing overlaps) ═══
-             Layer order in this file: background → 3D character (lh_player)
-             → name tag (lh_hero_name, in the UI layer, ABOVE the GL surface so
-             it can never clip the raised hand) → controls (launch row).
-
-             Vertical composition, top→bottom, all pinned:
-               account chip
-                 ↓  name tag
-                 ↓  3D character  (fills the band, height=0dp → never overlaps)
-                 ↓  LAUNCH row    (bottom-anchored above the carousel + gap)
-               carousel                                                        -->
-
-        <!-- Selected account's username — Minecraft-style name plate, sits
-             directly above the character's head. Drawn in the UI layer; the GL
-             surface's top is anchored BELOW this view so the surface (which is
-             z-ordered on top) can never paint over and hide the tag. -->
-        <TextView
-            android:id="@+id/lh_hero_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:maxWidth="230dp"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:text=""
-            android:fontFamily="@font/minecraftia"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="3dp"
-            android:background="@drawable/bg_lh_nametag"
-            android:includeFontPadding="false"
-            android:shadowColor="#B3000000"
-            android:shadowDy="1"
-            android:shadowRadius="6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lh_account_chip" />
-
-        <!-- 3D player. IMPORTANT: this GLSurfaceView has setZOrderOnTop(true),
-             so it is drawn ABOVE every sibling view. Its top is therefore
-             anchored to the BOTTOM of the name tag — never overlapping it — so
-             the name tag stays visible (the surface would otherwise paint over
-             and hide it). The band is still tall (down to the launch row) and
-             the renderer framing keeps the whole head + raised hand inside it,
-             with top headroom so nothing is clipped at the surface's top edge. -->
-        <android.opengl.GLSurfaceView
-            android:id="@+id/lh_player"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lh_hero_name"
-            app:layout_constraintBottom_toTopOf="@id/lh_launch_row" />
-
-        <!-- LAUNCH capsule + pencil. Bottom-anchored ABOVE the carousel with a
-             fixed gap → clear separation, can NEVER cover New Instance. -->
-        <!-- ═══ Download progress card — anchored to the SIDE (bottom-left),
-             never centered. Premium glass card: animated shimmer bar, live
-             percent ring accent, exact MB detail. Shown only while downloading. -->
-        <LinearLayout
-            android:id="@+id/lh_dl_pill"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_lh_dl_pill"
-            android:elevation="14dp"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="13dp"
-            android:paddingBottom="14dp"
-            android:visibility="gone"
-            android:layout_marginStart="18dp"
-            android:layout_marginBottom="14dp"
-            android:minWidth="248dp"
-            app:layout_constraintWidth_max="330dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lh_launch_row">
+            android:layout_marginStart="@dimen/od_space_2"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="horizontal">
 
-                <!-- Animated glowing download glyph -->
-                <FrameLayout
-                    android:id="@+id/lh_dl_icon_wrap"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/bg_lh_dl_icon">
-
-                    <ImageView
-                        android:id="@+id/lh_dl_icon"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_download"
-                        app:tint="#150C0C"
-                        android:contentDescription="@null" />
-                </FrameLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/lh_dl_title"
+                    style="@style/OdText.MonoS"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="11dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/minecraftia"
-                        android:text="LAUNCHING"
-                        android:textColor="#FF6B6B"
-                        android:textSize="8sp"
-                        android:letterSpacing="0.12"
-                        android:includeFontPadding="false" />
-
-                    <TextView
-                        android:id="@+id/lh_dl_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="Preparing…"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:includeFontPadding="false" />
-                </LinearLayout>
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/od_text_dim" />
 
                 <TextView
                     android:id="@+id/lh_dl_percent"
+                    style="@style/OdText.MonoS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:gravity="end"
-                    android:fontFamily="@font/minecraftia"
-                    android:text="0%"
-                    android:textColor="#F7EAEA"
-                    android:textSize="13sp"
-                    android:includeFontPadding="false" />
-                    android:textStyle="bold"
-                    android:includeFontPadding="false" />
+                    android:textColor="@color/od_accent_bright" />
             </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/lh_dl_bar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="7dp"
-                android:layout_marginTop="12dp"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@drawable/bg_lh_dl_track" />
-
-            <TextView
-                android:id="@+id/lh_dl_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text=""
-                android:textColor="#BDBDBD"
-                android:textSize="10.5sp"
-                android:includeFontPadding="false" />
+                android:layout_height="2dp"
+                android:layout_marginTop="3dp"
+                android:progressDrawable="@drawable/od_progress" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/lh_launch_row"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lh_launch_specs"
-            android:layout_marginBottom="6dp">
-
-            <!-- Signature launch capsule: wave/glow morph + STOP-cancel. -->
-            <net.kdt.pojavlaunch.ui.PremiumPlayButtonView
-                android:id="@+id/lh_launch_button"
-                android:layout_width="168dp"
-                android:layout_height="@dimen/lh_launch_button_h"
-                android:contentDescription="Launch Minecraft">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="24dp">
-
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/ic_play_arrow"
-                        app:tint="#110E0E"
-                        android:contentDescription="@null" />
-
-                    <TextView
-                        android:id="@+id/lh_launch_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="LAUNCH"
-                        android:textColor="#110E0E"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.12"
-                        android:includeFontPadding="false" />
-                </LinearLayout>
-            </net.kdt.pojavlaunch.ui.PremiumPlayButtonView>
-
-            <!-- Pencil: opens THIS profile's edit page. -->
-            <FrameLayout
-                android:id="@+id/lh_edit_btn"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_lh_glass"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_edit_profile"
-                    app:tint="#CFCFCF"
-                    android:contentDescription="Edit profile" />
-            </FrameLayout>
-        </LinearLayout>
-
-        <!-- Profile runtime Java version and RAM allocation spec pill -->
-        <LinearLayout
-            android:id="@+id/lh_launch_specs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_lh_specs_pill"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="4dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lh_prod_strip">
-
-            <ImageView
-                android:id="@+id/lh_spec_java_icon"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@drawable/ic_settings_java"
-                app:tint="#B49D9F"
-                android:contentDescription="@null" />
-
-            <TextView
-                android:id="@+id/lh_spec_java_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="Java 21"
-                android:textColor="#C8C8C8"
-                android:textSize="11sp"
-                android:fontFamily="sans-serif-medium"
-                android:includeFontPadding="false" />
-
-            <View
-                android:layout_width="3dp"
-                android:layout_height="3dp"
-                android:layout_marginHorizontal="7dp"
-                android:background="@drawable/dot_separator" />
-
-            <ImageView
-                android:id="@+id/lh_spec_ram_icon"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@drawable/ic_settings_performance"
-                app:tint="#B49D9F"
-                android:contentDescription="@null" />
-
-            <TextView
-                android:id="@+id/lh_spec_ram_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="4096 MB RAM"
-                android:textColor="#C8C8C8"
-                android:textSize="11sp"
-                android:fontFamily="sans-serif-medium"
-                android:includeFontPadding="false" />
-        </LinearLayout>
-
-        <!-- ═══ ORBITX PRODUCT STRIP ═══
-             The launcher's own tools, one tap from Home: browse Modrinth
-             content for this instance, review installed content, or export the
-             instance to a backup archive. Sits directly above the library so
-             it belongs to the launch column rather than floating loose. -->
-        <LinearLayout
-            android:id="@+id/lh_prod_strip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_lh_specs_pill"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="3dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/lh_library">
-
-            <TextView
-                android:id="@+id/lh_prod_browser"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/bg_lh_prod_chip"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:drawableStart="@drawable/ic_browser_resources"
-                android:drawablePadding="6dp"
-                android:letterSpacing="0.05"
-                android:paddingHorizontal="11dp"
-                android:text="CONTENT"
-                android:textColor="#E8E4E4"
-                android:textSize="9.5sp"
-                android:textStyle="bold"
-                app:drawableTint="#FF6B6B" />
-
-            <TextView
-                android:id="@+id/lh_prod_manage"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:layout_marginStart="6dp"
-                android:background="@drawable/bg_lh_prod_chip"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:drawableStart="@drawable/ic_folder"
-                android:drawablePadding="6dp"
-                android:letterSpacing="0.05"
-                android:paddingHorizontal="11dp"
-                android:text="PACKS"
-                android:textColor="#E8E4E4"
-                android:textSize="9.5sp"
-                android:textStyle="bold"
-                app:drawableTint="#FF6B6B" />
-
-            <TextView
-                android:id="@+id/lh_prod_backup"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:layout_marginStart="6dp"
-                android:background="@drawable/bg_lh_prod_chip"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:drawableStart="@drawable/ic_menu_install_jar"
-                android:drawablePadding="6dp"
-                android:letterSpacing="0.05"
-                android:paddingHorizontal="11dp"
-                android:text="BACKUP"
-                android:textColor="#E8E4E4"
-                android:textSize="9.5sp"
-                android:textStyle="bold"
-                app:drawableTint="#FF6B6B" />
-        </LinearLayout>
-
-        <!-- ═══ INSTANCE LIBRARY CAROUSEL (bottom, clear of the dock) ═══ -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lh_library"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/lh_carousel_height"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <!-- Empty-state hint (shown only with zero instances) -->
         <TextView
-            android:id="@+id/lh_empty"
+            android:id="@+id/lh_dl_detail"
+            style="@style/OdText.MonoS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="Your library will live here — create your first instance to begin."
-            android:textColor="#BDBDBD"
-            android:textSize="12sp"
-            android:includeFontPadding="false"
-            app:layout_constraintStart_toStartOf="@id/lh_library"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="44dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+            android:layout_marginStart="@dimen/od_space_2"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/od_text_faint" />
+    </LinearLayout>
+</LinearLayout>
