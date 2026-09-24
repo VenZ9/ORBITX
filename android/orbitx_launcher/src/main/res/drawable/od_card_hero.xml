@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the HERO card.
+
+     The card that owns the primary action carries ONE amber rule near its top
+     edge. That rule is the visual thread tying the card to the launch control
+     inside it: the eye reads card and button as one object, without the card
+     itself being filled with amber.
+
+     The rule is inset from both ends so it reads as a mark ON the card rather
+     than as a border the card failed to round. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_glass_card" />
+            <corners android:radius="@dimen/od_radius_card" />
+            <stroke
+                android:width="@dimen/od_stroke_rule"
+                android:color="@color/od_glass_edge" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="top"
+        android:left="@dimen/od_card_accent_inset"
+        android:right="@dimen/od_card_accent_inset"
+        android:top="@dimen/od_space_0">
+        <shape android:shape="rectangle">
+            <size android:height="@dimen/od_stroke_marker" />
+            <solid android:color="@color/od_card_accent_edge" />
+            <corners android:radius="@dimen/od_radius_sharp" />
+        </shape>
+    </item>
+</layer-list>

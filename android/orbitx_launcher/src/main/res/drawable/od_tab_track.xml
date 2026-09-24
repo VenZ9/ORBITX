@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the recessed track behind a segmented tab strip.
+
+     Recessed, not raised: the tabs sit IN the track, so the active one reads as
+     lifted out of it. A raised track would make every tab look inset instead. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_tab_track" />
+    <stroke
+        android:width="@dimen/od_stroke_rule"
+        android:color="@color/od_tab_track_edge" />
+    <corners android:radius="@dimen/od_radius_tab" />
+</shape>

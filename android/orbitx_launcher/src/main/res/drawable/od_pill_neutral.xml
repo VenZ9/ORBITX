@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — a NEUTRAL status pill.
+
+     A capsule that carries one runtime fact (a loader, a Java version, a RAM
+     figure). Bordered + washed rather than filled: on a dense card a row of
+     solid pills would out-shout the name they belong to. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_pill_neutral_wash" />
+    <stroke
+        android:width="@dimen/od_stroke_rule"
+        android:color="@color/od_pill_neutral_edge" />
+    <corners android:radius="@dimen/od_radius_pill" />
+</shape>

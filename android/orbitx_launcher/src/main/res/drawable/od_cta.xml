@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — THE PRIMARY ACTION.
+
+     The one warm ramp in the application. It sweeps left to right from amber to
+     gold, which is the single most distinctive element of the design this pass
+     is built to: a wide, soft, HIGH-CONTRAST filled bar is how you tell the
+     launch control from every other control on the screen.
+
+     Dark text sits on it (od_on_accent), not white — white on gold loses the
+     contrast a primary action needs, and a dark label on a warm ramp is exactly
+     what the design does. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_accent_dim" />
+            <corners android:radius="@dimen/od_radius_cta" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:endColor="@color/od_grad_cta_end_pressed"
+                android:startColor="@color/od_grad_cta_start_pressed"
+                android:type="linear" />
+            <corners android:radius="@dimen/od_radius_cta" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:centerColor="@color/od_grad_cta_mid"
+                android:endColor="@color/od_grad_cta_end"
+                android:startColor="@color/od_grad_cta_start"
+                android:type="linear" />
+            <corners android:radius="@dimen/od_radius_cta" />
+        </shape>
+    </item>
+</selector>

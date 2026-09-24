@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — one tab in a segmented control.
+
+     Active = raised fill + a 2dp accent rule along the LOWER edge. Two signals,
+     so the current tab survives a dim panel and colour-blindness. The rule
+     points down at the content the tab controls. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/od_pane_raised" />
+                    <corners android:radius="@dimen/od_radius_tab" />
+                </shape>
+            </item>
+            <item android:gravity="bottom">
+                <shape android:shape="rectangle">
+                    <size android:height="@dimen/od_stroke_marker" />
+                    <solid android:color="@color/od_tab_active" />
+                    <corners android:radius="@dimen/od_radius_sharp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#1FFFFFFF" />
+            <corners android:radius="@dimen/od_radius_tab" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="@dimen/od_radius_tab" />
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the rule under the ACTIVE destination in the command bar.
+
+     A state selector, not a plain shape: android:visibility cannot ride on
+     duplicateParentState (only states propagate), so a plain shape left with
+     visibility="invisible" would stay hidden forever. As a selector the rule is
+     simply transparent at rest and amber when the column is selected — the
+     parent's setSelected() drives it with no Java change.
+
+     The rule points DOWN into the workspace, the same grammar as the segmented
+     tab indicator: on this bar, an amber rule always points at the panel it
+     controls. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <size android:height="@dimen/od_stroke_marker" />
+            <solid android:color="@color/od_accent" />
+            <corners android:radius="@dimen/od_radius_sharp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <size android:height="@dimen/od_stroke_marker" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — BLUE status pill. Reserved for the mod loader. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_pill_blue_wash" />
+    <stroke
+        android:width="@dimen/od_stroke_rule"
+        android:color="@color/od_pill_blue" />
+    <corners android:radius="@dimen/od_radius_pill" />
+</shape>

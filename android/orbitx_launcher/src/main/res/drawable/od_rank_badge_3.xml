@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the #3 rank badge. Bronze. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/od_window" />
+    <stroke
+        android:width="@dimen/od_stroke_rule"
+        android:color="@color/od_accent_dim" />
+</shape>

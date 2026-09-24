@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop: the glass card.
+
+     The hero surface. A block of content sits ON a card, the card sits on the
+     window, and the two are told apart by a hairline and a step in value. There
+     is no elevation here on purpose: a shadow would say "floating", and these
+     blocks are docked to the workspace, not floating over it. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/od_glass_card" />
+
+    <corners android:radius="@dimen/od_radius_card" />
+
+    <stroke
+        android:width="@dimen/od_stroke_rule"
+        android:color="@color/od_glass_edge" />
+</shape>

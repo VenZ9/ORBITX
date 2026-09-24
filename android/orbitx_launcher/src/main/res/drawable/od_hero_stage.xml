@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the HERO STAGE: the well the 3D skin render stands in.
+
+     Recessed and rimmed, like a viewport cut into the card. The render is the
+     only object in the app that is lit from inside, so the surface behind it
+     stays the darkest one on the card. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_well" />
+    <stroke
+        android:width="@dimen/od_stroke_rule"
+        android:color="@color/od_well_edge" />
+    <corners android:radius="@dimen/od_radius_inner" />
+</shape>

@@ -21,11 +21,19 @@ import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
 
 /**
- * Premium launch button used by profile cards / FastClient home.
+ * Premium launch button used by the home card.
  *
- * Idle: platinum capsule + a slow diagonal sheen.
- * Launching: horizontal progress wave, violet edge glow, particle burst and a
+ * Idle: the amber-to-gold ramp the design specifies for the primary action, with
+ * a slow diagonal sheen. This is the ONE warm ramp in the app — a filled amber
+ * bar on screen always means "this starts the game", so it can never be mistaken
+ * for selection.
+ *
+ * The label sits DARK on it, not white: white on gold loses the contrast a
+ * primary action needs.
+ *
+ * Launching: horizontal progress wave, warm edge glow, particle burst and a
  * subtle morph pulse — visually distinct from the normal "download" spinner.
+ * Stop: solid red with the white glyph.
  *
  * Perf notes:
  * - Fixed preallocated paints/path/particle pool; zero per-frame allocations.
@@ -111,13 +119,13 @@ public class PremiumPlayButtonView extends FrameLayout implements TaskCountListe
         mRoundPath.addRoundRect(mRect, h / 2f, h / 2f, Path.Direction.CW);
 
         mBaseGradient = new LinearGradient(0, 0, w, h,
-                new int[]{0xFFFAFAFC, 0xFFFFFFFF, 0xFFBFC1CB},
+                new int[]{0xFFFF9500, 0xFFFFB01F, 0xFFFFD600},
                 new float[]{0f, 0.48f, 1f}, Shader.TileMode.CLAMP);
         mSheenGradient = new LinearGradient(0, 0, w * 0.32f, h,
                 new int[]{0x00FFFFFF, 0x7FFFFFFF, 0x00FFFFFF},
                 new float[]{0f, 0.5f, 1f}, Shader.TileMode.CLAMP);
         mWaveGradient = new LinearGradient(0, 0, Math.max(1, w), 0,
-                new int[]{0x00FFFFFF, 0x66FFFFFF, 0xCCD0D0D0, 0x66FFFFFF, 0x00FFFFFF},
+                new int[]{0x00FFFFFF, 0x66FFFFFF, 0xAAFFFFFF, 0x66FFFFFF, 0x00FFFFFF},
                 new float[]{0f, 0.28f, 0.5f, 0.72f, 1f}, Shader.TileMode.CLAMP);
         mBasePaint.setShader(mBaseGradient);
         mSheenPaint.setShader(mSheenGradient);
@@ -339,11 +347,11 @@ public class PremiumPlayButtonView extends FrameLayout implements TaskCountListe
         // Glow + edge highlight above content.
         if (mLaunching) {
             float pulse = 0.5f + 0.5f * (float) Math.sin(mLaunchFraction * Math.PI * 2.0);
-            mStrokePaint.setColor(0x55D0D0D0);
+            mStrokePaint.setColor(0x66FFD600);
             mStrokePaint.setStrokeWidth(dp(4.5f + pulse * 1.3f));
             canvas.drawPath(mRoundPath, mStrokePaint);
         }
-        mStrokePaint.setColor(mStopMode ? 0xFFFFA0A7 : mLaunching ? 0x99F3F3F7 : 0x66FFFFFF);
+        mStrokePaint.setColor(mStopMode ? 0xFFFFA0A7 : mLaunching ? 0x99FFF4D6 : 0x55FFFFFF);
         mStrokePaint.setStrokeWidth(dp(1.15f));
         canvas.drawPath(mRoundPath, mStrokePaint);
 
@@ -379,7 +387,7 @@ public class PremiumPlayButtonView extends FrameLayout implements TaskCountListe
             int life = mPLife[i];
             if (life <= 0) continue;
             int alpha = Math.min(220, life * 9);
-            mParticlePaint.setColor((alpha << 24) | (i % 3 == 0 ? 0xD0D0D0 : 0xFFFFFF));
+            mParticlePaint.setColor((alpha << 24) | (i % 3 == 0 ? 0xFFE8B44A : 0xFFFFFFFF));
             canvas.drawCircle(mPX[i], mPY[i], dp(i % 4 == 0 ? 1.7f : 1.1f), mParticlePaint);
         }
     }

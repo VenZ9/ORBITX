@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — ACCENT status pill. The running instance / the selected one. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_pill_accent_wash" />
+    <stroke
+        android:width="@dimen/od_stroke_rule"
+        android:color="@color/od_pill_accent" />
+    <corners android:radius="@dimen/od_radius_pill" />
+</shape>

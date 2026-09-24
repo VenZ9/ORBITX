@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — an INNER row.
+
+     One step up from the card it is nested in, with the mid-grey rim the design
+     uses for a block that is itself clickable. This is the row for "Partner
+     Servers", a profile selector, a tool row — anything that sits INSIDE a card
+     as a discrete target.
+
+     Card > inner row is a two-step ladder. Adding a third border inside an inner
+     row is how a design turns into nesting boxes; the language stops here. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_inner_row_pressed" />
+            <stroke
+                android:width="@dimen/od_stroke_rule"
+                android:color="@color/od_inner_row_edge" />
+            <corners android:radius="@dimen/od_radius_inner" />
+        </shape>
+    </item>
+
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_inner_row_pressed" />
+            <stroke
+                android:width="@dimen/od_stroke_rule"
+                android:color="@color/od_accent" />
+            <corners android:radius="@dimen/od_radius_inner" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_inner_row" />
+            <stroke
+                android:width="@dimen/od_stroke_rule"
+                android:color="@color/od_inner_row_edge" />
+            <corners android:radius="@dimen/od_radius_inner" />
+        </shape>
+    </item>
+</selector>
