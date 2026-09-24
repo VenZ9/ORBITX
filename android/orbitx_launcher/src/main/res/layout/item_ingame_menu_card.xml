@@ -1,90 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT DESKTOP — in-game command panel ROW  (item_ingame_menu_card)
+
+  The panel this row belongs to is the menu that opens over the running game.
+  It previously rendered as a stack of floating rounded cards separated by
+  gaps, which is why it read as a mobile settings sheet rather than as a
+  command menu.
+
+  This row is a TABLE ROW:
+
+      +------+----------------------------------------+------+
+      |  01  | FULLSCREEN                     [i]     |      |
+      |      | Hide the on-screen controls            |      |
+      +------+----------------------------------------+------+
+        index   label + description                 glyph
+
+  - the index column keys the row (01, 02, ...) so the menu reads as a numbered
+    checklist a user can learn by position
+  - a 1dp vertical rule separates the index field from the content field
+  - the hairline UNDER the row is the separator, so rows are flush and the
+    panel is continuous
+
+  Ids preserved for InGameMenuAdapter: igm_card, igm_key, igm_title,
+  igm_subtitle, igm_icon_well, igm_icon.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/igm_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/orb_row_surface"
+    android:background="@drawable/od_row"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/od_row_h_tall"
         android:gravity="center_vertical"
-        android:minHeight="58dp"
         android:orientation="horizontal"
-        android:paddingStart="14dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingStart="@dimen/od_space_3"
+        android:paddingEnd="@dimen/od_space_2">
 
-        <!-- Index numeral: keys the row without a decorative icon chip. -->
+        <!-- index column -->
         <TextView
             android:id="@+id/igm_key"
-            android:layout_width="26dp"
-            android:layout_height="22dp"
-            android:background="@drawable/orb_index_chip"
-            android:fontFamily="monospace"
+            style="@style/OdText.MonoS"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/ox_text_tertiary"
-            android:textSize="@dimen/orb_text_label_xs" />
+            android:textColor="@color/od_accent_bright"
+            tools:text="01" />
 
-        <!-- Vertical rule: the index column and the content column are
-             separate fields of one table. -->
+        <!-- field rule: index and content are separate columns -->
         <View
             android:layout_width="1dp"
-            android:layout_height="26dp"
-            android:layout_marginStart="12dp"
-            android:background="@color/ox_hairline" />
+            android:layout_height="22dp"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:background="@color/od_rule" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="@dimen/od_space_3"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/igm_title"
+                style="@style/OdText.TitleS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
-                android:letterSpacing="0.06"
+                android:letterSpacing="0.04"
                 android:maxLines="1"
                 android:textAllCaps="true"
-                android:textColor="@color/ox_text_primary"
-                android:textSize="@dimen/orb_text_label" />
+                android:textSize="@dimen/od_text_body"
+                tools:text="FULLSCREEN" />
 
             <TextView
                 android:id="@+id/igm_subtitle"
+                style="@style/OdText.BodyS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/ox_text_tertiary"
-                android:textSize="@dimen/orb_text_body_s" />
+                tools:text="Hide the on-screen controls" />
         </LinearLayout>
 
+        <!-- glyph well: a bordered square, not a rounded tile -->
         <FrameLayout
             android:id="@+id/igm_icon_well"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/orb_icon_tile">
+            android:layout_width="@dimen/od_thumb"
+            android:layout_height="@dimen/od_thumb"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:background="@drawable/od_bitmap_frame">
 
             <ImageView
                 android:id="@+id/igm_icon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_gravity="center"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                app:tint="@color/od_text_dim" />
         </FrameLayout>
     </LinearLayout>
 
-    <!-- The hairline IS the separator; there is no spacing between rows. -->
+    <!-- the hairline IS the separator -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="14dp"
-        android:background="@color/ox_hairline" />
+        android:background="@color/od_rule" />
 </LinearLayout>

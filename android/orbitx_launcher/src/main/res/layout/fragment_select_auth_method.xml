@@ -1,334 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════
-     IDENTITY TERMINAL (Phase 9) — sign-in method chooser.
-     LEFT  : terminal card (glyph · kicker · title · what each account can do)
-     RIGHT : provider rows (icon well · name · capability · key-cap → )
-     Ids kept: auth_aura, auth_header, auth_title, card_auth_container,
-     button_microsoft_authentication, button_elyby_authentication,
-     button_local_authentication, auth_footnote
-     ═══════════════════════════════════════════════════════════════════ -->
+<!--
+  ORBIT DESKTOP — ACCOUNT / SIGN-IN  (was: three big method cards)
+
+  THE STRUCTURAL CHANGE
+
+  The screen offered its three sign-in methods as large vertical CARDS, each one
+  a coloured glyph tile stacked over a title and a paragraph. Three cards is a
+  storefront choice: it dramatises a three-way choice and costs the whole screen
+  to do it, so the footnote and the method details were pushed below the fold.
+
+  A desktop sign-in dialog lists its methods. This is now a LIST OF ROWS on a
+  single panel:
+
+      +--------------------------------------------+
+      |  (o) MICROSOFT  [RECOMMENDED]           >  |  row 1
+      |      Servers - skins - capes               |
+      |  ----------------------------------------  |  hairline
+      |  ( ) ELY.BY                             >  |  row 2
+      |      Free skins - most servers             |
+      |  ----------------------------------------  |
+      |  ( ) LOCAL                              >  |  row 3
+      |      Offline / LAN only                    |
+      +--------------------------------------------+
+
+  - each method is a 56dp two-line row, hairline-separated, full-bleed hit area
+  - the decorative colour glyph tile becomes a small radio SCOPE MARK, so the
+    rows read as one exclusive choice rather than as three destinations
+  - a trailing chevron states that the row advances
+  - the footnote sits inside the panel, not below the fold
+
+  Ids preserved (LauncherActivity/MicrosoftLoginFragment bind all of them):
+  auth_aura, auth_header, auth_title, card_auth_container,
+  button_microsoft_authentication, button_elyby_authentication,
+  button_local_authentication, auth_footnote.
+-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/au9_page">
+    android:background="@drawable/od_pane">
 
+    <!-- decorative aura, retired to a flat accent bar so the panel can lead -->
     <View
         android:id="@+id/auth_aura"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="2dp"
+        android:layout_gravity="top"
+        android:background="@color/od_accent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:overScrollMode="never"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:gravity="center_vertical"
-            android:minHeight="300dp"
-            android:orientation="horizontal"
-            android:paddingHorizontal="22dp"
-            android:paddingVertical="16dp">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/od_space_6"
+            android:paddingTop="@dimen/od_space_8"
+            android:paddingEnd="@dimen/od_space_6"
+            android:paddingBottom="@dimen/od_space_6">
 
-            <!-- LEFT: terminal card -->
+            <!-- -- header: the app marks itself, then states the task -- -->
             <LinearLayout
                 android:id="@+id/auth_header"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.95"
-                android:background="@drawable/au9_terminal"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/orbitx_mark" />
+
+                <TextView
+                    style="@style/OdText.Label"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/au9_icon_well"
-                        android:fontFamily="monospace"
-                        android:gravity="center"
-                        android:text="ID"
-                        android:textColor="#F9F4F4"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:letterSpacing="0.18"
-                        android:text="IDENTITY  ·  SIGN IN"
-                        android:textColor="#9C8A8B"
-                        android:textSize="9.5sp" />
-                </LinearLayout>
+                    android:layout_marginTop="@dimen/od_space_3"
+                    android:text="ORBITX - SIGN IN"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/auth_title"
-                    android:layout_width="match_parent"
+                    style="@style/OdText.Title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Who is playing?"
-                    android:textColor="#F9F4F4"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:lineSpacingMultiplier="1.2"
-                    android:text="Pick how this launcher should identify you. You can add more accounts later from the account switcher."
-                    android:textColor="#AC9A9B"
-                    android:textSize="12sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="#2D2223" />
-
-                <!-- capability ledger -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="vertical">
-
-                    <TextView style="@style/Au9Ledger" android:text="●  Microsoft   — servers · skins · capes" />
-                    <TextView style="@style/Au9Ledger" android:text="●  ely.by      — free skins · many servers" />
-                    <TextView style="@style/Au9Ledger" android:text="○  Local       — offline / LAN only" />
-                </LinearLayout>
+                    android:layout_marginTop="@dimen/od_space_1"
+                    android:text="Choose how to sign in"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
-            <!-- RIGHT: provider rows -->
+            <!-- -- the method list -- -->
             <LinearLayout
                 android:id="@+id/card_auth_container"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_weight="1.05"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/od_space_6"
+                android:background="@drawable/od_panel"
+                android:divider="@drawable/od_divider"
+                android:orientation="vertical"
+                android:showDividers="middle">
 
-                <!-- Microsoft (primary) -->
+                <!-- == MICROSOFT == the recommended path == -->
                 <LinearLayout
                     android:id="@+id/button_microsoft_authentication"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/au9_provider_row_primary"
+                    android:layout_height="@dimen/od_row_h_tall"
+                    android:background="@drawable/od_row"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    android:minHeight="70dp"
                     android:orientation="horizontal"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp">
+                    android:paddingStart="@dimen/od_space_3"
+                    android:paddingEnd="@dimen/od_space_3">
 
+                    <!-- scope mark: chosen state is a filled ember square.
+                         A radio SCOPE rather than a destination glyph, because
+                         these three are one exclusive choice. -->
                     <FrameLayout
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/au9_icon_well_dark">
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/od_bitmap_frame">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:layout_gravity="center"
                             android:contentDescription="@null"
-                            android:src="@drawable/ic_auth_microsoft" />
+                            android:src="@drawable/ic_auth_microsoft"
+                            app:tint="@color/od_accent_bright" />
                     </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
+                        android:layout_marginStart="@dimen/od_space_3"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Microsoft account"
-                            android:textColor="#191414"
-                            android:textSize="15sp" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/OdText.TitleS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:letterSpacing="0.08"
+                                android:text="MICROSOFT"
+                                tools:ignore="HardcodedText" />
+
+                            <TextView
+                                style="@style/OdText.MonoS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/od_space_2"
+                                android:background="@drawable/od_keycap"
+                                android:paddingStart="4dp"
+                                android:paddingEnd="4dp"
+                                android:text="RECOMMENDED"
+                                android:textColor="@color/od_accent_bright"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            style="@style/OdText.MonoS"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
-                            android:text="Premium · full online play"
-                            android:textColor="#4D3F40"
-                            android:textSize="11sp" />
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Servers - skins - capes"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:background="@drawable/au9_icon_well_dark"
-                        android:fontFamily="monospace"
-                        android:gravity="center"
-                        android:paddingHorizontal="8dp"
-                        android:text="1  →"
-                        android:textColor="#EFE6E7"
-                        android:textSize="9.5sp" />
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/od_text_faint" />
                 </LinearLayout>
 
-                <!-- ely.by -->
+                <!-- == ELY.BY == -->
                 <LinearLayout
                     android:id="@+id/button_elyby_authentication"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/au9_provider_row"
+                    android:layout_height="@dimen/od_row_h_tall"
+                    android:background="@drawable/od_row"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    android:minHeight="70dp"
                     android:orientation="horizontal"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp">
+                    android:paddingStart="@dimen/od_space_3"
+                    android:paddingEnd="@dimen/od_space_3">
 
                     <FrameLayout
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/au9_icon_well">
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/od_bitmap_frame">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:layout_gravity="center"
                             android:contentDescription="@null"
-                            android:src="@drawable/ic_auth_elyby" />
+                            android:src="@drawable/ic_auth_elyby"
+                            app:tint="@color/od_text_muted" />
                     </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
+                        android:layout_marginStart="@dimen/od_space_3"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            style="@style/OdText.TitleS"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="ely.by account"
-                            android:textColor="#F9F4F4"
-                            android:textSize="15sp" />
+                            android:letterSpacing="0.08"
+                            android:text="ELY.BY"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            style="@style/OdText.MonoS"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
-                            android:text="Free · skins &amp; capes, ely-enabled servers"
-                            android:textColor="#9C8A8B"
-                            android:textSize="11sp" />
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Free skins - most servers"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:background="@drawable/au9_keycap"
-                        android:fontFamily="monospace"
-                        android:gravity="center"
-                        android:paddingHorizontal="8dp"
-                        android:text="2  →"
-                        android:textColor="#D8C9CA"
-                        android:textSize="9.5sp" />
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/od_text_faint" />
                 </LinearLayout>
 
-                <!-- Local -->
+                <!-- == LOCAL / OFFLINE == -->
                 <LinearLayout
                     android:id="@+id/button_local_authentication"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/au9_provider_row"
+                    android:layout_height="@dimen/od_row_h_tall"
+                    android:background="@drawable/od_row"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    android:minHeight="70dp"
                     android:orientation="horizontal"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp">
+                    android:paddingStart="@dimen/od_space_3"
+                    android:paddingEnd="@dimen/od_space_3">
 
                     <FrameLayout
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/au9_icon_well">
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/od_bitmap_frame">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:layout_gravity="center"
                             android:contentDescription="@null"
-                            android:src="@drawable/ic_auth_offline" />
+                            android:src="@drawable/ic_auth_offline"
+                            app:tint="@color/od_text_muted" />
                     </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
+                        android:layout_marginStart="@dimen/od_space_3"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            style="@style/OdText.TitleS"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Local profile"
-                            android:textColor="#F9F4F4"
-                            android:textSize="15sp" />
+                            android:letterSpacing="0.08"
+                            android:text="LOCAL"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            style="@style/OdText.MonoS"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
-                            android:text="Offline · pick any name, no password"
-                            android:textColor="#9C8A8B"
-                            android:textSize="11sp" />
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Offline / LAN only"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:background="@drawable/au9_keycap"
-                        android:fontFamily="monospace"
-                        android:gravity="center"
-                        android:paddingHorizontal="8dp"
-                        android:text="3  →"
-                        android:textColor="#D8C9CA"
-                        android:textSize="9.5sp" />
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/od_text_faint" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/auth_footnote"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="monospace"
-                    android:paddingHorizontal="4dp"
-                    android:text="// credentials go straight to the provider — the launcher never sees your password"
-                    android:textColor="#604F50"
-                    android:textSize="9.5sp" />
             </LinearLayout>
+
+            <!-- -- footnote, inside the panel where it can actually be read -- -->
+            <TextView
+                android:id="@+id/auth_footnote"
+                style="@style/OdText.MonoS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/od_space_4"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.4"
+                android:text="Sign-in credentials are stored only on this device."
+                android:textColor="@color/od_text_faint"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

@@ -1,90 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════
-     MICROSOFT SIGN-IN (Phase 9) — left brand/steps column, right framed
-     web sheet. Id kept: microsoft_login_webview. New ids ms_step_* /
-     ms_status are optional (fragment checks for null).
-     ═══════════════════════════════════════════════════════════════════ -->
+<!--
+  ORBIT DESKTOP — MICROSOFT SIGN-IN  (was: a brand column beside a step rail)
+
+  Retuned onto the window language. The handshake is now presented as a HEALTH
+  READOUT — the same three-step tracker, but drawn as a status column with
+  square state dots and mono labels, which is how a desktop client reports an
+  in-progress connection. The embedded browser sits in an inset WELL so the
+  web content reads as a viewport inside the window, not as a floating card.
+
+  Ids preserved: ms_brand_column, ms_step_1_dot, ms_step_1, ms_step_2_dot,
+  ms_step_2, ms_step_3_dot, ms_step_3, ms_status, ms_web_frame,
+  microsoft_login_webview (WebView), ms_progress (ProgressBar).
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/au9_page"
+    android:background="@drawable/od_pane"
     android:baselineAligned="false"
     android:orientation="horizontal">
 
-    <!-- LEFT column -->
+    <!-- == LEADING PANE - the handshake readout == -->
     <LinearLayout
         android:id="@+id/ms_brand_column"
-        android:layout_width="220dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@drawable/au9_brand_col"
+        android:layout_weight="0.42"
+        android:background="@drawable/od_pane_raised"
         android:orientation="vertical"
-        android:paddingHorizontal="18dp"
-        android:paddingTop="18dp"
-        android:paddingBottom="14dp">
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingTop="@dimen/od_space_5"
+        android:paddingEnd="@dimen/od_gutter"
+        android:paddingBottom="@dimen/od_space_5">
 
         <FrameLayout
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:background="@drawable/au9_icon_well">
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/od_bitmap_frame">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:contentDescription="@null"
-                android:src="@drawable/ic_auth_microsoft" />
+                android:src="@drawable/ic_auth_microsoft"
+                app:tint="@color/od_accent_bright" />
         </FrameLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.18"
-            android:text="PREMIUM  ·  MICROSOFT"
-            android:textColor="#9C8A8B"
-            android:textSize="9sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Sign in"
-            android:textColor="#F9F4F4"
-            android:textSize="22sp" />
-
-        <TextView
+            style="@style/OdText.TitleM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:lineSpacingMultiplier="1.2"
-            android:text="Use the Microsoft page on the right. The launcher only receives the final token."
-            android:textColor="#9C8A8B"
-            android:textSize="11sp" />
+            android:layout_marginTop="@dimen/od_space_3"
+            android:text="Microsoft"
+            tools:ignore="HardcodedText" />
 
-        <!-- step tracker -->
+        <TextView
+            style="@style/OdText.MonoS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="Xbox Live authentication"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/od_space_4"
+            android:layout_marginBottom="@dimen/od_space_4"
+            android:background="@color/od_rule_strong" />
+
+        <TextView
+            style="@style/OdText.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Handshake"
+            tools:ignore="HardcodedText" />
+
+        <!-- step 1 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:orientation="vertical">
+            android:layout_height="26dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout style="@style/Au9Step">
-                <View android:id="@+id/ms_step_1_dot" style="@style/Au9StepDot" android:background="@drawable/mvs_state_ok" />
-                <TextView android:id="@+id/ms_step_1" style="@style/Au9StepText" android:text="Microsoft login" android:textColor="#F9F4F4" />
-            </LinearLayout>
+            <View
+                android:id="@+id/ms_step_1_dot"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/od_live_dot" />
 
-            <LinearLayout style="@style/Au9Step">
-                <View android:id="@+id/ms_step_2_dot" style="@style/Au9StepDot" android:background="@drawable/pk_check_dot" />
-                <TextView android:id="@+id/ms_step_2" style="@style/Au9StepText" android:text="Xbox Live handshake" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/ms_step_1"
+                style="@style/OdText.MonoS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Microsoft login"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
 
-            <LinearLayout style="@style/Au9Step">
-                <View android:id="@+id/ms_step_3_dot" style="@style/Au9StepDot" android:background="@drawable/pk_check_dot" />
-                <TextView android:id="@+id/ms_step_3" style="@style/Au9StepText" android:text="Minecraft profile + skin" />
-            </LinearLayout>
+        <!-- step 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/ms_step_2_dot"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/od_live_dot_idle" />
+
+            <TextView
+                android:id="@+id/ms_step_2"
+                style="@style/OdText.MonoS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Xbox Live handshake"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <!-- step 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/ms_step_3_dot"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/od_live_dot_idle" />
+
+            <TextView
+                android:id="@+id/ms_step_3"
+                style="@style/OdText.MonoS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Minecraft profile + skin"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <Space
@@ -94,48 +163,39 @@
 
         <TextView
             android:id="@+id/ms_status"
+            style="@style/OdText.MonoS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/au9_keycap"
-            android:ellipsize="end"
-            android:fontFamily="monospace"
-            android:maxLines="2"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
-            android:text="// waiting for login.live.com"
-            android:textColor="#806B6C"
-            android:textSize="9.5sp" />
+            android:lineSpacingMultiplier="1.35"
+            android:textColor="@color/od_text_muted"
+            tools:text="Waiting..." />
     </LinearLayout>
 
-    <!-- RIGHT: framed web sheet -->
+    <View
+        android:layout_width="@dimen/od_splitter_w"
+        android:layout_height="match_parent"
+        android:background="@drawable/od_splitter" />
+
+    <!-- == TRAILING PANE - the embedded browser, in a well == -->
     <FrameLayout
+        android:id="@+id/ms_web_frame"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="14dp">
+        android:background="@drawable/od_well"
+        android:padding="@dimen/od_space_2">
 
-        <FrameLayout
-            android:id="@+id/ms_web_frame"
+        <WebView
+            android:id="@+id/microsoft_login_webview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/au9_webframe"
-            android:clipToOutline="true"
-            android:padding="1dp">
+            android:layout_height="match_parent" />
 
-            <WebView
-                android:id="@+id/microsoft_login_webview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <ProgressBar
-                android:id="@+id/ms_progress"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_gravity="top"
-                android:indeterminate="true"
-                android:indeterminateTint="#5C6068"
-                android:progressBackgroundTint="#00000000" />
-        </FrameLayout>
+        <ProgressBar
+            android:id="@+id/ms_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="top"
+            android:progressDrawable="@drawable/od_progress" />
     </FrameLayout>
 </LinearLayout>
