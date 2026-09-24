@@ -1,19 +1,25 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import {
-  ArrowLeft,
-  Blocks,
+  Boxes,
   Check,
+  ChevronDown,
+  ChevronRight,
+  Coffee,
+  Cpu,
   Download,
+  ExternalLink,
+  FolderOpen,
   Gamepad2,
-  Home,
+  Layers,
   Play,
   Plus,
   Settings,
   Share2,
   Trash2,
-  User,
   Wrench,
   X,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -23,15 +29,16 @@ import {
   useLauncher,
   type Loader,
   type NavId,
+  type Version,
 } from "@/lib/launcher-store";
 import { OrbitMark } from "./orbit-mark";
-import { PlayerPreview } from "./player-preview";
+import { PlayerHead, PlayerPreview } from "./player-preview";
 
-const NAV: { id: NavId; label: string; icon: typeof Home }[] = [
-  { id: "home", label: "Home", icon: Home },
-  { id: "manage", label: "Manage", icon: Wrench },
+const NAV: { id: NavId; label: string; icon: typeof Play }[] = [
+  { id: "home", label: "Play", icon: Play },
+  { id: "manage", label: "Instances", icon: Layers },
   { id: "download", label: "Download", icon: Download },
-  { id: "controller", label: "Controller", icon: Gamepad2 },
+  { id: "controller", label: "Controls", icon: Gamepad2 },
   { id: "multiplayer", label: "Multiplayer", icon: Share2 },
   { id: "settings", label: "Settings", icon: Settings },
 ];
@@ -42,26 +49,25 @@ export function LauncherShell() {
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-bg text-fg">
+      {/* world backdrop + ember vignette */}
       <div
         className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url(/launcher-bg.jpg)" }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-bg/55 via-bg/25 to-accent-dark/45" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_85%_100%,rgba(122,19,13,0.5),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-bg/80 via-bg/55 to-bg/85" />
 
-      <div className="relative z-10 mx-auto flex min-h-dvh max-w-[1400px] flex-col md:flex-row">
-        <NavRail />
-        <main className="flex min-h-0 min-w-0 flex-1 flex-col px-3 py-3 md:px-4 md:py-4">
-          <HeaderBar />
-          <div className="mt-3 min-h-0 flex-1 overflow-y-auto">
-            {nav === "home" && <HomeView />}
-            {nav === "manage" && <ManageView />}
-            {nav === "download" && <DownloadView />}
-            {nav === "controller" && <ControllerView />}
-            {nav === "multiplayer" && <MultiplayerView />}
-            {nav === "settings" && <SettingsView />}
-          </div>
+      <div className="relative z-10 flex min-h-dvh flex-col">
+        <TopBar />
+        <main className="mx-auto w-full max-w-[1280px] flex-1 px-3 pt-4 pb-2 md:px-6">
+          {nav === "home" && <HomeGrid />}
+          {nav === "manage" && <ManageView />}
+          {nav === "download" && <DownloadView />}
+          {nav === "controller" && <ControllerView />}
+          {nav === "multiplayer" && <MultiplayerView />}
+          {nav === "settings" && <SettingsView />}
         </main>
-        <RightDock />
+        <Footer />
       </div>
 
       {launching && <LaunchOverlay />}
@@ -69,121 +75,474 @@ export function LauncherShell() {
   );
 }
 
-function NavRail() {
+/* ───────────────────────────── top bar ─────────────────────────────── */
+
+function TopBar() {
   const nav = useLauncher((s) => s.nav);
   const setNav = useLauncher((s) => s.setNav);
+  const name = useLauncher((s) => s.launcherName);
+  const account = useLauncher(selectedAccount);
+  const [accountOpen, setAccountOpen] = useState(false);
+
   return (
-    <nav
-      className="flex shrink-0 items-center gap-1 overflow-x-auto border-border/80 bg-bg/88 px-2 py-2 backdrop-blur-md md:w-[72px] md:flex-col md:overflow-visible md:border-r md:py-5"
-      aria-label="Launcher"
-    >
-      <OrbitMark className="hidden size-11 md:mb-4 md:block" />
-      {NAV.map((item) => {
-        const Icon = item.icon;
-        const active = nav === item.id;
-        return (
+    <header className="sticky top-0 z-30 border-b border-white/6 bg-bg/72 backdrop-blur-xl">
+      <div className="mx-auto flex h-15 max-w-[1280px] items-center gap-2 px-3 md:gap-4 md:px-6">
+        {/* brand */}
+        <button
+          type="button"
+          onClick={() => setNav("home")}
+          className="flex shrink-0 items-center gap-2.5"
+          title={name}
+        >
+          <OrbitMark className="size-8" />
+          <span className="hidden flex-col items-start leading-none sm:flex">
+            <span className="font-display text-[1.35rem] font-bold tracking-[0.08em]">
+              ORBITX
+            </span>
+            <span className="text-[10px] font-medium tracking-[0.28em] text-subtle">
+              LAUNCHER
+            </span>
+          </span>
+        </button>
+
+        {/* tabs */}
+        <nav
+          className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto px-1 md:justify-center"
+          aria-label="Launcher"
+        >
+          {NAV.map((item) => {
+            const Icon = item.icon;
+            const active = nav === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setNav(item.id)}
+                data-active={active}
+                className={cn(
+                  "fc-tab flex h-15 shrink-0 items-center gap-1.5 px-2.5 text-[13px] font-medium whitespace-nowrap transition-colors md:px-3.5",
+                  active ? "text-fg" : "text-subtle hover:text-muted",
+                )}
+                aria-current={active ? "page" : undefined}
+              >
+                <Icon className="size-4" strokeWidth={1.9} />
+                <span className="hidden lg:inline">{item.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* account chip */}
+        <div className="relative shrink-0">
           <button
-            key={item.id}
             type="button"
-            onClick={() => setNav(item.id)}
-            title={item.label}
+            onClick={() => setAccountOpen((v) => !v)}
             className={cn(
-              "flex size-11 shrink-0 items-center justify-center rounded-md transition-colors duration-150",
-              active
-                ? "bg-accent text-fg"
-                : "text-muted hover:bg-surface-2 hover:text-fg",
+              "flex h-10 items-center gap-2 rounded-xl border px-1.5 pr-2 transition-colors",
+              accountOpen
+                ? "border-accent/50 bg-accent/12"
+                : "border-white/8 bg-surface-2/80 hover:border-accent/40",
             )}
-            aria-current={active ? "page" : undefined}
           >
-            <Icon className="size-5" strokeWidth={1.75} />
-            <span className="sr-only">{item.label}</span>
+            <PlayerHead className="size-7 rounded-md" />
+            <span className="hidden max-w-24 truncate text-[13px] font-medium sm:block">
+              {account?.name ?? "Offline"}
+            </span>
+            <ChevronDown
+              className={cn(
+                "size-3.5 text-subtle transition-transform",
+                accountOpen && "rotate-180",
+              )}
+            />
           </button>
-        );
-      })}
-      <button
-        type="button"
-        onClick={() => setNav("home")}
-        className="ml-auto flex size-11 items-center justify-center rounded-md text-muted hover:bg-surface-2 hover:text-fg md:mt-auto md:ml-0"
-        title="Back"
-      >
-        <ArrowLeft className="size-5" strokeWidth={1.75} />
-        <span className="sr-only">Back</span>
-      </button>
-    </nav>
+          {accountOpen && <AccountMenu onClose={() => setAccountOpen(false)} />}
+        </div>
+      </div>
+    </header>
   );
 }
 
-function HeaderBar() {
-  const name = useLauncher((s) => s.launcherName);
-  const nav = useLauncher((s) => s.nav);
-  const label = NAV.find((n) => n.id === nav)?.label ?? "Home";
-  return (
-    <div className="flex items-center gap-3">
-      <OrbitMark className="size-9 md:hidden" />
-      <div className="min-w-0">
-        <p className="font-display text-[1.65rem] leading-none font-semibold tracking-wide text-balance">
-          {name}{" "}
-          <span className="text-muted">1.3.3.3</span>
+function AccountMenu({ onClose }: { onClose: () => void }) {
+  const accounts = useLauncher((s) => s.accounts);
+  const selected = useLauncher((s) => s.selectedAccountId);
+  const selectAccount = useLauncher((s) => s.selectAccount);
+  const addOffline = useLauncher((s) => s.addOfflineAccount);
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  // Portal to <body>: the header's backdrop-blur makes it the containing
+  // block for fixed descendants, which would shrink this menu's scrim to
+  // the header strip and swallow every click on the page behind it.
+  return createPortal(
+    <>
+      <button
+        type="button"
+        className="fixed inset-0 z-40 cursor-default"
+        onClick={onClose}
+        aria-label="Close account menu"
+      />
+      <div className="fc-card fixed top-[3.75rem] right-3 z-50 w-72 p-2 md:right-6">
+        <p className="px-2 pt-1 pb-2 text-[11px] font-semibold tracking-[0.2em] text-subtle uppercase">
+          Accounts
         </p>
-        <p className="mt-1 text-xs tracking-wide text-subtle uppercase">{label}</p>
+        <ul className="space-y-0.5">
+          {accounts.map((a) => (
+            <li key={a.id}>
+              <button
+                type="button"
+                onClick={() => {
+                  selectAccount(a.id);
+                  onClose();
+                }}
+                className={cn(
+                  "flex h-11 w-full items-center gap-2.5 rounded-xl px-2 text-sm transition-colors",
+                  selected === a.id
+                    ? "bg-accent/14 text-fg"
+                    : "text-muted hover:bg-white/5 hover:text-fg",
+                )}
+              >
+                <PlayerHead className="size-7 rounded-md" />
+                <span className="min-w-0 flex-1 truncate text-left">{a.name}</span>
+                <span className="text-[11px] text-subtle">{a.type}</span>
+                {selected === a.id && (
+                  <Check className="size-4 text-accent-soft" />
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <form
+          className="mt-2 flex gap-1.5 border-t border-white/6 pt-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            addOffline(name);
+            setName("");
+          }}
+        >
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Offline name"
+            className="h-10 min-w-0 flex-1 rounded-lg border border-white/8 bg-bg px-2.5 text-sm outline-none placeholder:text-subtle focus:border-accent/60"
+          />
+          <button
+            type="submit"
+            className="fc-play relative flex h-10 items-center gap-1 overflow-hidden rounded-lg px-3 text-sm font-semibold"
+          >
+            <Plus className="size-4" />
+            Add
+          </button>
+        </form>
       </div>
+    </>,
+    document.body,
+  );
+}
+
+/* ─────────────────────────── home: hero + rail ─────────────────────── */
+
+function HomeGrid() {
+  return (
+    <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <HeroCard />
+      <InstanceRail />
     </div>
   );
 }
 
-function Panel({
+function SpecPill({
+  icon,
   children,
-  className,
+  tint,
 }: {
+  icon: ReactNode;
   children: ReactNode;
-  className?: string;
+  tint: "ember" | "blue" | "gold" | "neutral";
 }) {
   return (
-    <div
+    <span
       className={cn(
-        "rounded-xl border border-border/80 bg-surface/78 p-4 shadow-[0_12px_40px_rgba(0,0,0,0.28)] backdrop-blur-md",
+        "inline-flex h-8 items-center gap-1.5 rounded-[10px] px-2.5 text-[12.5px] font-medium",
+        tint === "ember" && "pill-ember",
+        tint === "blue" && "pill-blue",
+        tint === "gold" && "pill-gold",
+        tint === "neutral" && "pill-neutral",
+      )}
+    >
+      {icon}
+      {children}
+    </span>
+  );
+}
+
+function HeroCard() {
+  const account = useLauncher(selectedAccount);
+  const version = useLauncher(selectedVersion);
+  const ramMb = useLauncher((s) => s.ramMb);
+  const setNav = useLauncher((s) => s.setNav);
+  const startLaunch = useLauncher((s) => s.startLaunch);
+  const online = account?.type === "Microsoft";
+
+  return (
+    <section className="fc-card flex min-h-[560px] flex-col overflow-hidden lg:h-[calc(100dvh-7.5rem)] lg:min-h-0">
+      <div className="fc-rule" />
+      <div className="flex min-h-0 flex-1 flex-col p-4 md:p-6">
+        {/* identity */}
+        <div className="flex items-center gap-4">
+          <div className="relative shrink-0">
+            <PlayerHead className="size-16 rounded-2xl md:size-18" framed />
+            <span
+              className={cn(
+                "absolute -right-1 -bottom-1 size-4 rounded-full border-[3px] border-[#101116]",
+                online ? "status-dot bg-ok" : "bg-subtle",
+              )}
+              title={online ? "Online" : "Offline"}
+            />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <h1 className="font-display truncate text-3xl leading-none font-bold tracking-wide md:text-4xl">
+                {account?.name ?? "Player"}
+              </h1>
+              <span
+                className={cn(
+                  "inline-flex h-6 items-center rounded-md px-2 text-[11px] font-semibold tracking-wide",
+                  online ? "pill-ok" : "pill-neutral",
+                )}
+              >
+                {online ? "Online" : "Offline"}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setNav("manage")}
+              className="mt-1.5 flex items-center gap-1.5 text-sm text-subtle transition-colors hover:text-muted"
+            >
+              <FolderOpen className="size-4" />
+              <span>
+                Profile:{" "}
+                <span className="font-semibold text-fg">
+                  {version?.name ?? "none"}
+                </span>
+              </span>
+              <ChevronRight className="size-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* spec pills — one hue, one meaning */}
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <SpecPill tint="ember" icon={<Boxes className="size-4" />}>
+            {version?.mc ?? "—"}
+          </SpecPill>
+          <SpecPill tint="blue" icon={<Layers className="size-4" />}>
+            {version?.loader ?? "Vanilla"}
+          </SpecPill>
+          <SpecPill tint="gold" icon={<Coffee className="size-4" />}>
+            Java 21+
+          </SpecPill>
+          <SpecPill tint="neutral" icon={<Cpu className="size-4" />}>
+            {(ramMb / 1024).toFixed(1)}GB
+          </SpecPill>
+        </div>
+
+        {/* stage */}
+        <div className="relative my-2 min-h-56 flex-1">
+          <PlayerPreview name={account?.name ?? "Orbit"} />
+        </div>
+
+        {/* the action */}
+        <button
+          type="button"
+          onClick={startLaunch}
+          disabled={!version}
+          className="fc-play relative flex h-16 w-full shrink-0 items-center justify-center gap-3 overflow-hidden rounded-2xl transition-[filter,transform] duration-150"
+        >
+          <Play className="size-6 fill-current" />
+          <span className="font-display text-2xl font-bold tracking-[0.35em]">
+            PLAY
+          </span>
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function loaderTint(loader: Loader) {
+  switch (loader) {
+    case "Fabric":
+      return "bg-[rgba(58,144,255,0.16)] text-pill-blue";
+    case "Forge":
+      return "bg-[rgba(255,176,60,0.14)] text-pill-gold";
+    case "Quilt":
+      return "bg-[rgba(61,220,132,0.14)] text-ok";
+    case "NeoForge":
+      return "bg-[rgba(255,90,60,0.16)] text-accent-soft";
+    default:
+      return "bg-white/6 text-muted";
+  }
+}
+
+function InstanceRail() {
+  const versions = useLauncher((s) => s.versions);
+  const selectedId = useLauncher((s) => s.selectedVersionId);
+  const selectVersion = useLauncher((s) => s.selectVersion);
+  const setNav = useLauncher((s) => s.setNav);
+
+  return (
+    <aside className="flex min-h-0 flex-col gap-2.5 lg:h-[calc(100dvh-7.5rem)]">
+      {/* quick card */}
+      <button
+        type="button"
+        onClick={() => setNav("download")}
+        className="fc-card fc-shimmer relative flex items-center gap-3 overflow-hidden p-3 text-left transition-colors hover:border-accent/40"
+      >
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent/14 text-accent-soft">
+          <Download className="size-5" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-semibold">Download Center</span>
+          <span className="block text-xs text-subtle">
+            Versions, loaders & mods
+          </span>
+        </span>
+        <ChevronRight className="size-4 shrink-0 text-subtle" />
+      </button>
+
+      {/* instance list */}
+      <div className="flex items-center justify-between px-1">
+        <p className="text-[11px] font-semibold tracking-[0.22em] text-subtle uppercase">
+          Instances
+        </p>
+        <span className="font-mono text-[11px] text-subtle">
+          {versions.length}
+        </span>
+      </div>
+
+      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto pr-0.5 lg:overflow-visible">
+        {versions.map((v, i) => {
+          const active = v.id === selectedId;
+          return (
+            <button
+              key={v.id}
+              type="button"
+              onClick={() => selectVersion(v.id)}
+              className={cn(
+                "relative flex w-full items-center gap-3 rounded-2xl border p-2.5 text-left transition-all",
+                active
+                  ? "border-accent/60 bg-accent/10 shadow-[0_8px_28px_rgba(227,55,43,0.18)]"
+                  : "border-white/7 bg-surface/85 hover:border-white/16",
+              )}
+            >
+              <span
+                className={cn(
+                  "flex size-11 shrink-0 items-center justify-center rounded-xl",
+                  loaderTint(v.loader),
+                )}
+              >
+                <Boxes className="size-5.5" strokeWidth={1.8} />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-sm font-semibold">
+                  {v.name}
+                </span>
+                <span className="block truncate text-xs text-subtle">
+                  {v.lastPlayed ? `Played ${v.lastPlayed.toLowerCase()}` : v.loader}
+                </span>
+              </span>
+              {active ? (
+                <span className="flex size-5.5 items-center justify-center rounded-full bg-accent">
+                  <Check className="size-3.5 text-white" strokeWidth={3} />
+                </span>
+              ) : (
+                <span className="font-display text-sm font-bold text-subtle/60">
+                  #{i + 1}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <button
+        type="button"
+        onClick={() => setNav("manage")}
+        className="flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-white/8 bg-surface-2/70 text-sm font-medium text-muted transition-colors hover:border-accent/40 hover:text-fg"
+      >
+        <Wrench className="size-4" />
+        Manage all
+      </button>
+    </aside>
+  );
+}
+
+/* ───────────────────────── shared view pieces ──────────────────────── */
+
+function ViewHeader({
+  icon,
+  title,
+  sub,
+  action,
+}: {
+  icon: ReactNode;
+  title: string;
+  sub: string;
+  action?: ReactNode;
+}) {
+  return (
+    <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div className="flex items-center gap-3">
+        <span className="flex size-11 items-center justify-center rounded-2xl border border-white/8 bg-surface-2/80 text-accent-soft">
+          {icon}
+        </span>
+        <div>
+          <h2 className="font-display text-2xl font-bold tracking-wide">
+            {title}
+          </h2>
+          <p className="text-sm text-subtle">{sub}</p>
+        </div>
+      </div>
+      {action}
+    </div>
+  );
+}
+
+function PrimaryButton({
+  children,
+  onClick,
+  className,
+  disabled,
+  type = "button",
+}: {
+  children: ReactNode;
+  onClick?: () => void;
+  className?: string;
+  disabled?: boolean;
+  type?: "button" | "submit";
+}) {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        "fc-play relative inline-flex h-11 items-center justify-center gap-2 overflow-hidden rounded-xl px-4 text-sm font-semibold",
         className,
       )}
     >
       {children}
-    </div>
+    </button>
   );
 }
 
-function HomeView() {
-  const account = useLauncher(selectedAccount);
-  return (
-    <div className="grid gap-4 lg:h-full lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-      <Panel className="flex flex-col lg:h-full">
-        <h2 className="text-center font-display text-lg font-semibold tracking-wide">
-          Notice
-        </h2>
-        <div className="my-3 h-px bg-border" />
-        <div className="min-h-0 flex-1 space-y-3 overflow-y-auto text-pretty text-sm leading-relaxed text-muted">
-          <p>
-            OrbitX Launcher is a rebrand of Fold Craft Launcher — same Java
-            Edition stack on Android, new name, crimson orbit mark, and a
-            darker UI.
-          </p>
-          <p>
-            Full versions, Forge / Fabric / Quilt / NeoForge, custom controls,
-            shaders, and LAN via Terracotta are still here. Game files now live
-            in <span className="font-mono text-fg">/OrbitX/.minecraft</span>.
-          </p>
-          <p>
-            This preview is the launcher chrome. Build the APK from the
-            OrbitX-Launcher repo to run the game on a device.
-          </p>
-        </div>
-        <div className="my-3 h-px bg-border" />
-        <p className="text-center text-xs text-subtle">2026.09.19</p>
-      </Panel>
-      <div className="hidden min-h-72 lg:block">
-        <PlayerPreview name={account?.name ?? "Orbit"} />
-      </div>
-    </div>
-  );
-}
+/* ────────────────────────────── instances ──────────────────────────── */
 
 function ManageView() {
   const versions = useLauncher((s) => s.versions);
@@ -193,63 +552,62 @@ function ManageView() {
   const setNav = useLauncher((s) => s.setNav);
 
   return (
-    <div className="space-y-3">
-      <div className="flex items-end justify-between gap-3">
-        <div>
-          <h2 className="font-display text-2xl font-semibold tracking-wide">
-            Versions
-          </h2>
-          <p className="text-sm text-muted">Installed profiles on this device</p>
-        </div>
-        <button
-          type="button"
-          onClick={() => setNav("download")}
-          className="inline-flex h-11 items-center gap-2 rounded-md bg-accent px-4 text-sm font-medium text-fg"
-        >
-          <Plus className="size-4" />
-          Install
-        </button>
-      </div>
+    <div>
+      <ViewHeader
+        icon={<Layers className="size-5.5" />}
+        title="Instances"
+        sub="Installed profiles on this device"
+        action={
+          <PrimaryButton onClick={() => setNav("download")}>
+            <Plus className="size-4" />
+            Install
+          </PrimaryButton>
+        }
+      />
       <ul className="space-y-2">
         {versions.map((v) => {
           const active = v.id === selectedId;
           return (
-            <li key={v.id}>
-              <div
-                className={cn(
-                  "flex items-center gap-3 rounded-lg border px-3 py-3 transition-colors",
-                  active
-                    ? "border-accent bg-accent/15"
-                    : "border-border bg-surface/70 hover:border-accent/50",
-                )}
+            <li
+              key={v.id}
+              className={cn(
+                "flex items-center gap-3 rounded-2xl border p-3 transition-colors",
+                active
+                  ? "border-accent/60 bg-accent/10"
+                  : "border-white/7 bg-surface/85 hover:border-white/16",
+              )}
+            >
+              <button
+                type="button"
+                onClick={() => selectVersion(v.id)}
+                className="flex min-w-0 flex-1 items-center gap-3 text-left"
               >
-                <button
-                  type="button"
-                  onClick={() => selectVersion(v.id)}
-                  className="flex min-w-0 flex-1 items-center gap-3 text-left"
+                <span
+                  className={cn(
+                    "flex size-11 shrink-0 items-center justify-center rounded-xl",
+                    loaderTint(v.loader),
+                  )}
                 >
-                  <span className="flex size-10 items-center justify-center rounded-sm bg-surface-2 text-accent">
-                    <Blocks className="size-5" />
+                  <Boxes className="size-5.5" strokeWidth={1.8} />
+                </span>
+                <span className="min-w-0">
+                  <span className="block truncate font-semibold">{v.name}</span>
+                  <span className="block truncate text-xs text-subtle">
+                    {v.mc}
+                    {v.loaderVer ? ` · ${v.loader} ${v.loaderVer}` : ` · ${v.loader}`}
+                    {v.lastPlayed ? ` · ${v.lastPlayed}` : ""}
                   </span>
-                  <span className="min-w-0">
-                    <span className="block truncate font-medium">{v.name}</span>
-                    <span className="block text-xs text-subtle">
-                      {v.mc}
-                      {v.loaderVer ? ` · ${v.loader} ${v.loaderVer}` : ` · ${v.loader}`}
-                      {v.lastPlayed ? ` · ${v.lastPlayed}` : ""}
-                    </span>
-                  </span>
-                </button>
-                {active && <Check className="size-4 shrink-0 text-accent-soft" />}
-                <button
-                  type="button"
-                  onClick={() => removeVersion(v.id)}
-                  className="flex size-10 items-center justify-center rounded-md text-subtle hover:bg-surface-2 hover:text-fg"
-                  title="Remove"
-                >
-                  <Trash2 className="size-4" />
-                </button>
-              </div>
+                </span>
+              </button>
+              {active && <Check className="size-4 shrink-0 text-accent-soft" />}
+              <button
+                type="button"
+                onClick={() => removeVersion(v.id)}
+                className="flex size-10 shrink-0 items-center justify-center rounded-xl text-subtle transition-colors hover:bg-accent/12 hover:text-accent-soft"
+                title="Remove"
+              >
+                <Trash2 className="size-4" />
+              </button>
             </li>
           );
         })}
@@ -257,6 +615,8 @@ function ManageView() {
     </div>
   );
 }
+
+/* ────────────────────────────── download ───────────────────────────── */
 
 function DownloadView() {
   const [loader, setLoader] = useState<Loader>("Vanilla");
@@ -266,8 +626,7 @@ function DownloadView() {
   const loaders: Loader[] = ["Vanilla", "Fabric", "Forge", "Quilt", "NeoForge"];
 
   function install(mc: string, type: "release" | "snapshot") {
-    const id =
-      loader === "Vanilla" ? mc : `${mc}-${loader.toLowerCase()}`;
+    const id = loader === "Vanilla" ? mc : `${mc}-${loader.toLowerCase()}`;
     setBusy(id);
     window.setTimeout(() => {
       installVersion({
@@ -284,63 +643,63 @@ function DownloadView() {
   }
 
   return (
-    <div className="space-y-4">
-      <div>
-        <h2 className="font-display text-2xl font-semibold tracking-wide">
-          Download
-        </h2>
-        <p className="text-sm text-muted">
-          Install a Minecraft version. Loaders apply at install time.
-        </p>
-      </div>
-      <div className="flex flex-wrap gap-2">
+    <div className="mx-auto max-w-3xl">
+      <ViewHeader
+        icon={<Download className="size-5.5" />}
+        title="Download Center"
+        sub="Install a Minecraft version. Loaders apply at install time."
+      />
+      <div className="mb-4 flex flex-wrap gap-1.5 rounded-2xl border border-white/7 bg-surface/85 p-1.5">
         {loaders.map((l) => (
           <button
             key={l}
             type="button"
             onClick={() => setLoader(l)}
             className={cn(
-              "h-10 rounded-md px-3 text-sm font-medium",
+              "h-9 flex-1 rounded-xl px-3 text-sm font-medium whitespace-nowrap transition-colors",
               loader === l
-                ? "bg-accent text-fg"
-                : "bg-surface-2 text-muted hover:text-fg",
+                ? "bg-accent text-white shadow-[0_4px_16px_rgba(227,55,43,0.35)]"
+                : "text-subtle hover:text-fg",
             )}
           >
             {l}
           </button>
         ))}
       </div>
-      <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-surface/70">
+      <ul className="fc-card divide-y divide-white/6 overflow-hidden">
         {CATALOG.map((item) => {
-          const id =
-            loader === "Vanilla"
-              ? item.mc
-              : `${item.mc}-${loader.toLowerCase()}`;
+          const id = loader === "Vanilla" ? item.mc : `${item.mc}-${loader.toLowerCase()}`;
           const have = versions.some((v) => v.id === id);
           return (
-            <li
-              key={item.id + loader}
-              className="flex items-center gap-3 px-3 py-3"
-            >
+            <li key={item.id + loader} className="flex items-center gap-3 p-3.5">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white/5 text-subtle">
+                <Boxes className="size-5" strokeWidth={1.8} />
+              </span>
               <div className="min-w-0 flex-1">
-                <p className="font-medium">{item.mc}</p>
+                <p className="font-semibold">{item.mc}</p>
                 <p className="text-xs text-subtle">
                   {item.type} · {item.date}
                 </p>
               </div>
-              <button
-                type="button"
+              <PrimaryButton
                 disabled={have || busy === id}
                 onClick={() => install(item.mc, item.type)}
                 className={cn(
-                  "h-10 min-w-24 rounded-md px-3 text-sm font-medium",
-                  have
-                    ? "bg-surface-2 text-subtle"
-                    : "bg-accent text-fg disabled:opacity-60",
+                  "min-w-28",
+                  have && "bg-surface-3 text-subtle shadow-none grayscale-0",
                 )}
               >
-                {have ? "Installed" : busy === id ? "Installing…" : "Install"}
-              </button>
+                {have ? (
+                  "Installed"
+                ) : busy === id ? (
+                  "Installing…"
+                ) : (
+                  <>
+                    <Download className="size-4" />
+                    Install
+                  </>
+                )}
+              </PrimaryButton>
             </li>
           );
         })}
@@ -349,20 +708,19 @@ function DownloadView() {
   );
 }
 
+/* ────────────────────────────── controls ───────────────────────────── */
+
 function ControllerView() {
   const layouts = useLauncher((s) => s.layouts);
   const selected = useLauncher((s) => s.selectedLayoutId);
   const selectLayout = useLauncher((s) => s.selectLayout);
   return (
-    <div className="space-y-4">
-      <div>
-        <h2 className="font-display text-2xl font-semibold tracking-wide">
-          Control layouts
-        </h2>
-        <p className="text-sm text-muted">
-          Touch mappings used in-game. Compatible with ZalithLauncher2 import.
-        </p>
-      </div>
+    <div className="mx-auto max-w-3xl">
+      <ViewHeader
+        icon={<Gamepad2 className="size-5.5" />}
+        title="Control layouts"
+        sub="Touch mappings used in-game. Compatible with ZalithLauncher2 import."
+      />
       <ul className="grid gap-3 sm:grid-cols-2">
         {layouts.map((l) => {
           const active = l.id === selected;
@@ -372,21 +730,29 @@ function ControllerView() {
                 type="button"
                 onClick={() => selectLayout(l.id)}
                 className={cn(
-                  "flex h-full w-full flex-col items-start rounded-lg border p-4 text-left",
+                  "flex h-full w-full flex-col items-start rounded-2xl border p-4 text-left transition-colors",
                   active
-                    ? "border-accent bg-accent/15"
-                    : "border-border bg-surface/70 hover:border-accent/50",
+                    ? "border-accent/60 bg-accent/10"
+                    : "border-white/7 bg-surface/85 hover:border-white/16",
                 )}
               >
-                <span className="flex items-center gap-2 font-medium">
-                  <Gamepad2 className="size-4 text-accent-soft" />
+                <span className="flex items-center gap-2.5 font-semibold">
+                  <span
+                    className={cn(
+                      "flex size-9 items-center justify-center rounded-xl",
+                      active ? "bg-accent/18 text-accent-soft" : "bg-white/5 text-subtle",
+                    )}
+                  >
+                    <Gamepad2 className="size-4.5" />
+                  </span>
                   {l.name}
+                  {active && <Check className="size-4 text-accent-soft" />}
                 </span>
-                <span className="mt-2 text-sm text-muted">
+                <span className="mt-2.5 text-sm text-subtle">
                   {l.author} · {l.buttons} buttons
                 </span>
                 {active && (
-                  <span className="mt-3 text-xs tracking-wide text-accent-soft uppercase">
+                  <span className="mt-3 text-[11px] font-semibold tracking-[0.18em] text-accent-soft uppercase">
                     Active
                   </span>
                 )}
@@ -399,6 +765,8 @@ function ControllerView() {
   );
 }
 
+/* ───────────────────────────── multiplayer ─────────────────────────── */
+
 function MultiplayerView() {
   const [mode, setMode] = useState<"host" | "guest">("host");
   const [code] = useState("ORBIT-7K2Q");
@@ -406,17 +774,13 @@ function MultiplayerView() {
   const [status, setStatus] = useState("");
 
   return (
-    <div className="mx-auto max-w-xl space-y-4">
-      <div>
-        <h2 className="font-display text-2xl font-semibold tracking-wide">
-          Multiplayer
-        </h2>
-        <p className="text-sm text-muted">
-          Terracotta mesh — play LAN across the internet, including offline
-          accounts.
-        </p>
-      </div>
-      <div className="flex gap-2">
+    <div className="mx-auto max-w-xl">
+      <ViewHeader
+        icon={<Share2 className="size-5.5" />}
+        title="Multiplayer"
+        sub="Terracotta mesh — play LAN across the internet, including offline accounts."
+      />
+      <div className="mb-3 flex gap-1.5 rounded-2xl border border-white/7 bg-surface/85 p-1.5">
         {(["host", "guest"] as const).map((m) => (
           <button
             key={m}
@@ -426,35 +790,39 @@ function MultiplayerView() {
               setStatus("");
             }}
             className={cn(
-              "h-11 flex-1 rounded-md text-sm font-medium capitalize",
-              mode === m ? "bg-accent text-fg" : "bg-surface-2 text-muted",
+              "h-10 flex-1 rounded-xl text-sm font-medium capitalize transition-colors",
+              mode === m
+                ? "bg-accent text-white shadow-[0_4px_16px_rgba(227,55,43,0.35)]"
+                : "text-subtle hover:text-fg",
             )}
           >
             {m}
           </button>
         ))}
       </div>
-      <Panel>
+      <div className="fc-card p-5">
         {mode === "host" ? (
-          <div className="space-y-3">
+          <div className="space-y-4">
             <p className="text-sm text-muted">
               Open to LAN in-game, then share this invite code.
             </p>
-            <p className="font-mono text-2xl tracking-[0.2em] text-fg">{code}</p>
-            <button
-              type="button"
+            <p className="rounded-xl border border-white/7 bg-bg py-4 text-center font-mono text-2xl tracking-[0.2em]">
+              {code}
+            </p>
+            <PrimaryButton
+              className="w-full"
               onClick={() => {
                 void navigator.clipboard?.writeText(code);
                 setStatus("Invite code copied");
               }}
-              className="h-11 w-full rounded-md bg-accent text-sm font-medium"
             >
+              <ExternalLink className="size-4" />
               Copy invite code
-            </button>
+            </PrimaryButton>
           </div>
         ) : (
           <form
-            className="space-y-3"
+            className="space-y-4"
             onSubmit={(e) => {
               e.preventDefault();
               setStatus(
@@ -469,23 +837,22 @@ function MultiplayerView() {
               <input
                 value={join}
                 onChange={(e) => setJoin(e.target.value)}
-                className="mt-1 h-11 w-full rounded-md border border-border bg-bg px-3 text-fg outline-none focus:border-accent"
+                className="mt-1.5 h-11 w-full rounded-xl border border-white/8 bg-bg px-3 font-mono tracking-wider text-fg outline-none placeholder:text-subtle focus:border-accent/60"
                 placeholder="ORBIT-XXXX"
               />
             </label>
-            <button
-              type="submit"
-              className="h-11 w-full rounded-md bg-accent text-sm font-medium"
-            >
+            <PrimaryButton type="submit" className="w-full">
               Join session
-            </button>
+            </PrimaryButton>
           </form>
         )}
         {status && <p className="mt-3 text-sm text-accent-soft">{status}</p>}
-      </Panel>
+      </div>
     </div>
   );
 }
+
+/* ────────────────────────────── settings ───────────────────────────── */
 
 function SettingsView() {
   const ram = useLauncher((s) => s.ramMb);
@@ -502,23 +869,25 @@ function SettingsView() {
   ];
 
   return (
-    <div className="mx-auto max-w-2xl space-y-4">
-      <h2 className="font-display text-2xl font-semibold tracking-wide">
-        Launcher settings
-      </h2>
-      <Panel className="space-y-5">
+    <div className="mx-auto max-w-2xl">
+      <ViewHeader
+        icon={<Settings className="size-5.5" />}
+        title="Settings"
+        sub="Launcher behaviour and performance"
+      />
+      <div className="fc-card space-y-6 p-5">
         <label className="block">
           <span className="text-sm text-muted">Custom launcher name</span>
           <input
             value={launcherName}
             onChange={(e) => setLauncherName(e.target.value)}
-            className="mt-1 h-11 w-full rounded-md border border-border bg-bg px-3 outline-none focus:border-accent"
+            className="mt-1.5 h-11 w-full rounded-xl border border-white/8 bg-bg px-3 outline-none focus:border-accent/60"
           />
         </label>
         <div>
           <div className="flex justify-between text-sm">
             <span className="text-muted">Memory</span>
-            <span className="font-mono tabular-nums">{ram} MB</span>
+            <span className="font-mono text-pill-gold tabular-nums">{ram} MB</span>
           </div>
           <input
             type="range"
@@ -527,7 +896,7 @@ function SettingsView() {
             step={256}
             value={ram}
             onChange={(e) => setRam(Number(e.target.value))}
-            className="mt-2 w-full accent-accent"
+            className="mt-2.5 w-full accent-accent"
           />
         </div>
         <label className="block">
@@ -535,16 +904,16 @@ function SettingsView() {
           <select
             value={renderer}
             onChange={(e) => setRenderer(e.target.value)}
-            className="mt-1 h-11 w-full rounded-md border border-border bg-bg px-3 outline-none focus:border-accent"
+            className="mt-1.5 h-11 w-full rounded-xl border border-white/8 bg-bg px-3 outline-none focus:border-accent/60"
           >
             {renderers.map((r) => (
               <option key={r}>{r}</option>
             ))}
           </select>
         </label>
-      </Panel>
-      <Panel className="space-y-2 text-sm leading-relaxed text-muted">
-        <p className="font-display text-lg font-semibold tracking-wide text-fg">
+      </div>
+      <div className="fc-card mt-3 space-y-2 p-5 text-sm leading-relaxed text-muted">
+        <p className="font-display text-lg font-bold tracking-wide text-fg">
           About
         </p>
         <p>
@@ -553,131 +922,14 @@ function SettingsView() {
           PojavLauncher and Boat.
         </p>
         <p className="font-mono text-xs text-subtle">
-          com.orbitx.launcher · theme #C0392B · /OrbitX/.minecraft
+          com.orbitx.launcher · theme #E3372B · /OrbitX/.minecraft
         </p>
-      </Panel>
-    </div>
-  );
-}
-
-function RightDock() {
-  const account = useLauncher(selectedAccount);
-  const version = useLauncher(selectedVersion);
-  const setNav = useLauncher((s) => s.setNav);
-  const startLaunch = useLauncher((s) => s.startLaunch);
-  const [accountOpen, setAccountOpen] = useState(false);
-
-  return (
-    <aside className="relative flex w-full shrink-0 flex-col border-t border-border/80 bg-bg/88 px-4 py-4 backdrop-blur-md md:w-[260px] md:border-t-0 md:border-l">
-      <button
-        type="button"
-        onClick={() => setAccountOpen((v) => !v)}
-        className="mx-auto flex flex-col items-center gap-1 py-2"
-      >
-        <span className="flex size-14 items-center justify-center rounded-full bg-accent/20 text-accent-soft ring-2 ring-accent/40">
-          <User className="size-7" />
-        </span>
-        <span className="font-display text-lg font-semibold tracking-wide">
-          {account?.name ?? "No account"}
-        </span>
-        <span className="text-xs text-subtle">
-          {account ? `${account.type} · tap to switch` : "Add account"}
-        </span>
-      </button>
-
-      {accountOpen && <AccountMenu onClose={() => setAccountOpen(false)} />}
-
-      <button
-        type="button"
-        onClick={() => setNav("manage")}
-        className="mt-auto flex items-center gap-3 rounded-lg border border-border bg-surface-2/80 px-3 py-3 text-left"
-      >
-        <Blocks className="size-7 shrink-0 text-accent-soft" />
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-sm font-semibold">
-            {version?.name ?? "No version"}
-          </span>
-          <span className="block truncate text-xs text-subtle">
-            {version
-              ? `${version.mc}${version.loaderVer ? ` · ${version.loader}` : ""}`
-              : "Install a version"}
-          </span>
-        </span>
-        <Settings className="size-4 text-subtle" />
-      </button>
-
-      <button
-        type="button"
-        onClick={startLaunch}
-        disabled={!version}
-        className="mt-3 flex h-12 items-center justify-center gap-2 rounded-lg bg-accent text-base font-semibold tracking-wide text-fg shadow-[0_8px_24px_rgba(192,57,43,0.35)] transition-transform duration-150 active:scale-[0.98] disabled:opacity-50"
-      >
-        <Play className="size-5 fill-current" />
-        Launch
-      </button>
-    </aside>
-  );
-}
-
-function AccountMenu({ onClose }: { onClose: () => void }) {
-  const accounts = useLauncher((s) => s.accounts);
-  const selected = useLauncher((s) => s.selectedAccountId);
-  const selectAccount = useLauncher((s) => s.selectAccount);
-  const addOffline = useLauncher((s) => s.addOfflineAccount);
-  const [name, setName] = useState("");
-
-  return (
-    <div className="absolute inset-x-3 top-36 z-20 rounded-lg border border-border bg-surface p-3 shadow-xl">
-      <div className="mb-2 flex items-center justify-between">
-        <p className="text-sm font-medium">Accounts</p>
-        <button type="button" onClick={onClose} className="size-8 text-subtle">
-          <X className="mx-auto size-4" />
-        </button>
       </div>
-      <ul className="space-y-1">
-        {accounts.map((a) => (
-          <li key={a.id}>
-            <button
-              type="button"
-              onClick={() => {
-                selectAccount(a.id);
-                onClose();
-              }}
-              className={cn(
-                "flex h-10 w-full items-center justify-between rounded-md px-2 text-sm",
-                selected === a.id ? "bg-accent/20" : "hover:bg-surface-2",
-              )}
-            >
-              <span>{a.name}</span>
-              <span className="text-xs text-subtle">{a.type}</span>
-            </button>
-          </li>
-        ))}
-      </ul>
-      <form
-        className="mt-3 flex gap-2"
-        onSubmit={(e) => {
-          e.preventDefault();
-          addOffline(name);
-          setName("");
-        }}
-      >
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Offline name"
-          className="h-10 min-w-0 flex-1 rounded-md border border-border bg-bg px-2 text-sm outline-none focus:border-accent"
-        />
-        <button
-          type="submit"
-          className="h-10 rounded-md bg-accent px-3 text-sm font-medium"
-        >
-          Add
-        </button>
-      </form>
     </div>
   );
 }
+
+/* ──────────────────────────── launch overlay ───────────────────────── */
 
 function LaunchOverlay() {
   const log = useLauncher((s) => s.launchLog);
@@ -688,12 +940,13 @@ function LaunchOverlay() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg/80 p-4 backdrop-blur-sm">
-      <div className="flex max-h-[min(640px,90dvh)] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-2xl">
-        <div className="flex items-center justify-between border-b border-border px-4 py-3">
+      <div className="fc-card flex max-h-[min(640px,90dvh)] w-full max-w-2xl flex-col overflow-hidden">
+        <div className="fc-rule" />
+        <div className="flex items-center justify-between border-b border-white/6 px-5 py-3.5">
           <div className="flex items-center gap-3">
             <OrbitMark className="size-9" />
             <div>
-              <p className="font-display text-lg font-semibold tracking-wide">
+              <p className="font-display text-lg font-bold tracking-wide">
                 {name}
               </p>
               <p className="text-xs text-subtle">
@@ -704,12 +957,12 @@ function LaunchOverlay() {
           <button
             type="button"
             onClick={clear}
-            className="flex size-10 items-center justify-center rounded-md hover:bg-surface-2"
+            className="flex size-10 items-center justify-center rounded-xl transition-colors hover:bg-white/6"
           >
             <X className="size-5" />
           </button>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto bg-bg px-4 py-3 font-mono text-xs leading-6 text-ok">
+        <div className="min-h-0 flex-1 overflow-y-auto bg-black/40 px-5 py-3 font-mono text-xs leading-6 text-ok">
           {log.map((line, i) => (
             <p key={i} className="log-line">
               {line}
@@ -717,21 +970,31 @@ function LaunchOverlay() {
           ))}
         </div>
         {phase === "blocked" && (
-          <div className="space-y-3 border-t border-border px-4 py-4">
+          <div className="space-y-3 border-t border-white/6 px-5 py-4">
             <p className="text-sm text-pretty text-muted">
               JVM handoff is native. Install the OrbitX APK on Android to
-              actually enter the world — this screen is the new branded chrome.
+              actually enter the world — this screen is the branded chrome.
             </p>
-            <button
-              type="button"
-              onClick={clear}
-              className="h-11 w-full rounded-md bg-accent text-sm font-medium"
-            >
+            <PrimaryButton className="w-full" onClick={clear}>
+              <Zap className="size-4" />
               Return to launcher
-            </button>
+            </PrimaryButton>
           </div>
         )}
       </div>
     </div>
   );
 }
+
+/* ─────────────────────────────── footer ────────────────────────────── */
+
+function Footer() {
+  const name = useLauncher((s) => s.launcherName);
+  return (
+    <footer className="relative z-10 py-3 text-center text-[11px] tracking-wide text-subtle/80">
+      {name} v3.2 · GPL-3.0 · a Fold Craft Launcher fork · built for Android
+    </footer>
+  );
+}
+
+export type { Version };

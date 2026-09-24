@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.vite/
+build/
+.nitro/
+.tanstack/
+
+# Local env & caches
+.env
+.env.*
+*.log
+.cache/

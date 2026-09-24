@@ -208,21 +208,21 @@
     <color name="od_rule_strong">#2C2C2E</color>
     <color name="od_splitter">#242426</color>
 
-    <!-- — Amber: state only. — -->
+    <!-- — Accent: the ORBITX ember ramp (matches the Fast Client-style web
+         chrome: ember → amber gradient, red = the live action). — -->
+    <color name="od_accent">#E3372B</color>
+    <color name="od_accent_bright">#FF5A3C</color>
+    <color name="od_accent_dim">#7A130D</color>
+    <color name="od_accent_wash">#1FE3372B</color>
+    <color name="od_on_accent">#FFFFFF</color>
+
+    <!-- Legacy note: od_accent used to be amber (#FF9500); it now carries the
+         ORBITX ember ramp so the app matches the Fast Client-style chrome.
     <color name="od_accent">#FF9500</color>
     <color name="od_accent_bright">#FFB01F</color>
     <color name="od_accent_dim">#8A5200</color>
     <color name="od_accent_wash">#22FF9500</color>
     <color name="od_on_accent">#14100A</color>
-
-    <!-- Ember: the ORBITX brand red, retained as a complete alternative accent.
-         Everything on screen reads od_accent, so swapping these five values for
-         the ember set is the whole of a brand re-skin.
-    <color name="od_accent">#FF3B30</color>
-    <color name="od_accent_bright">#FF6B6B</color>
-    <color name="od_accent_dim">#8C2A24</color>
-    <color name="od_accent_wash">#1FFF3B30</color>
-    <color name="od_on_accent">#FFFFFF</color>
     -->
 
     <!-- — Type, four levels — -->

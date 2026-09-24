@@ -2,21 +2,39 @@
 @import "tw-animate-css";
 
 @theme {
-  --color-bg: #0b0e18;
-  --color-surface: #141218;
-  --color-surface-2: #1c181f;
-  --color-fg: #f4edea;
-  --color-muted: #c2b0ab;
-  --color-subtle: #8a7874;
-  --color-accent: #c0392b;
-  --color-accent-dark: #8e1e1e;
-  --color-accent-soft: #e07a6e;
-  --color-border: #3a2c2c;
-  --color-ok: #7d9b6a;
+  /* ── ORBITX × FAST CLIENT palette ───────────────────────────────────────
+     Surfaces pulled from the OrbitX mark: near-black charcoal with a warm
+     ember vignette. Accent is the ring's crimson ramp, pushed bright for
+     gradient work. One warm ramp (ember → amber) carries every gradient,
+     the way Fast Client's orange ramp does. */
+  --color-bg: #0b0c10;
+  --color-surface: #101116;
+  --color-surface-2: #17181f;
+  --color-surface-3: #1e2028;
+  --color-fg: #f5f2ef;
+  --color-muted: #b9b1ab;
+  --color-subtle: #837a74;
+
+  /* Ember — the brand red, from the orbit mark */
+  --color-accent: #e3372b;
+  --color-accent-bright: #ff5a3c;
+  --color-accent-ember: #ff9a3c;
+  --color-accent-dark: #a31d12;
+  --color-accent-deep: #7a130d;
+  --color-accent-soft: #ff7a64;
+
+  /* Spec-pill hues (Fast Client style: one hue per fact) */
+  --color-pill-blue: #6db6ff;
+  --color-pill-gold: #ffc25e;
+  --color-ok: #3ddc84;
+
+  --color-border: #2b2b33;
+
   --color-skin: #d8c4b0;
   --color-hair: #2a1c1c;
   --color-pants: #3a3538;
   --color-pants-2: #2e2a2c;
+
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Barlow Condensed", "IBM Plex Sans", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -40,6 +58,123 @@
     color: var(--color-fg);
     font-family: var(--font-sans);
   }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2b2b33;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ── The Fast Client card: near-black, floating, hairline rim ─────────── */
+.fc-card {
+  background: linear-gradient(180deg, rgba(18, 19, 24, 0.96), rgba(11, 12, 16, 0.97));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* The signature gradient rule along a card's top edge */
+.fc-rule {
+  height: 4px;
+  border-radius: 18px 18px 0 0;
+  background: linear-gradient(90deg, #a31d12, #e3372b 30%, #ff5a3c 62%, #ff9a3c);
+}
+
+/* ── PLAY bar: the one loud surface ───────────────────────────────────── */
+.fc-play {
+  background: linear-gradient(90deg, #c22417, #e3372b 38%, #ff5a3c 68%, #ff9a3c);
+  box-shadow:
+    0 10px 34px rgba(227, 55, 43, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18);
+}
+.fc-play:hover:not(:disabled) {
+  filter: brightness(1.07);
+}
+.fc-play:active:not(:disabled) {
+  transform: scale(0.985);
+}
+.fc-play:disabled {
+  filter: grayscale(0.75) brightness(0.6);
+  box-shadow: none;
+}
+
+/* Shimmer sweep across the play bar */
+.fc-play::after,
+.fc-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 48%,
+    transparent 62%
+  );
+  background-size: 260% 100%;
+  background-position: 120% 0;
+  animation: fc-sweep 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes fc-sweep {
+  0% {
+    background-position: 130% 0;
+  }
+  55%,
+  100% {
+    background-position: -130% 0;
+  }
+}
+
+/* Tab underline for the top nav */
+.fc-tab {
+  position: relative;
+}
+.fc-tab[data-active="true"]::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #e3372b, #ff9a3c);
+}
+
+/* Spec pill tints — one hue, one meaning */
+.pill-ember {
+  background: rgba(227, 55, 43, 0.16);
+  color: #ff8a70;
+  border: 1px solid rgba(227, 55, 43, 0.28);
+}
+.pill-blue {
+  background: rgba(58, 144, 255, 0.14);
+  color: var(--color-pill-blue);
+  border: 1px solid rgba(58, 144, 255, 0.26);
+}
+.pill-gold {
+  background: rgba(255, 176, 60, 0.13);
+  color: var(--color-pill-gold);
+  border: 1px solid rgba(255, 176, 60, 0.26);
+}
+.pill-neutral {
+  background: rgba(255, 255, 255, 0.06);
+  color: #b9b1ab;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+.pill-ok {
+  background: rgba(61, 220, 132, 0.13);
+  color: var(--color-ok);
+  border: 1px solid rgba(61, 220, 132, 0.28);
 }
 
 @keyframes orbit-spin {
@@ -72,9 +207,21 @@
   }
 }
 
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(61, 220, 132, 0.45);
+  }
+  60% {
+    box-shadow: 0 0 0 6px rgba(61, 220, 132, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .orbit-ring,
-  .player-bob {
+  .player-bob,
+  .fc-play::after,
+  .fc-shimmer::after {
     animation: none !important;
   }
 }
@@ -85,6 +232,10 @@
 
 .player-bob {
   animation: bob 3.6s ease-in-out infinite;
+}
+
+.status-dot {
+  animation: pulse-dot 2.4s ease-out infinite;
 }
 
 .log-line {
