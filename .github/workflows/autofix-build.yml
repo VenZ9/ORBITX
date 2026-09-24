@@ -1,0 +1,305 @@
+name: Build debug APK (self-fixing)
+
+# WHAT THIS ADDS OVER android-build.yml
+# -------------------------------------
+# android-build.yml is the strict gate: it builds, verifies the APK and its
+# LWJGL natives, and fails loudly. This workflow is the RETRY half of the
+# request: when the build fails for a cause that is mechanically identifiable
+# and mechanical to repair, it repairs that cause, commits the repair, and
+# builds again -- up to three attempts -- before giving up.
+#
+# WHAT IT REPAIRS BY ITSELF
+#   1. A run of two or more hyphens inside a resource-XML comment. That is a
+#      hard AAPT2 parse failure, not a warning, and it has already broken main
+#      once. The project ships the fixer for it:
+#          tools/guard_resource_xml_comments.py --fix
+#   2. A resource the Android linker itself reported missing, for the four types
+#      that can be substituted by something which links and renders as nothing:
+#      drawable, color, dimen, style. Driven by tools/ci_repair_from_log.py,
+#      which reads AAPT2's own diagnostics rather than guessing.
+#
+# WHAT IT WILL NOT REPAIR, AND WHY
+#   Anything it cannot fix mechanically. A missing string, layout, mipmap or
+#   array; a Kotlin or Java type error; a failed download; an SDK or NDK
+#   problem. The repair for those is a decision, not a substitution, and a
+#   placeholder would hide a real bug behind a green build. Those are handed to
+#   the strict workflow and raised as an issue for a human.
+#
+#   This is deliberate, and it mirrors this repo's own history: an earlier
+#   permissive resource gate masked a genuinely missing resource for as long as
+#   it existed. A green build that is green for the wrong reason is worse than
+#   a red one.
+#
+# THE LOOP
+#   attempt 1 -> build -> red?  repair what is repairable -> commit -> attempt 2
+#             -> build -> red?  repair again              -> commit -> attempt 3
+#             -> build -> green?  verify APK + native guards -> publish
+#                                red?   escalate
+#
+# A repair commit is pushed to main, so every substitution is in the history
+# with a message naming exactly what was substituted. A push made with
+# GITHUB_TOKEN does not re-trigger other workflows, so the strict gate is
+# dispatched explicitly at the end instead of being relied upon to fire.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'android/**'
+      - '.github/workflows/autofix-build.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: orbitx-autofix-build
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+jobs:
+  build:
+    name: assembleDebug with self-repair
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    env:
+      RES: android/orbitx_launcher/src/main/res
+      APK: android/orbitx_launcher/build/outputs/apk/debug/orbitx_launcher-debug.apk
+      LOG: /tmp/gradle.log
+      TAG: orbitx-debug-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+          fetch-depth: 1
+
+      # toolchain: mirrors android-build.yml so both produce the same APK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle (dependency + build cache)
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Set up Android command-line tools
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+          accept-android-sdk-licenses: true
+
+      - name: Install the SDK packages and NDK the project pins
+        run: |
+          set -euo pipefail
+          NDK=$(grep -m1 'ndkVersion' android/orbitx_launcher/build.gradle \
+                | grep -oE '[0-9]+[.][0-9]+[.][0-9]+' | head -1)
+          test -n "$NDK"
+          echo "Project pins NDK $NDK"
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          sdkmanager --install \
+            'platforms;android-34' \
+            'build-tools;34.0.0' \
+            platform-tools \
+            'cmake;3.22.1' \
+            "ndk;$NDK"
+          echo "NDK_VERSION=$NDK" >> "$GITHUB_ENV"
+
+      - name: Prepare the build
+        run: |
+          set -euo pipefail
+          echo "sdk.dir=$ANDROID_HOME" > android/local.properties
+          chmod +x android/gradlew
+
+      # THE LOOP
+      - name: Build, repairing and retrying
+        run: |
+          set -o pipefail
+          BUILD_OK=0
+
+          for attempt in 1 2 3; do
+            echo "::group::attempt $attempt - assembleDebug"
+            if ( cd android && ./gradlew --no-daemon --stacktrace assembleDebug ) 2>&1 | tee "$LOG"; then
+              echo "::endgroup::"
+              echo "::notice::build succeeded on attempt $attempt"
+              BUILD_OK=1
+              break
+            fi
+            echo "::endgroup::"
+            echo "::warning::attempt $attempt failed - inspecting the log for a repairable cause"
+
+            REPAIRED=0
+
+            # repair 1: a hyphen run inside a resource-XML comment (hard AAPT2 failure)
+            if grep -qE "Android resource linking failed|not allowed in comments|XMLStreamReader" "$LOG"; then
+              python3 tools/guard_resource_xml_comments.py --fix "$RES" || true
+              if ! git diff --quiet -- "$RES"; then
+                echo "::warning::repaired a hyphen run inside a resource-XML comment (would have failed AAPT2)"
+                REPAIRED=1
+              fi
+            fi
+
+            # repair 2: the linker reported a resource that does not exist
+            python3 tools/ci_repair_from_log.py "$LOG" --res "$RES" || true
+
+            if [ -n "$(git status --porcelain -- "$RES")" ]; then
+              echo "::warning::placeholder resources were created - see the repair output above"
+              REPAIRED=1
+            fi
+
+            if [ "$REPAIRED" -eq 0 ]; then
+              echo "::error::attempt $attempt failed and nothing in the log was mechanically repairable"
+              break
+            fi
+
+            git config user.name  "orbitx-ci"
+            git config user.email "orbitx-ci@users.noreply.github.com"
+            git add -- "$RES"
+            COUNT=$(git diff --cached --name-only | wc -l)
+            git diff --cached --name-only | sed 's/^/   repaired: /'
+            MSG=$(printf 'ci(autofix): repair the resource fault that failed attempt %s\n\nThe build failed on %s and the log named a cause that is mechanically\nrepairable, so it was repaired rather than only reported:\n\n  * a hyphen run inside a resource-XML comment (a hard AAPT2 parse failure), or\n  * resources the Android linker reported missing, materialised as placeholders\n    for the four types that can be substituted safely: drawable, color, dimen,\n    style.\n\nFiles touched: %s. Placeholders render as nothing - a transparent drawable, a\nneutral colour, an 8dp dimen, an empty style - so they link without pretending\nto be the real asset. Anything the repair could not do mechanically, such as a\nmissing string, layout, mipmap or array, or a compile error, is reported and\nleft for a human in the run that produced this commit.' "$attempt" "${GITHUB_SHA:0:7}" "$COUNT")
+            git commit -q -m "$MSG"
+            git push origin main
+            echo "::notice::pushed the repair, retrying the build"
+          done
+
+          if [ "$BUILD_OK" -ne 1 ]; then
+            echo "BUILD_OK=0" >> "$GITHUB_ENV"
+            echo "::error::the build did not go green within three attempts"
+          else
+            echo "BUILD_OK=1" >> "$GITHUB_ENV"
+          fi
+
+      # verification: only when the loop actually went green
+      - name: Verify the APK and its LWJGL natives
+        if: env.BUILD_OK == '1'
+        run: |
+          set -euo pipefail
+          test -f "$APK"
+          ls -la "$APK"
+          unzip -t "$APK" > /dev/null
+          echo "shared objects in APK: $(unzip -l "$APK" | grep -c '[.]so$')"
+          unzip -l "$APK" | grep -q libpojavexec.so
+          unzip -l "$APK" | grep -q libmobileglues.so
+          unzip -l "$APK" | grep -q libltw.so
+          "$ANDROID_HOME/build-tools/34.0.0/aapt" dump badging "$APK" | grep -E '^package|^application-label:' || true
+
+          rm -rf /tmp/apkx && mkdir -p /tmp/apkx
+          unzip -q "$APK" 'assets/components/lwjgl-*-natives/*' -d /tmp/apkx
+
+          guard_version() {
+            ver=$1; sym=$2; shift 2
+            for abi in arm64-v8a armeabi-v7a; do
+              D=/tmp/apkx/assets/components/lwjgl-$ver-natives/$abi
+              test -d "$D" || { echo "::error::LWJGL $ver/$abi not packaged"; exit 1; }
+              for so in "$@"; do
+                test -s "$D/$so" || { echo "::error::LWJGL $ver/$abi missing $so"; exit 1; }
+              done
+              grep -aq "$sym" "$D/liblwjgl.so" || {
+                echo "::error::LWJGL $ver/$abi does not export $sym - built from a different revision than the bundled lwjgl.jar"
+                exit 1; }
+              echo "OK  lwjgl-$ver/$abi  ($(du -sh "$D" | cut -f1), $sym present)"
+            done
+          }
+
+          guard_version 3.3.3 nsetupEnvData \
+            liblwjgl.so liblwjgl_opengl.so liblwjgl_stb.so liblwjgl_tinyfd.so \
+            liblwjgl_vma.so liblwjgl_nanovg.so libfreetype.so libshaderc.so
+          guard_version 3.4.1 setupEnvData \
+            liblwjgl.so liblwjgl_opengl.so liblwjgl_stb.so liblwjgl_tinyfd.so \
+            liblwjgl_vma.so liblwjgl_nanovg.so liblwjgl_spng.so libfreetype.so libshaderc.so
+          guard_version 3.4.2 setupEnvData \
+            liblwjgl.so liblwjgl_opengl.so liblwjgl_stb.so liblwjgl_tinyfd.so \
+            liblwjgl_vma.so liblwjgl_nanovg.so liblwjgl_spng.so libfreetype.so libshaderc.so
+
+          if unzip -l "$APK" | grep -qE 'lib/[^/]+/liblwjgl\.so'; then
+            echo "::error::liblwjgl.so is in lib/ again - a stale LWJGL natives AAR was reintroduced"
+            exit 1
+          fi
+          echo "LWJGL natives guard passed"
+          sha256sum "$APK"
+
+      - name: Publish the APK to the rolling debug release
+        if: env.BUILD_OK == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release view "$TAG" > /dev/null 2>&1 || gh release create "$TAG" --title 'ORBITX debug build (rolling)' --notes 'Rolling debug APK, rebuilt on every push to main.' --prerelease
+          gh release upload "$TAG" "$APK" --clobber
+          echo "Published $APK to release $TAG"
+
+      # escalation: a red build is never left silent
+      - name: Hand the failure to the strict workflow
+        if: env.BUILD_OK != '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run android-build.yml --ref main || true
+
+      - name: Raise an issue for a human
+        if: env.BUILD_OK != '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TITLE="self-fixing build could not repair ${GITHUB_SHA:0:7}"
+          {
+            echo "The self-fixing build could not go green in three attempts."
+            echo
+            echo "**Commit:** \`${GITHUB_SHA}\`"
+            echo "**Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo
+            echo "Repairable causes: a hyphen run inside a resource-XML comment, or a"
+            echo "resource the linker reported missing for drawable/color/dimen/style."
+            echo "Everything else needs a decision."
+            echo
+            echo "<details><summary>last 120 lines of the Gradle log</summary>"
+            echo
+            echo '```'
+            tail -120 "$LOG" 2>/dev/null || echo '(no log captured)'
+            echo '```'
+            echo
+            echo "</details>"
+          } > /tmp/body.md
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number -q '.[0].number' || true)
+          if [ -n "${EXISTING:-}" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/body.md
+          else
+            gh issue create --title "$TITLE" --body-file /tmp/body.md
+          fi
+
+      - name: Upload the APK
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: orbitx_launcher-debug-autofix
+          path: android/orbitx_launcher/build/outputs/apk/debug/orbitx_launcher-debug.apk
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "### Self-fixing debug build"
+            echo
+            echo "| | |"
+            echo "|---|---|"
+            echo "| outcome | $([ "${BUILD_OK:-0}" = "1" ] && echo 'green' || echo 'escalated') |"
+            echo "| commit | \`${GITHUB_SHA:0:7}\` |"
+            echo
+            if [ -f "$LOG" ]; then
+              echo '<details><summary>Gradle errors</summary>'
+              echo
+              echo '```'
+              grep -E "error:|FAILURE:|What went wrong" "$LOG" | head -25 || true
+              echo '```'
+              echo
+              echo "</details>"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
