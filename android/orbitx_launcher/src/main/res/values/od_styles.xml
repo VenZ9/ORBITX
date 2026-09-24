@@ -319,4 +319,291 @@
         <item name="android:textSize">@dimen/od_text_label</item>
     </style>
 
+    <!-- == THE CARD LAYER ==================================================
+         A card groups content INSIDE a pane. One card holds one idea: the
+         instance you are about to launch, the list you pick a server from, the
+         tools for one job. Two cards side by side is already the limit of what
+         a screen can show before the eye stops ranking them.
+    -->
+
+    <style name="OdCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/od_card</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/od_pad_card</item>
+    </style>
+
+    <!-- The card that owns the primary action: one amber rule along its top. -->
+    <style name="OdCard.Hero">
+        <item name="android:background">@drawable/od_card_hero</item>
+    </style>
+
+    <!-- A card with no padding, for a card whose children are full-bleed rows. -->
+    <style name="OdCard.Flush">
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <!-- The header inside a card: a title and an optional trailing affordance. -->
+    <style name="OdCard.Header">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingBottom">@dimen/od_space_3</item>
+    </style>
+
+    <!-- The section title inside a card. Sentence case, medium weight — the
+         uppercase label role is for column headers, not for card titles. -->
+    <style name="OdCard.Title" parent="OdText.TitleM">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- A block nested INSIDE a card: one step lighter, rimmed, clickable. -->
+    <style name="OdInnerRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_row_h</item>
+        <item name="android:background">@drawable/od_inner_row</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_space_3</item>
+        <item name="android:paddingEnd">@dimen/od_space_3</item>
+    </style>
+
+    <style name="OdInnerRow.Tall">
+        <item name="android:layout_height">@dimen/od_row_h_tall</item>
+    </style>
+
+    <!-- == PILLS ===========================================================
+         A pill carries ONE runtime fact. The hue is the fact's identity: blue
+         is the loader, gold is Java, green is online, accent is "this is the
+         one that is running". A pill is read by colour before it is read by
+         text, so the same hue must never mean two things.
+    -->
+
+    <style name="OdPill">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/od_pill_h</item>
+        <item name="android:background">@drawable/od_pill_neutral</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:paddingStart">@dimen/od_pill_pad</item>
+        <item name="android:paddingEnd">@dimen/od_pill_pad</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/od_pill_neutral_text</item>
+        <item name="android:textSize">@dimen/od_text_label</item>
+    </style>
+
+    <style name="OdPill.Blue">
+        <item name="android:background">@drawable/od_pill_blue</item>
+        <item name="android:textColor">@color/od_pill_blue</item>
+    </style>
+
+    <style name="OdPill.Gold">
+        <item name="android:background">@drawable/od_pill_gold</item>
+        <item name="android:textColor">@color/od_pill_gold</item>
+    </style>
+
+    <style name="OdPill.Green">
+        <item name="android:background">@drawable/od_pill_green</item>
+        <item name="android:textColor">@color/od_pill_green</item>
+    </style>
+
+    <style name="OdPill.Accent">
+        <item name="android:background">@drawable/od_pill_accent</item>
+        <item name="android:textColor">@color/od_pill_accent</item>
+    </style>
+
+    <!-- == RANK BADGE ======================================================
+         A rank badge must declare its BASE style. Android resolves the dotted
+         name `OdBadge.Rank` to style OdBadge with implicit parent OdBadge, so a
+         family introduced at the dotted level alone fails the resource link with
+         "resource style/OdBadge not found". Same trap as OdButton/OdChrome
+         earlier in this file. -->
+    <style name="OdBadge">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="OdBadge.Rank">
+        <item name="android:layout_width">@dimen/od_badge_rank</item>
+        <item name="android:layout_height">@dimen/od_badge_rank</item>
+        <item name="android:background">@drawable/od_rank_badge_1</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/od_text</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <!-- == SEGMENTED TABS ================================================== -->
+
+    <style name="OdTabStrip">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_tab_h</item>
+        <item name="android:background">@drawable/od_tab_track</item>
+        <item name="android:baselineAligned">false</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">3dp</item>
+    </style>
+
+    <style name="OdTab">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/od_tab</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:textSize">@dimen/od_text_body_s</item>
+    </style>
+
+    <!-- == UPLOAD SLOT ====================================================
+         A dashed drop target. The ONLY dashed shape in the language, so a
+         dashed outline always and only means "something belongs here".
+    -->
+
+    <style name="OdSlot">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/od_slot_h</item>
+        <item name="android:background">@drawable/od_slot</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- == INFO BOX ======================================================= -->
+
+    <style name="OdInfoBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/od_infobox</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/od_space_3</item>
+    </style>
+
+    <!-- == THE PRIMARY ACTION =============================================
+         One warm ramp, used once per screen. The label is DARK on it: white
+         on gold loses the contrast the primary action needs.
+    -->
+
+    <style name="OdCta">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_play_h</item>
+        <item name="android:background">@drawable/od_cta</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:letterSpacing">0.14</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/od_on_accent</item>
+        <item name="android:textSize">@dimen/od_text_title_m</item>
+    </style>
+
+    <!-- == COMMAND BAR: destinations and utilities ======================== -->
+
+    <!-- One destination: glyph over label, centred in a flexible column. The
+         active underline is drawn as an explicit child View so it can be sized
+         to the label rather than to the whole column. -->
+    <style name="OdNavItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/od_nav_item_bg</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="OdNavItem.Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:duplicateParentState">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/od_menuitem_text</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <!-- The underline under an active destination. A 2dp mark pointing down
+         into the workspace, matching the tab indicator and the window's own
+         grammar: the accent rule always points at what it controls. -->
+    <style name="OdNavItem.Underline">
+        <item name="android:layout_width">@dimen/od_badge_rank</item>
+        <item name="android:layout_height">@dimen/od_stroke_marker</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:background">@drawable/od_nav_underline</item>
+        <item name="android:duplicateParentState">true</item>
+    </style>
+
+    <!-- A utility cluster entry on the trailing edge of the bar. -->
+    <style name="OdUtility">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/od_utility_h</item>
+        <item name="android:background">@drawable/od_icon_button</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minWidth">@dimen/od_utility_h</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_space_2</item>
+        <item name="android:paddingEnd">@dimen/od_space_2</item>
+    </style>
+
+    <!-- The identity cell on the leading edge: mark + wordmark. -->
+    <style name="OdBrand">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_space_4</item>
+        <item name="android:paddingEnd">@dimen/od_space_3</item>
+    </style>
+
+    <!-- == AVATAR / STAGE WELLS =========================================== -->
+
+    <style name="OdAvatar">
+        <item name="android:layout_width">@dimen/od_avatar</item>
+        <item name="android:layout_height">@dimen/od_avatar</item>
+        <item name="android:background">@drawable/od_avatar_frame</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="OdIconWell">
+        <item name="android:layout_width">@dimen/od_thumb_lg</item>
+        <item name="android:layout_height">@dimen/od_thumb_lg</item>
+        <item name="android:background">@drawable/od_icon_well</item>
+    </style>
+
+    <!-- The well a 3D render stands in. -->
+    <style name="OdHeroStage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_hero_h</item>
+        <item name="android:background">@drawable/od_hero_stage</item>
+    </style>
+
+    <!-- == CARD DIVIDER =================================================== -->
+
+    <style name="OdCard.Rule">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_stroke_rule</item>
+        <item name="android:background">@color/od_glass_edge_soft</item>
+    </style>
+
 </resources>
