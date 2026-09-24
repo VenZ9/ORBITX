@@ -4,38 +4,51 @@
 
   THE STRUCTURAL CHANGE
 
-  The band it replaces sat on the BOTTOM edge and stacked a glyph over a label
+  The band this replaces sat on the BOTTOM edge and stacked a glyph over a label
   inside five equal columns — the home-screen idiom every phone launcher uses.
   That is why the app kept reading as a re-skin no matter what colour it was.
 
-  This is a desktop MENU BAR. It is pinned to the TOP edge and is built from two
-  tiers, which is how every Windows application is organised:
+  This is a desktop MENU BAR: pinned to the TOP edge, built from two tiers.
 
      +==========================================================+
-     | ORBITX                              v3.2.0        [gear]  |  title strip
+     | [mark] ORBITX  .            EN v  build  [@ player]      |  title strip
      +==========================================================+
-     | HOME  |  CURSOR  |  CONTROLS  |  ABOUT  |  SETTINGS        |  menu strip
+     |   HOME   |  CURSOR  | CONTROLS |  ABOUT  |  SETTINGS     |  nav strip
+     |   =====  |          |          |         |               |
      +==========================================================+
 
-  Tier 1 is the TITLE STRIP: the product identity on the leading edge, and the
-  build/utility cluster on the trailing edge — the same furniture as a window's
-  own title bar. 30dp.
+  TIER 1 — THE TITLE STRIP, 32dp.
 
-  Tier 2 is the MENU STRIP: every destination as ONE HORIZONTAL UNIT — a glyph
-  sitting BESIDE its label, reading left to right like File / Edit / View. 42dp.
+  Product identity on the leading edge; the utility cluster on the trailing
+  edge. This is a window's own title bar: who this is, on the left; the controls
+  that act on the whole window, on the right. The build id and the account chip
+  live here rather than on a page, because they are global facts, not
+  per-destination ones.
 
-  The two tiers are told apart by a 1dp rule; the whole bar is closed by a second
-  rule where it meets the workspace. Nothing floats, nothing is a capsule.
+  TIER 2 — THE NAV STRIP, 56dp.
+
+  Every destination as a centred column: glyph above caption, with a 2dp accent
+  rule under the caption when it is the page you are on. That underline is the
+  most recognisable element of the design this is built to, and it is what makes
+  the current location legible WITHOUT the caption changing colour — a colour-
+  only active state disappears on a dim panel.
+
+  The two tiers are separated by a hairline and the whole bar is closed by a
+  second one where it meets the workspace. Nothing floats, nothing is a capsule.
 
   HOW THE ACTIVE DESTINATION READS
 
-  A 2dp ember rule along the BOTTOM edge of the active item — the seam pointing
-  down into the panel you are looking at — plus a raised fill. Nothing else on
-  the bar is ever coloured, so the eye lands on the current location instantly.
+  A 2dp accent rule under the caption — pointing DOWN into the workspace, the
+  same grammar the segmented tabs and the row-selection marker use, so an accent
+  rule always points at the thing it controls. Plus a raised fill on the column.
+  Two signals, so the current page survives low brightness and colour-blindness,
+  and nothing else on the bar is ever coloured.
 
-  Children carry android:duplicateParentState="true" so the parent's
-  setSelected() drives the glyph and label colour selectors. That is what
-  LauncherActivity already calls, so no Java changes are needed.
+  The underline is driven by @drawable/od_nav_underline, a state selector, so
+  the parent's setSelected() lights it with no Java change. It is a selector and
+  not a shape with visibility="invisible" because android:visibility does NOT
+  propagate through duplicateParentState — only states do, and an invisible view
+  would have stayed invisible forever.
 
   LEGACY IDS: lh_dock, lh_nav_home/_cursor/_controls/_about/_settings and every
   *_glyph id are unchanged, as are the account_spinner and setting_button
@@ -49,55 +62,108 @@
     android:background="@drawable/od_commandbar"
     android:orientation="vertical">
 
-    <!-- ============ TIER 1 . TITLE STRIP ============ -->
+    <!-- ══════════ TIER 1 · TITLE STRIP ══════════ -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="32dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/od_space_3"
-        android:paddingEnd="@dimen/od_space_1">
+        android:orientation="horizontal">
 
         <!-- identity: the mark and the wordmark, exactly as a window titles
              itself. This is also the host for the account spinner ghost. -->
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/orbitx_mark" />
+        <LinearLayout style="@style/OdBrand">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/od_space_2"
-            android:fontFamily="sans-serif-medium"
-            android:includeFontPadding="false"
-            android:letterSpacing="0.16"
-            android:text="ORBITX"
-            android:textColor="@color/od_text"
-            android:textSize="@dimen/od_text_body_s" />
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/orbitx_mark" />
 
-        <!-- one always-visible live marker: the client is running. -->
-        <View
-            android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:layout_marginStart="@dimen/od_space_2"
-            android:background="@drawable/od_live_dot" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.16"
+                android:text="ORBITX"
+                android:textColor="@color/od_accent"
+                android:textSize="@dimen/od_text_body_s" />
+
+            <!-- one always-visible live marker: the client is running. -->
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:background="@drawable/od_live_dot" />
+        </LinearLayout>
 
         <Space
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
-        <!-- build identity, mono, right-aligned: a desktop client always shows
-             which build you are running. -->
+        <!-- ──── utility cluster: the controls that act on the whole window ──── -->
+
+        <!-- language / locale. A text cell, because two letters do not need a
+             glyph, and the chevron is the framework's own so it can never be a
+             missing resource. -->
+        <LinearLayout
+            android:id="@+id/lh_dock_util_lang"
+            style="@style/OdUtility">
+
+            <TextView
+                style="@style/OdText.MonoS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EN"
+                android:textColor="@color/od_text_dim" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="3dp"
+                android:contentDescription="@null"
+                android:src="@android:drawable/arrow_down_float"
+                app:tint="@color/od_text_muted" />
+        </LinearLayout>
+
+        <!-- build identity, mono: a desktop client always shows its build. -->
         <TextView
+            android:id="@+id/lh_dock_build"
             style="@style/OdText.MonoS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_2"
             android:letterSpacing="0.06"
             android:text="ORBITX"
             android:textColor="@color/od_text_faint" />
+
+        <!-- the account chip: the global identity control. -->
+        <LinearLayout
+            android:id="@+id/lh_dock_account"
+            style="@style/OdUtility"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:background="@drawable/od_inner_row">
+
+            <ImageView
+                android:id="@+id/lh_dock_account_head"
+                android:layout_width="@dimen/od_avatar_xs"
+                android:layout_height="@dimen/od_avatar_xs"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/lh_dock_account_name"
+                style="@style/OdText.MonoS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/od_text"
+                android:textSize="@dimen/od_text_label" />
+        </LinearLayout>
 
         <!-- Legacy logic host: settings icon swap target. Zero size, gone. -->
         <ImageButton
@@ -117,183 +183,137 @@
             android:popupBackground="@drawable/bg_account_popup"
             android:popupElevation="10dp"
             android:visibility="gone" />
+
+        <View
+            android:layout_width="@dimen/od_space_3"
+            android:layout_height="1dp" />
     </LinearLayout>
 
-    <!-- hairline between the title strip and the menu strip -->
+    <!-- hairline between the title strip and the nav strip -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/od_rule" />
 
-    <!-- ============ TIER 2 . MENU STRIP ============ -->
+    <!-- ══════════ TIER 2 · NAV STRIP ══════════ -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="42dp"
+        android:layout_height="@dimen/od_nav_h"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
         <!-- === HOME === -->
         <LinearLayout
             android:id="@+id/lh_nav_home"
-            style="@style/OdChrome.MenuItem"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            style="@style/OdNavItem"
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/lh_nav_home_glyph"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/od_nav_glyph"
+                android:layout_height="@dimen/od_nav_glyph"
                 android:contentDescription="@null"
                 android:duplicateParentState="true"
                 android:src="@drawable/ic_menu_home"
                 app:tint="@color/od_menuitem_glyph" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:duplicateParentState="true"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
-                android:includeFontPadding="false"
-                android:letterSpacing="0.06"
-                android:maxLines="1"
-                android:text="HOME"
-                android:textColor="@color/od_menuitem_text"
-                android:textSize="9sp" />
+                style="@style/OdNavItem.Text"
+                android:text="HOME" />
+
+            <View style="@style/OdNavItem.Underline" />
         </LinearLayout>
 
         <!-- === CURSOR === -->
         <LinearLayout
             android:id="@+id/lh_nav_cursor"
-            style="@style/OdChrome.MenuItem"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            style="@style/OdNavItem"
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/lh_nav_cursor_glyph"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/od_nav_glyph"
+                android:layout_height="@dimen/od_nav_glyph"
                 android:contentDescription="@null"
                 android:duplicateParentState="true"
                 android:src="@drawable/ic_mouse_pointer"
                 app:tint="@color/od_menuitem_glyph" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:duplicateParentState="true"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
-                android:includeFontPadding="false"
-                android:letterSpacing="0.06"
-                android:maxLines="1"
-                android:text="CURSOR"
-                android:textColor="@color/od_menuitem_text"
-                android:textSize="9sp" />
+                style="@style/OdNavItem.Text"
+                android:text="CURSOR" />
+
+            <View style="@style/OdNavItem.Underline" />
         </LinearLayout>
 
         <!-- === CONTROLS === -->
         <LinearLayout
             android:id="@+id/lh_nav_controls"
-            style="@style/OdChrome.MenuItem"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            style="@style/OdNavItem"
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/lh_nav_controls_glyph"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/od_nav_glyph"
+                android:layout_height="@dimen/od_nav_glyph"
                 android:contentDescription="@null"
                 android:duplicateParentState="true"
                 android:src="@drawable/ic_menu_custom_controls"
                 app:tint="@color/od_menuitem_glyph" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:duplicateParentState="true"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
-                android:includeFontPadding="false"
-                android:letterSpacing="0.06"
-                android:maxLines="1"
-                android:text="CONTROLS"
-                android:textColor="@color/od_menuitem_text"
-                android:textSize="9sp" />
+                style="@style/OdNavItem.Text"
+                android:text="CONTROLS" />
+
+            <View style="@style/OdNavItem.Underline" />
         </LinearLayout>
 
         <!-- === ABOUT === -->
         <LinearLayout
             android:id="@+id/lh_nav_about"
-            style="@style/OdChrome.MenuItem"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            style="@style/OdNavItem"
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/lh_nav_about_glyph"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/od_nav_glyph"
+                android:layout_height="@dimen/od_nav_glyph"
                 android:contentDescription="@null"
                 android:duplicateParentState="true"
                 android:src="@drawable/ic_info"
                 app:tint="@color/od_menuitem_glyph" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:duplicateParentState="true"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
-                android:includeFontPadding="false"
-                android:letterSpacing="0.06"
-                android:maxLines="1"
-                android:text="ABOUT"
-                android:textColor="@color/od_menuitem_text"
-                android:textSize="9sp" />
+                style="@style/OdNavItem.Text"
+                android:text="ABOUT" />
+
+            <View style="@style/OdNavItem.Underline" />
         </LinearLayout>
 
         <!-- === SETTINGS ===
-             Kept in the menu strip, where a desktop application always puts
+             Kept in the nav strip, where a desktop application always puts
              preferences. The id must stay lh_nav_settings: LauncherActivity
              resolves it for both the click handler and the selected-state
              refresh. -->
         <LinearLayout
             android:id="@+id/lh_nav_settings"
-            style="@style/OdChrome.MenuItem"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            style="@style/OdNavItem"
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/lh_nav_settings_glyph"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/od_nav_glyph"
+                android:layout_height="@dimen/od_nav_glyph"
                 android:contentDescription="@null"
                 android:duplicateParentState="true"
                 android:src="@drawable/ic_menu_settings"
                 app:tint="@color/od_menuitem_glyph" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:duplicateParentState="true"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
-                android:includeFontPadding="false"
-                android:letterSpacing="0.06"
-                android:maxLines="1"
-                android:text="SETTINGS"
-                android:textColor="@color/od_menuitem_text"
-                android:textSize="9sp" />
+                style="@style/OdNavItem.Text"
+                android:text="SETTINGS" />
+
+            <View style="@style/OdNavItem.Underline" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

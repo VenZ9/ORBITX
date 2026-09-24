@@ -42,7 +42,7 @@
       which is legible for micro-labels on a good panel and keeps six to eight
       rows visible on a landscape phone.
 
-   4. ACCENT IS STATE. Ember only ever means selected, primary action, or live.
+   4. ACCENT IS STATE. Amber only ever means selected, primary action, or live.
       Rest states are carried by surface and rules, so the eye goes to the one
       thing that matters on a screen.
 
@@ -127,7 +127,7 @@
 
     <!-- The bottom status strip: what the app is doing, right now, plus the
          build identity. A desktop client always tells you this. -->
-    <dimen name="od_status_h">26dp</dimen>
+    <dimen name="od_status_h">28dp</dimen>
     <dimen name="od_status_dot">6dp</dimen>
 
     <!-- Panes. min is the width below which a pane stops being usable and the
@@ -174,5 +174,59 @@
     <item name="od_alpha_pressed" format="float" type="dimen">0.12</item>
     <item name="od_alpha_hover" format="float" type="dimen">0.06</item>
     <item name="od_alpha_scrim" format="float" type="dimen">0.78</item>
+
+    <!-- == 7. CARD LAYER ====================================================
+         The card ladder. Panes DIVIDE the screen; cards GROUP content inside a
+         pane. Both exist, and the distinction is why a screen can be dense
+         without being flat: the pane answers "where am I", a card answers
+         "what is this block".
+
+         Radii are deliberately larger than the window's own, so a card is
+         visibly an object placed on the workspace rather than another pane. -->
+    <dimen name="od_radius_card">20dp</dimen>
+    <dimen name="od_radius_inner">12dp</dimen>
+    <dimen name="od_radius_tab">10dp</dimen>
+    <dimen name="od_radius_avatar">8dp</dimen>
+    <dimen name="od_radius_cta">14dp</dimen>
+
+    <!-- How far the hero card's accent rule is inset from each end. -->
+    <dimen name="od_card_accent_inset">12dp</dimen>
+
+    <dimen name="od_pad_card">16dp</dimen>
+    <dimen name="od_pad_card_tight">12dp</dimen>
+
+    <!-- The hero stage: the well the 3D render stands in. -->
+    <dimen name="od_hero_h">132dp</dimen>
+    <dimen name="od_hero_h_short">104dp</dimen>
+
+    <!-- The primary action. Tall enough that it reads as the destination of
+         the eye, which is the whole job of a launch control. -->
+    <dimen name="od_play_h">50dp</dimen>
+    <dimen name="od_play_glyph">22dp</dimen>
+
+    <!-- Pills: runtime facts (loader / java / ram). -->
+    <dimen name="od_pill_h">20dp</dimen>
+    <dimen name="od_pill_pad">8dp</dimen>
+    <dimen name="od_pill_gap">6dp</dimen>
+
+    <dimen name="od_avatar">38dp</dimen>
+    <dimen name="od_avatar_sm">26dp</dimen>
+    <dimen name="od_avatar_xs">16dp</dimen>
+    <dimen name="od_badge_rank">18dp</dimen>
+
+    <!-- The segmented tab strip. -->
+    <dimen name="od_tab_h">38dp</dimen>
+    <dimen name="od_tab_glyph">16dp</dimen>
+
+    <!-- The dashed upload slot. -->
+    <dimen name="od_slot_h">64dp</dimen>
+
+    <!-- The nav strip inside the command bar. -->
+    <dimen name="od_nav_h">56dp</dimen>
+    <dimen name="od_nav_glyph">17dp</dimen>
+    <dimen name="od_utility_gap">10dp</dimen>
+
+    <!-- Dominant card columns. -->
+    <dimen name="od_col_sidebar">200dp</dimen>
 
 </resources>
