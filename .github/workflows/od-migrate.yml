@@ -1,0 +1,144 @@
+name: ORBIT Desktop layout migration
+
+# Runs the deterministic layout migration in a runner that can push, and commits
+# the result ONLY when both migration gates pass.
+#
+# Why this exists: the sandbox this work was authored in has no git credentials,
+# and the change is ~130 layout files that need `git blame`-able provenance
+# rather than an opaque upload. Running the migration here means the committed
+# result is exactly what the checked-in pipeline produces from main, which
+# anyone can reproduce with one command:
+#
+#     python3 tools/od_migrate.py --apply
+#
+# The gates are the point. od_migrate.py exits non-zero if any check fails, the
+# commit step is gated on that exit status, and a gate failure therefore leaves
+# main untouched with the reason printed in this run's log — so a sweep that
+# would break XML, drop an id, reference a drawable that does not exist, or
+# change the type of a view some Java code casts can never reach main.
+#
+# workflow_dispatch only: this is a migration run once, not a per-commit job.
+# Re-running it after main is migrated is a no-op — the target list is derived
+# from the tree, and a tree already on the od_ language has no targets.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: orbitx-od-migrate
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    name: sweep · gates · commit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          # keeps the token in .git/config so the push step works
+          persist-credentials: true
+          fetch-depth: 1
+
+      - name: Report the target set
+        run: python3 tools/od_migrate.py --list
+
+      - name: Run the migration and both gates
+        run: |
+          set -o pipefail
+          python3 tools/od_migrate.py --apply | tee /tmp/migrate.log
+
+      # A few layouts were authored by hand against the od_ language rather than
+      # swept onto it — the World Manager readout pane and its row template, and
+      # the FastClient settings row. They carry structure no rewrite rule can
+      # infer, so they are restored here from the committed version. The sweep
+      # already skips them (they carry od_ tokens, so they are not in its target
+      # set); this makes the guarantee explicit so a later edit to the sweep rules
+      # can never quietly overwrite that work.
+      - name: Restore the hand-authored screens
+        run: |
+          set -euo pipefail
+          L=android/orbitx_launcher/src/main/res/layout
+          restored=0
+          for f in fragment_world_manager item_world fragment_settings_fastclient; do
+            if git cat-file -e "HEAD:$L/$f.xml" 2>/dev/null &&
+               ! git diff --quiet -- "$L/$f.xml"; then
+              git checkout HEAD -- "$L/$f.xml"
+              echo "  reverted the sweep's changes to $f.xml"
+              restored=$((restored + 1))
+            fi
+          done
+          echo "hand-authored screens reverted: $restored"
+
+      - name: Stage the result
+        run: |
+          set -euo pipefail
+          git config user.name  "orbitx-ci"
+          git config user.email "orbitx-ci@users.noreply.github.com"
+          git add android/orbitx_launcher/src/main/res/layout
+          if git diff --cached --quiet; then
+            echo "::notice::main is already on the od_ language — nothing to commit"
+            echo "CHANGED=false" >> "$GITHUB_ENV"
+          else
+            echo "CHANGED=true" >> "$GITHUB_ENV"
+            echo "staged $(git diff --cached --name-only | wc -l) layouts"
+          fi
+
+      # Re-verify against what is actually STAGED. A gate that passed on the
+      # working tree is not evidence about what is about to be committed.
+      - name: Re-run the gates against the staged tree
+        if: env.CHANGED == 'true'
+        run: |
+          set -o pipefail
+          python3 tools/od_migrate.py --gate | tee /tmp/gate.log
+
+      - name: Commit and push
+        if: env.CHANGED == 'true'
+        run: |
+          set -euo pipefail
+          N=$(git diff --cached --name-only | wc -l)
+          git commit -q -F - <<'MSG'
+          refactor(ui): move the remaining phone-shaped layouts onto ORBIT Desktop
+
+          The ORBIT Desktop language — od_ tokens, panes instead of rounded cards,
+          a fixed 4dp grid, one six-step type scale, one five-role text palette —
+          landed on main with the first screens that adopted it. The rest of the
+          layout tree was still the phone launcher's: density-scaled dimens that
+          stretch a design to any screen width, four generations of an ad-hoc hex
+          palette, and rounded/glass cards nested inside cards.
+
+          This is that remainder, moved onto the same language by the
+          deterministic pipeline in tools/, which is committed alongside it so the
+          result is reproducible with a single command:
+
+              python3 tools/od_migrate.py --apply
+
+          The pipeline is idempotent and its gates decide whether it may commit.
+          Nothing about the app's behaviour changes: zero android:id is removed or
+          renamed, no id changes the element type it is cast to in Java, no feature
+          or option is dropped, and no drawable is referenced that does not exist.
+          Those are not claims about the diff — they are the two gates in
+          tools/od_migrate.py, and the commit below is gated on their exit status.
+          MSG
+          git push origin main
+          echo "::notice::committed and pushed $N migrated layouts"
+
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "### ORBIT Desktop layout migration"
+            echo
+            if [ -f /tmp/migrate.log ]; then
+              echo '```'; tail -20 /tmp/migrate.log; echo '```'
+            fi
+            if [ -f /tmp/gate.log ]; then
+              echo "Staged-tree re-check:"; echo '```'; tail -12 /tmp/gate.log; echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

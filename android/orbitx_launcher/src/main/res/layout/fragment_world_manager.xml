@@ -1,70 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ═══════════════════════════════════════════════════════════════════
-     WORLD MANAGER v6 — rebuilt on the "Clean Console" inner-page shell
-     (52dp command bar, graphite cards, platinum actions), never
-     full-screen. Storage meter, search + sort rail, cascading list.
-     All WorldManagerFragment IDs preserved.
-     ═══════════════════════════════════════════════════════════════════ -->
+<!--
+     WORLD MANAGER  (was: a "Clean Console" page of graphite cards)
+
+     It replaces a phone page wearing console colours: a 52dp rounded top bar,
+     then TWO rounded cards side by side (storage meter / search over four
+     rounded sort chips), then a cascading list of rounded world cards. Two
+     cards side by side, each with its own radius and its own interior padding,
+     is the clearest tell that a layout was composed on a phone and recoloured
+     later: three different left edges on one screen.
+
+     It is now a WINDOW PANE with exactly one left edge:
+
+         [ pane header 46dp ]  <-  SINGLEPLAYER / World Manager   [12][R][IMPORT]
+         [ readout row 40dp ]  STORAGE  4.2 GB / 32 GB  [=======]
+         [ toolbar 44dp     ]  [ search worlds ] RECENT NAME SIZE VERSION
+         [ 56dp row         ]  My Survival Base  1.20.1 2d ago  842 MB  ...
+         [ 1dp rule         ]
+         [ status strip 26dp]  12 worlds   RECENT . NAME . SIZE . VERSION
+
+       - the two cards merge into two flush STRIPS: storage and search share the
+         pane's single left edge and are separated by hairlines, not gutters
+       - sort becomes a segmented control at the trailing edge of the search
+         row, where a browser puts it, not four chips on their own line
+       - the storage meter becomes a labelled readout with the figure beside
+         the label, so the number reads without measuring a bar
+       - the command bar becomes the standard pane header
+       - a status strip closes the pane
+
+     Zero regression: every id WorldManagerFragment and the adapter bind is
+     preserved verbatim, including _header_right_group, the datapack hint
+     (still gone by default), the loading and empty state groups, and the sort
+     chips. View types unchanged: world_list stays a RecyclerView and
+     world_storage_bar stays a ProgressBar.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pe4_page_bg"
-    android:orientation="vertical"
-    android:paddingHorizontal="16dp"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp">
+    android:background="@drawable/od_window_bg"
+    android:orientation="vertical">
 
-    <!-- ── COMMAND BAR ── -->
+    <!-- == PANE HEADER == -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:background="@drawable/pe5_topbar"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="12dp">
+        style="@style/OdPaneHeader">
 
         <FrameLayout
             android:id="@+id/world_back_button"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="@drawable/pe4_back_btn"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/od_icon_button"
             android:clickable="true"
             android:focusable="true">
+
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/global_back"
                 android:src="@drawable/ic_chevron_left"
-                app:tint="#EFEAEA" />
+                app:tint="@color/od_text_dim" />
         </FrameLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_weight="1"
+            android:layout_marginStart="@dimen/od_space_2"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/world_subtitle"
-                android:layout_width="match_parent"
+                style="@style/OdText.Label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:letterSpacing="0.2"
                 android:maxLines="1"
                 android:text="SINGLEPLAYER"
-                android:textColor="#7C828E"
-                android:textSize="7.5sp"
-                android:textStyle="bold" />
+                tools:ignore="HardcodedText" />
+
             <TextView
-                android:layout_width="match_parent"
+                style="@style/OdText.TitleS"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="World Manager"
-                android:textColor="#FFFFFF"
-                android:textSize="14.5sp"
-                android:textStyle="bold" />
+                tools:ignore="HardcodedText" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/_header_right_group"
@@ -75,249 +100,247 @@
 
             <TextView
                 android:id="@+id/world_count_chip"
+                style="@style/OdWell.Keycap"
                 android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:background="@drawable/bg_cursorx_chip"
-                android:gravity="center"
-                android:letterSpacing="0.06"
-                android:paddingHorizontal="10dp"
+                android:minWidth="52dp"
+                android:paddingStart="@dimen/od_space_2"
+                android:paddingEnd="@dimen/od_space_2"
                 android:text="0 WORLDS"
-                android:textColor="#D3C6C7"
-                android:textSize="8sp"
-                android:textStyle="bold" />
+                tools:ignore="HardcodedText" />
 
             <FrameLayout
                 android:id="@+id/world_datapack_hint_button"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/pe4_icon_well"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:background="@drawable/od_icon_button"
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="gone">
+
                 <TextView
+                    style="@style/OdText.MonoS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="DP"
-                    android:textColor="#EEE6E6"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
+                    tools:ignore="HardcodedText" />
             </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/world_refresh_button"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/pe4_icon_well"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:background="@drawable/od_icon_button"
                 android:clickable="true"
                 android:focusable="true">
+
                 <ImageView
                     android:id="@+id/world_refresh_icon"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_cs_refresh"
-                    app:tint="#EEE6E6" />
+                    app:tint="@color/od_text_dim" />
             </FrameLayout>
 
             <TextView
                 android:id="@+id/world_import_button"
+                style="@style/OdButton.Primary"
                 android:layout_width="wrap_content"
-                android:layout_height="34dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/pe4_btn_save"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:letterSpacing="0.08"
-                android:paddingHorizontal="14dp"
-                android:text="IMPORT"
-                android:textColor="#1A1414"
-                android:textSize="9.5sp"
-                android:textStyle="bold" />
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/od_space_2"
+                android:minHeight="0dp"
+                android:text="Import"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- ── STORAGE + SEARCH RAIL ── -->
+    <!-- == STORAGE READOUT == one flush strip: label, the figure, the meter.
+         The number sits beside the label so it reads without measuring a bar. == -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_gutter">
 
-        <!-- Storage meter card -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            style="@style/OdText.Label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.42"
-            android:background="@drawable/bg_cursorx_card"
-            android:orientation="vertical"
-            android:paddingHorizontal="13dp"
-            android:paddingVertical="10dp">
+            android:text="STORAGE"
+            tools:ignore="HardcodedText" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:letterSpacing="0.14"
-                    android:text="STORAGE"
-                    android:textColor="#7C828E"
-                    android:textSize="7.5sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/world_storage_used"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#F5F0F0"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:text="—" />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/world_storage_used"
+            style="@style/OdText.Mono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:text="-"
+            tools:ignore="HardcodedText" />
 
-            <ProgressBar
-                android:id="@+id/world_storage_bar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginTop="7dp"
-                android:max="100"
-                android:progressDrawable="@drawable/bg_rs_stage_track" />
+        <ProgressBar
+            android:id="@+id/world_storage_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:layout_weight="1"
+            android:max="100"
+            android:progressDrawable="@drawable/od_progress" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/world_storage_summary"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="#7C828E"
-                    android:textSize="8.5sp"
-                    android:text="Worlds on this profile" />
-                <TextView
-                    android:id="@+id/world_storage_free"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#AE9A9B"
-                    android:textSize="8.5sp"
-                    android:text="" />
-                <TextView
-                    android:id="@+id/world_storage_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:textColor="#705C5C"
-                    android:textSize="8.5sp"
-                    android:text="" />
-            </LinearLayout>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/world_storage_summary"
+            style="@style/OdText.MonoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Worlds on this profile"
+            tools:ignore="HardcodedText" />
 
-        <!-- Search + sort card -->
+        <TextView
+            android:id="@+id/world_storage_free"
+            style="@style/OdText.MonoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/world_storage_total"
+            style="@style/OdText.MonoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_1"
+            android:text="" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/od_stroke_rule"
+        android:background="@color/od_rule" />
+
+    <!-- == TOOLBAR == search well on the leading edge, sort as a segmented
+         control on the trailing edge - where a browser keeps it. == -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/od_row_h_toolbar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_space_2">
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="0.58"
-            android:background="@drawable/bg_cursorx_card"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/od_search_well"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="9dp">
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/od_space_2">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_search"
+                app:tint="@color/od_text_faint" />
 
             <EditText
                 android:id="@+id/world_search_input"
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:background="@drawable/bg_input_premium"
-                android:hint="Search worlds…"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="Search worlds..."
                 android:imeOptions="actionSearch"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLines="1"
-                android:paddingHorizontal="12dp"
-                android:textColor="#F5F0F0"
-                android:textColorHint="#705C5C"
-                android:textSize="10.5sp" />
+                android:textColor="@color/od_text"
+                android:textColorHint="@color/od_text_faint"
+                android:textSize="@dimen/od_text_body_s"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/world_sort_last_played"
-                    android:layout_width="0dp"
-                    android:layout_height="22dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_cursorx_chip"
-                    android:gravity="center"
-                    android:letterSpacing="0.05"
-                    android:text="RECENT"
-                    android:textColor="#D3C6C7"
-                    android:textSize="7.5sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/world_sort_name"
-                    android:layout_width="0dp"
-                    android:layout_height="22dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_cursorx_chip"
-                    android:gravity="center"
-                    android:letterSpacing="0.05"
-                    android:text="NAME"
-                    android:textColor="#D3C6C7"
-                    android:textSize="7.5sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/world_sort_size"
-                    android:layout_width="0dp"
-                    android:layout_height="22dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_cursorx_chip"
-                    android:gravity="center"
-                    android:letterSpacing="0.05"
-                    android:text="SIZE"
-                    android:textColor="#D3C6C7"
-                    android:textSize="7.5sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/world_sort_version"
-                    android:layout_width="0dp"
-                    android:layout_height="22dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_cursorx_chip"
-                    android:gravity="center"
-                    android:letterSpacing="0.05"
-                    android:text="VERSION"
-                    android:textColor="#D3C6C7"
-                    android:textSize="7.5sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+        <!-- Sort: one segmented control, so the four states read as one
+             instrument instead of four separate buttons. -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:background="@drawable/od_chip"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/world_sort_last_played"
+                style="@style/OdText.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/od_chip"
+                android:gravity="center"
+                android:minWidth="52dp"
+                android:paddingStart="@dimen/od_space_2"
+                android:paddingEnd="@dimen/od_space_2"
+                android:text="RECENT"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/world_sort_name"
+                style="@style/OdText.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minWidth="46dp"
+                android:paddingStart="@dimen/od_space_2"
+                android:paddingEnd="@dimen/od_space_2"
+                android:text="NAME"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/world_sort_size"
+                style="@style/OdText.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minWidth="46dp"
+                android:paddingStart="@dimen/od_space_2"
+                android:paddingEnd="@dimen/od_space_2"
+                android:text="SIZE"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/world_sort_version"
+                style="@style/OdText.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minWidth="60dp"
+                android:paddingStart="@dimen/od_space_2"
+                android:paddingEnd="@dimen/od_space_2"
+                android:text="VERSION"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- ── LIST ── -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/od_stroke_rule"
+        android:background="@color/od_rule" />
+
+    <!-- == LIST == -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
         android:layout_weight="1">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -327,10 +350,9 @@
             android:clipToPadding="false"
             android:layoutAnimation="@anim/cz_cascade"
             android:overScrollMode="never"
-            android:paddingBottom="4dp"
+            android:paddingBottom="@dimen/od_space_1"
             android:scrollbars="none" />
 
-        <!-- Loading -->
         <LinearLayout
             android:id="@+id/world_loading_state"
             android:layout_width="wrap_content"
@@ -339,20 +361,21 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
+
             <ProgressBar
                 style="?android:attr/progressBarStyleSmall"
                 android:layout_width="22dp"
                 android:layout_height="22dp" />
+
             <TextView
+                style="@style/OdText.MonoS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Scanning worlds…"
-                android:textColor="#7C828E"
-                android:textSize="9.5sp" />
+                android:layout_marginTop="@dimen/od_space_2"
+                android:text="Scanning worlds..."
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <!-- Empty -->
         <LinearLayout
             android:id="@+id/world_empty_state"
             android:layout_width="wrap_content"
@@ -361,28 +384,63 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
+
             <FrameLayout
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:background="@drawable/pe4_icon_ring">
+                android:background="@drawable/od_well">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="✦"
-                    android:textColor="#AE9A9B"
+                    android:text="*"
+                    android:textColor="@color/od_text_faint"
                     android:textSize="20sp" />
             </FrameLayout>
+
             <TextView
                 android:id="@+id/world_empty_text"
+                style="@style/OdText.BodyS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/od_space_3"
                 android:gravity="center"
                 android:lineSpacingExtra="3dp"
-                android:text="No worlds here yet.\nPlay this profile once or import a .zip / .mcworld above."
-                android:textColor="#7C828E"
-                android:textSize="10sp" />
+                android:text="No worlds here yet.\nPlay this profile once, or import a .zip / .mcworld above."
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </FrameLayout>
+
+    <!-- == STATUS STRIP == -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/od_status_h"
+        android:background="@drawable/od_statusstrip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_gutter">
+
+        <View
+            android:layout_width="@dimen/od_status_dot"
+            android:layout_height="@dimen/od_status_dot"
+            android:background="@drawable/od_live_dot" />
+
+        <TextView
+            style="@style/OdChrome.StatusCell"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_2"
+            android:layout_weight="1"
+            android:text="WORLDS"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            style="@style/OdChrome.StatusCell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RECENT . NAME . SIZE . VERSION"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 </LinearLayout>

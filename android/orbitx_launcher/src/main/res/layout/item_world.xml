@@ -1,123 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- WORLD CARD — compact premium grid card (mobile-first, shows more worlds
-     per screen). All view IDs preserved for WorldListAdapter (R5). -->
+<!--
+     WORLD ROW  (was: a rounded "glass card" with a chip row under it)
+
+     Was a card: a rounded surface, an 8dp bottom margin, a 46dp art tile beside
+     the name and meta, an overflow button, and a SECOND line of rounded chips
+     (size, datapack count) below it. Three visual layers to express one world.
+
+     A row that carries its facts in ALIGNED COLUMNS lets you compare four worlds
+     by running your eye down the page. One that carries them in chips under
+     itself cannot be compared with the row above it at all.
+
+     It is now one 56dp table row, flush, hairline-separated by the list:
+
+         > [art] My Survival Base   1.20.1 . 2d ago   842 MB   ...
+                 ^ name / meta       ^ when           ^ size   ^ actions
+
+     The size moves OUT of a chip and INTO a right-aligned mono column, which is
+     the whole point: every world's size now sits on the same vertical line. The
+     datapack chip stays as a mono column too, so it still has somewhere to
+     render when the adapter shows it.
+
+     Every id WorldListAdapter binds is preserved: world_icon, world_name,
+     world_meta, world_menu_button, world_size_chip, world_datapack_chip.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/bg_cs_glass_card"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:minHeight="82dp"
-    android:orientation="vertical"
-    android:padding="10dp">
+    style="@style/OdRow.TallSelectable"
+    android:layout_width="match_parent">
 
-    <!-- ── Top row: art icon + name/actions ── -->
+    <!-- the row's own rule. Drawn by the row, not by the list, so the last row
+         can suppress it. -->
+    <FrameLayout
+        android:layout_width="46dp"
+        android:layout_height="36dp"
+        android:background="@drawable/od_bitmap_frame">
+
+        <ImageView
+            android:id="@+id/world_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/cs_world_icon_desc"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+    </FrameLayout>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_marginStart="@dimen/od_space_3"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/bg_cs_world_icon"
-            android:padding="3dp">
-
-            <ImageView
-                android:id="@+id/world_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/cs_world_icon_desc"
-                android:scaleType="centerCrop"
-                tools:src="@tools:sample/avatars" />
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/world_name"
+            style="@style/OdText.TitleS"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="My Survival Base" />
 
-            <TextView
-                android:id="@+id/world_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:fontFamily="@font/minecraftia"
-                android:includeFontPadding="false"
-                android:letterSpacing="0.02"
-                android:maxLines="1"
-                android:textColor="#FFFFFF"
-                android:textSize="13.5sp"
-                tools:text="My Survival Base" />
-
-            <TextView
-                android:id="@+id/world_meta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="#AF9C9D"
-                android:textSize="9.5sp"
-                tools:text="1.20.1  •  2d ago" />
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/world_menu_button"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="4dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/cs_world_actions"
-            android:padding="7dp"
-            android:src="@drawable/ic_cs_more"
-            app:tint="#AF9C9D" />
+        <TextView
+            android:id="@+id/world_meta"
+            style="@style/OdText.MonoS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="1.20.1  .  2d ago" />
     </LinearLayout>
 
-    <!-- ── Bottom row: chips ── -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- the size, as a right-aligned mono column: every row's size lands on the
+         same vertical line, which is what makes the list scannable. -->
+    <TextView
+        android:id="@+id/world_size_chip"
+        style="@style/OdText.Mono"
+        android:layout_width="@dimen/od_col_meta"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
+        android:gravity="end"
+        android:maxLines="1"
+        tools:text="842 MB" />
 
-        <TextView
-            android:id="@+id/world_size_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:background="@drawable/bg_cs_chip"
-            android:gravity="center"
-            android:paddingHorizontal="8dp"
-            android:textColor="#AF9C9D"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            tools:text="842 MB" />
+    <TextView
+        android:id="@+id/world_datapack_chip"
+        style="@style/OdText.MonoS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/od_space_2"
+        android:maxLines="1"
+        android:visibility="gone"
+        tools:text="3 DP" />
 
-        <TextView
-            android:id="@+id/world_datapack_chip"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginStart="6dp"
-            android:background="@drawable/bg_cs_chip_accent"
-            android:gravity="center"
-            android:paddingHorizontal="8dp"
-            android:textColor="#FFFFFF"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:text="3 datapacks" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
-
+    <ImageButton
+        android:id="@+id/world_menu_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="@dimen/od_space_1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/cs_world_actions"
+        android:padding="7dp"
+        android:src="@drawable/ic_cs_more"
+        app:tint="@color/od_text_muted" />
 </LinearLayout>
