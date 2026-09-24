@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================================
+  ORBIT DESKTOP — the status strip
+  ============================================================================
+
+  The third and last piece of the window frame, and the piece the previous shell
+  was missing entirely. A desktop application always keeps a thin strip along
+  the bottom edge that answers "what is the application doing right now".
+
+  Content, left to right:
+    - a square live indicator (a square, not a circle — the window is orthogonal
+      and the only round object on screen is the primary action)
+    - the current state, in mono
+    - a flexible gap
+    - the product id, right-aligned, faint
+
+  The strip is closed by a 1dp rule along its TOP edge, mirroring the command
+  bar's rule along its bottom edge. Together those two rules are what make the
+  content region read as a bounded workspace rather than as the whole screen.
+
+  It sits BELOW the content pane and never scrolls, never collapses, and is
+  never covered by a page. All of its ids are new, so nothing in Java binds to
+  it and nothing can break.
+  ============================================================================
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/orbit_status_strip"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/od_status_h"
+    android:background="@drawable/od_statusstrip"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/od_space_3"
+    android:paddingEnd="@dimen/od_space_3">
+
+    <View
+        android:id="@+id/orbit_status_dot"
+        android:layout_width="@dimen/od_status_dot"
+        android:layout_height="@dimen/od_status_dot"
+        android:background="@drawable/od_live_dot" />
+
+    <TextView
+        android:id="@+id/orbit_status_text"
+        style="@style/OdChrome.StatusCell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/od_space_2"
+        android:letterSpacing="0.1"
+        android:text="READY"
+        android:textColor="@color/od_text_faint" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/orbit_status_build"
+        style="@style/OdChrome.StatusCell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="0.08"
+        android:text="ORBITX - ANDROID"
+        android:textColor="@color/od_text_faint" />
+</LinearLayout>

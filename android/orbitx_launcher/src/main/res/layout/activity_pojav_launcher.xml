@@ -1,30 +1,40 @@
 <!--
-  ══════════════════════════════════════════════════════════════════════════════
-  LauncherActivity — PORTRAIT shell
-  ══════════════════════════════════════════════════════════════════════════════
+  ============================================================================
+  LauncherActivity — THE WINDOW
+  ============================================================================
 
-  ORBIT's chrome is ONE element: the command bar along the bottom edge. There is
-  no left navigation rail, no top header band, and no floating settings gear —
-  the three things that made the previous shell read as a re-skin of another
-  launcher rather than a product of its own.
+  This file used to be a phone shell: content filling the screen with a single
+  navigation band along the bottom edge. It is now organised as an application
+  WINDOW with three stacked regions, which is the whole point of the redesign:
+
+      +----------------------------------------------------------+
+      |  lh_dock            COMMAND BAR   (title + menu strips)  |  top
+      +----------------------------------------------------------+
+      |                                                          |
+      |  container_fragment  WORKSPACE — every page renders here  |  fills
+      |                                                          |
+      +----------------------------------------------------------+
+      |  orbit_status_strip  STATUS STRIP                        |  bottom
+      +----------------------------------------------------------+
+
+  The workspace is BOUNDED on both sides now. Before, a page ran edge to edge
+  with chrome only at the bottom, so every screen read as a full-bleed mobile
+  page. With a bar above and a strip below, the same page reads as a document
+  inside a client — which is the entire visual difference between the two
+  idioms, and it costs about 68dp of height.
 
   LAYOUT CONTRACT
 
-    · container_fragment  owns every pixel ABOVE the bar, edge to edge, and
-      starts flush at the top of the display. Each page draws its own heading,
-      which is what lets a title run full width instead of being boxed inside a
-      header strip.
-    · lh_dock             is the bar, pinned to the bottom edge, spanning the
-      full width. It is the same include on every page, so navigation can never
-      drift between screens.
+    . lh_dock  is pinned to the TOP edge and is wrap_content (two tiers).
+    . container_fragment  starts below lh_dock and stops above the status strip.
+    . orbit_status_strip  is pinned to the BOTTOM edge.
 
   LEGACY LOGIC HOSTS
 
   account_spinner and setting_button are kept as zero-size, permanently-gone
-  views. They render nothing and reserve no space; they exist only so the
-  existing Java (account dialog host, settings icon swap target) keeps
-  resolving its R.id.* lookups unchanged.
-  ══════════════════════════════════════════════════════════════════════════════
+  views so the existing Java (account dialog host, settings icon swap target)
+  keeps resolving its R.id.* lookups unchanged.
+  ============================================================================
 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,31 +67,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- The content pane. Full width, and it stops exactly at the bar. -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container_fragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/lh_dock"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- The command bar: the only chrome in the app. -->
+    <!-- -- the command bar: title strip over menu strip, pinned to the top -- -->
     <include
         android:id="@+id/lh_dock"
         layout="@layout/include_lh_dock"
         android:layout_width="0dp"
-        android:layout_height="@dimen/orb_bar_height"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- -- the status strip, pinned to the bottom edge -- -->
+    <include
+        android:id="@+id/orbit_status_strip"
+        layout="@layout/include_orbit_status"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/od_status_h"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Old on-screen download progress bar REMOVED (developer req 8). Download
-         status is now surfaced only by the notification system. The download
-         engine (ProgressKeeper/DownloadControl) is untouched (req 9). -->
+    <!-- -- the workspace: bounded above by the bar and below by the strip -- -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container_fragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/lh_dock"
+        app:layout_constraintBottom_toTopOf="@+id/orbit_status_strip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Shortcut boot overlay: identical to the shortcut's "Opening Game…"
+    <!-- Shortcut boot overlay: identical to the shortcut's "Opening Game..."
          screen so the hand-off never flashes the launcher home UI -->
     <include
         android:id="@+id/launch_boot_overlay"
@@ -96,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"
-        android:background="@drawable/bg_skin_library_panel"
+        android:background="@drawable/od_panel"
         android:clickable="false"
         android:elevation="16dp"
         android:gravity="center"
@@ -108,27 +124,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
-            android:layout_width="38dp"
-            android:layout_height="38dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:contentDescription="@null"
             android:src="@mipmap/ic_launcher_round" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:letterSpacing="0.16"
+            android:layout_marginTop="@dimen/od_space_2"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false"
+            android:letterSpacing="0.18"
             android:text="WELCOME BACK"
-            android:textColor="@color/ox_text_primary"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textColor="@color/od_text"
+            android:textSize="@dimen/od_text_title_m" />
+
         <TextView
+            style="@style/OdText.MonoS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/od_space_1"
             android:text="Your profiles are ready"
-            android:textColor="@color/ox_text_secondary"
-            android:textSize="9sp" />
+            android:textColor="@color/od_text_muted" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

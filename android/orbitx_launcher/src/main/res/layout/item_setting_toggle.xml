@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Phase 10 simple settings row (toggle). ids preserved. -->
+<!-- ORBIT Desktop — one settings ROW (toggle). 48dp, flush, full-bleed hit area.
+     ids preserved: setting_icon, setting_title, setting_summary,
+     setting_fav_star, setting_toggle (CustomToggleView — its class and size are
+     unchanged because it draws its own track and thumb). -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/ss_row"
+    android:layout_height="@dimen/od_row_h"
+    android:background="@drawable/od_row"
     android:clickable="true"
     android:focusable="true"
     android:gravity="center_vertical"
-    android:minHeight="62dp"
     android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingTop="12dp"
-    android:paddingEnd="14dp"
-    android:paddingBottom="12dp">
+    android:paddingStart="@dimen/od_gutter"
+    android:paddingEnd="@dimen/od_space_3">
 
     <ImageView
         android:id="@+id/setting_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="14dp"
+        android:layout_width="@dimen/od_row_glyph"
+        android:layout_height="@dimen/od_row_glyph"
+        android:layout_marginEnd="@dimen/od_space_3"
         android:contentDescription="@null"
         android:src="@drawable/ic_menu_settings"
-        app:tint="#AC9A9B" />
+        app:tint="@color/od_text_muted" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="@dimen/od_space_3"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/setting_title"
+            style="@style/OdText.TitleS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#F9F4F4"
-            android:textSize="15.5sp" />
+            android:textSize="@dimen/od_text_body"
+            tools:text="Force English" />
 
         <TextView
             android:id="@+id/setting_summary"
+            style="@style/OdText.MonoS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="#9C8A8B"
-            android:textSize="12.5sp" />
+            android:maxLines="1"
+            tools:text="Always run the interface in English" />
     </LinearLayout>
 
     <ImageButton
@@ -56,7 +58,7 @@
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:background="@null"
-        android:contentDescription="@string/cs_settings_fav_add"
+        android:contentDescription="@null"
         android:src="@drawable/ic_csp_star_outline"
         android:visibility="gone" />
 

@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Phase 10 simple settings: group label above a rounded card of rows.
-     ids kept: category_title, category_count, settings_list_container -->
+<!-- ORBIT Desktop — a settings GROUP: an uppercase label over a run of flush
+     rows. No card, no radius, no exterior gutter: the group is delimited by its
+     label above and a hairline below, the way a group is delimited in a desktop
+     preferences dialog.
+     ids preserved: category_title, category_count, settings_list_container -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="14dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="6dp"
-        android:paddingEnd="6dp"
-        android:paddingBottom="8dp">
+        android:paddingStart="@dimen/od_gutter"
+        android:paddingEnd="@dimen/od_gutter">
 
         <TextView
             android:id="@+id/category_title"
+            style="@style/OdText.Label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.04"
-            android:maxLines="1"
-            android:textColor="#AC9A9B"
-            android:textSize="13sp" />
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/category_count"
+            style="@style/OdText.MonoS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#5C6068"
-            android:textSize="12sp"
+            android:textColor="@color/od_text_faint"
             android:visibility="gone" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/od_rule_strong" />
 
     <LinearLayout
         android:id="@+id/settings_list_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ss_card"
-        android:divider="@drawable/ss_divider"
+        android:divider="@drawable/od_divider"
         android:orientation="vertical"
         android:showDividers="middle" />
 </LinearLayout>

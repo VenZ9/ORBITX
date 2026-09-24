@@ -1,118 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ✦ Compact instance chip — icon + name + ⋮ (play + favorite kept small).
-     No large background imagery: the async background slot is zero-sized. -->
+<!--
+  ORBIT DESKTOP — instance TABLE ROW  (item_library_card)
+
+  Already a 48dp row, so this pass is a retune onto the desktop table language
+  rather than a rebuild:
+
+    - the name is medium-weight, and the meta line drops to monospace so the
+      version/loader/size figures line up column-wise down the table
+    - the favourite marker is a small square spine, not a star badge with a halo
+    - PLAY becomes a filled ember square placed where a table row puts its
+      inline action, and the overflow becomes a flat chrome button beside it
+    - the root carries the row ripple, so the hit area is the whole row
+
+  `lib_card_bg` is kept as the first child and the Java still sets its drawable
+  for the selected state - only its own framing changes.
+
+  Ids preserved: lib_card_root, lib_card_bg, lib_card_primary, lib_card_fav,
+  lib_card_icon, lib_card_name, lib_card_meta, lib_card_play, lib_card_more.
+-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lib_card_root"
-    android:layout_width="188dp"
-    android:layout_height="48dp"
-    android:layout_marginHorizontal="4dp"
-    android:background="@drawable/bg_lh_glass"
-    android:stateListAnimator="@animator/card_press_anim"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/od_row_h"
+    android:background="@drawable/od_row_bg">
 
-    <!-- Async background slot (kept for the adapter; zero size = never shown) -->
     <ImageView
         android:id="@+id/lib_card_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="fitXY" />
 
-    <!-- Primary indicator: slim accent strip on the leading edge -->
+    <!-- the ember spine: this row is the current instance -->
     <View
         android:id="@+id/lib_card_primary"
-        android:layout_width="3dp"
+        android:layout_width="2dp"
         android:layout_height="22dp"
         android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="7dp"
-        android:background="@drawable/bg_lh_primary_strip" />
-
-    <!-- Favorite star — tiny, pinned top-end -->
-    <ImageView
-        android:id="@+id/lib_card_fav"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/ic_csp_star_filled"
-        app:tint="#D8C79A"
-        android:contentDescription="@null" />
+        android:background="@color/od_accent"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:layout_gravity="center_vertical"
-        android:paddingStart="14dp"
-        android:paddingEnd="4dp">
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/od_space_3"
+        android:paddingEnd="@dimen/od_space_1">
 
-        <ImageView
-            android:id="@+id/lib_card_icon"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@null" />
-
-        <TextView
-            android:id="@+id/lib_card_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="9dp"
-            android:layout_marginEnd="4dp"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:textColor="#F3F0F0"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:includeFontPadding="false" />
-
-        <!-- Meta slot (kept for the adapter; hidden in the compact chip) -->
-        <TextView
-            android:id="@+id/lib_card_meta"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:textSize="9sp"
-            android:textColor="#B5A1A3"
-            android:includeFontPadding="false" />
-
-        <!-- Quick play — small ghost circle -->
         <FrameLayout
-            android:id="@+id/lib_card_play"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@drawable/bg_cs_ghost_button"
-            android:clickable="true"
-            android:focusable="true">
+            android:layout_width="@dimen/od_thumb"
+            android:layout_height="@dimen/od_thumb">
+
             <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_play_arrow"
-                app:tint="#CFCFCF"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:contentDescription="@null" />
+                android:id="@+id/lib_card_icon"
+                android:layout_width="@dimen/od_thumb"
+                android:layout_height="@dimen/od_thumb"
+                android:background="@drawable/od_bitmap_frame"
+                android:contentDescription="@null"
+                android:padding="1dp"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/lib_card_fav"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="bottom|end"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_csp_star_outline"
+                app:tint="@color/od_accent_bright"
+                android:visibility="gone" />
         </FrameLayout>
 
-        <!-- ⋮ menu — always present -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/od_space_3"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lib_card_name"
+                style="@style/OdText.TitleS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/od_text_body" />
+
+            <TextView
+                android:id="@+id/lib_card_meta"
+                style="@style/OdText.MonoS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:ellipsize="end"
+                android:maxLines="1" />
+        </LinearLayout>
+
+        <!-- inline action: the launch control, as a filled ember square -->
         <FrameLayout
-            android:id="@+id/lib_card_more"
-            android:layout_width="34dp"
-            android:layout_height="40dp"
+            android:id="@+id/lib_card_play"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/od_btn_primary"
             android:clickable="true"
             android:focusable="true">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/orbitx_cd_launch"
+                android:src="@drawable/ic_play_arrow"
+                app:tint="@color/od_on_accent" />
+        </FrameLayout>
+
+        <!-- overflow: a flat chrome button, not a rounded chip -->
+        <FrameLayout
+            android:id="@+id/lib_card_more"
+            android:layout_width="@dimen/od_touch_min"
+            android:layout_height="@dimen/od_touch_min"
+            android:background="@drawable/od_icon_button"
+            android:clickable="true"
+            android:focusable="true">
+
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
+                android:contentDescription="@string/orbitx_cd_more"
                 android:src="@drawable/ic_more_vert"
-                app:tint="#CFCFCF"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:contentDescription="Instance menu" />
+                app:tint="@color/od_text_muted" />
         </FrameLayout>
     </LinearLayout>
+
+    <!-- the hairline that makes the table continuous -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/od_rule" />
 </FrameLayout>
