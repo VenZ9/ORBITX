@@ -27,7 +27,12 @@
         android:top="@dimen/od_space_0">
         <shape android:shape="rectangle">
             <size android:height="@dimen/od_stroke_marker" />
-            <solid android:color="@color/od_card_accent_edge" />
+            <gradient
+                android:angle="0"
+                android:centerColor="@color/od_accent"
+                android:endColor="@color/od_grad_cta_end"
+                android:startColor="@color/od_grad_cta_start_pressed"
+                android:type="linear" />
             <corners android:radius="@dimen/od_radius_sharp" />
         </shape>
     </item>

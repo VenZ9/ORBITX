@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- ORBIT Desktop — THE PRIMARY ACTION.
 
-     The one warm ramp in the application. It sweeps left to right from amber to
-     gold, which is the single most distinctive element of the design this pass
-     is built to: a wide, soft, HIGH-CONTRAST filled bar is how you tell the
-     launch control from every other control on the screen.
+     The one warm ramp in the application. It sweeps left to right from deep
+     ember through the brand red to amber (the Fast Client-style web chrome's
+     fc-play ramp), which is the single most distinctive element of the design
+     this pass is built to: a wide, soft, HIGH-CONTRAST filled bar is how you
+     tell the launch control from every other control on the screen.
 
-     Dark text sits on it (od_on_accent), not white — white on gold loses the
-     contrast a primary action needs, and a dark label on a warm ramp is exactly
-     what the design does. -->
+     A white label sits on it (od_on_accent) — on this darker ember ramp white
+     carries the contrast a primary action needs. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_enabled="false">

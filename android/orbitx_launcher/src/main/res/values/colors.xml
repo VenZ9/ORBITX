@@ -269,18 +269,19 @@
          THE PRIMARY ACTION GRADIENT
          ==================================================================
          The one warm ramp in the app. It runs across the launch control only,
-         so a filled amber-to-gold bar on screen always means "this starts the
-         game" and can never be confused with selection. -->
-    <color name="od_grad_cta_start">#FF9500</color>
-    <color name="od_grad_cta_mid">#FFB01F</color>
-    <color name="od_grad_cta_end">#FFD600</color>
-    <color name="od_grad_cta_start_pressed">#E88600</color>
-    <color name="od_grad_cta_end_pressed">#E8C200</color>
+         so a filled ember-to-amber bar on screen always means "this starts the
+         game" and can never be confused with selection. Ramp matches the Fast
+         Client-style web chrome (fc-play): deep ember -> brand red -> amber. -->
+    <color name="od_grad_cta_start">#C22417</color>
+    <color name="od_grad_cta_mid">#E3372B</color>
+    <color name="od_grad_cta_end">#FF9A3C</color>
+    <color name="od_grad_cta_start_pressed">#A31D12</color>
+    <color name="od_grad_cta_end_pressed">#E8802E</color>
 
-    <!-- The hero card's accent edge: a single amber rule along the top of the
+    <!-- The hero card's accent edge: a single ember rule along the top of the
          card that carries the primary action. It ties the card to the button
          inside it without filling the whole surface. -->
-    <color name="od_card_accent_edge">#FF9500</color>
+    <color name="od_card_accent_edge">#E3372B</color>
 
     <!-- ==================================================================
          SEMANTIC PILLS AND BADGES
@@ -301,13 +302,13 @@
     <color name="od_pill_green">#34C759</color>
     <color name="od_pill_green_wash">#1A34C759</color>
 
-    <color name="od_pill_accent">#FF9500</color>
-    <color name="od_pill_accent_wash">#1AFF9500</color>
+    <color name="od_pill_accent">#E3372B</color>
+    <color name="od_pill_accent_wash">#1AE3372B</color>
 
     <!-- A count / occupancy readout on a server row. Mono, so figures line up. -->
     <color name="od_count_idle">#8E8E93</color>
     <color name="od_count_busy">#34C759</color>
-    <color name="od_count_full">#FF9500</color>
+    <color name="od_count_full">#FF9A3C</color>
 
     <!-- ==================================================================
          TAB STRIP
@@ -316,7 +317,7 @@
          holding tabs, the active one carrying an accent rule beneath it. -->
     <color name="od_tab_track">#0B0B0D</color>
     <color name="od_tab_track_edge">#242426</color>
-    <color name="od_tab_active">#FF9500</color>
+    <color name="od_tab_active">#E3372B</color>
 
     <!-- The diegetic upload slot: a dashed drop target. -->
     <color name="od_slot_dash">#4A4A4E</color>

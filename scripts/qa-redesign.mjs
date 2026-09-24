@@ -34,6 +34,11 @@ if (tabs[1]) {
   await new Promise((r) => setTimeout(r, 600));
   await page.screenshot({ path: "screenshots/redesign-instances.png" });
 }
+if (tabs[3]) {
+  await tabs[3].click();
+  await new Promise((r) => setTimeout(r, 600));
+  await page.screenshot({ path: "screenshots/redesign-controls.png" });
+}
 if (tabs[4]) {
   await tabs[4].click();
   await new Promise((r) => setTimeout(r, 600));
