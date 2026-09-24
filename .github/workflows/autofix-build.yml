@@ -171,6 +171,11 @@ jobs:
           if [ "$BUILD_OK" -ne 1 ]; then
             echo "BUILD_OK=0" >> "$GITHUB_ENV"
             echo "::error::the build did not go green within three attempts"
+            # Fail the step. The escalation steps below key off BUILD_OK and
+            # still run, but without this the job would report SUCCESS for a
+            # build that never worked, and the verification steps it skipped
+            # would have been the only evidence anything was wrong.
+            exit 1
           else
             echo "BUILD_OK=1" >> "$GITHUB_ENV"
           fi
