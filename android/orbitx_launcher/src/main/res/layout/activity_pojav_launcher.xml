@@ -7,15 +7,15 @@
   navigation band along the bottom edge. It is now organised as an application
   WINDOW with three stacked regions, which is the whole point of the redesign:
 
-      +----------------------------------------------------------+
+      +==========================================================+
       |  lh_dock            COMMAND BAR   (title + menu strips)  |  top
-      +----------------------------------------------------------+
+      +==========================================================+
       |                                                          |
       |  container_fragment  WORKSPACE — every page renders here  |  fills
       |                                                          |
-      +----------------------------------------------------------+
+      +==========================================================+
       |  orbit_status_strip  STATUS STRIP                        |  bottom
-      +----------------------------------------------------------+
+      +==========================================================+
 
   The workspace is BOUNDED on both sides now. Before, a page ran edge to edge
   with chrome only at the bottom, so every screen read as a full-bleed mobile
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- -- the command bar: title strip over menu strip, pinned to the top -- -->
+    <!-- == the command bar: title strip over menu strip, pinned to the top == -->
     <include
         android:id="@+id/lh_dock"
         layout="@layout/include_lh_dock"
@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- -- the status strip, pinned to the bottom edge -- -->
+    <!-- == the status strip, pinned to the bottom edge == -->
     <include
         android:id="@+id/orbit_status_strip"
         layout="@layout/include_orbit_status"
@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- -- the workspace: bounded above by the bar and below by the strip -- -->
+    <!-- == the workspace: bounded above by the bar and below by the strip == -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_fragment"
         android:layout_width="0dp"

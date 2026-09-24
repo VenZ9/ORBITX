@@ -17,16 +17,16 @@
 
   It is now a WINDOW WORKSPACE, split by a hairline into two panes:
 
-      +---------------------------+------------------------------+
+      +===========================+==============================+
       | INSTANCES             n   |  [icon] Fabulously Optimized |  inspector
-      | ------------------------- |  [3D skin]  JAVA 17          |
+      | ========================= |  [3D skin]  JAVA 17          |
       | [i] Fabulously Optimized  |             RAM 2048         |
-      |     Fabric  1.21   2 GB   |  ---------------------------- |
-      | ------------------------- |  BROWSE | MANAGE | BACKUP    |  command row
-      | [i] Vanilla               |  ---------------------------- |
+      |     Fabric  1.21   2 GB   |  ============================ |
+      | ========================= |  BROWSE | MANAGE | BACKUP    |  command row
+      | [i] Vanilla               |  ============================ |
       |     Vanilla 1.21   1 GB   |  [        LAUNCH         ]   |  primary
-      | ------------------------- |                              |
-      +---------------------------+------------------------------+
+      | ========================= |                              |
+      +===========================+==============================+
 
   The list pane is the primary surface — every instance, all at once, as a
   scannable table. The inspector pane carries the one instance you selected:
@@ -58,7 +58,7 @@
     android:background="@drawable/od_window_bg"
     android:orientation="vertical">
 
-    <!-- -- background crossfade pair (driven by the fragment) -- -->
+    <!-- == background crossfade pair (driven by the fragment) == -->
     <ImageView
         android:id="@+id/lh_bg_a"
         android:layout_width="1dp"
@@ -190,7 +190,7 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <!-- --------------- LEFT PANE . INSTANCE TABLE --------------- -->
+        <!-- =============== LEFT PANE . INSTANCE TABLE =============== -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -270,13 +270,13 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <!-- ------------------- THE SPLITTER ------------------- -->
+        <!-- =================== THE SPLITTER =================== -->
         <View
             android:layout_width="@dimen/od_splitter_w"
             android:layout_height="match_parent"
             android:background="@drawable/od_splitter" />
 
-        <!-- ------------------- RIGHT PANE . INSPECTOR ------------------- -->
+        <!-- =================== RIGHT PANE . INSPECTOR =================== -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -386,7 +386,7 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <!-- -- command row: browse . manage . backup, three equal verbs -- -->
+            <!-- == command row: browse . manage . backup, three equal verbs == -->
             <LinearLayout
                 android:id="@+id/lh_prod_strip"
                 android:layout_width="match_parent"
@@ -476,7 +476,7 @@
                 android:layout_height="1dp"
                 android:background="@color/od_rule" />
 
-            <!-- -- the primary action: launch. The only filled object in the pane. -- -->
+            <!-- == the primary action: launch. The only filled object in the pane. == -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/od_row_h_tall"

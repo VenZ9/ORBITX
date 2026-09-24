@@ -12,16 +12,16 @@
   A desktop sign-in dialog lists its methods. This is now a LIST OF ROWS on a
   single panel:
 
-      +--------------------------------------------+
+      +============================================+
       |  (o) MICROSOFT  [RECOMMENDED]           >  |  row 1
       |      Servers - skins - capes               |
-      |  ----------------------------------------  |  hairline
+      |  ========================================  |  hairline
       |  ( ) ELY.BY                             >  |  row 2
       |      Free skins - most servers             |
-      |  ----------------------------------------  |
+      |  ========================================  |
       |  ( ) LOCAL                              >  |  row 3
       |      Offline / LAN only                    |
-      +--------------------------------------------+
+      +============================================+
 
   - each method is a 56dp two-line row, hairline-separated, full-bleed hit area
   - the decorative colour glyph tile becomes a small radio SCOPE MARK, so the
@@ -65,7 +65,7 @@
             android:paddingEnd="@dimen/od_space_6"
             android:paddingBottom="@dimen/od_space_6">
 
-            <!-- -- header: the app marks itself, then states the task -- -->
+            <!-- == header: the app marks itself, then states the task == -->
             <LinearLayout
                 android:id="@+id/auth_header"
                 android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 
-            <!-- -- the method list -- -->
+            <!-- == the method list == -->
             <LinearLayout
                 android:id="@+id/card_auth_container"
                 android:layout_width="match_parent"
@@ -314,7 +314,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- -- footnote, inside the panel where it can actually be read -- -->
+            <!-- == footnote, inside the panel where it can actually be read == -->
             <TextView
                 android:id="@+id/auth_footnote"
                 style="@style/OdText.MonoS"

@@ -9,10 +9,10 @@
 
   This row is a TABLE ROW:
 
-      +------+----------------------------------------+------+
+      +======+========================================+======+
       |  01  | FULLSCREEN                     [i]     |      |
       |      | Hide the on-screen controls            |      |
-      +------+----------------------------------------+------+
+      +======+========================================+======+
         index   label + description                 glyph
 
   - the index column keys the row (01, 02, ...) so the menu reads as a numbered

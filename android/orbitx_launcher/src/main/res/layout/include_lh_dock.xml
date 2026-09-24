@@ -11,11 +11,11 @@
   This is a desktop MENU BAR. It is pinned to the TOP edge and is built from two
   tiers, which is how every Windows application is organised:
 
-     +----------------------------------------------------------+
+     +==========================================================+
      | ORBITX                              v3.2.0        [gear]  |  title strip
-     +----------------------------------------------------------+
+     +==========================================================+
      | HOME  |  CURSOR  |  CONTROLS  |  ABOUT  |  SETTINGS        |  menu strip
-     +----------------------------------------------------------+
+     +==========================================================+
 
   Tier 1 is the TITLE STRIP: the product identity on the leading edge, and the
   build/utility cluster on the trailing edge — the same furniture as a window's
@@ -132,7 +132,7 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <!-- --- HOME --- -->
+        <!-- === HOME === -->
         <LinearLayout
             android:id="@+id/lh_nav_home"
             style="@style/OdChrome.MenuItem"
@@ -164,7 +164,7 @@
                 android:textSize="9sp" />
         </LinearLayout>
 
-        <!-- --- CURSOR --- -->
+        <!-- === CURSOR === -->
         <LinearLayout
             android:id="@+id/lh_nav_cursor"
             style="@style/OdChrome.MenuItem"
@@ -196,7 +196,7 @@
                 android:textSize="9sp" />
         </LinearLayout>
 
-        <!-- --- CONTROLS --- -->
+        <!-- === CONTROLS === -->
         <LinearLayout
             android:id="@+id/lh_nav_controls"
             style="@style/OdChrome.MenuItem"
@@ -228,7 +228,7 @@
                 android:textSize="9sp" />
         </LinearLayout>
 
-        <!-- --- ABOUT --- -->
+        <!-- === ABOUT === -->
         <LinearLayout
             android:id="@+id/lh_nav_about"
             style="@style/OdChrome.MenuItem"
@@ -260,7 +260,7 @@
                 android:textSize="9sp" />
         </LinearLayout>
 
-        <!-- --- SETTINGS ---
+        <!-- === SETTINGS ===
              Kept in the menu strip, where a desktop application always puts
              preferences. The id must stay lh_nav_settings: LauncherActivity
              resolves it for both the click handler and the selected-state

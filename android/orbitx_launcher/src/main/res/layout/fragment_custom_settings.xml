@@ -13,16 +13,16 @@
 
   Every one of those choices is a phone choice. It is now a DOCUMENT PANE:
 
-      +----------------------------------------------------------+
+      +==========================================================+
       | <- | SETTINGS  .  N options          [ search well ]      |  toolbar 46dp
-      +----------------------------------------------------------+
+      +==========================================================+
       | GENERAL                                                  |  group label
       | [i] Language                      English            >   |  48dp row
-      | -------------------------------------------------------- |  hairline
+      | ======================================================== |  hairline
       | [i] Download source               Default            >   |
-      +----------------------------------------------------------+
+      +==========================================================+
       | * 2 unsaved changes                      [ APPLY ]      |  footer apply
-      +----------------------------------------------------------+
+      +==========================================================+
 
   Concretely:
     - the search field moved INTO the toolbar, where a desktop application puts
@@ -77,7 +77,7 @@
         android:layout_height="0dp"
         android:visibility="gone" />
 
-    <!-- -- the pane column -- -->
+    <!-- == the pane column == -->
     <LinearLayout
         android:id="@+id/settings_column"
         android:layout_width="match_parent"
