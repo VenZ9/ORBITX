@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — a square chrome button (toolbar / title bar / row action).
+     Flat at rest so a toolbar full of them reads as a quiet strip of glyphs. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#26FFFFFF">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" />
+            <corners android:radius="@dimen/od_radius_sm" />
+        </shape>
+    </item>
+</ripple>

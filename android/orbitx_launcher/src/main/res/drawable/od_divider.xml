@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the 1dp divider used between rows in a flush list. Needs an
+     intrinsic height, which is why it is its own drawable and not @drawable/od_rule. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size android:height="1dp" />
+    <solid android:color="@color/od_rule" />
+</shape>

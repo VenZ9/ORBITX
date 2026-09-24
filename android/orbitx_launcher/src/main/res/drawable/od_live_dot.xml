@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the status indicator in the status strip.
+     A square, not a circle: the window is orthogonal, and the one round object
+     on screen is the primary action. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_live" />
+    <corners android:radius="1dp" />
+    <size android:width="6dp" android:height="6dp" />
+</shape>

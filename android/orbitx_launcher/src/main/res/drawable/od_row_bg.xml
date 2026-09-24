@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — row background selector: flat at rest, raised + ember-edged
+     when selected or checked. Applied as android:background on a list row so a
+     RecyclerView selection needs no extra view. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_activated="true" android:drawable="@drawable/od_row_selected" />
+    <item android:state_selected="true" android:drawable="@drawable/od_row_selected" />
+    <item android:drawable="@android:color/transparent" />
+</selector>

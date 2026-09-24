@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — a SELECTED row.
+     Two signals at once, deliberately:
+       1. a 2dp ember rule on the LEADING edge — the shape of selection, which
+          survives a washed-out panel, low brightness and colour-blindness;
+       2. a raised fill — the surface of selection.
+     Colour alone would carry neither on a cheap screen at night. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_pane_selected" />
+        </shape>
+    </item>
+    <item android:gravity="left|start" android:width="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_accent" />
+        </shape>
+    </item>
+</layer-list>

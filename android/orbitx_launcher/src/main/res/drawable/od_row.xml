@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — a table/list row, rest state.
+     Rows are FLUSH: the hairline under one row is the separator, so a list
+     reads as a continuous table instead of a stack of pills. The ripple covers
+     the full row width so the hit area is unambiguous. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#1FFFFFFF">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+</ripple>

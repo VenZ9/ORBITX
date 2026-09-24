@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — one destination in the command bar.
+     Rest: flat, nothing drawn. Active: a raised fill AND a 2dp ember rule along
+     the LOWER edge — the seam pointing down into the workspace, which is how a
+     desktop application signals "this is the panel you are looking at".
+     Nothing on the bar is ever a filled capsule. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- active destination -->
+    <item android:state_selected="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/od_pane_raised" />
+                </shape>
+            </item>
+            <item android:gravity="bottom">
+                <shape android:shape="rectangle">
+                    <size android:height="2dp" />
+                    <solid android:color="@color/od_accent" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- pressed -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#1FFFFFFF" />
+        </shape>
+    </item>
+
+    <!-- rest -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</selector>

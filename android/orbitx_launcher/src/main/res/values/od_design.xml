@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT DESKTOP — the OD language
+
+  This is a WINDOW, not a phone page. The whole interface is organised as a
+  desktop application shell:
+
+      +----------------------------------------------------------+
+      |  COMMAND BAR   identity | destinations | utilities      |  48dp
+      +----------------------------------------------------------+
+      |  WORKSPACE     +-- pane --+-- splitter --+-- pane --+    |
+      |                |  list    |     1dp      |  detail  |    |
+      |                +----------+--------------+----------+    |
+      +----------------------------------------------------------+
+      |  STATUS STRIP  state - counts              build - ver  |  24dp
+      +----------------------------------------------------------+
+
+  WHY THIS INSTEAD OF THE PHONE SHELL IT REPLACES
+
+  The previous interface was a mobile launcher: a bottom icon band, a full-bleed
+  hero image, a horizontal carousel and a centred column of rounded cards. That
+  idiom optimises for thumb-reach on a home screen and for one item at a time.
+  It is the wrong shape for the actual job here, which is managing MANY
+  instances and MANY options — work that is inherently tabular and comparative.
+
+  A window optimises for exactly that: persistent chrome that never scrolls
+  away, a pane that stays put while you inspect another, rows that line up in
+  columns so two instances can be compared by eye, and a status strip that
+  always answers "what is the app doing right now".
+
+  THE RULES THAT MAKE IT COHERENT
+
+   1. STRUCTURE IS RULES, NOT BOXES. Regions are separated by a 1dp hairline.
+      A container with a border inside a container with a border is a mistake;
+      nesting depth is shown by a surface change plus one rule.
+
+   2. WELLS GO DOWN, PANELS COME UP. An input/field is DARKER than the pane it
+      sits in. A raised row is LIGHTER than its pane. This one rule is what
+      stops the layout reading as a pile of identical grey boxes.
+
+   3. DENSITY IS A FEATURE. Rows are 48dp. The type scale bottoms out at 10sp,
+      which is legible for micro-labels on a good panel and keeps six to eight
+      rows visible on a landscape phone.
+
+   4. ACCENT IS STATE. Ember only ever means selected, primary action, or live.
+      Rest states are carried by surface and rules, so the eye goes to the one
+      thing that matters on a screen.
+
+   5. SELECTION IS SHAPE. The selected row grows a 2dp ember rule on its
+      leading edge AND a raised fill, so selection survives a washed-out panel,
+      low brightness, and colour-blindness.
+
+   6. NO DECORATIVE ELEVATION. Exactly one surface in the app is allowed a
+      shadow: the in-game command panel, because it floats over the game.
+
+  NAMING
+  Every token is `od_*`. The older `orb_*` tokens remain so that no existing
+  reference breaks; new work uses `od_*`.
+-->
+<resources>
+
+    <!-- == 1. SPACING — one 4dp grid ==========================================
+         Every margin, padding and gap picks one of these. Arbitrary values are
+         what make a dense interface look accidental. -->
+    <dimen name="od_space_0">0dp</dimen>
+    <dimen name="od_space_1">4dp</dimen>
+    <dimen name="od_space_2">8dp</dimen>
+    <dimen name="od_space_3">12dp</dimen>
+    <dimen name="od_space_4">16dp</dimen>
+    <dimen name="od_space_5">20dp</dimen>
+    <dimen name="od_space_6">24dp</dimen>
+    <dimen name="od_space_8">32dp</dimen>
+    <dimen name="od_space_10">40dp</dimen>
+
+    <!-- Pane gutter: the single inset every pane's content aligns to, so all
+         panes share one left edge. -->
+    <dimen name="od_gutter">14dp</dimen>
+    <!-- Chrome gutter: tighter, used inside the command bar and status strip. -->
+    <dimen name="od_gutter_tight">10dp</dimen>
+
+    <!-- == 2. SHAPE =========================================================
+         Deliberately tighter than the storefront radii this replaces. An
+         application window has corners; a shop has curves. -->
+    <dimen name="od_radius_sharp">2dp</dimen>
+    <dimen name="od_radius_sm">4dp</dimen>
+    <dimen name="od_radius_md">6dp</dimen>
+    <dimen name="od_radius_panel">10dp</dimen>
+    <dimen name="od_radius_pill">999dp</dimen>
+
+    <!-- Stroke weights. The hairline does the structural work. -->
+    <dimen name="od_stroke_rule">1dp</dimen>
+    <dimen name="od_stroke_rule_strong">1dp</dimen>
+    <dimen name="od_stroke_marker">2dp</dimen>   <!-- selection edge -->
+    <dimen name="od_stroke_focus">2dp</dimen>
+
+    <!-- == 3. TYPE SCALE ====================================================
+         Six sizes. Everything informative is >= 10sp. Monospace is reserved
+         for data the user compares: versions, counts, checksums, log lines. -->
+    <dimen name="od_text_title_l">20sp</dimen>
+    <dimen name="od_text_title_m">15sp</dimen>
+    <dimen name="od_text_title_s">13.5sp</dimen>
+    <dimen name="od_text_body">12.5sp</dimen>
+    <dimen name="od_text_body_s">11.5sp</dimen>
+    <dimen name="od_text_label">10sp</dimen>
+    <dimen name="od_text_label_tracking">0.13</dimen>
+    <dimen name="od_text_mono">11sp</dimen>
+    <dimen name="od_text_mono_s">10sp</dimen>
+
+    <item name="od_line_body" format="float" type="dimen">1.35</item>
+    <item name="od_line_tight" format="float" type="dimen">1.1</item>
+
+    <!-- == 4. STRUCTURE — the fixed furniture of the window ================= -->
+
+    <!-- The command bar. One band pinned to the TOP edge, holding identity,
+         the destination menu and the utility cluster. It never scrolls and
+         never collapses: persistent chrome is the whole point of the model,
+         and a header that hides itself is how a user loses their navigation. -->
+    <dimen name="od_commandbar_h">48dp</dimen>
+    <dimen name="od_commandbar_brand">30dp</dimen>
+    <dimen name="od_menuitem_h">40dp</dimen>
+    <dimen name="od_menuitem_glyph">16dp</dimen>
+    <dimen name="od_menuitem_pad">12dp</dimen>
+
+    <!-- Utility cluster on the trailing edge of the bar. -->
+    <dimen name="od_utility_h">30dp</dimen>
+    <dimen name="od_utility_glyph">15dp</dimen>
+
+    <!-- The bottom status strip: what the app is doing, right now, plus the
+         build identity. A desktop client always tells you this. -->
+    <dimen name="od_status_h">26dp</dimen>
+    <dimen name="od_status_dot">6dp</dimen>
+
+    <!-- Panes. min is the width below which a pane stops being usable and the
+         workspace falls back to single-pane drill-down. -->
+    <dimen name="od_splitter_w">1dp</dimen>
+    <dimen name="od_pane_min">240dp</dimen>
+    <dimen name="od_list_pane_w">300dp</dimen>
+    <dimen name="od_pane_header_h">46dp</dimen>
+
+    <!-- Rows. 48dp dense is the working height; 56dp is for a two-line row. -->
+    <dimen name="od_row_h">48dp</dimen>
+    <dimen name="od_row_h_tall">56dp</dimen>
+    <dimen name="od_row_h_toolbar">44dp</dimen>
+    <dimen name="od_row_icon">20dp</dimen>
+    <dimen name="od_row_glyph">17dp</dimen>
+    <dimen name="od_thumb">28dp</dimen>
+    <dimen name="od_thumb_lg">36dp</dimen>
+    <dimen name="od_well_w">34dp</dimen>
+
+    <!-- Minimum interactive target. -->
+    <dimen name="od_touch_min">48dp</dimen>
+
+    <!-- Panel (dialog / in-game overlay). -->
+    <dimen name="od_panel_w">420dp</dimen>
+    <dimen name="od_panel_title_h">44dp</dimen>
+    <dimen name="od_panel_footer_h">48dp</dimen>
+
+    <!-- Column widths for the instance table, so every row aligns. -->
+    <dimen name="od_col_meta">76dp</dimen>
+    <dimen name="od_col_action">32dp</dimen>
+
+    <!-- == 5. MOTION ========================================================
+         Shorter than a phone app's: a desktop client should feel immediate.
+         Nothing the user waits for exceeds 260ms. -->
+    <integer name="od_motion_instant">80</integer>
+    <integer name="od_motion_quick">130</integer>
+    <integer name="od_motion_base">180</integer>
+    <integer name="od_motion_panel">260</integer>
+    <integer name="od_motion_stagger">30</integer>
+
+    <!-- == 6. ALPHA LADDER =================================================
+         Named opacities so no screen invents its own "slightly transparent". -->
+    <item name="od_alpha_disabled" format="float" type="dimen">0.34</item>
+    <item name="od_alpha_pressed" format="float" type="dimen">0.12</item>
+    <item name="od_alpha_hover" format="float" type="dimen">0.06</item>
+    <item name="od_alpha_scrim" format="float" type="dimen">0.78</item>
+
+</resources>

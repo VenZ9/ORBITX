@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — a content pane. Flat, no rim: panes are delimited by the
+     splitter or rule between them, never by a border of their own. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_pane" />
+</shape>

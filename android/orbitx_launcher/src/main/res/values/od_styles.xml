@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT DESKTOP — component styles
+
+  A style per component, so a screen is ASSEMBLED out of the language instead of
+  re-deciding type sizes, tracking and colours each time. If a screen needs a new
+  value it either maps onto one of these or the language is wrong — it does not
+  invent a 13sp label with 0.1 tracking.
+
+  THE COMPONENTS, and where each belongs:
+
+    OdChrome.*      command bar - status strip - pane header - toolbar
+    OdText.*        the six type roles
+    OdRow.*         table/list rows (flat, selected, dense, two-line)
+    OdPanel.*       floating panels and their title/footer strips
+    OdButton.*      primary - ghost - chrome icon - chip
+    OdWell.*        inset fields and mono readouts
+    OdTable.*       column headers and cells
+-->
+<resources>
+
+    <!-- == TYPE ROLES =======================================================
+         One role per (size, weight, tracking, colour). Nothing informative is
+         set in a role that does not exist here. -->
+
+    <style name="OdText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/od_text</item>
+        <item name="android:textSize">@dimen/od_text_body</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Page title inside a pane. -->
+    <style name="OdText.Title" parent="OdText">
+        <item name="android:textSize">@dimen/od_text_title_l</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <!-- Pane title, dialog title, panel title. -->
+    <style name="OdText.TitleM" parent="OdText">
+        <item name="android:textSize">@dimen/od_text_title_m</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Row title. -->
+    <style name="OdText.TitleS" parent="OdText">
+        <item name="android:textSize">@dimen/od_text_title_s</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="OdText.Body" parent="OdText">
+        <item name="android:textSize">@dimen/od_text_body</item>
+        <item name="android:textColor">@color/od_text_dim</item>
+        <item name="android:lineSpacingMultiplier">@dimen/od_line_body</item>
+    </style>
+
+    <style name="OdText.BodyS" parent="OdText">
+        <item name="android:textSize">@dimen/od_text_body_s</item>
+        <item name="android:textColor">@color/od_text_muted</item>
+    </style>
+
+    <!-- Section / column label. Uppercase + wide tracking is the house style:
+         it makes a string read as a FIELD NAME, not as a sentence. -->
+    <style name="OdText.Label" parent="OdText">
+        <item name="android:textSize">@dimen/od_text_label</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/od_text_label_tracking</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/od_text_muted</item>
+    </style>
+
+    <!-- Mono data: versions, counts, sizes, checksums. -->
+    <style name="OdText.Mono" parent="OdText">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/od_text_mono</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/od_text_dim</item>
+    </style>
+
+    <style name="OdText.MonoS" parent="OdText">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/od_text_mono_s</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/od_text_muted</item>
+    </style>
+
+    <!-- The one figure a screen wants you to read. -->
+    <style name="OdText.Ember" parent="OdText">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/od_text_mono_s</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/od_accent_bright</item>
+    </style>
+
+    <!-- == CHROME =========================================================== -->
+
+    <!-- Base style for the chrome family. AAPT resolves the dotted name
+         OdChrome.MenuItem to the implicit parent OdChrome, so this must exist
+         even though it carries no attributes of its own. -->
+    <style name="OdChrome" />
+
+    <style name="OdChrome.MenuItem">
+        <item name="android:layout_height">@dimen/od_menuitem_h</item>
+        <item name="android:background">@drawable/od_menuitem</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minWidth">@dimen/od_touch_min</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_menuitem_pad</item>
+        <item name="android:paddingEnd">@dimen/od_menuitem_pad</item>
+    </style>
+
+    <style name="OdChrome.StatusCell">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/od_text_mono_s</item>
+        <item name="android:textColor">@color/od_text_muted</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- == ROWS =============================================================
+         Rows are FLAT and FLUSH. The layout draws a 1dp rule under each one; the
+         row itself never carries a border or a radius. -->
+
+    <style name="OdRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_row_h</item>
+        <item name="android:background">@drawable/od_row</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_gutter</item>
+        <item name="android:paddingEnd">@dimen/od_space_2</item>
+    </style>
+
+    <!-- Two-line row (title over subtitle). -->
+    <style name="OdRow.Tall">
+        <item name="android:layout_height">@dimen/od_row_h_tall</item>
+    </style>
+
+    <!-- A row that can be SELECTED: the background selector swaps in the
+         ember-edged raised fill, so selection is a shape change. -->
+    <style name="OdRow.Selectable" parent="OdRow">
+        <item name="android:background">@drawable/od_row_bg</item>
+    </style>
+    <style name="OdRow.TallSelectable" parent="OdRow.Tall">
+        <item name="android:background">@drawable/od_row_bg</item>
+    </style>
+
+    <!-- The 1dp separator under a row. -->
+    <style name="OdRow.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/od_rule</item>
+    </style>
+
+    <!-- == WELLS AND READOUTS ===============================================
+         A field or stat block. Darker than its parent — this is the rule that
+         makes depth read correctly. -->
+
+    <style name="OdWell">
+        <item name="android:background">@drawable/od_well</item>
+        <item name="android:minHeight">@dimen/od_well_w</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/od_space_2</item>
+        <item name="android:paddingEnd">@dimen/od_space_2</item>
+    </style>
+
+    <style name="OdWell.Keycap" parent="OdWell">
+        <item name="android:background">@drawable/od_keycap</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/od_text_mono_s</item>
+        <item name="android:textColor">@color/od_text_muted</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- == BUTTONS ========================================================== -->
+
+    <!-- Base style for the button family. OdButton.Icon and OdButton.Chip declare
+         no explicit parent, so they inherit from here (AAPT resolves the dotted
+         name to the implicit parent; the style must therefore exist). -->
+    <style name="OdButton" parent="android:Widget.Button">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="OdButton.Primary" parent="android:Widget.Button">
+        <item name="android:background">@drawable/od_btn_primary</item>
+        <item name="android:textColor">@color/od_on_accent</item>
+        <item name="android:textSize">@dimen/od_text_label</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/od_text_label_tracking</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:minHeight">@dimen/od_touch_min</item>
+        <item name="android:minWidth">@dimen/od_touch_min</item>
+        <item name="android:paddingStart">@dimen/od_space_5</item>
+        <item name="android:paddingEnd">@dimen/od_space_5</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="OdButton.Ghost" parent="android:Widget.Button">
+        <item name="android:background">@drawable/od_btn_ghost</item>
+        <item name="android:textColor">@color/od_text</item>
+        <item name="android:textSize">@dimen/od_text_label</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/od_text_label_tracking</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:minHeight">@dimen/od_touch_min</item>
+        <item name="android:minWidth">@dimen/od_touch_min</item>
+        <item name="android:paddingStart">@dimen/od_space_4</item>
+        <item name="android:paddingEnd">@dimen/od_space_4</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <!-- A square chrome button: pane header, toolbar, row action. -->
+    <style name="OdButton.Icon">
+        <item name="android:layout_width">@dimen/od_touch_min</item>
+        <item name="android:layout_height">@dimen/od_touch_min</item>
+        <item name="android:background">@drawable/od_icon_button</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:padding">@dimen/od_space_3</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <!-- A category / filter chip. -->
+    <style name="OdButton.Chip">
+        <item name="android:layout_height">26dp</item>
+        <item name="android:background">@drawable/od_chip</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:paddingStart">@dimen/od_space_3</item>
+        <item name="android:paddingEnd">@dimen/od_space_3</item>
+        <item name="android:textSize">@dimen/od_text_label</item>
+    </style>
+
+    <!-- == PANELS =========================================================== -->
+
+    <style name="OdPanel">
+        <item name="android:background">@drawable/od_panel</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="OdPanel.TitleBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_panel_title_h</item>
+        <item name="android:background">@drawable/od_panel_titlebar</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_gutter</item>
+        <item name="android:paddingEnd">@dimen/od_space_1</item>
+    </style>
+
+    <style name="OdPanel.Footer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_panel_footer_h</item>
+        <item name="android:background">@drawable/od_statusstrip</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_gutter</item>
+        <item name="android:paddingEnd">@dimen/od_space_2</item>
+    </style>
+
+    <!-- == STRUCTURE HELPERS ================================================ -->
+
+    <!-- A pane. -->
+    <style name="OdPane">
+        <item name="android:background">@drawable/od_pane</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="OdPane.Raised">
+        <item name="android:background">@drawable/od_pane_raised</item>
+    </style>
+
+    <!-- The vertical rule between two panes. -->
+    <style name="OdSplitter">
+        <item name="android:layout_width">@dimen/od_splitter_w</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/od_splitter</item>
+    </style>
+
+    <!-- A pane header strip: names the pane or the column set. -->
+    <style name="OdPaneHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/od_pane_header_h</item>
+        <item name="android:background">@drawable/od_pane_header</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/od_gutter</item>
+        <item name="android:paddingEnd">@dimen/od_space_2</item>
+    </style>
+
+    <!-- A vertical hairline used inside a row to separate fields. -->
+    <style name="OdCellRule">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:background">@color/od_rule</item>
+    </style>
+
+    <!-- A group heading: an uppercase label over a set of rows. -->
+    <style name="OdGroupLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">@dimen/od_text_label_tracking</item>
+        <item name="android:paddingStart">@dimen/od_gutter</item>
+        <item name="android:paddingTop">@dimen/od_space_5</item>
+        <item name="android:paddingBottom">@dimen/od_space_2</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/od_text_muted</item>
+        <item name="android:textSize">@dimen/od_text_label</item>
+    </style>
+
+</resources>

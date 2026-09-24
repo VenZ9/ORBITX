@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ORBIT DESKTOP — content descriptions
+
+  The redesign introduces several icon-only chrome controls (the toolbar refresh
+  and new-instance buttons, the row overflow button, the row action group). An
+  icon-only control with no content description is invisible to TalkBack, so
+  every one of them names itself here. Kept in their own file rather than in
+  strings.xml so the chrome vocabulary stays together and reviews in one screen.
+-->
+<resources>
+    <string name="orbitx_cd_refresh">Refresh instances</string>
+    <string name="orbitx_cd_new_instance">New instance</string>
+    <string name="orbitx_cd_status">Launcher status</string>
+    <string name="orbitx_cd_search_settings">Search settings</string>
+    <string name="orbitx_cd_launch">Launch instance</string>
+    <string name="orbitx_cd_favourite">Favourite</string>
+    <string name="orbitx_cd_browse">Browse files</string>
+    <string name="orbitx_cd_shortcut">Create shortcut</string>
+    <string name="orbitx_cd_reorder">Reorder</string>
+    <string name="orbitx_cd_more">More options</string>
+</resources>

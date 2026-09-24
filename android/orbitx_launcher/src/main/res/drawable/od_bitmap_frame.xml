@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the frame around every bitmap the app shows (instance icon,
+     mod thumbnail). One rim, no radius, so all images in a list share a shape. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_well" />
+    <stroke android:width="1dp" android:color="@color/od_well_edge" />
+    <corners android:radius="@dimen/od_radius_sharp" />
+</shape>

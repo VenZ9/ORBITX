@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — a raised pane: one step up from @drawable/od_pane. Used for
+     a pane that owns focus, or for the leading pane of a split so the two panes
+     are told apart by surface rather than by two competing borders. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/od_pane_raised" />
+</shape>

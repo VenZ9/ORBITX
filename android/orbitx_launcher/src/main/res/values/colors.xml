@@ -26,7 +26,7 @@
     <color name="primary_text">#F5F5F5</color>
     <color name="secondary_text">#B8B8B8</color>
 
-    <!-- ── Midnight Blue preset ───────────────────────────────────────── -->
+    <!-- ── Midnight Blue preset ────────────────────────────────────────────── -->
     <color name="mb_bg_app">#2A0D0F</color>
     <color name="mb_bg_bottom_bar">#3B1B1D</color>
     <color name="mb_bg_status_bar">#220A0C</color>
@@ -35,7 +35,7 @@
     <color name="mb_text_primary">#F5E8E9</color>
     <color name="mb_text_secondary">#BF8B8E</color>
 
-    <!-- ── Forest Green preset ───────────────────────────────────────── -->
+    <!-- ── Forest Green preset ─────────────────────────────────────────────── -->
     <color name="fg_bg_app">#0F1F0F</color>
     <color name="fg_bg_bottom_bar">#1A2E1A</color>
     <color name="fg_bg_status_bar">#0C1A0C</color>
@@ -44,7 +44,7 @@
     <color name="fg_text_primary">#E8F5E9</color>
     <color name="fg_text_secondary">#9CCC9C</color>
 
-    <!-- ── Crimson preset ────────────────────────────────────────────── -->
+    <!-- ── Crimson preset ──────────────────────────────────────────────────── -->
     <color name="cr_bg_app">#1A0A0A</color>
     <color name="cr_bg_bottom_bar">#2A1010</color>
     <color name="cr_bg_status_bar">#150808</color>
@@ -53,7 +53,7 @@
     <color name="cr_text_primary">#FFF0F0</color>
     <color name="cr_text_secondary">#CCA0A0</color>
 
-    <!-- ── Amethyst preset ───────────────────────────────────────────── -->
+    <!-- ── Amethyst preset ─────────────────────────────────────────────────── -->
     <color name="am_bg_app">#1A090A</color>
     <color name="am_bg_bottom_bar">#1B1515</color>
     <color name="am_bg_status_bar">#140708</color>
@@ -62,7 +62,7 @@
     <color name="am_text_primary">#F2F2F2</color>
     <color name="am_text_secondary">#A0A0A0</color>
 
-    <!-- ── Arctic preset ─────────────────────────────────────────────── -->
+    <!-- ── Arctic preset ───────────────────────────────────────────────────── -->
     <color name="ar_bg_app">#200E0F</color>
     <color name="ar_bg_bottom_bar">#301618</color>
     <color name="ar_bg_status_bar">#180B0C</color>
@@ -71,7 +71,7 @@
     <color name="ar_text_primary">#E0F7FA</color>
     <color name="ar_text_secondary">#80C8D4</color>
 
-    <!-- ══════════════════════════════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════════════════════════
          ORBITX DESIGN SYSTEM — canonical palette
 
          Intent: a launcher for someone holding a mid-range phone in one
@@ -82,7 +82,7 @@
          ONE accent. Red means "this is live / this is the action" — never
          decoration, never a second hue competing for attention.
          Depth is borders + surface shifts, not drop shadows.
-         ══════════════════════════════════════════════════════════════════ -->
+         ══════════════════════════════════════════════════════════════════════ -->
 
     <!-- — Surfaces, ascending. Each step is a few points of lightness. — -->
     <color name="ox_void">#08070A</color>
@@ -169,4 +169,64 @@
 
     <color name="bg_nav_item_active">#26FF3B30</color>
     <color name="premium_cyan">#FF3B30</color>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         ORBIT DESKTOP — window-chrome palette
+         ══════════════════════════════════════════════════════════════════════
+         The desktop client is modelled as a WINDOW: a command bar at the top,
+         one or more panes in the middle, a status strip along the bottom.
+         Each of those is a distinct surface, and the ladder runs:
+
+             od_window   deepest  — the frame behind everything
+             od_pane     base     — a content region
+             od_pane_raised +     — the selected / focused region
+             od_well     recessed — an inset field INSIDE a pane
+
+         A well is darker than its parent; a panel is lighter. That single rule
+         is what makes the layout read as depth instead of as stacked boxes.
+
+         Accent discipline: ember marks SELECTED, PRIMARY ACTION or LIVE.
+         Nothing decorative is ever ember.
+         ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- — Window frame — -->
+    <color name="od_window">#0A0808</color>
+    <color name="od_window_edge">#241E1E</color>
+    <color name="od_commandbar">#121010</color>
+    <color name="od_commandbar_edge">#2A2323</color>
+    <color name="od_statusstrip">#100D0D</color>
+
+    <!-- — Panes, ascending — -->
+    <color name="od_pane">#131010</color>
+    <color name="od_pane_raised">#1A1616</color>
+    <color name="od_pane_selected">#221A1A</color>
+    <color name="od_well">#0C0A0A</color>
+    <color name="od_well_edge">#332B2B</color>
+
+    <!-- — Rules and splitters. These carry the structure. — -->
+    <color name="od_rule">#241E1E</color>
+    <color name="od_rule_strong">#332B2B</color>
+    <color name="od_splitter">#2A2323</color>
+
+    <!-- — Ember: state only. — -->
+    <color name="od_accent">#FF3B30</color>
+    <color name="od_accent_bright">#FF6B6B</color>
+    <color name="od_accent_dim">#8C2A24</color>
+    <color name="od_accent_wash">#1FFF3B30</color>
+    <color name="od_on_accent">#FFFFFF</color>
+
+    <!-- — Type, four levels — -->
+    <color name="od_text">#F2EEEE</color>
+    <color name="od_text_dim">#C0B2B2</color>
+    <color name="od_text_muted">#8B7C7C</color>
+    <color name="od_text_faint">#5E5454</color>
+
+    <!-- — Semantic status: live / warn / error. Never identity. — -->
+    <color name="od_live">#3FBF6A</color>
+    <color name="od_warn">#E0A030</color>
+    <color name="od_error">#FF4444</color>
+
+    <!-- — Scrims — -->
+    <color name="od_scrim">#B3070505</color>
+    <color name="od_scrim_soft">#6E070505</color>
 </resources>

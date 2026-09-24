@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the bottom status strip.
+     Hairline on its UPPER edge: the mirror image of the command bar, which
+     closes the window frame at both ends. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_statusstrip" />
+        </shape>
+    </item>
+    <item android:gravity="top">
+        <shape android:shape="rectangle">
+            <size android:height="1dp" />
+            <solid android:color="@color/od_rule" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the primary action.
+     Bounded to a small radius on purpose: the window is made of right angles,
+     so the one soft-ish filled object on a screen is unmistakably the action. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_accent_dim" />
+            <corners android:radius="@dimen/od_radius_sm" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_accent_bright" />
+            <corners android:radius="@dimen/od_radius_sm" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_accent" />
+            <corners android:radius="@dimen/od_radius_sm" />
+        </shape>
+    </item>
+</selector>

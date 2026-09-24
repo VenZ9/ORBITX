@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ORBIT Desktop — the command bar surface.
+     A flat band with a single hairline along its lower edge. The rule IS the
+     separation from the workspace; there is no shadow and no gradient, because
+     the bar is part of the window, not a card sitting on top of it. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/od_commandbar" />
+        </shape>
+    </item>
+    <item android:gravity="bottom">
+        <shape android:shape="rectangle">
+            <size android:height="1dp" />
+            <solid android:color="@color/od_commandbar_edge" />
+        </shape>
+    </item>
+</layer-list>
